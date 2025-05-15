@@ -1,4 +1,5 @@
 import PublicLayout from '@app/components/templates/PublicLayout';
+import { SignIn } from '@app/pages';
 
 const routes = [
   {
@@ -6,7 +7,7 @@ const routes = [
     children: [
       {
         path: 'login',
-        element: <div className='font-bold bg-[#121212] text-white p-2'>Login Page</div>,
+        element: <SignIn />,
       },
     ],
   },
