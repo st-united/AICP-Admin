@@ -206,5 +206,14 @@
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email",
     "EMAIL": "Email"
+  },
+  "PASSWORD": {
+    "PASSWORD": "Mật khẩu",
+    "NEW_PASSWORD": "Mật khẩu mới *",
+    "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới *",
+    "FORGOT_PASSWORD": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "CREATE_NEW_PASSWORD": "Tạo mật khẩu mới",
+    "BACK_TO_LOGIN": "Quay về trang đăng nhập"
   }
 }
