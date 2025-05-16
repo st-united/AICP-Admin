@@ -15,7 +15,7 @@ const ForgotPassword = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const signInSchema = useForgotPasswordSchema();
+  const forgotPasswordSchema = useForgotPasswordSchema();
 
   const onFinish = (values: { email: string }) => {
     forgotPasswordUser(values.email);
@@ -24,7 +24,7 @@ const ForgotPassword = () => {
     navigate('/login');
   };
 
-  const validator = [yupSync(signInSchema)] as unknown as Rule[];
+  const validator = [yupSync(forgotPasswordSchema)] as unknown as Rule[];
 
   return (
     <div
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
           </Button>
         </div>
         <div>
-          <h1 className='text-[rem] md:text-[2.5rem] !text-white font-bold text-center mb-12'>
+          <h1 className='text-[1.5rem] md:text-[2.5rem] !text-white font-bold text-center mb-12'>
             {t('PASSWORD.FORGOT_PASSWORD')}
           </h1>
         </div>
@@ -50,7 +50,7 @@ const ForgotPassword = () => {
           <Form.Item className='col-span-2 ' name='email' rules={validator}>
             <Input
               className='!px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t<string>('LOGIN.EMAIL')}
+              placeholder={t('LOGIN.EMAIL') ?? ''}
             />
           </Form.Item>
           <Form.Item className='col-span-2 !mt-2'>
