@@ -29,7 +29,7 @@ const SignIn = () => {
       <div className='w-full h-full'>
         <div>
           <h1 className='text-[1.25rem] md:text-[2rem] !text-white font-bold mb-8'>
-            {t<string>('LOGIN.TEXT')}
+            {t('LOGIN.TEXT')}
           </h1>
         </div>
         <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
@@ -57,7 +57,7 @@ const SignIn = () => {
               className='text-lg !underline text-[#1890FF] cursor-pointer hover:!text-[#096dd9] transition-color duration-3000 border-none !outline-none !bg-transparent'
               onClick={() => navigate('/forgot-password')}
             >
-              {t<string>('LOGIN.FORGOT_PASSWORD')}
+              {t('LOGIN.FORGOT_PASSWORD')}
             </Button>
           </div>
           <Form.Item className='col-span-2 !mt-2'>
@@ -66,7 +66,7 @@ const SignIn = () => {
               htmlType='submit'
               className='w-full h-[3.5rem] bg-[#1890FF] text-[1rem] font-bold border-none !outline-none !rounded-md !text-white cursor-pointer !transition-colors duration-3000 hover:!text-black !active:!bg-[#096dd9] !disabled:!bg-[#69c0ff] !disabled:!text-[#ffffff]'
             >
-              {t<string>('LOGIN.LOGIN')}
+              {t('LOGIN.LOGIN')}
             </Button>
           </Form.Item>
         </Form>
