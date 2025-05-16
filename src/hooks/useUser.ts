@@ -3,7 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { GetUsersParams, UserDetail } from '@app/interface/user.interface';
-import { createUser, deleteUserAPI, getUserByIdAPI, getUsersAPI, updateUser } from '@app/services';
+import {
+  createUser,
+  deleteUserAPI,
+  getUserByIdAPI,
+  getUsersAPI,
+  updateUser,
+  forgotPasswordApi,
+} from '@app/services';
 
 export const useCreateUser = () => {
   const navigate = useNavigate();
@@ -64,4 +71,19 @@ export const useDeleteUser = () => {
     const response = await deleteUserAPI(id);
     return response.data;
   });
+};
+
+export const useForgotPassword = () => {
+  const navigate = useNavigate();
+  return useMutation(
+    async (email: string) => {
+      const response = await forgotPasswordApi(email);
+      return response.data;
+    },
+    {
+      onSuccess() {
+        navigate('/set-password');
+      },
+    },
+  );
 };
