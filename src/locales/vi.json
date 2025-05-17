@@ -62,14 +62,15 @@
     "CHANGE": "Thay đổi",
     "UPLOAD": "Tải ảnh",
     "EXPORT": "Export",
-    "START": "Bắt đầu",
     "CONFIRM": "Xác nhận"
   },
 
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
-    "SIGN_OUT": "Đăng xuất"
+    "SIGN_OUT": "Đăng xuất",
+    "SIGN_UP": "Đăng ký",
+    "SIGN_IN": "Đăng nhập"
   },
   "NOT_FOUND": {
     "TITLE": "404",
@@ -198,6 +199,14 @@
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "NULL_INFO": "Chưa có thông tin",
+    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
+    "FULLNAME": "Họ tên",
+    "PHONE": "Số điện thoại",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Nhập email",
+    "DOB": "Ngày sinh",
+    "DOB_PLACEHOLDER": "Chọn ngày sinh",
     "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
   },
   "LOGIN": {
@@ -206,5 +215,11 @@
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email",
     "EMAIL": "Email"
+  },
+  "SIDEBAR": {
+    "ONLINE_COURSES": "Khóa học trực tuyến",
+    "HISTORY": "Lịch sử kiểm tra",
+    "PERSONAL_PROFILE": "Thông tin cá nhân",
+    "CHANGE_PASSWORD": "Đổi mật khẩu"
   }
 }
