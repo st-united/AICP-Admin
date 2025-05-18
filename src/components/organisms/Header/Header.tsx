@@ -1,12 +1,10 @@
 import { Image } from 'antd';
-import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ProfileAvatar from './ProfileAvatar';
 import { DevPlus, DevPlusS } from '@app/assets/images';
 
 const Header = () => {
-  const { t } = useTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 

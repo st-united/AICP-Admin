@@ -19,16 +19,6 @@ const Sidebar = () => {
       label: t('SIDEBAR.CHANGE_PASSWORD'),
       path: '/change-password',
     },
-    {
-      icon: ContainerOutlined,
-      label: t('SIDEBAR.HISTORY'),
-      path: '/profile/history',
-    },
-    {
-      icon: ContainerOutlined,
-      label: t('SIDEBAR.ONLINE_COURSES'),
-      path: '/profile/courses',
-    },
   ];
 
   return (

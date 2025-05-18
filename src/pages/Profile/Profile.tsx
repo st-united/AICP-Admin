@@ -21,11 +21,6 @@ const Profile = () => {
         fullName: data.fullName || '',
         email: data.email || '',
         phone: data.phone || '',
-        // dob: data.dob ? new Date(data.dob) : null,
-        // country: data.country || null,
-        // province: data.province || null,
-        // occupation: data.occupation || null,
-        // referral: data.referral || null,
       });
     }
   }, [data, form]);
@@ -58,11 +53,6 @@ const Profile = () => {
             fullName: data?.fullName ?? '',
             email: data?.email ?? '',
             phone: data?.phone ?? '',
-            // dob: data?.dob ? new Date(data.dob) : null,
-            // country: data?.country ?? null,
-            // province: data?.province ?? null,
-            // occupation: data?.occupation ?? null,
-            // referral: data?.referral ?? null,
           }}
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>

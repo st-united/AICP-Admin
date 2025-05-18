@@ -3,7 +3,6 @@ import * as yup from 'yup';
 
 import {
   PHONE_REGEX_PATTERN,
-  EMAIL_REGEX_PATTERN,
   NO_SPECIAL_CHARACTER_IN_NAME,
   NO_SPACE_START_END,
   NO_TWO_SPACE,
@@ -33,18 +32,5 @@ export const useProfileSchema = () => {
       .string()
       .required(t('VALIDATE.PHONE_REQUIRED') as string)
       .matches(PHONE_REGEX_PATTERN, t('VALIDATE.INVALID', { field: t('PROFILE.PHONE') }) as string),
-
-    dob: yup
-      .date()
-      .nullable()
-      .max(new Date(), t('VALIDATE.DATE_NOT_FUTURE') as string),
-
-    country: yup.string().nullable(),
-
-    province: yup.string().nullable(),
-
-    occupation: yup.string().nullable(),
-
-    referral: yup.string().nullable(),
   });
 };

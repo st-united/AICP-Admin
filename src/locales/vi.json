@@ -217,9 +217,7 @@
     "EMAIL": "Email"
   },
   "SIDEBAR": {
-    "ONLINE_COURSES": "Khóa học trực tuyến",
-    "HISTORY": "Lịch sử kiểm tra",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
-    "CHANGE_PASSWORD": "Đổi mật khẩu"
+    "CHANGE_PASSWORD": "Đổi mới mật khẩu"
   }
 }
