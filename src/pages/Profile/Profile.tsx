@@ -93,7 +93,7 @@ const Profile = () => {
                       onClick={() => setIsEdit(true)}
                       className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#3D6ADA] !text-white'
                     >
-                      Chỉnh sửa
+                      {t('PROFILE.EDIT_PROFILE_BTN')}
                     </Button>
                   </>
                 ) : (
@@ -102,14 +102,14 @@ const Profile = () => {
                       onClick={handleCancel}
                       className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#3D6ADA] !text-[#3D6ADA] !text-md hover:!bg-[#3D6ADA] hover:!text-white'
                     >
-                      Hủy bỏ
+                      {t('PROFILE.CANCEL_EDIT_PROFILE_BTN')}
                     </Button>
                     <Button
                       type='primary'
                       htmlType='submit'
                       className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#3D6ADA] !text-white'
                     >
-                      Lưu
+                      {t('PROFILE.SAVE_PROFILE_BTN')}
                     </Button>
                   </>
                 )}

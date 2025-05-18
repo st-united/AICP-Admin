@@ -9,62 +9,54 @@ import './ProfileAvatar.scss';
 
 const ProfileAvatar = () => {
   const { t } = useTranslation();
-  console.log(localStorage.getItem('accessToken'));
-
-  const isLoggedIn = !!localStorage.getItem('accessToken');
 
   const items: MenuProps['items'] = [
     {
       key: '1',
       label: (
-        <div className='profile-avatar__item'>
+        <div className='flex items-center gap-3 text-lg font-semibold !p-1 hover:!rounded-lg'>
           <UserOutlined />
           <div>{t('PROFILE.PERSONAL_PROFILE')}</div>
         </div>
       ),
-      style: { display: isLoggedIn ? 'block' : 'none' },
+      style: { display: !localStorage.getItem('access_token') ? 'none' : 'block' },
     },
     {
       key: '2',
       label: (
-        <div className='profile-avatar__item profile-avatar__item--logout'>
+        <div className='flex items-center gap-3 text-lg font-semibold !p-1 text-[#ED0909]'>
           <LogoutOutlined />
           <div>{t('PROFILE.LOGOUT')}</div>
         </div>
       ),
-      style: { display: isLoggedIn ? 'block' : 'none' },
+      style: { display: !localStorage.getItem('access_token') ? 'none' : 'block' },
     },
     {
       key: '3',
       label: (
-        <Link to='/login' className='profile-avatar__item'>
+        <Link className='flex items-center gap-3 text-lg font-semibold !p-1' to={'/login'}>
           <LoginOutlined />
           <div>{t('DROPDOWN_PROFILE.SIGN_IN')}</div>
         </Link>
       ),
-      style: { display: !isLoggedIn ? 'block' : 'none' },
+      style: { display: localStorage.getItem('access_token') ? 'none' : 'block' },
     },
     {
       key: '4',
       label: (
-        <Link to='/register' className='profile-avatar__item'>
+        <Link className='flex items-center gap-3 text-lg font-semibold !p-1' to={'/register'}>
           <UserAddOutlined />
           <div>{t('DROPDOWN_PROFILE.SIGN_UP')}</div>
         </Link>
       ),
-      style: { display: !isLoggedIn ? 'block' : 'none' },
+      style: { display: localStorage.getItem('access_token') ? 'none' : 'block' },
     },
   ];
 
   return (
-    <Dropdown
-      menu={{ items }}
-      placement='bottomRight'
-      arrow
-      overlayClassName='profile-avatar__dropdown'
-    >
+    <Dropdown menu={{ items }} placement='bottomRight' arrow>
       <Avatar
-        className='profile-avatar__avatar'
+        className='border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
         icon={
           <div className='flex items-center justify-center w-full h-full'>
             <UserOutlined />

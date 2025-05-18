@@ -2,7 +2,7 @@ import { Image } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ProfileAvatar from './ProfileAvatar';
-import { DevPlus, DevPlusS } from '@app/assets/images';
+import { logoDevPlus, devPlusS } from '@app/assets/images';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -21,13 +21,13 @@ const Header = () => {
           <div className='cursor-pointer flex items-center justify-center'>
             <Image
               onClick={() => navigate('/')}
-              src={DevPlus}
+              src={logoDevPlus}
               className='hidden md:block !h-20'
               preview={false}
             />
             <Image
               onClick={() => navigate('/')}
-              src={DevPlusS}
+              src={devPlusS}
               className='block md:hidden !h-20'
               preview={false}
             />

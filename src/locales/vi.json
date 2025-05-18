@@ -207,14 +207,23 @@
     "EMAIL_PLACEHOLDER": "Nhập email",
     "DOB": "Ngày sinh",
     "DOB_PLACEHOLDER": "Chọn ngày sinh",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
+    "EDIT_PROFILE_BTN": "Chỉnh sửa",
+    "CANCEL_EDIT_PROFILE_BTN": "Hủy bỏ",
+    "SAVE_PROFILE_BTN": "Lưu thay đổi",
+    "LOGOUT": "Đăng xuất"
   },
   "LOGIN": {
-    "TEXT": "Đăng nhập",
-    "PASSWORD": "Mật khẩu",
+    "LOGIN": "Đăng nhập",
+    "TEXT": "Chào mừng bạn trở lại",
+    "EMAIL": "Email *",
+    "PASSWORD": "Mật khẩu *",
+    "FORGOT_PASSWORD": "Quên mật khẩu?",
+    "REGISTER": "Đăng ký",
+    "BACK_TO_HOME": "Quay về trang chủ",
+    "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
-    "EMAIL_INPUT": "Nhập email",
-    "EMAIL": "Email"
+    "EMAIL_INPUT": "Nhập email"
   },
   "SIDEBAR": {
     "PERSONAL_PROFILE": "Thông tin cá nhân",
