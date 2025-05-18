@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { GetUsersParams, UserDetail } from '@app/interface/user.interface';
+import { GetUsersParams, UserDetail, ChangePassword } from '@app/interface/user.interface';
 import {
   createUser,
   deleteUserAPI,
@@ -10,6 +10,7 @@ import {
   getUsersAPI,
   updateUser,
   forgotPasswordApi,
+  changePasswordApi,
 } from '@app/services';
 
 export const useCreateUser = () => {
@@ -83,6 +84,23 @@ export const useForgotPassword = () => {
     {
       onSuccess() {
         navigate('/set-password');
+      },
+    },
+  );
+};
+export const useChangeNewPassword = () => {
+  const navigate = useNavigate();
+  return useMutation(
+    async (changePassword: ChangePassword) => {
+      const response = await changePasswordApi(changePassword);
+      return response.data;
+    },
+    {
+      onSuccess({ message }) {
+        navigate(NAVIGATE_URL.PROFILE);
+      },
+      onError({ response }) {
+        console.log(response);
       },
     },
   );

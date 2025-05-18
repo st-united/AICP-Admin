@@ -1,6 +1,6 @@
+import ChangeNewPassword from './ChangePassword/ChangePassword';
+import ForgotPassword from './ForgotPassword/ForgotPassword';
 import NotFound from './NotFound/NotFound';
 import SignIn from './SignIn/SignIn';
-import ForgotPassword from './ForgotPassword/ForgotPassword';
-import ResetPassword from './ResetPassword/ResetPassword';
 
-export { SignIn, NotFound, ForgotPassword, ResetPassword };
+export { SignIn, NotFound, ForgotPassword, ChangeNewPassword };

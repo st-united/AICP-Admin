@@ -3,27 +3,27 @@ import { Button, Form, Input } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
 
-import { useResetPasswordSchema } from './resetPasswordSchema';
+import { useChangePasswordSchema } from './changePasswordSchema';
 import { yupSync } from '@app/helpers/yupSync';
-import { useResetPassword } from '@app/hooks';
+import { useChangeNewPassword } from '@app/hooks';
 import { ChangePassword } from '@app/interface/user.interface';
 
 import '../ForgotPassword/ForgotPassword.scss';
-const ResetPassword = () => {
-  const { mutate: resetPassword } = useResetPassword();
+const ChangeNewPassword = () => {
+  const { mutate: changePassword } = useChangeNewPassword();
   const { t } = useTranslation();
   const [form] = Form.useForm();
-  const resetPasswordSchema = useResetPasswordSchema();
+  const changePasswordSchema = useChangePasswordSchema();
 
   const onFinish = (values: ChangePassword) => {
-    resetPassword(values);
+    changePassword(values);
   };
 
-  const validator = [yupSync(resetPasswordSchema)] as unknown as Rule[];
+  const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
     <div
-      id='container-reset-password'
+      id='container-change-password'
       className='flex justify-center items-center w-[20rem] md:w-[40%]'
     >
       <div className='w-full h-full'>
@@ -33,7 +33,13 @@ const ResetPassword = () => {
           </h1>
         </div>
         <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
-          <Form.Item className='col-span-2' name='password' rules={validator}>
+          <Form.Item className='col-span-2' name='oldPassword' rules={validator}>
+            <Input.Password
+              className='!px-6 !py-4 !bg-[#1955A0] !border-none !outline-none !rounded-md !text-lg'
+              placeholder={t('PASSWORD.OLD_PASSWORD') ?? ''}
+            />
+          </Form.Item>
+          <Form.Item className='col-span-2' name='newPassword' rules={validator}>
             <Input.Password
               className='!px-6 !py-4 !bg-[#1955A0] !border-none !outline-none !rounded-md !text-lg'
               placeholder={t('PASSWORD.NEW_PASSWORD') ?? ''}
@@ -67,4 +73,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ChangeNewPassword;

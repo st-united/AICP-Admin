@@ -214,6 +214,7 @@
   },
   "PASSWORD": {
     "PASSWORD": "Mật khẩu",
+    "OLD_PASSWORD": "Mật khẩu cũ *",
     "NEW_PASSWORD": "Mật khẩu mới *",
     "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới *",
     "FORGOT_PASSWORD": "Quên mật khẩu",
