@@ -97,7 +97,7 @@ const Profile = () => {
                     </Button>
                   </>
                 ) : (
-                  <>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px]'>
                     <Button
                       onClick={handleCancel}
                       className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#3D6ADA] !text-[#3D6ADA] !text-md hover:!bg-[#3D6ADA] hover:!text-white'
@@ -111,7 +111,7 @@ const Profile = () => {
                     >
                       {t('PROFILE.SAVE_PROFILE_BTN')}
                     </Button>
-                  </>
+                  </div>
                 )}
               </div>
             </Form.Item>
