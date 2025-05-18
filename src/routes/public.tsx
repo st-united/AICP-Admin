@@ -1,6 +1,5 @@
 import PublicLayout from '@app/components/templates/PublicLayout';
-import ForgotPassword from '@app/pages/ForgotPassword/ForgotPassword';
-import ResetPassword from '@app/pages/ResetPassword/ResetPassword';
+import { SignIn, ForgotPassword, ResetPassword } from '@app/pages';
 
 const routes = [
   {
@@ -8,7 +7,7 @@ const routes = [
     children: [
       {
         path: 'login',
-        element: <div className='font-bold bg-[#121212] text-white p-2'>Login Page</div>,
+        element: <SignIn />,
       },
       {
         path: 'forgot-password',
