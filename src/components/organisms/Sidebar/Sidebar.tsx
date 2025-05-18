@@ -22,7 +22,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className='flex !rounded-2xl bg-white !p-6 h-full'>
+    <div className='flex !rounded-2xl bg-white !p-6 h-full shadow-md'>
       <div className='grid grid-cols-1 gap-1 text-[16px] w-full h-fit'>
         {menuItems.map((item, index) => {
           const isActive = currentPath === item.path;

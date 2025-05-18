@@ -38,7 +38,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className='relative rounded-2xl bg-white h-full'>
+      <div className='relative rounded-2xl bg-white h-full shadow-md'>
         <div className='bg-[#3D6ADA] h-[145px] rounded-t-2xl '>
           <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
             <CustomAvartar />
