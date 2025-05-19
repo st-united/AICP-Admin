@@ -11,14 +11,14 @@ import { useForgotPassword } from '@app/hooks';
 import './ForgotPassword.scss';
 
 const ForgotPassword = () => {
-  const { mutate: forgotPasswordUser } = useForgotPassword();
+  const { mutate: handleForgotPassword } = useForgotPassword();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const forgotPasswordSchema = useForgotPasswordSchema();
 
   const onFinish = (values: { email: string }) => {
-    forgotPasswordUser(values.email);
+    handleForgotPassword(values.email);
   };
   const handleOnClickLoginPage = () => {
     navigate('/login');

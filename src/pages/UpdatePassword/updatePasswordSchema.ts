@@ -3,15 +3,11 @@ import * as yup from 'yup';
 
 import { PASSWORD_REGEX_PATTERN } from '@app/constants/regex';
 
-export const useChangePasswordSchema = () => {
+export const useUpdatePasswordSchema = () => {
   const { t } = useTranslation();
 
   return yup.object().shape({
-    oldPassword: yup
-      .string()
-      .required(t('VALIDATE.REQUIRED', { field: t('PASSWORD.PASSWORD') }) as string),
-
-    newPassword: yup
+    password: yup
       .string()
       .matches(
         PASSWORD_REGEX_PATTERN,
@@ -21,10 +17,6 @@ export const useChangePasswordSchema = () => {
 
     confirmPassword: yup
       .string()
-      .oneOf(
-        [yup.ref('password')],
-        t('VALIDATE.MATCH', { field: t('PASSWORD.PASSWORD') }) as string,
-      )
       .required(t('VALIDATE.REQUIRED', { field: t('PASSWORD.PASSWORD') }) as string),
   });
 };

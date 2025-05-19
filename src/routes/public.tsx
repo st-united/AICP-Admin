@@ -1,5 +1,5 @@
 import PublicLayout from '@app/components/templates/PublicLayout';
-import { SignIn, ForgotPassword, ChangeNewPassword } from '@app/pages';
+import { SignIn, ForgotPassword, UpdatePassword } from '@app/pages';
 
 const routes = [
   {
@@ -14,8 +14,8 @@ const routes = [
         element: <ForgotPassword />,
       },
       {
-        path: 'change-password',
-        element: <ChangeNewPassword />,
+        path: 'update-password',
+        element: <UpdatePassword />,
       },
     ],
   },

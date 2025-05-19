@@ -1,7 +1,12 @@
 import axios from 'axios';
 
 import { API_URL } from '@app/constants';
-import { GetUsersParams, UserDetail, ChangePassword } from '@app/interface/user.interface';
+import {
+  GetUsersParams,
+  UserDetail,
+  ChangePassword,
+  UpdateForgotPassword,
+} from '@app/interface/user.interface';
 
 export const getUsersAPI = async (params: GetUsersParams) =>
   await axios.get(API_URL.USERS, { params });
@@ -26,3 +31,6 @@ export const forgotPasswordApi = async (email: string) =>
 
 export const changePasswordApi = async (changePassword: ChangePassword) =>
   await axios.post(API_URL.CHANGE_PASSWORD, changePassword);
+
+export const updateForgotPasswordApi = async (payload: UpdateForgotPassword) =>
+  await axios.post(API_URL.UPDATE_FORGOT_PASSWORD, payload);

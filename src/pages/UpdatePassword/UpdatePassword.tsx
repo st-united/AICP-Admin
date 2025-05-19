@@ -2,21 +2,29 @@ import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
-import { useChangePasswordSchema } from './changePasswordSchema';
+import { useUpdatePasswordSchema } from './updatePasswordSchema';
 import { yupSync } from '@app/helpers/yupSync';
-import { useChangeNewPassword } from '@app/hooks';
-import { ChangePassword } from '@app/interface/user.interface';
+import { useUpdateForgotPassword } from '@app/hooks';
+import { UpdateForgotPassword } from '@app/interface/user.interface';
 
 import '../ForgotPassword/ForgotPassword.scss';
-const ChangeNewPassword = () => {
-  const { mutate: changePassword } = useChangeNewPassword();
+const UpdatePassword = () => {
+  const { mutate: handleUpdateForgotPassword } = useUpdateForgotPassword();
   const { t } = useTranslation();
   const [form] = Form.useForm();
-  const changePasswordSchema = useChangePasswordSchema();
+  const [searchParams, _] = useSearchParams();
+  const changePasswordSchema = useUpdatePasswordSchema();
 
-  const onFinish = (values: ChangePassword) => {
-    changePassword(values);
+  const token = searchParams.get('token');
+
+  const onFinish = async (values: { password: string }) => {
+    const payload: UpdateForgotPassword = {
+      token,
+      password: values.password,
+    };
+    handleUpdateForgotPassword(payload);
   };
 
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
@@ -33,19 +41,30 @@ const ChangeNewPassword = () => {
           </h1>
         </div>
         <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
-          <Form.Item className='col-span-2' name='oldPassword' rules={validator}>
-            <Input.Password
-              className='!px-6 !py-4 !bg-[#1955A0] !border-none !outline-none !rounded-md !text-lg'
-              placeholder={t('PASSWORD.OLD_PASSWORD') ?? ''}
-            />
-          </Form.Item>
-          <Form.Item className='col-span-2' name='newPassword' rules={validator}>
+          <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
               className='!px-6 !py-4 !bg-[#1955A0] !border-none !outline-none !rounded-md !text-lg'
               placeholder={t('PASSWORD.NEW_PASSWORD') ?? ''}
             />
           </Form.Item>
-          <Form.Item className='col-span-2' name='confirmPassword' rules={validator}>
+          <Form.Item
+            className='col-span-2'
+            name='confirmPassword'
+            dependencies={['password']}
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(String(t('VALIDATE.MATCH', { field: t('PASSWORD.PASSWORD') }))),
+                  );
+                },
+              }),
+              ...validator,
+            ]}
+          >
             <Input.Password
               className='col-span-2 text-lg !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md'
               placeholder={t('PASSWORD.NEW_PASSWORD_CONFIRM') ?? ''}
@@ -73,4 +92,4 @@ const ChangeNewPassword = () => {
   );
 };
 
-export default ChangeNewPassword;
+export default UpdatePassword;
