@@ -62,15 +62,14 @@
     "CHANGE": "Thay đổi",
     "UPLOAD": "Tải ảnh",
     "EXPORT": "Export",
+    "START": "Bắt đầu",
     "CONFIRM": "Xác nhận"
   },
 
   "DROPDOWN_PROFILE": {
     "HI": "Chào",
     "PROFILE": "Cá nhân",
-    "SIGN_OUT": "Đăng xuất",
-    "SIGN_UP": "Đăng ký",
-    "SIGN_IN": "Đăng nhập"
+    "SIGN_OUT": "Đăng xuất"
   },
   "NOT_FOUND": {
     "TITLE": "404",
@@ -199,19 +198,7 @@
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "NULL_INFO": "Chưa có thông tin",
-    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
-    "FULLNAME": "Họ tên",
-    "PHONE": "Số điện thoại",
-    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
-    "EMAIL": "Email",
-    "EMAIL_PLACEHOLDER": "Nhập email",
-    "DOB": "Ngày sinh",
-    "DOB_PLACEHOLDER": "Chọn ngày sinh",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
-    "EDIT_PROFILE_BTN": "Chỉnh sửa",
-    "CANCEL_EDIT_PROFILE_BTN": "Hủy bỏ",
-    "SAVE_PROFILE_BTN": "Lưu thay đổi",
-    "LOGOUT": "Đăng xuất"
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -228,5 +215,25 @@
   "SIDEBAR": {
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "CHANGE_PASSWORD": "Đổi mới mật khẩu"
+  },
+  "PASSWORD": {
+    "PASSWORD": "Mật khẩu",
+    "OLD_PASSWORD": "Mật khẩu cũ *",
+    "NEW_PASSWORD": "Mật khẩu mới *",
+    "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới *",
+    "FORGOT_PASSWORD": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "CREATE_NEW_PASSWORD": "Tạo mật khẩu mới",
+    "BACK_TO_LOGIN": "Quay về trang đăng nhập",
+    "EXPIRED": "Liên kết đã hết hạn"
+  },
+  "FORGOT_PASSWORD": {
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "NOT_FOUND": "Người dùng không tồn tại!",
+    "REGISTER": "Đăng ký",
+    "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Gửi email thành công!",
+    "EXPIRED": "Liên kết đã hết hạn"
   }
 }
