@@ -1,4 +1,4 @@
-import { Form, Input, DatePicker, Button } from 'antd';
+import { Form, Input, DatePicker, Button, Divider } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -85,6 +85,7 @@ const Profile = () => {
                 disabled={!isEdit}
               />
             </Form.Item>
+            <Divider className='md:col-span-2 border-t border-[#E5E5E5]' />
             <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
               <div className='flex justify-end gap-2 !flex-row'>
                 {!isEdit ? (
