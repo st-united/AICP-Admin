@@ -1,12 +1,13 @@
 import { Form, Input, DatePicker, Button, Divider } from 'antd';
 import { Rule } from 'antd/lib/form';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useProfileSchema } from './profileSchema';
 import CustomAvartar from '@app/components/molecules/CustomAvartar/CustomAvartar';
 import { yupSync } from '@app/helpers';
-import { useGetProfile } from '@app/hooks';
+import { useGetProfile, useUpdateProfile } from '@app/hooks';
 
 const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -14,13 +15,15 @@ const Profile = () => {
   const { data } = useGetProfile();
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
+  const { mutate: updateProfile } = useUpdateProfile();
 
   useEffect(() => {
     if (data) {
       form.setFieldsValue({
         fullName: data.fullName || '',
         email: data.email || '',
-        phone: data.phone || '',
+        phoneNumber: data.phoneNumber || '',
+        dob: data.dob ? moment(data.dob) : null,
       });
     }
   }, [data, form]);
@@ -31,8 +34,7 @@ const Profile = () => {
   };
 
   const handleSubmit = async (values: any) => {
-    console.log('Form values:', values);
-    // TODO: Add update profile API call here
+    updateProfile(values);
     setIsEdit(false);
   };
 
@@ -41,7 +43,7 @@ const Profile = () => {
       <div className='relative rounded-2xl bg-white h-full shadow-md'>
         <div className='bg-[#3D6ADA] h-[145px] rounded-t-2xl '>
           <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
-            <CustomAvartar />
+            <CustomAvartar avatar={data?.avatarUrl} isEdit={true} />
           </div>
         </div>
         <Form
@@ -52,7 +54,8 @@ const Profile = () => {
           initialValues={{
             fullName: data?.fullName ?? '',
             email: data?.email ?? '',
-            phone: data?.phone ?? '',
+            phoneNumber: data?.phoneNumber ?? '',
+            dob: moment(data?.dob) ?? null,
           }}
         >
           <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px] w-full'>
@@ -70,7 +73,7 @@ const Profile = () => {
                 disabled
               />
             </Form.Item>
-            <Form.Item name='phone' label={t('PROFILE.PHONE')} rules={validator}>
+            <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
               <Input
                 className='!px-6 !py-3 !rounded-lg'
                 placeholder={t('PROFILE.PHONE_PLACEHOLDER') as string}
