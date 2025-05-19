@@ -1,0 +1,14 @@
+.dropdown-menu {
+  .ant-dropdown-menu {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    padding: 12px;
+    gap: 6px !important;
+
+    :hover {
+      border-radius: 12px;
+    }
+  }
+}
