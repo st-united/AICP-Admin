@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useProfileSchema } from './profileSchema';
 import CustomAvartar from '@app/components/molecules/CustomAvartar/CustomAvartar';
 import { yupSync } from '@app/helpers';
-import { useGetProfile, useUpdateProfile } from '@app/hooks';
+import { useGetProfile, useUpdateProfile, useUploadAvatar } from '@app/hooks';
 
 const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -16,6 +16,7 @@ const Profile = () => {
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
   const { mutate: updateProfile } = useUpdateProfile();
+  const { mutate: uploadAvatar } = useUploadAvatar();
 
   useEffect(() => {
     if (data) {
@@ -33,24 +34,33 @@ const Profile = () => {
     form.resetFields();
   };
 
-  const handleSubmit = async (values: any) => {
-    updateProfile(values);
+  const handleSubmitUpdateProfile = async (values: any) => {
+    const { email, ...rest } = values;
+    updateProfile(rest);
     setIsEdit(false);
   };
 
+  const handleSubmitUploadAvatar = async (values: FormData) => {
+    uploadAvatar(values);
+    setIsEdit(false);
+  };
   return (
     <>
       <div className='relative rounded-2xl bg-white h-full shadow-md'>
         <div className='bg-[#3D6ADA] h-[145px] rounded-t-2xl '>
           <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
-            <CustomAvartar avatar={data?.avatarUrl} isEdit={true} />
+            <CustomAvartar
+              avatar={data?.avatarUrl}
+              isEdit={isEdit}
+              onAvatarChange={handleSubmitUploadAvatar}
+            />
           </div>
         </div>
         <Form
           form={form}
           layout='vertical'
           className='w-full flex justify-center !mt-[120px] !px-4'
-          onFinish={handleSubmit}
+          onFinish={handleSubmitUpdateProfile}
           initialValues={{
             fullName: data?.fullName ?? '',
             email: data?.email ?? '',

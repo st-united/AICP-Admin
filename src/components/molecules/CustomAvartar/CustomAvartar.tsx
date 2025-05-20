@@ -1,12 +1,41 @@
 import { CameraFilled, UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
+import { Avatar, Upload } from 'antd';
+import { UploadChangeParam } from 'antd/lib/upload';
+import { useTranslation } from 'react-i18next';
+
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB } from '@app/constants/file';
+import { validateFile } from '@app/helpers/fileValidation';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 interface Props {
   avatar?: string;
   isEdit?: boolean;
+  onAvatarChange: (formdata: FormData) => void;
 }
 
-const CustomAvartar = ({ avatar, isEdit }: Props) => {
+const CustomAvartar = ({ avatar, isEdit, onAvatarChange }: Props) => {
+  const { t } = useTranslation();
+  const handleChangeImage = (info: UploadChangeParam) => {
+    const file = info.fileList[0]?.originFileObj;
+    if (!file) return;
+    const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
+    if (!validation.isValid) {
+      openNotificationWithIcon(
+        NotificationTypeEnum.WARNING,
+        t(validation.errorMessageKey!, {
+          field: t('PROFILE.AVATAR'),
+          ...validation.errorMessageParams,
+        }),
+      );
+      return;
+    }
+    const formdata = new FormData();
+    formdata.append('avatar', file);
+    onAvatarChange(formdata);
+  };
   return (
     <div className='relative'>
       <Avatar
@@ -14,11 +43,22 @@ const CustomAvartar = ({ avatar, isEdit }: Props) => {
         src={avatar}
         icon={<UserOutlined className='md:!text-[180px] !text-[150px]' />}
       />
-      <div className={`absolute bottom-0 right-2 cursor-pointer ${isEdit ? 'block' : 'hidden'}`}>
-        <div className='flex items-center justify-center bg-[#3D6ADA] rounded-full !p-2'>
-          <CameraFilled style={{ color: '#fff', fontSize: '24px' }} />
-        </div>
-      </div>
+
+      {isEdit && (
+        <Upload
+          key={avatar}
+          showUploadList={false}
+          beforeUpload={() => false}
+          onChange={handleChangeImage}
+          accept='image/*'
+        >
+          <div className='absolute bottom-0 right-2 cursor-pointer'>
+            <div className='flex items-center justify-center bg-[#FF8C5F] rounded-full !p-2'>
+              <CameraFilled style={{ color: '#fff', fontSize: '24px' }} />
+            </div>
+          </div>
+        </Upload>
+      )}
     </div>
   );
 };
