@@ -17,7 +17,7 @@ const routes = [
         element: <ForgotPassword />,
       },
       {
-        path: 'update-password',
+        path: 'reset-password',
         element: <UpdatePassword />,
       },
     ],
