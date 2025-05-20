@@ -1,8 +1,9 @@
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useUpdatePasswordSchema } from './updatePasswordSchema';
 import { yupSync } from '@app/helpers/yupSync';
@@ -10,7 +11,9 @@ import { useUpdateForgotPassword } from '@app/hooks';
 import { UpdateForgotPassword } from '@app/interface/user.interface';
 
 import '../ForgotPassword/ForgotPassword.scss';
+
 const UpdatePassword = () => {
+  const navigate = useNavigate();
   const { mutate: handleUpdateForgotPassword } = useUpdateForgotPassword();
   const { t } = useTranslation();
   const [form] = Form.useForm();
@@ -18,6 +21,12 @@ const UpdatePassword = () => {
   const changePasswordSchema = useUpdatePasswordSchema();
 
   const token = searchParams.get('token');
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/forgot-password');
+    }
+  }, [token, navigate]);
 
   const onFinish = async (values: { password: string }) => {
     const payload: UpdateForgotPassword = {
