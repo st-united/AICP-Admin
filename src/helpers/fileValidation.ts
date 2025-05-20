@@ -1,3 +1,4 @@
+export type FileType = 'image' | 'pdf' | 'word' | 'excel' | 'text' | 'video' | 'audio';
 export interface ValidationResult {
   isValid: boolean;
   errorMessageKey?: string;
@@ -7,7 +8,8 @@ export interface ValidationResult {
 export function validateFile(
   file: File,
   acceptedTypes: string[],
-  maxSizeMB: number,
+  maxSizeKB: number,
+  type: FileType,
 ): ValidationResult {
   if (!acceptedTypes.includes(file.type)) {
     return {
@@ -15,11 +17,11 @@ export function validateFile(
       errorMessageKey: 'VALIDATE.INVALID',
     };
   }
-  if (file.size / 1024 / 1024 > maxSizeMB) {
+  if (file.size > maxSizeKB * 1024) {
     return {
       isValid: false,
-      errorMessageKey: 'VALIDATE.FILE_TOO_LARGE',
-      errorMessageParams: { max: maxSizeMB },
+      errorMessageKey: 'VALIDATE.FILE_MAX_SIZE',
+      errorMessageParams: { max: maxSizeKB, type },
     };
   }
   return { isValid: true };

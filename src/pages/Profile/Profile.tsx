@@ -47,7 +47,7 @@ const Profile = () => {
   return (
     <>
       <div className='relative rounded-2xl bg-white h-full shadow-md'>
-        <div className='bg-[#3D6ADA] h-[145px] rounded-t-2xl '>
+        <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl '>
           <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
             <CustomAvartar
               avatar={data?.avatarUrl}
@@ -105,7 +105,7 @@ const Profile = () => {
                   <>
                     <Button
                       onClick={() => setIsEdit(true)}
-                      className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#3D6ADA] !text-white'
+                      className='!flex !justify-center !items-center !rounded-3xl !px-8 !py-4 !text-md !bg-[#FF8C5F] !border-[#FF8C5F] !text-white'
                     >
                       {t('PROFILE.EDIT_PROFILE_BTN')}
                     </Button>
@@ -114,14 +114,14 @@ const Profile = () => {
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px]'>
                     <Button
                       onClick={handleCancel}
-                      className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#3D6ADA] !text-[#3D6ADA] !text-md hover:!bg-[#3D6ADA] hover:!text-white'
+                      className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
                     >
                       {t('PROFILE.CANCEL_EDIT_PROFILE_BTN')}
                     </Button>
                     <Button
                       type='primary'
                       htmlType='submit'
-                      className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#3D6ADA] !text-white'
+                      className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
                     >
                       {t('PROFILE.SAVE_PROFILE_BTN')}
                     </Button>

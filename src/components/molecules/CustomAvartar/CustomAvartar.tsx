@@ -3,7 +3,7 @@ import { Avatar, Upload } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { useTranslation } from 'react-i18next';
 
-import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB } from '@app/constants/file';
+import { ACCEPTED_IMAGE_TYPES, FILE_TYPE, MAX_IMAGE_FILE_SIZE_KB } from '@app/constants/file';
 import { validateFile } from '@app/helpers/fileValidation';
 import {
   NotificationTypeEnum,
@@ -21,7 +21,12 @@ const CustomAvartar = ({ avatar, isEdit, onAvatarChange }: Props) => {
   const handleChangeImage = (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
     if (!file) return;
-    const validation = validateFile(file, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE_MB);
+    const validation = validateFile(
+      file,
+      ACCEPTED_IMAGE_TYPES,
+      MAX_IMAGE_FILE_SIZE_KB,
+      FILE_TYPE.AUDIO,
+    );
     if (!validation.isValid) {
       openNotificationWithIcon(
         NotificationTypeEnum.WARNING,
