@@ -1,4 +1,4 @@
-import { ProfileOutlined, LockOutlined, ContainerOutlined } from '@ant-design/icons';
+import { ProfileOutlined, LockOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -31,14 +31,14 @@ const Sidebar = () => {
           return (
             <Link to={item.path} key={index}>
               <div
-                className={`flex flex-row gap-2 items-center justify-start !px-6 !p-4 hover:bg-[#EDF9FF] rounded-lg cursor-pointer ${
-                  isActive ? 'bg-[#EDF9FF]' : ''
+                className={`flex flex-row gap-2 items-center justify-start !px-6 !p-4 hover:bg-[#fff2e8] rounded-lg cursor-pointer ${
+                  isActive ? 'bg-[#fff2e8]' : ''
                 }`}
               >
-                <Icon style={{ fontSize: '24px', color: isActive ? '#3D6ADA' : '#5B5B5B' }} />
+                <Icon style={{ fontSize: '24px', color: isActive ? '#ff7a45' : '#5B5B5B' }} />
                 <div
                   className={`${
-                    isActive ? 'text-[#3D6ADA] font-semibold' : 'text-[#5B5B5B] font-medium'
+                    isActive ? 'text-[#ff7a45] font-semibold' : 'text-[#5B5B5B] font-medium'
                   }`}
                 >
                   {item.label}
