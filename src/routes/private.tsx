@@ -22,7 +22,7 @@ const routes = [
         element: <AdminLayout />,
         children: [
           { path: 'dashboard', element: <div></div> },
-          { path: 'adviser', element: <div></div> },
+          { path: 'mentor', element: <div></div> },
           { path: 'user', element: <div></div> },
           { path: 'company', element: <div></div> },
         ],

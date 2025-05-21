@@ -18,7 +18,7 @@ const AdminLayout: React.FC = () => {
 
   const menuItems = [
     { key: 'dashboard', label: t('ADMIN_SIDEBAR.DASHBOARD') },
-    { key: 'adviser', label: t('ADMIN_SIDEBAR.ADVISER') },
+    { key: 'mentor', label: t('ADMIN_SIDEBAR.MENTOR') },
     { key: 'user', label: t('ADMIN_SIDEBAR.USER') },
     { key: 'company', label: t('ADMIN_SIDEBAR.COMPANY') },
   ];

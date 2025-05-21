@@ -29,9 +29,9 @@ const AdminSidebar: React.FC = () => {
       label: t('ADMIN_SIDEBAR.DASHBOARD'),
     },
     {
-      key: 'adviser',
+      key: 'mentor',
       icon: <UserOutlined />,
-      label: t('ADMIN_SIDEBAR.ADVISER'),
+      label: t('ADMIN_SIDEBAR.MENTOR'),
     },
     {
       key: 'user',
