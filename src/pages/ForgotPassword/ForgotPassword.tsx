@@ -11,14 +11,18 @@ import { useForgotPassword } from '@app/hooks';
 import './ForgotPassword.scss';
 
 const ForgotPassword = () => {
-  const { mutate: handleForgotPassword } = useForgotPassword();
+  const { mutate: handleForgotPassword, isLoading } = useForgotPassword();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const forgotPasswordSchema = useForgotPasswordSchema();
 
   const onFinish = (values: { email: string }) => {
-    handleForgotPassword(values.email);
+    handleForgotPassword(values.email, {
+      onSuccess: () => {
+        form.resetFields();
+      },
+    });
   };
   const handleOnClickLoginPage = () => {
     navigate('/login');
@@ -34,7 +38,7 @@ const ForgotPassword = () => {
       <div className='w-full h-full'>
         <div>
           <Button
-            className='mb-12 !bg-transparent border-none !outline-none text-[1rem] md:text-lg text-[#B2B2B2] hover:text-[#ffffff] cursor-pointer !transition-colors duration-3000'
+            className='mb-12 !bg-transparent border-none !outline-none text-[1rem] md:text-lg text-primary-gray hover:text-primary-light cursor-pointer transition-colors duration-3000'
             onClick={handleOnClickLoginPage}
           >
             <LeftOutlined />
@@ -42,14 +46,14 @@ const ForgotPassword = () => {
           </Button>
         </div>
         <div>
-          <h1 className='text-[1.5rem] md:text-[2.5rem] !text-white font-bold text-center mb-12'>
+          <h1 className='text-[2rem] md:text-[2.5rem] text-primary font-bold text-center mb-12'>
             {t('PASSWORD.FORGOT_PASSWORD')}
           </h1>
         </div>
         <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-1'>
           <Form.Item className='col-span-2 ' name='email' rules={validator}>
             <Input
-              className='!px-6 !py-4 !border-none !outline-none !rounded-md !text-lg'
+              className='!px-6 !py-4 !rounded-md !text-lg'
               placeholder={t('LOGIN.EMAIL') ?? ''}
             />
           </Form.Item>
@@ -57,9 +61,10 @@ const ForgotPassword = () => {
             <Button
               type='primary'
               htmlType='submit'
-              className='w-full h-[3.75rem] bg-[#1890FF] text-[1rem] font-bold border-none !outline-none !rounded-md !text-white cursor-pointer !transition-colors duration-3000 hover:!text-black !active:!bg-[#096dd9] !disabled:!bg-[#69c0ff] !disabled:!text-[#ffffff]'
+              className='w-full h-[3.75rem] !bg-primary-bold text-[1rem] font-bold border-none !outline-none !rounded-md !text-white cursor-pointer hover:!text-black hover:!bg-primary-light transition duration-3000'
+              loading={isLoading}
             >
-              {t('PASSWORD.RESET_PASSWORD')}
+              {!isLoading && t('PASSWORD.RESET_PASSWORD')}
             </Button>
           </Form.Item>
         </Form>

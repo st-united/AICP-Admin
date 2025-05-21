@@ -12,7 +12,7 @@ import { Credentials } from '@app/interface/user.interface';
 import './SignIn.scss';
 
 const SignIn = () => {
-  const { mutate: loginUser } = useLogin();
+  const { mutate: loginUser, isLoading } = useLogin();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -33,7 +33,7 @@ const SignIn = () => {
           </h1>
         </div>
         <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
-          <Form.Item className='col-span-2 ' name='email' rules={validator}>
+          <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='!px-6 !py-4 !rounded-md !text-lg'
               placeholder={t<string>('LOGIN.EMAIL')}

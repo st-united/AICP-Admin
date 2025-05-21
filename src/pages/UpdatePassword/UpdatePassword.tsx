@@ -14,7 +14,7 @@ import '../ForgotPassword/ForgotPassword.scss';
 
 const UpdatePassword = () => {
   const navigate = useNavigate();
-  const { mutate: handleUpdateForgotPassword } = useUpdateForgotPassword();
+  const { mutate: handleUpdateForgotPassword, isLoading } = useUpdateForgotPassword();
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const [searchParams, _] = useSearchParams();
@@ -40,19 +40,19 @@ const UpdatePassword = () => {
 
   return (
     <div
-      id='container-change-password'
+      id='container-update-password'
       className='flex justify-center items-center w-[20rem] md:w-[40%]'
     >
       <div className='w-full h-full'>
         <div>
-          <h1 className='text-[1.5rem] md:text-[2rem] !text-white font-bold mb-8 text-center'>
+          <h1 className='text-[2rem] lg:text-[2.5rem] !text-primary font-bold mb-8 text-center'>
             {t('PASSWORD.RESET_PASSWORD')}
           </h1>
         </div>
         <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
           <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
-              className='!px-6 !py-4 !bg-[#1955A0] !border-none !outline-none !rounded-md !text-lg'
+              className='!px-6 !py-4 !rounded-md !text-lg'
               placeholder={t('PASSWORD.NEW_PASSWORD') ?? ''}
             />
           </Form.Item>
@@ -75,7 +75,7 @@ const UpdatePassword = () => {
             ]}
           >
             <Input.Password
-              className='col-span-2 text-lg !bg-[#1955A0] !px-6 !py-4 !border-none !outline-none !rounded-md'
+              className='col-span-2 text-lg !px-6 !py-4 !rounded-md'
               placeholder={t('PASSWORD.NEW_PASSWORD_CONFIRM') ?? ''}
               iconRender={(visible) =>
                 visible ? (
@@ -90,7 +90,8 @@ const UpdatePassword = () => {
             <Button
               type='primary'
               htmlType='submit'
-              className='w-full h-[3.5rem] bg-[#1890FF] text-[1rem] font-bold border-none !outline-none !rounded-md !text-white cursor-pointer !transition-colors duration-3000 hover:!text-black !active:!bg-[#096dd9] !disabled:!bg-[#69c0ff] !disabled:!text-[#ffffff]'
+              className='w-full h-[3.5rem] !bg-primary-bold text-[1rem] font-bold border-none !outline-none !rounded-md !text-white cursor-pointer hover:!text-black hover:!bg-primary-light transition duration-3000'
+              loading={isLoading}
             >
               {t('PASSWORD.RESET_PASSWORD')}
             </Button>
