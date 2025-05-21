@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useProfileSchema } from './profileSchema';
-import CustomAvartar from '@app/components/molecules/CustomAvartar/CustomAvartar';
+import CustomAvartar from '@app/components/molecules/CustomAvatar/CustomAvatar';
 import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile, useUploadAvatar } from '@app/hooks';
 

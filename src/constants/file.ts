@@ -1,4 +1,4 @@
-export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/png'];
+export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 export const MAX_IMAGE_FILE_SIZE_KB = 524288;
 export enum FILE_TYPE {
   IMAGE = 'image',

@@ -1,4 +1,5 @@
-export type FileType = 'image' | 'pdf' | 'word' | 'excel' | 'text' | 'video' | 'audio';
+import { FILE_TYPE } from '@app/constants/file';
+
 export interface ValidationResult {
   isValid: boolean;
   errorMessageKey?: string;
@@ -9,7 +10,7 @@ export function validateFile(
   file: File,
   acceptedTypes: string[],
   maxSizeKB: number,
-  type: FileType,
+  type: FILE_TYPE,
 ): ValidationResult {
   if (!acceptedTypes.includes(file.type)) {
     return {

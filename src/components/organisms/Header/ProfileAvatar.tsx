@@ -11,7 +11,6 @@ import './ProfileAvatar.scss';
 const ProfileAvatar = () => {
   const { t } = useTranslation();
   const { isAuth, user } = useAppSelector((state) => state.auth);
-  console.log(user);
 
   const items: MenuProps['items'] = isAuth
     ? [

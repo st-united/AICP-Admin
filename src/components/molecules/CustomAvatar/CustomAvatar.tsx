@@ -21,18 +21,20 @@ const CustomAvartar = ({ avatar, isEdit, onAvatarChange }: Props) => {
   const handleChangeImage = (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
     if (!file) return;
-    const validation = validateFile(
+    const { isValid, errorMessageKey, errorMessageParams } = validateFile(
       file,
       ACCEPTED_IMAGE_TYPES,
       MAX_IMAGE_FILE_SIZE_KB,
-      FILE_TYPE.AUDIO,
+      FILE_TYPE.IMAGE,
     );
-    if (!validation.isValid) {
+    if (!isValid) {
+      const msgKey = errorMessageKey ?? 'PROFILE.AVATAR_UPLOAD_ERROR';
+
       openNotificationWithIcon(
         NotificationTypeEnum.WARNING,
-        t(validation.errorMessageKey!, {
+        t(msgKey, {
           field: t('PROFILE.AVATAR'),
-          ...validation.errorMessageParams,
+          ...errorMessageParams,
         }),
       );
       return;
