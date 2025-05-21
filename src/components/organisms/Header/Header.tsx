@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <div
       className={`${
-        isHomePage ? 'absolute bg-transparent' : 'bg-[#080140]'
+        isHomePage ? 'absolute bg-transparent' : 'bg-[#fff]'
       } flex justify-center item-center w-full z-9999 `}
     >
       <div className='container !md:px-0 !px-4'>

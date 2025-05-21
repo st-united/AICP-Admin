@@ -22,7 +22,7 @@ export interface UserProfile {
   address: string;
   gender: string;
   identityId: string;
-  avatar: string;
+  avatarUrl: string;
   permissions: string[];
 }
 

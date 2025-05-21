@@ -9,7 +9,7 @@ const ProfileLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className='flex justify-center items-center w-full min-h-[80vh] bg-[#f3f8fa]'>
+    <div className='flex justify-center items-center w-full min-h-[80vh] bg-[#fffbf9]'>
       <div
         className={`
           fixed inset-0 bg-black bg-opacity-50 z-40

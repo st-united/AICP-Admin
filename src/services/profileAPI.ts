@@ -11,8 +11,8 @@ export const getProfileApi = () => axios.get(API_URL.GET_PROFILE);
 export const updateProfileApi = async (user: UserProfile) =>
   await axios.patch(`${API_URL.UPDATE_PROFILE}`, user);
 
-export const uploadAvatarApi = async (identityId: string, formData: FormData) => {
-  return await axios.post(`${API_URL.UPLOAD_AVATAR}/${identityId}`, formData, {
+export const uploadAvatarApi = async (formData: FormData) => {
+  return await axios.post(`${API_URL.UPLOAD_AVATAR}`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
