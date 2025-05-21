@@ -2,7 +2,7 @@ import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
 import { yupSync } from '@app/helpers/yupSync';
@@ -14,7 +14,6 @@ import './SignIn.scss';
 const SignIn = () => {
   const { mutate: loginUser, isLoading } = useLogin();
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [form] = Form.useForm();
   const signInSchema = useSignInSchema();
 
@@ -36,7 +35,7 @@ const SignIn = () => {
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='!px-6 !py-4 !rounded-md !text-lg'
-              placeholder={t<string>('LOGIN.EMAIL')}
+              placeholder={t('LOGIN.EMAIL') ?? ''}
             />
           </Form.Item>
           <Form.Item className='col-span-2 ' name='password' rules={validator}>
@@ -53,10 +52,7 @@ const SignIn = () => {
             />
           </Form.Item>
           <div className='grid col-span-2 justify-end items-center'>
-            <Button
-              className='text-lg cursor-pointer transition-color duration-3000 border-none !outline-none !bg-transparent'
-              onClick={() => navigate('/forgot-password')}
-            >
+            <Button className='text-lg cursor-pointer transition-color duration-3000 border-none !outline-none !bg-transparent'>
               <Link
                 to='/forgot-password'
                 className='!text-primary-bold font-bold underline hover:!text-primary-light'
