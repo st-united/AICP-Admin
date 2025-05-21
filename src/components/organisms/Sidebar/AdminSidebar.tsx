@@ -1,9 +1,10 @@
 import {
-  DashboardOutlined,
-  SettingOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
+  UsergroupAddOutlined,
+  HomeOutlined,
+  BankOutlined,
 } from '@ant-design/icons';
 import { Menu, Button, Image, Layout } from 'antd';
 import { useState } from 'react';
@@ -25,12 +26,12 @@ const AdminSidebar: React.FC = () => {
   const menuItems: MenuProps['items'] = [
     {
       key: 'dashboard',
-      icon: <DashboardOutlined />,
+      icon: <HomeOutlined />,
       label: t('ADMIN_SIDEBAR.DASHBOARD'),
     },
     {
       key: 'mentor',
-      icon: <UserOutlined />,
+      icon: <UsergroupAddOutlined />,
       label: t('ADMIN_SIDEBAR.MENTOR'),
     },
     {
@@ -40,7 +41,7 @@ const AdminSidebar: React.FC = () => {
     },
     {
       key: 'company',
-      icon: <SettingOutlined />,
+      icon: <BankOutlined />,
       label: t('ADMIN_SIDEBAR.COMPANY'),
     },
   ];
