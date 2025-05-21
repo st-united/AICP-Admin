@@ -1,9 +1,28 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
-import { GetUsersParams, UserDetail } from '@app/interface/user.interface';
-import { createUser, deleteUserAPI, getUserByIdAPI, getUsersAPI, updateUser } from '@app/services';
+import {
+  GetUsersParams,
+  UserDetail,
+  ChangePassword,
+  UpdateForgotPassword,
+} from '@app/interface/user.interface';
+import {
+  createUser,
+  deleteUserAPI,
+  getUserByIdAPI,
+  getUsersAPI,
+  updateUser,
+  forgotPasswordApi,
+  changePasswordApi,
+  updateForgotPasswordApi,
+} from '@app/services';
+import {
+  openNotificationWithIcon,
+  NotificationTypeEnum,
+} from '@app/services/notification/notificationService';
 
 export const useCreateUser = () => {
   const navigate = useNavigate();
@@ -64,4 +83,49 @@ export const useDeleteUser = () => {
     const response = await deleteUserAPI(id);
     return response.data;
   });
+};
+
+export const useForgotPassword = () => {
+  const { t } = useTranslation();
+  return useMutation(
+    async (email: string) => {
+      const response = await forgotPasswordApi(email);
+      return response.data;
+    },
+    {
+      onSuccess() {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('FORGOT_PASSWORD.SUCCESS'));
+      },
+      onError() {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('FORGOT_PASSWORD.NOT_FOUND'));
+      },
+    },
+  );
+};
+
+export const useChangeNewPassword = () => {
+  return useMutation(async (changePassword: ChangePassword) => {
+    const response = await changePasswordApi(changePassword);
+    return response.data;
+  });
+};
+
+export const useUpdateForgotPassword = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  return useMutation(
+    async (payload: UpdateForgotPassword) => {
+      const response = await updateForgotPasswordApi(payload);
+      return response.data;
+    },
+    {
+      onSuccess() {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, t('MODAL.SUGGESTION_COPY_PASSWORD'));
+        navigate('/login', { replace: true });
+      },
+      onError() {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, t('FORGOT_PASSWORD.EXPIRED'));
+      },
+    },
+  );
 };

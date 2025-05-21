@@ -44,6 +44,11 @@ export interface ChangePassword {
   confirmPassword: string;
 }
 
+export interface UpdateForgotPassword {
+  token: string | null;
+  password: string;
+}
+
 export interface UserCreateParams {
   name: string;
   password: string;
