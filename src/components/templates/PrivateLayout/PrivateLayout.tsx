@@ -10,9 +10,9 @@ const { Content } = Layout;
 
 const PrivateLayout: FC = () => {
   const { isLoading } = useGetProfile();
-  // if (isLoading) {
-  //   return <Spin />;
-  // }
+  if (isLoading) {
+    return <Spin />;
+  }
 
   return (
     <Layout>
