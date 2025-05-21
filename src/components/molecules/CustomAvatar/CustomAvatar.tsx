@@ -4,7 +4,7 @@ import { UploadChangeParam } from 'antd/lib/upload';
 import { useTranslation } from 'react-i18next';
 
 import { ACCEPTED_IMAGE_TYPES, FILE_TYPE, MAX_IMAGE_FILE_SIZE_KB } from '@app/constants/file';
-import { validateFile } from '@app/helpers/fileValidation';
+import { validateFile, ValidateFileParams } from '@app/helpers/fileValidation';
 import {
   NotificationTypeEnum,
   openNotificationWithIcon,
@@ -21,12 +21,13 @@ const CustomAvartar = ({ avatar, isEdit, onAvatarChange }: Props) => {
   const handleChangeImage = (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
     if (!file) return;
-    const { isValid, errorMessageKey, errorMessageParams } = validateFile(
+    const paramValid: ValidateFileParams = {
       file,
-      ACCEPTED_IMAGE_TYPES,
-      MAX_IMAGE_FILE_SIZE_KB,
-      FILE_TYPE.IMAGE,
-    );
+      acceptedTypes: ACCEPTED_IMAGE_TYPES,
+      maxSizeKB: MAX_IMAGE_FILE_SIZE_KB,
+      type: FILE_TYPE.IMAGE,
+    };
+    const { isValid, errorMessageKey, errorMessageParams } = validateFile(paramValid);
     if (!isValid) {
       const msgKey = errorMessageKey ?? 'PROFILE.AVATAR_UPLOAD_ERROR';
 
