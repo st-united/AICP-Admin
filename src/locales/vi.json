@@ -183,11 +183,15 @@
     "SPECIAL_CHARACTER": "{{field}} không được chứa kí tự đặc biệt",
     "NOT_SPACE": "{{field}} không được chứa chữ có dấu và khoảng trống",
     "NOT_ALLOW_SPACE": "{{field}} không được chứa khoảng trống",
+    "NOT_ALLOW_TWO_SPACE": "{{field}} không được chứa 2 khoảng trống",
+    "NOT_ALLOW_SPACE_START_END": "{{field}} không được chứa khoảng trống đầu và cuối",
     "IMAGE_MAX_SIZE": "Dung lượng hình ảnh tối đa là 512Kb",
     "IMAGE_MIN_SIZE": "Dung lượng hình ảnh tối thiểu là 10Kb",
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
-    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
+    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
+    "DATE_OF_BIRTH_MAX": "Ngày sinh không được lớn hơn ngày hiện tại",
+    "DATE_OF_BIRTH_MIN": "Ngày sinh không được nhỏ hơn ngày 01/01/1900"
   },
   "PROFILE": {
     "CHANGE_PASSWORD": "Đổi mật khẩu",

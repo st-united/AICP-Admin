@@ -40,6 +40,16 @@ export default {
         primaryTextColor: '#637381',
         stroke: '#DFE4EA',
         gray: '#F9FAFB',
+        primary: {
+          DEFAULT: 'var(--primary-color)',
+          light: 'var(--primary-color-light)',
+          bold: 'var(--primary-color-bold)',
+          gray: 'var(--primary-gray-color)',
+        },
+        paragraph: {
+          DEFAULT: 'var(--paragraph-color)',
+          light: 'var(--paragraph-light-color)',
+        },
       },
     },
   },
