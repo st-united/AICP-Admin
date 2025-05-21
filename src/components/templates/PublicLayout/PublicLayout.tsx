@@ -9,7 +9,7 @@ const PublicLayout: React.FC = () => {
     navigate('/');
   };
   return (
-    <div className='relative h-screen w-full grid !p-10 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/background.png)]'>
+    <div className='relative h-screen w-full grid !p-10 bg-cover bg-center bg-no-repeat bg-[url(./assets/images/login-background.png)]'>
       <div className='absolute top-[4rem] left-[7rem] flex'>
         <button
           onClick={handleOnClickHomePage}
