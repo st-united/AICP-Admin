@@ -40,7 +40,7 @@ const UpdatePassword = () => {
 
   return (
     <div
-      id='container-change-password'
+      id='container-update-password'
       className='flex justify-center items-center w-[20rem] md:w-[40%]'
     >
       <div className='w-full h-full'>
