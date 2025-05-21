@@ -206,5 +206,14 @@
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email",
     "EMAIL": "Email"
+  },
+  "ADMIN_SIDEBAR": {
+    "DASHBOARD": "Trang chủ",
+    "ADVISER": "Cố vấn",
+    "USER": "Người dùng",
+    "COMPANY": "Doanh nghiệp"
+  },
+  "ADMIN_BREADCRUMB": {
+    "HOME": "Trang chủ"
   }
 }

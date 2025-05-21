@@ -1,0 +1,23 @@
+.admin-sidebar {
+  .ant-menu {
+    .ant-menu-item {
+      color: #888;
+      &::after {
+        display: none;
+      }
+      &:hover {
+        background: transparent;
+        color: #fa8c16;
+      }
+
+      &.ant-menu-item-selected,
+      &.ant-menu-item-active {
+        background: transparent;
+        color: #fa8c16;
+      }
+    }
+  }
+  .ant-menu-inline {
+    border: none;
+  }
+}

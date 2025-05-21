@@ -1,4 +1,4 @@
-.admin-layout {
+#admin-layout {
   min-height: 100vh;
 
   &__sider {
@@ -28,13 +28,5 @@
     &:hover {
       color: #1890ff;
     }
-  }
-
-  &__content {
-    margin: 24px 16px;
-    padding: 24px;
-    background: #fff;
-    min-height: 280px;
-    border-radius: 4px;
   }
 }

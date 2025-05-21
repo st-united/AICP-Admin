@@ -1,91 +1,49 @@
-import {
-  DashboardOutlined,
-  UserOutlined,
-  SettingOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from '@ant-design/icons';
-import { Image, Layout, Menu, Button } from 'antd';
-import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Layout } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { Outlet, useLocation } from 'react-router-dom';
 
-import './AdminLayout.scss';
-import { logoDevPlus } from '@app/assets/images';
+import AdminBreadcrumbs, {
+  BreadcrumbItem,
+} from '@app/components/molecules/Breadcrumb/AdminBreadcrumb';
 import Header from '@app/components/organisms/Header/Header';
-
-const { Sider, Content } = Layout;
+import AdminSidebar from '@app/components/organisms/Sidebar/AdminSidebar';
 
 const AdminLayout: React.FC = () => {
-  const [collapsed, setCollapsed] = React.useState(false);
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const location = useLocation();
+  const segments = location.pathname
+    .split('/')
+    .filter(Boolean)
+    .filter((seg) => seg !== 'dashboard');
 
   const menuItems = [
-    {
-      key: 'dashboard',
-      icon: <DashboardOutlined />,
-      label: 'Dashboard',
-    },
-    {
-      key: 'users',
-      icon: <UserOutlined />,
-      label: 'Users',
-    },
-    {
-      key: 'settings',
-      icon: <SettingOutlined />,
-      label: 'Settings',
-    },
+    { key: 'dashboard', label: t('ADMIN_SIDEBAR.DASHBOARD') },
+    { key: 'adviser', label: t('ADMIN_SIDEBAR.ADVISER') },
+    { key: 'user', label: t('ADMIN_SIDEBAR.USER') },
+    { key: 'company', label: t('ADMIN_SIDEBAR.COMPANY') },
   ];
 
-  const handleToggleCollapse = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handleToggleCollapse();
+  const breadcrumbItems: BreadcrumbItem[] = [];
+  let currentPath = '';
+  segments.forEach((seg) => {
+    currentPath += `/${seg}`;
+    const found = menuItems.find((item) => item.key === seg);
+    if (found) {
+      breadcrumbItems.push({ ...found, path: currentPath });
+    } else {
+      breadcrumbItems.push({ key: seg, label: decodeURIComponent(seg), path: currentPath });
     }
-  };
+  });
 
   return (
-    <Layout className='admin-layout'>
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-        className={`admin-layout__sider bg-white ${collapsed ? 'collapsed' : ''}`}
-      >
-        <div className='flex items-center justify-between p-4'>
-          {!collapsed && (
-            <Button type='text' className='p-0 h-auto' onClick={() => navigate('/')}>
-              <Image width={100} src={logoDevPlus} preview={false} className='cursor-pointer' />
-            </Button>
-          )}
-
-          <Button
-            type='text'
-            className='text-xl p-0 h-auto'
-            onClick={handleToggleCollapse}
-            onKeyDown={handleKeyPress}
-            aria-label={collapsed ? 'Expand menu' : 'Collapse menu'}
-          >
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </Button>
-        </div>
-        <Menu
-          theme='light'
-          mode='inline'
-          defaultSelectedKeys={['dashboard']}
-          items={menuItems}
-          onClick={({ key }) => navigate(`/admin/${key}`)}
-          className='admin-layout__menu'
-        />
-      </Sider>
-      <Layout>
+    <Layout id='admin-layout'>
+      <AdminSidebar />
+      <Layout className='bg-transparent'>
         <Header />
-        <Content className='admin-layout__content'>
-          <Outlet />
-        </Content>
+        <div className='flex items-center justify-start pl-5'>
+          <AdminBreadcrumbs items={breadcrumbItems} />
+        </div>
+        <Outlet />
       </Layout>
     </Layout>
   );

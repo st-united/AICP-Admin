@@ -11,7 +11,7 @@ import './ProfileAvatar.scss';
 
 const ProfileAvatar = () => {
   const { t } = useTranslation();
-  const { isAuth } = useSelector((state: RootState) => state.auth);
+  const { isAuth, user } = useSelector((state: RootState) => state.auth);
 
   const items: MenuProps['items'] = isAuth
     ? [
@@ -57,14 +57,17 @@ const ProfileAvatar = () => {
 
   return (
     <Dropdown overlayClassName='dropdown-menu' menu={{ items }} placement='bottomRight' arrow>
-      <Avatar
-        className='border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
-        icon={
-          <div className='flex items-center justify-center w-full h-full'>
-            <UserOutlined />
-          </div>
-        }
-      />
+      <div className='flex items-center cursor-pointer space-x-2'>
+        {isAuth && user?.fullName && <span className='text-lg font-medium'>{user.fullName}</span>}
+        <Avatar
+          className='border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
+          icon={
+            <div className='flex items-center justify-center w-full h-full'>
+              <UserOutlined />
+            </div>
+          }
+        />
+      </div>
     </Dropdown>
   );
 };
