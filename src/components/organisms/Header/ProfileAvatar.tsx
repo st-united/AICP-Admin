@@ -2,7 +2,6 @@ import { LoginOutlined, LogoutOutlined, UserAddOutlined, UserOutlined } from '@a
 import { Avatar, Dropdown } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
 import { useAppSelector } from '@app/redux/hooks';
 import type { MenuProps } from 'antd';
 
@@ -56,11 +55,18 @@ const ProfileAvatar = () => {
 
   return (
     <Dropdown overlayClassName='dropdown-menu' menu={{ items }} placement='bottomRight' arrow>
-      <Avatar
-        className='border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
-        src={isAuth && user ? user.avatarUrl : undefined}
-        icon={!isAuth || !user ? <UserOutlined /> : undefined}
-      />
+      <div className='flex items-center cursor-pointer space-x-2'>
+        {isAuth && user?.fullName && <span className='text-lg font-medium'>{user.fullName}</span>}
+        <Avatar
+          src={isAuth && user ? user.avatarUrl : undefined}
+          className='border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
+          icon={
+            <div className='flex items-center justify-center w-full h-full'>
+              {!isAuth || !user ? <UserOutlined /> : undefined}
+            </div>
+          }
+        />
+      </div>
     </Dropdown>
   );
 };
