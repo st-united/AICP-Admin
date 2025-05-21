@@ -1,5 +1,7 @@
 import { lazy } from 'react';
 
+import adminRoutes from './admin';
+
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
 const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
@@ -8,6 +10,7 @@ const routes = [
   {
     element: <PrivateLayout />,
     children: [
+      ...adminRoutes,
       {
         path: '404',
         element: <NotFound />,
