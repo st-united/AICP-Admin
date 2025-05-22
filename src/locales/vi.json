@@ -189,6 +189,9 @@
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
   },
+  "PLACEHOLDER": {
+    "FIELD_REQUIRED": "{{field}} *"
+  },
   "PROFILE": {
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
@@ -211,5 +214,25 @@
     "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email"
+  },
+  "PASSWORD": {
+    "PASSWORD": "Mật khẩu",
+    "OLD_PASSWORD": "Mật khẩu cũ",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới",
+    "FORGOT_PASSWORD": "Quên mật khẩu",
+    "RESET_PASSWORD": "Đặt lại mật khẩu",
+    "CREATE_NEW_PASSWORD": "Tạo mật khẩu mới",
+    "BACK_TO_LOGIN": "Quay về trang đăng nhập",
+    "EXPIRED": "Liên kết đã hết hạn"
+  },
+  "FORGOT_PASSWORD": {
+    "NO_ACCOUNT": "Bạn chưa có tài khoản?",
+    "NOT_FOUND": "Người dùng không tồn tại!",
+    "REGISTER": "Đăng ký",
+    "SEND_EMAIL_SUCCESS": "Đã gửi email thành công",
+    "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
+    "SUCCESS": "Gửi email thành công!",
+    "EXPIRED": "Liên kết đã hết hạn"
   }
 }
