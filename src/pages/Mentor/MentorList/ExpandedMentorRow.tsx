@@ -1,11 +1,12 @@
+import { Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table/Table';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Table } from '@app/components/atoms';
 import { useGetMenteesMentor } from '@app/hooks';
 import { MenteeColumns } from '@app/interface/user.interface';
 import { formatDate } from '@app/utils';
+import './ExpandedMentorRow.scss';
 
 type Props = {
   mentorId: string;
@@ -45,5 +46,12 @@ export const ExpandedRow: React.FC<Props> = ({ mentorId }) => {
     },
   ];
 
-  return <Table columns={columnsExpand} dataSource={menteeData?.data} />;
+  return (
+    <Table
+      id='expanded-table-custom'
+      pagination={false}
+      columns={columnsExpand}
+      dataSource={menteeData?.data}
+    />
+  );
 };

@@ -1,7 +1,8 @@
-import { CalendarOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
+import { CalendarOutlined, SearchOutlined } from '@ant-design/icons';
+import { Button, Input, InputRef, Space, Tooltip } from 'antd';
+import { ColumnType, FilterConfirmProps } from 'antd/lib/table/interface';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table/Table';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ExpandedRow } from './ExpandedMentorRow';
@@ -11,6 +12,8 @@ import { useGetMentor } from '@app/hooks';
 import { GetMentorsParams, MentorColumns } from '@app/interface/user.interface';
 import { formatDate } from '@app/utils';
 import './MentorTable.scss';
+
+type DataIndex = keyof MentorColumns | string;
 
 const MentorTable = () => {
   const { t } = useTranslation();
@@ -29,12 +32,74 @@ const MentorTable = () => {
 
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
 
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef<InputRef>(null);
+
+  const handleSearch = (
+    selectedKeys: string[],
+    confirm: (param?: FilterConfirmProps) => void,
+    dataIndex: DataIndex,
+  ) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex as string);
+  };
+
   const handleTableChange = (pagination: TablePaginationConfig) => {
     setTable({
       page: pagination.current || 1,
-      take: pagination.pageSize || 10,
+      take: 20,
     });
   };
+
+  const getColumnSearchProps = (dataIndex: DataIndex): ColumnType<MentorColumns> => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+      <div className='p-2'>
+        <Input
+          ref={searchInput}
+          placeholder={t('MENTOR.SEARCH_FULLNAME_PLACEHOLDER') as string}
+          value={`${selectedKeys[0] || ''}`}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type='primary'
+            className='rounded-md'
+            onClick={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size='middle'
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
+            className='rounded-md'
+            // onClick={() => clearFilters && handleReset(clearFilters)}
+            size='middle'
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered: boolean) => (
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined, fontSize: 20 }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex as keyof MentorColumns]
+        .toString()
+        .toLowerCase()
+        .includes((value as string).toLowerCase()),
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
+  });
 
   const columns: ColumnsType<MentorColumns> = [
     {
@@ -43,24 +108,17 @@ const MentorTable = () => {
       key: 'fullName',
       width: 200,
       render(_, record) {
-        return (
-          <>
-            <span>{record.user.fullName}</span>
-          </>
-        );
+        return <div>{record.user.fullName}</div>;
       },
+      ...getColumnSearchProps('user.fullName'),
     },
     {
       title: t('MENTOR.EMAIL'),
       dataIndex: 'email',
       key: 'email',
-      width: 150,
+      width: 230,
       render(_, record) {
-        return (
-          <>
-            <span>{record.user.email}</span>
-          </>
-        );
+        return <>{record.user.email}</>;
       },
     },
     {
@@ -69,18 +127,14 @@ const MentorTable = () => {
       key: 'phoneNumber',
       width: 200,
       render(_, record) {
-        return (
-          <>
-            <span>{record.user.phoneNumber}</span>
-          </>
-        );
+        return <>{record.user.phoneNumber}</>;
       },
     },
     {
       title: t('MENTOR.INTERVIEW_COUNT'),
       dataIndex: 'completedCount',
       key: 'completedCount',
-      width: 150,
+      width: 200,
       render(_, record) {
         return (
           <>
@@ -142,11 +196,7 @@ const MentorTable = () => {
           pageCount: mentorData?.meta?.pageCount,
           setTable,
         }}
-        expandableRender={(record) => (
-          <div className='px-6 py-1'>
-            <ExpandedRow mentorId={record.id} />
-          </div>
-        )}
+        expandableRender={(record) => <ExpandedRow mentorId={record.id} />}
         expandedRowKeys={expandedRowKeys}
         setExpandedRowKeys={setExpandedRowKeys}
       />

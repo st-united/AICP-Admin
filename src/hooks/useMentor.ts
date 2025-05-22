@@ -5,18 +5,32 @@ import { GetMentorsParams } from '@app/interface/user.interface';
 import { getMenTeeFromMentorApi, getMentorsApi, getMentorStatsApi } from '@app/services';
 
 export const useGetMentor = (params: GetMentorsParams) => {
-  return useQuery([QUERY_KEY.MENTOR], async () => {
-    const { data } = await getMentorsApi(params);
+  return useQuery(
+    [QUERY_KEY.MENTOR, params.page, params.take],
+    async () => {
+      const { data } = await getMentorsApi(params);
 
-    return data;
-  });
+      return data;
+    },
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  );
 };
 
 export const useGetMentorStats = () => {
-  return useQuery([QUERY_KEY.MENTOR, 'stats'], async () => {
-    const { data } = await getMentorStatsApi();
-    return data;
-  });
+  return useQuery(
+    [QUERY_KEY.MENTOR, 'stats'],
+    async () => {
+      const { data } = await getMentorStatsApi();
+      return data;
+    },
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  );
 };
 
 export const useGetMenteesMentor = (mentorId: string, enabled = true) => {
@@ -28,6 +42,8 @@ export const useGetMenteesMentor = (mentorId: string, enabled = true) => {
     },
     {
       enabled: !!mentorId && enabled,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     },
   );
 };
