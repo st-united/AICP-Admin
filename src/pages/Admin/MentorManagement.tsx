@@ -8,42 +8,35 @@ import { useCreateMentor } from '@app/hooks';
 const MentorManagement: React.FC = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   const [form] = Form.useForm();
 
   const { mutate: createMentor } = useCreateMentor();
 
-  const showModal = () => {
+  const showMentorModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleCancel = () => {
+  const handleMentorCancel = () => {
     setIsModalOpen(false);
     form.resetFields();
   };
 
-  const handleOk = async () => {
-    try {
-      const values = await form.validateFields();
-      createMentor(values);
-      setIsModalOpen(false);
-      form.resetFields();
-    } catch (errorInfo) {
-      console.log('Failed:', errorInfo);
-    }
+  const handleMentorCreate = async () => {
+    const values = await form.validateFields();
+    createMentor(values);
+    setIsModalOpen(false);
+    form.resetFields();
   };
 
   return (
     <div>
-      <Button type='primary' onClick={showModal}>
-        {t('MENTOR.ADD_NEW')}
-      </Button>
-
       <MentorModal
         isOpen={isModalOpen}
-        onCancel={handleCancel}
-        onOk={handleOk}
+        onCancel={handleMentorCancel}
+        onOk={isUpdate ? handleMentorCreate : handleMentorCreate}
         form={form}
-        isUpdate={false}
+        isUpdate={isUpdate}
       />
     </div>
   );
