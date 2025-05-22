@@ -189,6 +189,9 @@
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
   },
+  "PLACEHOLDER": {
+    "FIELD_REQUIRED": "{{field}} *"
+  },
   "PROFILE": {
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
@@ -214,9 +217,9 @@
   },
   "PASSWORD": {
     "PASSWORD": "Mật khẩu",
-    "OLD_PASSWORD": "Mật khẩu cũ *",
-    "NEW_PASSWORD": "Mật khẩu mới *",
-    "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới *",
+    "OLD_PASSWORD": "Mật khẩu cũ",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới",
     "FORGOT_PASSWORD": "Quên mật khẩu",
     "RESET_PASSWORD": "Đặt lại mật khẩu",
     "CREATE_NEW_PASSWORD": "Tạo mật khẩu mới",

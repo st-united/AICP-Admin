@@ -53,7 +53,9 @@ const UpdatePassword = () => {
           <Form.Item className='col-span-2' name='password' rules={validator}>
             <Input.Password
               className='!px-6 !py-4 !rounded-md !text-lg'
-              placeholder={t('PASSWORD.NEW_PASSWORD') ?? ''}
+              placeholder={
+                t('PLACEHOLDER.FIELD_REQUIRED', { field: t('PASSWORD.NEW_PASSWORD') }) ?? ''
+              }
             />
           </Form.Item>
           <Form.Item
@@ -76,7 +78,9 @@ const UpdatePassword = () => {
           >
             <Input.Password
               className='col-span-2 text-lg !px-6 !py-4 !rounded-md'
-              placeholder={t('PASSWORD.NEW_PASSWORD_CONFIRM') ?? ''}
+              placeholder={
+                t('PLACEHOLDER.FIELD_REQUIRED', { field: t('PASSWORD.NEW_PASSWORD_CONFIRM') }) ?? ''
+              }
               iconRender={(visible) =>
                 visible ? (
                   <EyeOutlined color='#69c0ff' size={24} />
