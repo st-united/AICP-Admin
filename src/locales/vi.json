@@ -229,5 +229,22 @@
   },
   "ADMIN_BREADCRUMB": {
     "HOME": "Trang chủ"
+  },
+  "MENTOR": {
+    "ADD_NEW": "Thêm mới cố vấn",
+    "EDIT": "Chỉnh sửa",
+    "DELETE": "Xóa",
+    "LIST": "Danh sách cố vấn",
+    "ADD_NEW_DESCRIPTION": "Vui lòng nhập thông tin của cố vấn để thêm mới.",
+    "PLACEHOLDER": {
+      "FULLNAME": "Nhập họ tên tại đây",
+      "EMAIL": "Nhập email tại đây",
+      "PHONE": "Nhập số điện thoại tại đây",
+      "DOB": "Chọn ngày sinh"
+    }
+  },
+  "COMMON": {
+    "CANCEL": "Hủy bỏ",
+    "CREATE": "Tạo mới"
   }
 }
