@@ -18,7 +18,7 @@ interface Props {
 const AdminBreadcrumbs: React.FC<Props> = ({ items }) => {
   const { t } = useTranslation();
   return (
-    <div id='AdminBreadcrumbs'>
+    <div id='admin-breadcrumbs'>
       <Breadcrumb separator='/'>
         <Breadcrumb.Item key='home'>
           <span className='breadcrumbs-link'>

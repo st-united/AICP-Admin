@@ -57,7 +57,15 @@ const AdminSidebar: React.FC = () => {
       trigger={null}
       collapsible
       collapsed={collapsed}
-      className={`admin-sidebar bg-white !border-r-0 ${collapsed ? 'collapsed' : ''}`}
+      className={`
+      admin-sidebar bg-white
+      border-r border-gray-200
+      shadow-[2px_0_8px_rgba(0,0,0,0.05)]
+      transition-all duration-300 ease-in-out
+      ${collapsed ? 'collapsed' : ''}
+      `}
+      breakpoint='md'
+      onBreakpoint={(broken) => setCollapsed(broken)}
     >
       <div className='flex items-center justify-between p-4'>
         {!collapsed && (
