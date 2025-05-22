@@ -194,6 +194,9 @@
     "DATE_OF_BIRTH_MIN": "Ngày sinh không được nhỏ hơn ngày 01/01/1900",
     "FILE_MAX_SIZE": "Dung lượng file {{type}} tối đa là {{max}}Kb"
   },
+  "PLACEHOLDER": {
+    "FIELD_REQUIRED": "{{field}} *"
+  },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
     "AVATAR_UPLOAD_ERROR": "Lỗi khi upload avatar",
@@ -237,9 +240,9 @@
   },
   "PASSWORD": {
     "PASSWORD": "Mật khẩu",
-    "OLD_PASSWORD": "Mật khẩu cũ *",
-    "NEW_PASSWORD": "Mật khẩu mới *",
-    "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới *",
+    "OLD_PASSWORD": "Mật khẩu cũ",
+    "NEW_PASSWORD": "Mật khẩu mới",
+    "NEW_PASSWORD_CONFIRM": "Nhập lại mật khẩu mới",
     "FORGOT_PASSWORD": "Quên mật khẩu",
     "RESET_PASSWORD": "Đặt lại mật khẩu",
     "CREATE_NEW_PASSWORD": "Tạo mật khẩu mới",
