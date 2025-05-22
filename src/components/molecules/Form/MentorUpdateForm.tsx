@@ -2,6 +2,10 @@ import { Form, Input, DatePicker, type FormInstance } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useMentorSchema } from './mentorSchema';
+import { yupSync } from '@app/helpers';
+import type { Rule } from 'antd/es/form';
+
 interface MentorUpdateFormProps {
   form: FormInstance;
   className?: string;
@@ -9,39 +13,37 @@ interface MentorUpdateFormProps {
 
 const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className }) => {
   const { t } = useTranslation();
+  const validator = [yupSync(useMentorSchema())] as unknown as Rule[];
 
   return (
     <Form form={form} layout='vertical' className={`grid grid-cols-2 gap-x-6 gap-y-4 ${className}`}>
-      <Form.Item
-        name='fullName'
-        label={t('PROFILE.FULLNAME')}
-        rules={[{ required: true, message: 'Vui lòng nhập họ tên' }]}
-      >
-        <Input placeholder='Nhập họ tên tại đây' size='large' className='p-3' />
+      <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
+        <Input
+          placeholder={t('MENTOR.PLACEHOLDER.FULLNAME') as string}
+          size='large'
+          className='p-3'
+        />
       </Form.Item>
 
-      <Form.Item
-        name='email'
-        label={t('PROFILE.EMAIL')}
-        rules={[{ required: true, type: 'email', message: 'Email không hợp lệ' }]}
-      >
-        <Input placeholder='Nhập email tại đây' size='large' className='p-3' disabled={true} />
+      <Form.Item name='email' label={t('PROFILE.EMAIL')} rules={validator}>
+        <Input
+          placeholder={t('MENTOR.PLACEHOLDER.EMAIL') as string}
+          size='large'
+          className='p-3'
+          disabled={true}
+        />
       </Form.Item>
 
-      <Form.Item
-        name='phone'
-        label={t('PROFILE.PHONE')}
-        rules={[{ required: true, message: 'Vui lòng nhập số điện thoại' }]}
-      >
-        <Input placeholder='Nhập số điện thoại tại đây' size='large' className='p-3' />
+      <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
+        <Input placeholder={t('MENTOR.PLACEHOLDER.PHONE') as string} size='large' className='p-3' />
       </Form.Item>
 
-      <Form.Item
-        name='dob'
-        label={t('PROFILE.DOB')}
-        rules={[{ required: true, message: 'Vui lòng chọn ngày sinh' }]}
-      >
-        <DatePicker placeholder='Chọn ngày sinh' className='w-full p-3' size='large' />
+      <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
+        <DatePicker
+          placeholder={t('MENTOR.PLACEHOLDER.DOB') as string}
+          className='w-full p-3'
+          size='large'
+        />
       </Form.Item>
     </Form>
   );

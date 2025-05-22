@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import MentorModal from '@app/components/molecules/Modal/MentorModal';
+import { useCreateMentor } from '@app/hooks';
 
 const MentorManagement: React.FC = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
+
+  const { mutate: createMentor } = useCreateMentor();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -21,8 +24,7 @@ const MentorManagement: React.FC = () => {
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
-      console.log('Success:', values);
-      // TODO: Call API to create mentor
+      createMentor(values);
       setIsModalOpen(false);
       form.resetFields();
     } catch (errorInfo) {
@@ -36,7 +38,13 @@ const MentorManagement: React.FC = () => {
         {t('MENTOR.ADD_NEW')}
       </Button>
 
-      <MentorModal isOpen={isModalOpen} onCancel={handleCancel} onOk={handleOk} form={form} />
+      <MentorModal
+        isOpen={isModalOpen}
+        onCancel={handleCancel}
+        onOk={handleOk}
+        form={form}
+        isUpdate={false}
+      />
     </div>
   );
 };

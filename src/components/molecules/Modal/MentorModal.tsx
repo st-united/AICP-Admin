@@ -1,18 +1,20 @@
-import { Modal, Button, Space } from 'antd';
+import { Modal, Button, Space, type FormInstance } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import MentorForm from '../Form/MentorCreateForm';
 import './MentorModal.scss';
+import MentorCreateForm from '../Form/MentorCreateForm';
+import MentorUpdateForm from '../Form/MentorUpdateForm';
 
 interface MentorModalProps {
   isOpen: boolean;
   onCancel: () => void;
   onOk: () => void;
-  form: any;
+  form: FormInstance;
+  isUpdate: boolean;
 }
 
-const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form }) => {
+const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form, isUpdate }) => {
   const { t } = useTranslation();
 
   const renderFooter = () => (
@@ -35,6 +37,17 @@ const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form 
     </div>
   );
 
+  const renderTitle = () => (
+    <div className='mb-6'>
+      <h2 className='sm:text-xl font-semibold text-gray-800 text-2xl'>
+        {isUpdate ? t('MENTOR.UPDATE') : t('MENTOR.ADD_NEW')}
+      </h2>
+      <p className='text-sm sm:text-base text-gray-500'>
+        {isUpdate ? t('MENTOR.UPDATE_DESCRIPTION') : t('MENTOR.ADD_NEW_DESCRIPTION')}
+      </p>
+    </div>
+  );
+
   return (
     <Modal
       open={isOpen}
@@ -45,12 +58,9 @@ const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form 
       closable={false}
     >
       <Space direction='vertical' className='w-full px-9 py-5'>
-        <div className='mb-6'>
-          <h2 className='sm:text-xl font-semibold text-gray-800 text-2xl'>{t('MENTOR.ADD_NEW')}</h2>
-          <p className='text-sm sm:text-base text-gray-500'>{t('MENTOR.ADD_NEW_DESCRIPTION')}</p>
-        </div>
+        {renderTitle()}
 
-        <MentorForm form={form} />
+        {isUpdate ? <MentorUpdateForm form={form} /> : <MentorCreateForm form={form} />}
         {renderFooter()}
       </Space>
     </Modal>
