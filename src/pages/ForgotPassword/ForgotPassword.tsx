@@ -2,7 +2,7 @@ import { LeftOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useForgotPasswordSchema } from './forgotPasswordSchema';
 import { yupSync } from '@app/helpers/yupSync';
@@ -36,14 +36,15 @@ const ForgotPassword = () => {
       className='flex justify-center items-center w-[20rem] md:w-[40%]'
     >
       <div className='w-full h-full'>
-        <div>
-          <Button
-            className='mb-12 !bg-transparent border-none !outline-none text-[1rem] md:text-lg text-primary-gray hover:text-primary-light cursor-pointer transition-colors duration-3000'
+        <div className='mb-10'>
+          <Link
+            to='/login'
+            className='text-[1rem] md:text-lg text-primary-gray hover:text-primary-light cursor-pointer transition-colors duration-3000'
             onClick={handleOnClickLoginPage}
           >
             <LeftOutlined />
             {t('PASSWORD.BACK_TO_LOGIN')}
-          </Button>
+          </Link>
         </div>
         <div>
           <h1 className='text-[2rem] md:text-[2.5rem] text-primary font-bold text-center mb-12'>
@@ -54,7 +55,7 @@ const ForgotPassword = () => {
           <Form.Item className='col-span-2 ' name='email' rules={validator}>
             <Input
               className='!px-6 !py-4 !rounded-md !text-lg'
-              placeholder={t('LOGIN.EMAIL') ?? ''}
+              placeholder={t('PLACEHOLDER.FIELD_REQUIRED', { field: t('USER.EMAIL') }) ?? ''}
             />
           </Form.Item>
           <Form.Item className='col-span-2 !mt-2'>

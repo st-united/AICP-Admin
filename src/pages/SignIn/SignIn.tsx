@@ -35,13 +35,13 @@ const SignIn = () => {
           <Form.Item className='col-span-2' name='email' rules={validator}>
             <Input
               className='!px-6 !py-4 !rounded-md !text-lg'
-              placeholder={t('LOGIN.EMAIL') ?? ''}
+              placeholder={t('PLACEHOLDER.FIELD_REQUIRED', { field: t('LOGIN.EMAIL') }) ?? ''}
             />
           </Form.Item>
           <Form.Item className='col-span-2 ' name='password' rules={validator}>
             <Input.Password
               className='col-span-2 text-lg !px-6 !py-4 !rounded-md'
-              placeholder={t<string>('LOGIN.PASSWORD')}
+              placeholder={t('PLACEHOLDER.FIELD_REQUIRED', { field: t('LOGIN.PASSWORD') }) ?? ''}
               iconRender={(visible) =>
                 visible ? (
                   <EyeOutlined color='#69c0ff' size={24} />
