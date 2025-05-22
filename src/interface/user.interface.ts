@@ -92,4 +92,5 @@ export interface MenteeColumns {
 
 export interface GetMentorsParams extends GetListParams {
   fullName?: string;
+  isActive?: boolean;
 }

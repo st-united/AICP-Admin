@@ -17,24 +17,27 @@ type DataIndex = keyof MentorColumns | string;
 
 const MentorTable = () => {
   const { t } = useTranslation();
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef<InputRef>(null);
 
   const [table, setTable] = useState({
     page: 1,
     take: 20,
+    isActive: undefined as boolean | undefined,
   });
 
   const getMentorsParams: GetMentorsParams = {
+    search: searchText,
     page: table.page,
     take: table.take,
+    order: 'desc',
+    isActive: table.isActive,
   };
 
   const { data: mentorData, isLoading } = useGetMentor(getMentorsParams);
 
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
-
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
-  const searchInput = useRef<InputRef>(null);
 
   const handleSearch = (
     selectedKeys: string[],
@@ -46,11 +49,21 @@ const MentorTable = () => {
     setSearchedColumn(dataIndex as string);
   };
 
-  const handleTableChange = (pagination: TablePaginationConfig) => {
-    setTable({
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, (string | number | boolean)[] | null>,
+  ) => {
+    setTable((prev) => ({
+      ...prev,
       page: pagination.current || 1,
       take: 20,
-    });
+      isActive:
+        filters.isActive?.[0] === 'true'
+          ? true
+          : filters.isActive?.[0] === 'false'
+          ? false
+          : undefined,
+    }));
   };
 
   const getColumnSearchProps = (dataIndex: DataIndex): ColumnType<MentorColumns> => ({
@@ -89,11 +102,17 @@ const MentorTable = () => {
     filterIcon: (filtered: boolean) => (
       <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined, fontSize: 20 }} />
     ),
-    onFilter: (value, record) =>
-      record[dataIndex as keyof MentorColumns]
-        .toString()
+    onFilter: (value, record) => {
+      const keys = (dataIndex as string).split('.'); // ['user', 'fullName']
+      let data: any = record;
+      for (const key of keys) {
+        data = data?.[key];
+      }
+      return data
+        ?.toString()
         .toLowerCase()
-        .includes((value as string).toLowerCase()),
+        .includes((value as string).toLowerCase());
+    },
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => searchInput.current?.select(), 100);
@@ -142,6 +161,7 @@ const MentorTable = () => {
           </>
         );
       },
+      sorter: true,
     },
     {
       title: t('MENTOR.STATUS'),
@@ -159,18 +179,28 @@ const MentorTable = () => {
               color='black'
               overlayClassName='custom-tooltip'
             >
-              <CalendarOutlined
-                className='cursor-pointer hover:!text-sky-700'
-                onClick={() => {
-                  setExpandedRowKeys(isExpanded ? [] : [record.id]);
-                }}
-                style={{ fontSize: '26px', color: '#08c' }}
-              />
+              <div className='relative'>
+                <CalendarOutlined
+                  className='cursor-pointer hover:!text-sky-700'
+                  onClick={() => {
+                    setExpandedRowKeys(isExpanded ? [] : [record.id]);
+                  }}
+                  style={{ fontSize: '26px', color: '#08c' }}
+                />
+                <div className='absolute -top-1 -right-1 flex items-center justify-center text-[10px] text-white rounded-full bg-[#F36262] w-4 h-4'>
+                  {record.upcomingCount}
+                </div>
+              </div>
             </Tooltip>
           </div>
         );
       },
       width: 250,
+      filters: [
+        { text: 'Active', value: 'true' },
+        { text: 'Inactive', value: 'false' },
+      ],
+      onFilter: (value, record) => String(record.isActive) === value,
     },
     {
       title: t('MENTOR.CREATED_AT'),
