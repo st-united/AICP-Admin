@@ -5,10 +5,9 @@
   }
 
   .ant-table-thead > tr > th {
-    font: normal normal 600 12px/22px Quicksand !important;
-    color: #909090 !important;
-    background: white !important;
-    border-bottom: 2px solid #eaeff3;
+    font: normal normal 600 16px Quicksand !important;
+    color: #000 !important;
+    background: #f9f9f9 !important;
     height: 63px;
   }
 
@@ -28,8 +27,7 @@
   }
 
   .ant-table-tbody > tr > td {
-    border-bottom: none !important;
-    font: normal normal 600 14px Quicksand !important;
+    font: normal normal 500 16px Quicksand !important;
     height: 50px;
     color: $text-basic;
 
@@ -48,7 +46,6 @@
 
   .ant-select-selector {
     border: 1px solid #dde6e9;
-    border-radius: 8px !important;
   }
 
   .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
@@ -64,43 +61,18 @@
   }
 
   .ant-select-selection-item {
-    font: normal normal 600 14px Quicksand;
+    font: normal normal 400 14px Quicksand;
   }
 
-  .ant-pagination {
-    border-radius: 8px;
-    display: flex;
-    column-gap: 10px;
-    padding-left: 10px;
-  }
-
-  .ant-pagination-item {
-    border: none;
-    background: none;
-
-    a {
-      color: #727272;
-      font-weight: 600;
-    }
-  }
+  // .ant-pagination {
+  //   border-radius: 8px;
+  //   display: flex;
+  //   column-gap: 6px;
+  //   padding-left: 10px;
+  // }
 
   .ant-pagination-item-active a {
-    font-size: 18px;
-    color: #5646ff;
-  }
-
-  .ant-pagination-prev,
-  .ant-pagination-next {
-    color: #727272;
-  }
-
-  .ant-pagination-prev .ant-pagination-item-link,
-  .ant-pagination-next .ant-pagination-item-link {
-    border: 0px solid #dde6e9 !important;
-    background-color: rgb(247, 247, 247) !important;
-    border-radius: 12px;
-    display: flex;
-    column-gap: 10px;
+    color: #1890ff;
   }
 
   .ant-divider-vertical {
@@ -176,4 +148,9 @@
   .ant-table-content {
     overflow-x: hidden !important;
   }
+}
+
+tr.ant-table-expanded-row > td,
+tr.ant-table-expanded-row:hover > td {
+  background-color: #ffffff !important;
 }

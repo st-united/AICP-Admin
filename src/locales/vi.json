@@ -229,5 +229,29 @@
   },
   "ADMIN_BREADCRUMB": {
     "HOME": "Trang chủ"
+  },
+  "MENTOR": {
+    "LIST": "Danh sách cố vấn",
+    "EXPORT": "Xuất danh sách",
+    "ADD": "Thêm mới",
+    "FULLNAME": "Họ tên",
+    "PHONENUMBER": "Số điện thoại",
+    "EMAIL": "Email",
+    "TOTAL": "Tổng cộng",
+    "ACTIVE": "Đang hoạt động",
+    "INACTIVE": "Không hoạt động",
+    "FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm",
+    "EXPERTISE_PLACEHOLDER": "Nhập chuyên môn để tìm kiếm",
+    "STATUS_PLACEHOLDER": "Chọn trạng thái để lọc",
+    "INTERVIEW_COUNT": "Số lượt phỏng vấn",
+    "STATUS": "Trạng thái",
+    "CREATED_AT": "Ngày tạo",
+    "SEARCH": "Tìm kiếm",
+    "INTERVIEW_TOOLTIP": "Nhấn vào đây để xem lịch phỏng vấn sắp tới",
+    "MENTEE": {
+      "FULLNAME": "Họ tên người dùng",
+      "EMAIL": "Email người dùng",
+      "INTERVIEW_TIME": "Thời gian phỏng vấn"
+    }
   }
 }
