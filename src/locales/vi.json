@@ -205,7 +205,19 @@
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "NULL_INFO": "Chưa có thông tin",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
+    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
+    "FULLNAME": "Họ tên",
+    "PHONE": "Số điện thoại",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Nhập email",
+    "DOB": "Ngày sinh",
+    "DOB_PLACEHOLDER": "Chọn ngày sinh",
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
+    "EDIT_PROFILE_BTN": "Chỉnh sửa",
+    "CANCEL_EDIT_PROFILE_BTN": "Hủy bỏ",
+    "SAVE_PROFILE_BTN": "Lưu thay đổi",
+    "LOGOUT": "Đăng xuất"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
@@ -242,5 +254,14 @@
     "TURN_BACK_SIGN_IN": "Quay về trang đăng nhập",
     "SUCCESS": "Gửi email thành công!",
     "EXPIRED": "Liên kết đã hết hạn"
+  },
+  "ADMIN_SIDEBAR": {
+    "DASHBOARD": "Trang chủ",
+    "MENTOR": "Cố vấn",
+    "USER": "Người dùng",
+    "COMPANY": "Doanh nghiệp"
+  },
+  "ADMIN_BREADCRUMB": {
+    "HOME": "Trang chủ"
   }
 }
