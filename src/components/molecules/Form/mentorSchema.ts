@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
+import { NO_SPECIAL_CHARACTER_IN_NAME, NO_SPACE_START_END, NO_TWO_SPACE } from '@app/constants';
+
 export const useMentorSchema = () => {
   const { t } = useTranslation();
 
@@ -8,10 +10,17 @@ export const useMentorSchema = () => {
     fullName: yup
       .string()
       .required(t('VALIDATE.REQUIRED', { field: t('PROFILE.FULLNAME') }) as string)
-      .min(2, t('VALIDATE.MIN_CHARACTER', { field: t('PROFILE.FULLNAME'), number: 2 }) as string)
       .matches(
-        /^[^0-9]*$/,
-        t('VALIDATE.NOT_ALLOW_NUMBER', { field: t('PROFILE.FULLNAME') }) as string,
+        NO_SPECIAL_CHARACTER_IN_NAME,
+        t('VALIDATE.ONLY_ALPHABET', { field: t('PROFILE.FULLNAME') }) as string,
+      )
+      .matches(
+        NO_SPACE_START_END,
+        t('VALIDATE.NO_SPACE_START_END', { field: t('PROFILE.FULLNAME') }) as string,
+      )
+      .matches(
+        NO_TWO_SPACE,
+        t('VALIDATE.NO_TWO_SPACE', { field: t('PROFILE.FULLNAME') }) as string,
       ),
 
     email: yup

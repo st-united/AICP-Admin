@@ -30,7 +30,7 @@ const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form,
         key='create'
         type='primary'
         onClick={onOk}
-        className='bg-orange-500 hover:bg-orange-600 hover:shadow-lg border-orange-200 hover:border-orange-300 shadow-md rounded-lg text-lg px-5 py-3 h-fit transition-all duration-200 font-bold'
+        className='bg-orange-500 hover:bg-orange-600 hover:shadow-lg border-orange-200 hover:border-orange-300 focus:bg-orange-400 focus:border-orange-400 shadow-md rounded-lg text-lg px-5 py-3 h-fit transition-all duration-200 font-bold'
       >
         {t('COMMON.CREATE')}
       </Button>
