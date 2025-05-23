@@ -169,6 +169,7 @@ const MentorTable = () => {
       key: 'isActive',
       render(_, record) {
         const isExpanded = expandedRowKeys.includes(record.id);
+        const isEnabled = Boolean(record.upcomingCount);
         return (
           <div className='flex items-center justify-start flex-row gap-3'>
             <Status isActive={record.isActive} />
@@ -183,7 +184,9 @@ const MentorTable = () => {
                 <CalendarOutlined
                   className='cursor-pointer hover:!text-sky-700'
                   onClick={() => {
-                    setExpandedRowKeys(isExpanded ? [] : [record.id]);
+                    if (isEnabled) {
+                      setExpandedRowKeys(isExpanded ? [] : [record.id]);
+                    }
                   }}
                   style={{ fontSize: '26px', color: '#08c' }}
                 />
