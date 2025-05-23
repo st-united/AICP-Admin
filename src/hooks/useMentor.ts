@@ -6,7 +6,15 @@ import { getMenTeeFromMentorApi, getMentorsApi, getMentorStatsApi } from '@app/s
 
 export const useGetMentor = (params: GetMentorsParams) => {
   return useQuery(
-    [QUERY_KEY.MENTOR, params.page, params.take, params.search, params.isActive],
+    [
+      QUERY_KEY.MENTOR,
+      params.page,
+      params.take,
+      params.search,
+      params.isActive,
+      params.orderBy,
+      params.order,
+    ],
     async () => {
       const { data } = await getMentorsApi(params);
 

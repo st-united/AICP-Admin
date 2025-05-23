@@ -13,9 +13,6 @@ export const getMentorStatsApi = () => axios.get(API_URL.GET_MENTOR_STATS);
 export const getMenTeeFromMentorApi = (mentorId: string) =>
   axios.get(API_URL.GET_MENTEES_FROM_MENTOR, {
     params: {
-      order: 'desc',
-      page: 1,
-      take: 10,
       mentorId,
     },
   });

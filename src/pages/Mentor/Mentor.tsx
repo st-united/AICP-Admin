@@ -6,7 +6,7 @@ import { MentorTable, Summary } from './MentorList';
 const Mentor = () => {
   const { t } = useTranslation();
   return (
-    <div className='flex flex-col mt-2 gap-6 px-5'>
+    <div className='flex flex-col mt-2 gap-6 px-5 overflow-y-auto pb-6'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center justify-center'>
           <Typography.Title className='!text-2xl !mb-0'>{t('MENTOR.LIST')}</Typography.Title>

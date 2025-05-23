@@ -64,7 +64,7 @@ export const Table: React.FC<TableProps> = ({
         loading={loading}
         rowKey={(record) => record.id}
         onChange={onChange}
-        scroll={{ x: 'max-content' }}
+        scroll={{ x: 'max-content', y: 'calc(100vh - 300px)' }}
         showSorterTooltip={false}
         pagination={false}
         locale={{
@@ -97,7 +97,7 @@ export const Table: React.FC<TableProps> = ({
       {disablePaginate === false && (
         <>
           {paginate && (
-            <div className='flex gap-2 justify-end items-center py-4 pr-6 shadow-custom rounded-b-lg'>
+            <div className='flex gap-2 justify-end items-center py-4 pr-6 shadow-custom rounded-b-lg bg-white'>
               <Pagination
                 showSizeChanger={false}
                 total={paginate.total}

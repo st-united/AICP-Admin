@@ -80,7 +80,7 @@ const MentorTable = () => {
         <Space>
           <Button
             type='primary'
-            className='rounded-md'
+            className='rounded-md bg-[#fe7743] border-[#fe7743]'
             onClick={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
             icon={<SearchOutlined />}
             size='middle'
@@ -89,7 +89,7 @@ const MentorTable = () => {
             Search
           </Button>
           <Button
-            className='rounded-md'
+            className='rounded-md text-[#fe7743] border-[#fe7743]'
             // onClick={() => clearFilters && handleReset(clearFilters)}
             size='middle'
             style={{ width: 90 }}
@@ -103,7 +103,7 @@ const MentorTable = () => {
       <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined, fontSize: 20 }} />
     ),
     onFilter: (value, record) => {
-      const keys = (dataIndex as string).split('.'); // ['user', 'fullName']
+      const keys = (dataIndex as string).split('.');
       let data: any = record;
       for (const key of keys) {
         data = data?.[key];
@@ -154,14 +154,6 @@ const MentorTable = () => {
       dataIndex: 'completedCount',
       key: 'completedCount',
       width: 200,
-      render(_, record) {
-        return (
-          <>
-            <span>{record.completedCount}</span>
-          </>
-        );
-      },
-      sorter: true,
     },
     {
       title: t('MENTOR.STATUS'),
@@ -200,8 +192,8 @@ const MentorTable = () => {
       },
       width: 250,
       filters: [
-        { text: 'Active', value: 'true' },
-        { text: 'Inactive', value: 'false' },
+        { text: 'Đang hoạt động', value: 'true' },
+        { text: 'Không hoạt động', value: 'false' },
       ],
       onFilter: (value, record) => String(record.isActive) === value,
     },

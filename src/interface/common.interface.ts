@@ -3,4 +3,5 @@ export interface GetListParams {
   page: number;
   take: number;
   order?: string;
+  orderBy?: string;
 }
