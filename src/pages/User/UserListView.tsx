@@ -1,10 +1,5 @@
-import {
-  SearchOutlined,
-  FilterOutlined,
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-} from '@ant-design/icons';
-import { Input, Button, Space, Tag, DatePicker, Select } from 'antd';
+import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
+import { Input, Button, Space, DatePicker, Select } from 'antd';
 import moment, { Moment } from 'moment';
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -86,7 +81,12 @@ const UserTable: React.FC = () => {
             className='w-52 mb-2 block'
           />
           <Space>
-            <Button type='primary' size='small' onClick={() => searchInput.current?.focus()}>
+            <Button
+              type='primary'
+              size='small'
+              onClick={() => searchInput.current?.focus()}
+              className='rounded-md bg-[#fe7743] border-[#fe7743]'
+            >
               {t('USER.SEARCH')}
             </Button>
             <Button size='small' onClick={() => setSearchText('')}>
@@ -95,7 +95,11 @@ const UserTable: React.FC = () => {
           </Space>
         </div>
       ),
-      filterIcon: () => <SearchOutlined className={searchText ? 'text-blue-500' : undefined} />,
+      filterIcon: () => (
+        <SearchOutlined
+          className={`text-center text-lg mt-1 ${searchText ? 'text-blue-500' : ''}`}
+        />
+      ),
       onFilterDropdownOpenChange: (visible) => {
         if (visible) {
           setTimeout(() => searchInput.current?.select(), 100);
@@ -186,12 +190,9 @@ const UserTable: React.FC = () => {
       dataIndex: 'status',
       key: 'status',
       render: (status: boolean) => (
-        <Tag
-          icon={status ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
-          color={status ? 'success' : 'error'}
-        >
+        <Space className={status ? 'text-[#269900]' : 'text-[#F36960]'}>
           {status ? t('USER.STATUS_ACTIVE') : t('USER.STATUS_INACTIVE')}
-        </Tag>
+        </Space>
       ),
       filterDropdown: () => (
         <div className='p-2'>
