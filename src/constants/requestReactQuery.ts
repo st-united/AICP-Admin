@@ -34,6 +34,7 @@ export const QUERY_KEY = {
   DATA_CARD: 'DATA_CARD',
   DATA_CHART: 'DATA_CHART',
   CABINS: 'CABINS',
+  PROVINCE: 'PROVINCE',
 };
 
 export const REACT_QUERY = {

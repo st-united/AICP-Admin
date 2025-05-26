@@ -5,5 +5,11 @@ export const fetchProvinces = async (): Promise<Province[]> => {
   if (!response.ok) {
     throw new Error('Failed to fetch province');
   }
-  return response.json();
+
+  const rawData = await response.json();
+
+  return rawData.map((item: any) => ({
+    codeName: item.codename,
+    name: item.name,
+  }));
 };

@@ -188,7 +188,7 @@ const UserTable: React.FC = () => {
             }
           >
             {provinces?.map((province) => (
-              <Option key={province.codename} value={province.name}>
+              <Option key={province.codeName} value={province.name}>
                 {province.name}
               </Option>
             ))}

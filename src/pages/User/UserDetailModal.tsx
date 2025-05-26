@@ -35,7 +35,6 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
       }
       open={isVisible}
       onCancel={onClose}
-      onOk={onClose}
       footer={null}
       width='65%'
     >
@@ -48,7 +47,7 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
               </span>
             }
           >
-            {selectedUser.email}
+            {selectedUser.email || t('USER.NO_DATA')}
           </Descriptions.Item>
 
           <Descriptions.Item
@@ -68,7 +67,7 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
               </span>
             }
           >
-            {selectedUser.dob ? moment(selectedUser.dob).format('DD/MM/YYYY') : t('USER.NO_DATA')}
+            {moment(selectedUser.dob).format('DD/MM/YYYY') || t('USER.NO_DATA')}
           </Descriptions.Item>
 
           <Descriptions.Item
@@ -107,7 +106,7 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
               </span>
             }
           >
-            {moment(selectedUser.createdAt).format('DD/MM/YYYY HH:mm:ss')}
+            {moment(selectedUser.createdAt).format('DD/MM/YYYY HH:mm:ss') || t('USER.NO_DATA')}
           </Descriptions.Item>
 
           <Descriptions.Item label={t('USER.REFERRAL_CODE')}>
