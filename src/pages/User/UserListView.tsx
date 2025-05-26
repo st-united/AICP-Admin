@@ -3,9 +3,11 @@ import { Input, Button, Space, DatePicker, Select } from 'antd';
 import moment, { Moment } from 'moment';
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
 import UserDetailModal from './UserDetailModal';
 import { PaginateProp, Table } from '@app/components/atoms';
+import { DATE_TIME, PARAM, USER_PARAM } from '@app/constants';
 import { useGetUsers } from '@app/hooks';
 import { useGetProvince } from '@app/hooks/useLocation';
 import { GetUsersParams, UserColumns } from '@app/interface/user.interface';
@@ -16,28 +18,73 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 const UserTable: React.FC = () => {
-  const [searchText, setSearchText] = useState<string>('');
-  const [provinceFilter, setProvinceFilter] = useState<string[]>([]);
-  const [jobFilter, setJobFilter] = useState<string[]>([]);
-  const [statusFilter, setStatusFilter] = useState<boolean[]>([]);
-  const [dateFilter, setDateFilter] = useState<[Moment | null, Moment | null] | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchText, setSearchText] = useState<string>(searchParams.get(PARAM.SEARCH) || '');
+  const [provinceFilter, setProvinceFilter] = useState<string[]>(
+    searchParams.get(USER_PARAM.PROVINCE) ? [searchParams.get(USER_PARAM.PROVINCE)!] : [],
+  );
+  const [jobFilter, setJobFilter] = useState<string[]>(
+    searchParams.get(USER_PARAM.JOB) ? [searchParams.get(USER_PARAM.JOB)!] : [],
+  );
+  const [statusFilter, setStatusFilter] = useState<boolean[]>(
+    searchParams.get(USER_PARAM.STATUS) ? [searchParams.get(USER_PARAM.STATUS) === 'true'] : [],
+  );
+  const [dateFilter, setDateFilter] = useState<[Moment | null, Moment | null] | null>(
+    searchParams.get(USER_PARAM.START_DATE) && searchParams.get(USER_PARAM.END_DATE)
+      ? [
+          moment(searchParams.get(USER_PARAM.START_DATE)),
+          moment(searchParams.get(USER_PARAM.END_DATE)),
+        ]
+      : null,
+  );
   const [paginationState, setPaginationState] = useState<PaginateProp>({
-    page: 1,
-    take: 20,
+    page: Number(searchParams.get(PARAM.PAGE)) || 1,
+    take: Number(searchParams.get(PARAM.TAKE)) || 20,
   });
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<UserColumns | null>(null);
 
   const searchInput = useRef<InputRef>(null);
+
+  useEffect(() => {
+    const params: Record<string, string> = {};
+    if (searchText) params.search = searchText;
+    if (provinceFilter.length === 1) params.province = provinceFilter[0];
+    if (jobFilter.length === 1) params.job = jobFilter[0];
+    if (statusFilter.length === 1) params.status = String(statusFilter[0]);
+    if (dateFilter && dateFilter[0] && dateFilter[1]) {
+      params.startDate = dateFilter[0].format(DATE_TIME.YEAR_MONTH_DATE);
+      params.endDate = dateFilter[1].format(DATE_TIME.YEAR_MONTH_DATE);
+    }
+    params.page = String(paginationState.page);
+    params.take = String(paginationState.take);
+
+    setSearchParams(params);
+  }, [
+    searchText,
+    provinceFilter,
+    jobFilter,
+    statusFilter,
+    dateFilter,
+    paginationState,
+    setSearchParams,
+  ]);
+
   const apiParams: GetUsersParams = {
     search: searchText,
     page: paginationState.page,
     take: paginationState.take,
     status: statusFilter.length === 1 ? statusFilter[0] : null,
     province: provinceFilter.length === 1 ? provinceFilter[0] : null,
-    startDate: dateFilter && dateFilter[0] && dateFilter[1] ? dateFilter[0].toDate() : null,
-    endDate: dateFilter && dateFilter[0] && dateFilter[1] ? dateFilter[0].toDate() : null,
+    startDate:
+      dateFilter && dateFilter[0] && dateFilter[1]
+        ? new Date(dateFilter[0].format(DATE_TIME.YEAR_MONTH_DATE))
+        : null,
+    endDate:
+      dateFilter && dateFilter[0] && dateFilter[1]
+        ? new Date(dateFilter[1].format(DATE_TIME.YEAR_MONTH_DATE))
+        : null,
     job: jobFilter.length === 1 ? jobFilter[0] : null,
   };
 
@@ -120,7 +167,7 @@ const UserTable: React.FC = () => {
       title: t('USER.DATE_OF_BIRTH'),
       dataIndex: 'dob',
       key: 'dob',
-      render: (date: string) => moment(date).format('DD/MM/YYYY'),
+      render: (date: string) => moment(date).format(DATE_TIME.DAY_MONTH_YEAR),
     },
     {
       title: t('USER.PROVINCE'),
@@ -222,14 +269,14 @@ const UserTable: React.FC = () => {
       title: t('USER.CREATED_AT'),
       dataIndex: 'createdAt',
       key: 'createdAt',
-      render: (date: string) => moment(date).format('DD/MM/YYYY'),
+      render: (date: string) => moment(date).format(DATE_TIME.DAY_MONTH_YEAR),
 
       filterDropdown: () => (
         <div className='p-2'>
           <RangePicker
             value={dateFilter}
             onChange={setDateFilter}
-            format='DD/MM/YYYY'
+            format={DATE_TIME.DAY_MONTH_YEAR}
             placeholder={[t('USER.FROM'), t('USER.TO')]}
             className='mb-2'
           />
