@@ -9,10 +9,6 @@ const routes = [
         path: 'login',
         element: <div className='font-bold bg-[#121212] text-white p-2'>Login Page</div>,
       },
-      // {
-      //   path: 'mentor',
-      //   element: <Mentor />,
-      // },
     ],
   },
 ];

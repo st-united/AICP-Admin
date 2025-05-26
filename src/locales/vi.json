@@ -128,7 +128,8 @@
     "NO_CONTENT": "Chưa có thông tin",
     "TOTAL_PAGE": "Tổng trang: {{total}}",
     "DISPLAY": "Hiển thị",
-    "ITEM": "mục"
+    "ITEM": "mục",
+    "PER_PAGE": "{{number}} / trang"
   },
   "MODAL": {
     "CONFIRM_DELETE_AVATAR": "Bạn muốn xoá ảnh đại diện?",
