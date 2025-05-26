@@ -8,12 +8,18 @@ import { useTranslation } from 'react-i18next';
 import { ExpandedRow } from './ExpandedMentorRow';
 import Status from './Status';
 import { Table } from '@app/components/atoms';
+import { OrderDirection } from '@app/constants/order';
 import { useGetMentor } from '@app/hooks';
 import { GetMentorsParams, MentorColumns } from '@app/interface/user.interface';
 import { formatDate } from '@app/utils';
-import './MentorTable.scss';
 
 type DataIndex = keyof MentorColumns | string;
+
+interface TableState {
+  page: number;
+  take: number;
+  isActive?: boolean;
+}
 
 const MentorTable = () => {
   const { t } = useTranslation();
@@ -21,18 +27,17 @@ const MentorTable = () => {
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef<InputRef>(null);
 
-  const [table, setTable] = useState({
+  const [table, setTable] = useState<TableState>({
     page: 1,
     take: 20,
-    isActive: undefined as boolean | undefined,
   });
 
   const getMentorsParams: GetMentorsParams = {
     search: searchText,
     page: table.page,
     take: table.take,
-    order: 'desc',
-    isActive: table.isActive,
+    order: OrderDirection.DESC,
+    ...(table.isActive !== undefined && { isActive: table.isActive }),
   };
 
   const { data: mentorData, isLoading } = useGetMentor(getMentorsParams);
@@ -53,16 +58,15 @@ const MentorTable = () => {
     pagination: TablePaginationConfig,
     filters: Record<string, (string | number | boolean)[] | null>,
   ) => {
+    const isActiveFilters = filters.isActive as string[] | null;
+    const hasBothFilters = isActiveFilters?.length === 2;
+    const isReset = isActiveFilters === null || isActiveFilters === undefined;
+
     setTable((prev) => ({
       ...prev,
       page: pagination.current || 1,
       take: 20,
-      isActive:
-        filters.isActive?.[0] === 'true'
-          ? true
-          : filters.isActive?.[0] === 'false'
-          ? false
-          : undefined,
+      isActive: isReset ? undefined : hasBothFilters ? undefined : isActiveFilters?.[0] === 'true',
     }));
   };
 
@@ -75,24 +79,22 @@ const MentorTable = () => {
           value={`${selectedKeys[0] || ''}`}
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
-          style={{ marginBottom: 8, display: 'block' }}
+          className='mb-2 block'
         />
         <Space>
           <Button
             type='primary'
-            className='rounded-md bg-[#fe7743] border-[#fe7743]'
+            className='rounded-md bg-[#fe7743] border-[#fe7743] w-[90px]'
             onClick={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
             icon={<SearchOutlined />}
             size='middle'
-            style={{ width: 90 }}
           >
             Search
           </Button>
           <Button
-            className='rounded-md text-[#fe7743] border-[#fe7743]'
+            className='rounded-md text-[#fe7743] border-[#fe7743] w-[90px]'
             // onClick={() => clearFilters && handleReset(clearFilters)}
             size='middle'
-            style={{ width: 90 }}
           >
             Reset
           </Button>
@@ -100,7 +102,7 @@ const MentorTable = () => {
       </div>
     ),
     filterIcon: (filtered: boolean) => (
-      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined, fontSize: 20 }} />
+      <SearchOutlined className={`text-[20px] ${filtered ? 'text-[#1890ff]' : ''}`} />
     ),
     onFilter: (value, record) => {
       const keys = (dataIndex as string).split('.');
@@ -126,9 +128,7 @@ const MentorTable = () => {
       dataIndex: 'fullName',
       key: 'fullName',
       width: 200,
-      render(_, record) {
-        return <div>{record.user.fullName}</div>;
-      },
+      render: (_, record) => record.user.fullName,
       ...getColumnSearchProps('user.fullName'),
     },
     {
@@ -136,18 +136,14 @@ const MentorTable = () => {
       dataIndex: 'email',
       key: 'email',
       width: 230,
-      render(_, record) {
-        return <>{record.user.email}</>;
-      },
+      render: (_, record) => record.user.email,
     },
     {
       title: t('MENTOR.PHONENUMBER'),
       dataIndex: 'phoneNumber',
       key: 'phoneNumber',
       width: 200,
-      render(_, record) {
-        return <>{record.user.phoneNumber}</>;
-      },
+      render: (_, record) => record.user.phoneNumber,
     },
     {
       title: t('MENTOR.INTERVIEW_COUNT'),
@@ -159,12 +155,12 @@ const MentorTable = () => {
       title: t('MENTOR.STATUS'),
       dataIndex: 'isActive',
       key: 'isActive',
-      render(_, record) {
+      render(value, record) {
         const isExpanded = expandedRowKeys.includes(record.id);
         const isEnabled = Boolean(record.upcomingCount);
         return (
           <div className='flex items-center justify-start flex-row gap-3'>
-            <Status isActive={record.isActive} />
+            <Status isActive={value} />
             <Tooltip
               className='calendar-tooltip'
               title={t('MENTOR.INTERVIEW_TOOLTIP')}
@@ -174,13 +170,12 @@ const MentorTable = () => {
             >
               <div className='relative'>
                 <CalendarOutlined
-                  className='cursor-pointer hover:!text-sky-700'
+                  className='cursor-pointer hover:!text-sky-700 text-[26px] text-[#08c]'
                   onClick={() => {
                     if (isEnabled) {
                       setExpandedRowKeys(isExpanded ? [] : [record.id]);
                     }
                   }}
-                  style={{ fontSize: '26px', color: '#08c' }}
                 />
                 <div className='absolute -top-1 -right-1 flex items-center justify-center text-[10px] text-white rounded-full bg-[#F36262] w-4 h-4'>
                   {record.upcomingCount}
@@ -192,8 +187,8 @@ const MentorTable = () => {
       },
       width: 250,
       filters: [
-        { text: 'Đang hoạt động', value: 'true' },
-        { text: 'Không hoạt động', value: 'false' },
+        { text: t('MENTOR.ACTIVE'), value: 'true' },
+        { text: t('MENTOR.INACTIVE'), value: 'false' },
       ],
       onFilter: (value, record) => String(record.isActive) === value,
     },
@@ -209,23 +204,21 @@ const MentorTable = () => {
   ];
 
   return (
-    <div className='flex flex-col gap-6'>
-      <Table
-        columns={columns}
-        dataSource={mentorData?.data}
-        loading={isLoading}
-        onChange={handleTableChange}
-        paginate={{
-          table,
-          total: mentorData?.meta?.itemCount,
-          pageCount: mentorData?.meta?.pageCount,
-          setTable,
-        }}
-        expandableRender={(record) => <ExpandedRow mentorId={record.id} />}
-        expandedRowKeys={expandedRowKeys}
-        setExpandedRowKeys={setExpandedRowKeys}
-      />
-    </div>
+    <Table
+      columns={columns}
+      dataSource={mentorData?.data}
+      loading={isLoading}
+      onChange={handleTableChange}
+      paginate={{
+        table,
+        total: mentorData?.meta?.itemCount,
+        pageCount: mentorData?.meta?.pageCount,
+        setTable,
+      }}
+      expandableRender={(record) => <ExpandedRow mentorId={record.id} />}
+      expandedRowKeys={expandedRowKeys}
+      setExpandedRowKeys={setExpandedRowKeys}
+    />
   );
 };
 

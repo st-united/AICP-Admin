@@ -126,19 +126,19 @@ export const Table: React.FC<TableProps> = ({
                 options={[
                   {
                     value: 10,
-                    label: '10 / trang',
+                    label: t('TABLE.PER_PAGE', { number: 10 }),
                   },
                   {
                     value: 20,
-                    label: '20 / trang',
+                    label: t('TABLE.PER_PAGE', { number: 20 }),
                   },
                   {
                     value: 50,
-                    label: '50 / trang',
+                    label: t('TABLE.PER_PAGE', { number: 50 }),
                   },
                   {
                     value: 100,
-                    label: '100 / trang',
+                    label: t('TABLE.PER_PAGE', { number: 100 }),
                   },
                 ]}
               />

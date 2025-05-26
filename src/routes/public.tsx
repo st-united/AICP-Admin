@@ -34,10 +34,6 @@ const routes = [
           },
         ],
       },
-      // {
-      //   path: 'mentor',
-      //   element: <Mentor />,
-      // },
     ],
   },
 ];
