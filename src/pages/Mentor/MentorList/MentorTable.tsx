@@ -178,9 +178,6 @@ const MentorTable = () => {
                     }
                   }}
                 />
-                {/* <div className='absolute -top-1 -right-1 flex items-center justify-center text-[10px] text-white rounded-full bg-[#F36262] w-4 h-4'>
-                  {record.upcomingCount}
-                </div> */}
               </Badge>
             </Tooltip>
           </div>
