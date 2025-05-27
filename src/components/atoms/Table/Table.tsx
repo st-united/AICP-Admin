@@ -111,9 +111,6 @@ export const Table: React.FC<TableProps> = ({
                 }}
               />
               <Select
-                style={{
-                  width: 'fit-content',
-                }}
                 defaultValue={paginate && paginate.table.take}
                 onChange={(value: number) => {
                   paginate &&

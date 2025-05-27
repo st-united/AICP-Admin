@@ -20,19 +20,15 @@ export const ExpandedRow: React.FC<Props> = ({ mentorId }) => {
     {
       title: t('MENTOR.MENTEE.FULLNAME'),
       dataIndex: 'fullName',
-      key: 'fullName',
       width: 250,
     },
     {
       title: t('MENTOR.MENTEE.EMAIL'),
       dataIndex: 'email',
-      key: 'email',
       width: 250,
     },
     {
       title: t('MENTOR.MENTEE.INTERVIEW_TIME'),
-      dataIndex: 'interview_time',
-      key: 'interview_time',
       width: 250,
       render(_, record) {
         return <>{formatDate(record.scheduledAt, 'YYYY/MM/DD HH:mm')}</>;
