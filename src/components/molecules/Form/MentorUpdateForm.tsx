@@ -19,7 +19,7 @@ const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className }) 
     <Form form={form} layout='vertical' className={`grid grid-cols-2 gap-x-6 gap-y-4 ${className}`}>
       <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
         <Input
-          placeholder={t('MENTOR.PLACEHOLDER.FULLNAME') as string}
+          placeholder={t('MENTOR_ACTION.PLACEHOLDER.FULLNAME') as string}
           size='large'
           className='p-3'
         />
@@ -27,7 +27,7 @@ const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className }) 
 
       <Form.Item name='email' label={t('PROFILE.EMAIL')} rules={validator}>
         <Input
-          placeholder={t('MENTOR.PLACEHOLDER.EMAIL') as string}
+          placeholder={t('MENTOR_ACTION.PLACEHOLDER.EMAIL') as string}
           size='large'
           className='p-3'
           disabled={true}
@@ -35,12 +35,16 @@ const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className }) 
       </Form.Item>
 
       <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
-        <Input placeholder={t('MENTOR.PLACEHOLDER.PHONE') as string} size='large' className='p-3' />
+        <Input
+          placeholder={t('MENTOR_ACTION.PLACEHOLDER.PHONE') as string}
+          size='large'
+          className='p-3'
+        />
       </Form.Item>
 
       <Form.Item name='dob' label={t('PROFILE.DOB')} rules={validator}>
         <DatePicker
-          placeholder={t('MENTOR.PLACEHOLDER.DOB') as string}
+          placeholder={t('MENTOR_ACTION.PLACEHOLDER.DOB') as string}
           className='w-full p-3'
           size='large'
         />

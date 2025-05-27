@@ -2,11 +2,11 @@ import { Modal, Button, Space, type FormInstance } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import './MentorModal.scss';
+import './MentorUpSertModal.scss';
 import MentorCreateForm from '../Form/MentorCreateForm';
 import MentorUpdateForm from '../Form/MentorUpdateForm';
 
-interface MentorModalProps {
+interface MentorUpSertModalProps {
   isOpen: boolean;
   onCancel: () => void;
   onOk: () => void;
@@ -14,7 +14,13 @@ interface MentorModalProps {
   isUpdate: boolean;
 }
 
-const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form, isUpdate }) => {
+const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
+  isOpen,
+  onCancel,
+  onOk,
+  form,
+  isUpdate,
+}) => {
   const { t } = useTranslation();
 
   const renderFooter = () => (
@@ -40,10 +46,10 @@ const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form,
   const renderTitle = () => (
     <div className='mb-6'>
       <h2 className='sm:text-xl font-semibold text-gray-800 text-2xl'>
-        {isUpdate ? t('MENTOR.UPDATE') : t('MENTOR.ADD_NEW')}
+        {isUpdate ? t('MENTOR_ACTION.EDIT') : t('MENTOR_ACTION.ADD_NEW')}
       </h2>
       <p className='text-sm sm:text-base text-gray-500'>
-        {isUpdate ? t('MENTOR.UPDATE_DESCRIPTION') : t('MENTOR.ADD_NEW_DESCRIPTION')}
+        {isUpdate ? t('MENTOR_ACTION.EDIT_DESCRIPTION') : t('MENTOR_ACTION.ADD_NEW_DESCRIPTION')}
       </p>
     </div>
   );
@@ -52,12 +58,14 @@ const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form,
     <Modal
       open={isOpen}
       onCancel={onCancel}
-      width={800}
-      className='mentor-modal !rounded-sm px-2 sm:px-4'
+      className='mentor-modal !rounded-sm px-2 sm:px-4 !w-full'
       footer={null}
       closable={false}
     >
-      <Space direction='vertical' className='w-full px-9 py-5'>
+      <Space
+        direction='vertical'
+        className='w-full sm:w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] 2xl:w-[40vw] px-6 py-5'
+      >
         {renderTitle()}
 
         {isUpdate ? <MentorUpdateForm form={form} /> : <MentorCreateForm form={form} />}
@@ -67,4 +75,4 @@ const MentorModal: React.FC<MentorModalProps> = ({ isOpen, onCancel, onOk, form,
   );
 };
 
-export default MentorModal;
+export default MentorUpSertModal;
