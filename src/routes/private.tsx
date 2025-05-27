@@ -1,5 +1,8 @@
 import { lazy } from 'react';
 
+import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
+import { Mentor } from '@app/pages';
+
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
 const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
@@ -15,6 +18,18 @@ const routes = [
       {
         path: '403',
         element: <Forbidden />,
+      },
+      {
+        element: <AdminLayout />,
+        children: [
+          { path: 'dashboard', element: <div></div> },
+          {
+            path: 'mentor',
+            element: <Mentor />,
+          },
+          { path: 'user', element: <div></div> },
+          { path: 'company', element: <div></div> },
+        ],
       },
     ],
   },

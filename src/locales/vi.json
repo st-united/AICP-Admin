@@ -128,7 +128,8 @@
     "NO_CONTENT": "Chưa có thông tin",
     "TOTAL_PAGE": "Tổng trang: {{total}}",
     "DISPLAY": "Hiển thị",
-    "ITEM": "mục"
+    "ITEM": "mục",
+    "PER_PAGE": "{{number}} / trang"
   },
   "MODAL": {
     "CONFIRM_DELETE_AVATAR": "Bạn muốn xoá ảnh đại diện?",
@@ -190,6 +191,8 @@
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
   },
   "PROFILE": {
+    "AVATAR": "Ảnh đại diện",
+    "AVATAR_UPLOAD_ERROR": "Lỗi khi upload avatar",
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "OLD_PASSWORD": "Mật khẩu cũ",
     "NEW_PASSWORD": "Mật khẩu mới",
@@ -198,7 +201,19 @@
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PERSONAL_PROFILE": "Thông tin cá nhân",
     "NULL_INFO": "Chưa có thông tin",
-    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới"
+    "FULLNAME_PLACEHOLDER": "Vui lòng nhập họ tên",
+    "FULLNAME": "Họ tên",
+    "PHONE": "Số điện thoại",
+    "PHONE_PLACEHOLDER": "Nhập số điện thoại",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "Nhập email",
+    "DOB": "Ngày sinh",
+    "DOB_PLACEHOLDER": "Chọn ngày sinh",
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
+    "EDIT_PROFILE_BTN": "Chỉnh sửa",
+    "CANCEL_EDIT_PROFILE_BTN": "Hủy bỏ",
+    "SAVE_PROFILE_BTN": "Lưu thay đổi",
+    "LOGOUT": "Đăng xuất"
   },
   "LOGIN": {
     "TEXT": "Đăng nhập",
@@ -206,5 +221,39 @@
     "PASSWORD_INPUT": "Nhập mật khẩu",
     "EMAIL_INPUT": "Nhập email",
     "EMAIL": "Email"
+  },
+  "ADMIN_SIDEBAR": {
+    "DASHBOARD": "Trang chủ",
+    "MENTOR": "Cố vấn",
+    "USER": "Người dùng",
+    "COMPANY": "Doanh nghiệp"
+  },
+  "ADMIN_BREADCRUMB": {
+    "HOME": "Trang chủ"
+  },
+  "MENTOR": {
+    "LIST": "Danh sách cố vấn",
+    "EXPORT": "Xuất danh sách",
+    "ADD": "Thêm mới",
+    "FULLNAME": "Họ tên",
+    "PHONENUMBER": "Số điện thoại",
+    "EMAIL": "Email",
+    "TOTAL": "Tổng cộng",
+    "ACTIVE": "Đang hoạt động",
+    "INACTIVE": "Không hoạt động",
+    "FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm",
+    "EXPERTISE_PLACEHOLDER": "Nhập chuyên môn để tìm kiếm",
+    "STATUS_PLACEHOLDER": "Chọn trạng thái để lọc",
+    "INTERVIEW_COUNT": "Số lượt phỏng vấn",
+    "STATUS": "Trạng thái",
+    "CREATED_AT": "Ngày tạo",
+    "SEARCH": "Tìm kiếm",
+    "INTERVIEW_TOOLTIP": "Nhấn vào đây để xem lịch phỏng vấn sắp tới",
+    "MENTEE": {
+      "FULLNAME": "Họ tên người dùng",
+      "EMAIL": "Email người dùng",
+      "INTERVIEW_TIME": "Thời gian phỏng vấn"
+    },
+    "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm"
   }
 }

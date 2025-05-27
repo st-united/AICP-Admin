@@ -1,15 +1,4 @@
-import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import {
-  Col,
-  Divider,
-  Pagination,
-  Row,
-  Select,
-  Space,
-  Table as TableAntd,
-  TablePaginationConfig,
-  Typography,
-} from 'antd';
+import { Pagination, Select, Table as TableAntd, TablePaginationConfig } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { FilterValue, SorterResult, TableCurrentDataSource } from 'antd/lib/table/interface';
 import React, { ReactNode } from 'react';
@@ -46,6 +35,9 @@ type TableProps = {
   summary?: (data: readonly any[]) => ReactNode;
   className?: string;
   hiddenScrollX?: boolean;
+  expandableRender?: (record: any) => ReactNode;
+  expandedRowKeys?: React.Key[];
+  setExpandedRowKeys?: (keys: React.Key[]) => void;
 };
 
 export const Table: React.FC<TableProps> = ({
@@ -58,121 +50,98 @@ export const Table: React.FC<TableProps> = ({
   summary,
   className = '',
   hiddenScrollX = false,
+  expandableRender,
+  expandedRowKeys,
+  setExpandedRowKeys,
 }) => {
   const { t } = useTranslation();
 
   return (
-    <div className={`table-antd ${className}`}>
+    <div className={`table-antd shadow-custom rounded-lg ${className}`}>
       <TableAntd
         columns={columns}
         dataSource={dataSource}
         loading={loading}
         rowKey={(record) => record.id}
         onChange={onChange}
-        scroll={{ x: 'max-content' }}
+        scroll={{ x: 'max-content', y: 'calc(100vh - 300px)' }}
         showSorterTooltip={false}
         pagination={false}
         locale={{
           emptyText: <EmptyData />,
         }}
         className={`${disablePaginate === true ? 'br12' : ''} ${
-          hiddenScrollX ? 'hidden-scrollx' : ''
+          hiddenScrollX ? 'hidden-scroll-x' : ''
         }`}
         summary={summary}
-      />
-      {disablePaginate === false && (
-        <Row
-          justify='space-between'
-          style={{ padding: '1rem', background: '#F7F7F7', borderRadius: '0 0 12px 12px' }}
-          align='middle'
-        >
-          <Col>
-            <Space>
-              <Typography style={{ font: '14px Quicksand', color: '#727272' }}>
-                {t('TABLE.TOTAL_ITEMS', {
-                  item: paginate && paginate.total,
-                })}
-              </Typography>
-              <Divider type='vertical' style={{ stroke: '10px', strokeWidth: '90' }} />
-              <Typography
-                style={{
-                  font: '14px Quicksand',
-                  display: 'flex',
-                  alignItems: 'center',
-                  columnGap: '10px',
-                  color: '#727272',
-                }}
-              >
-                {t('TABLE.DISPLAY')}
-                <Select
-                  style={{
-                    width: 'fit-content',
-                    color: '#727272',
-                  }}
-                  defaultValue={paginate && paginate.table.take}
-                  onChange={(value: number) => {
-                    paginate &&
-                      paginate.setTable({
-                        ...paginate.table,
-                        take: value,
-                        page: 1,
-                      });
-                  }}
-                  options={[
-                    {
-                      value: 10,
-                      label: '10',
-                    },
-                    {
-                      value: 20,
-                      label: '20',
-                    },
-                    {
-                      value: 50,
-                      label: '50',
-                    },
-                    {
-                      value: 100,
-                      label: '100',
-                    },
-                  ]}
-                  getPopupContainer={(triggerNode: HTMLElement) =>
-                    triggerNode.parentNode as HTMLElement
+        expandable={
+          expandableRender
+            ? {
+                expandedRowRender: (record) => expandableRender(record),
+                rowExpandable: (record) => !record?.user?.upcomingCount,
+                expandedRowKeys: expandedRowKeys,
+                onExpand: (expanded, record) => {
+                  if (!setExpandedRowKeys) return;
+                  if (expanded) {
+                    setExpandedRowKeys([record.id]);
+                  } else {
+                    setExpandedRowKeys([]);
                   }
-                />
-                {t('TABLE.ITEM')}
-              </Typography>
-            </Space>
-          </Col>
+                },
+                expandIcon: () => null,
+              }
+            : undefined
+        }
+      />
+
+      {disablePaginate === false && (
+        <>
           {paginate && (
-            <Col>
-              <div style={{ background: '#0000000D', borderRadius: '8px' }}>
-                <Pagination
-                  showSizeChanger={false}
-                  current={paginate.table.page}
-                  total={paginate.total}
-                  pageSize={paginate.table.take}
-                  itemRender={(_, type: string, originalElement) => {
-                    switch (type) {
-                      case 'prev':
-                        return <ArrowLeftOutlined />;
-                      case 'next':
-                        return <ArrowRightOutlined />;
-                      default:
-                        return originalElement;
-                    }
-                  }}
-                  onChange={(page: number) => {
+            <div className='flex gap-2 justify-end items-center py-4 pr-6 shadow-custom rounded-b-lg bg-white'>
+              <Pagination
+                showSizeChanger={false}
+                total={paginate.total}
+                current={paginate.table.page}
+                pageSize={paginate.table.take}
+                onChange={(page: number) => {
+                  paginate.setTable({
+                    ...paginate.table,
+                    page: page,
+                  });
+                }}
+              />
+              <Select
+                defaultValue={paginate && paginate.table.take}
+                onChange={(value: number) => {
+                  paginate &&
                     paginate.setTable({
                       ...paginate.table,
-                      page: page,
+                      take: value,
+                      page: 1,
                     });
-                  }}
-                />
-              </div>
-            </Col>
+                }}
+                options={[
+                  {
+                    value: 10,
+                    label: t('TABLE.PER_PAGE', { number: 10 }),
+                  },
+                  {
+                    value: 20,
+                    label: t('TABLE.PER_PAGE', { number: 20 }),
+                  },
+                  {
+                    value: 50,
+                    label: t('TABLE.PER_PAGE', { number: 50 }),
+                  },
+                  {
+                    value: 100,
+                    label: t('TABLE.PER_PAGE', { number: 100 }),
+                  },
+                ]}
+              />
+            </div>
           )}
-        </Row>
+        </>
       )}
     </div>
   );

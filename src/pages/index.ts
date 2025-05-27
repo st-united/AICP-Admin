@@ -1,4 +1,5 @@
+import Mentor from './Mentor/Mentor';
 import NotFound from './NotFound/NotFound';
 import SignIn from './SignIn/SignIn';
 
-export { SignIn, NotFound };
+export { SignIn, NotFound, Mentor };
