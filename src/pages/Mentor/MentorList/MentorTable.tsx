@@ -1,5 +1,5 @@
 import { CalendarOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Input, InputRef, Space, Tooltip } from 'antd';
+import { Badge, Button, Input, InputRef, Space, Tooltip } from 'antd';
 import { ColumnType, FilterConfirmProps } from 'antd/lib/table/interface';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table/Table';
 import { useRef, useState } from 'react';
@@ -12,6 +12,7 @@ import { OrderDirection } from '@app/constants/order';
 import { useGetMentor } from '@app/hooks';
 import { GetMentorsParams, MentorColumns } from '@app/interface/user.interface';
 import { formatDate } from '@app/utils';
+import './MentorTable.scss';
 
 type DataIndex = keyof MentorColumns | string;
 
@@ -157,7 +158,7 @@ const MentorTable = () => {
       key: 'isActive',
       render(value, record) {
         const isExpanded = expandedRowKeys.includes(record.id);
-        const isEnabled = Boolean(record.upcomingCount);
+        const isEnabled = !!record.upcomingCount;
         return (
           <div className='flex items-center justify-start flex-row gap-3'>
             <Status isActive={value} />
@@ -168,7 +169,7 @@ const MentorTable = () => {
               color='black'
               overlayClassName='custom-tooltip'
             >
-              <div className='relative'>
+              <Badge className='custom-badge' count={record.upcomingCount} showZero size='small'>
                 <CalendarOutlined
                   className='cursor-pointer hover:!text-sky-700 text-[26px] text-[#08c]'
                   onClick={() => {
@@ -177,10 +178,10 @@ const MentorTable = () => {
                     }
                   }}
                 />
-                <div className='absolute -top-1 -right-1 flex items-center justify-center text-[10px] text-white rounded-full bg-[#F36262] w-4 h-4'>
+                {/* <div className='absolute -top-1 -right-1 flex items-center justify-center text-[10px] text-white rounded-full bg-[#F36262] w-4 h-4'>
                   {record.upcomingCount}
-                </div>
-              </div>
+                </div> */}
+              </Badge>
             </Tooltip>
           </div>
         );
@@ -196,8 +197,8 @@ const MentorTable = () => {
       title: t('MENTOR.CREATED_AT'),
       dataIndex: 'createdAt',
       key: 'createdAt',
-      render: (record: MentorColumns) => {
-        return <div className='font-medium'>{formatDate(record.createdAt)}</div>;
+      render: (value) => {
+        return <div className='font-medium'>{formatDate(value)}</div>;
       },
       width: 150,
     },
