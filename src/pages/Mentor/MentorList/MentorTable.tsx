@@ -160,30 +160,32 @@ const MentorTable = () => {
         const isExpanded = expandedRowKeys.includes(record.id);
         const isEnabled = !!record.upcomingCount;
         return (
-          <div className='flex items-center justify-start flex-row gap-3'>
+          <div className='grid grid-cols-[70%_30%] w-full gap-3'>
             <Status isActive={value} />
-            <Tooltip
-              className='calendar-tooltip'
-              title={t('MENTOR.INTERVIEW_TOOLTIP')}
-              placement='top'
-              color='black'
-              overlayClassName='custom-tooltip'
-            >
-              <Badge className='custom-badge' count={record.upcomingCount} showZero size='small'>
-                <CalendarOutlined
-                  className='cursor-pointer hover:!text-sky-700 text-[26px] text-[#08c]'
-                  onClick={() => {
-                    if (isEnabled) {
-                      setExpandedRowKeys(isExpanded ? [] : [record.id]);
-                    }
-                  }}
-                />
-              </Badge>
-            </Tooltip>
+            <div className='flex items-center justify-start'>
+              <Tooltip
+                className='calendar-tooltip'
+                title={t('MENTOR.INTERVIEW_TOOLTIP')}
+                placement='top'
+                color='black'
+                overlayClassName='custom-tooltip'
+              >
+                <Badge className='custom-badge' count={record.upcomingCount} showZero size='small'>
+                  <CalendarOutlined
+                    className='cursor-pointer hover:!text-sky-700 text-[26px] text-[#08c]'
+                    onClick={() => {
+                      if (isEnabled) {
+                        setExpandedRowKeys(isExpanded ? [] : [record.id]);
+                      }
+                    }}
+                  />
+                </Badge>
+              </Tooltip>
+            </div>
           </div>
         );
       },
-      width: 250,
+      width: 280,
       filters: [
         { text: t('MENTOR.ACTIVE'), value: 'true' },
         { text: t('MENTOR.INACTIVE'), value: 'false' },
