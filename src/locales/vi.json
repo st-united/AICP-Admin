@@ -179,6 +179,7 @@
     "PLACEHOLDER": "Nhập {{name}}",
     "CHOOSE": "Chọn {{name}}",
     "NO_SPECIAL_CHARACTER": "{{field}} không được chứa ký tự đặc biệt và khoảng trống",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
     "ONLY_ALPHABET": "{{field}} không được chứa số và ký tự đặc biệt",
     "NOT_ALLOW_NUMBER": "{{field}} không được chứa số",
     "SEARCH_CHOOSE": "Chọn {{name}} để tìm kiếm",
@@ -189,8 +190,7 @@
     "IMAGE_MIN_SIZE": "Dung lượng hình ảnh tối thiểu là 10Kb",
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
-    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
-    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối"
+    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
