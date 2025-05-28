@@ -177,7 +177,7 @@ const UserTable: React.FC = () => {
         <div className='p-2'>
           <Select
             mode='multiple'
-            placeholder='Chọn tỉnh thành'
+            placeholder={t('USER.PROVINCE_PLACEHOLDER')}
             value={provinceFilter}
             onChange={setProvinceFilter}
             className='w-52 mb-2'
