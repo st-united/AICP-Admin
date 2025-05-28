@@ -81,3 +81,32 @@ export interface GetUsersParams extends GetListParams {
   startDate: Date | null;
   endDate: Date | null;
 }
+
+export interface Users {
+  id: number;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  status: string;
+}
+
+export interface MentorColumns {
+  id: number;
+  isActive: boolean;
+  createdAt: string;
+  user: Users;
+  completedCount: string;
+  upcomingCount: string;
+}
+
+export interface MenteeColumns {
+  id: number;
+  fullName: string;
+  email: string;
+  scheduledAt: string;
+}
+
+export interface GetMentorsParams extends GetListParams {
+  fullName?: string;
+  isActive?: boolean;
+}
