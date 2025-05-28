@@ -121,6 +121,7 @@
     "LIST": "Danh sách người dùng",
     "EXPORT": "Xuất danh sách",
     "PROVINCE": "Tỉnh thành",
+    "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
     "RESET_FILTER": "Đặt lại",
     "JOB": "Nghề nghiệp",
     "SELECT_JOB": "Chọn nghề nghiệp",
