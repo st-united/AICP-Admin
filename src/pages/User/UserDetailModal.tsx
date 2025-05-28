@@ -14,6 +14,7 @@ import moment from 'moment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { DATE_TIME } from '@app/constants';
 import { UserColumns } from '@app/interface/user.interface';
 
 interface UserDetailModalProps {
@@ -24,6 +25,15 @@ interface UserDetailModalProps {
 
 const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUser, onClose }) => {
   const { t } = useTranslation();
+
+  const renderLabel = (icon: React.ReactNode, text: string) => (
+    <span className='flex items-center gap-2'>
+      {icon}
+      {text}
+    </span>
+  );
+
+  const renderValue = (value?: string | null) => value || t('USER.NO_DATA');
 
   return (
     <Modal
@@ -40,54 +50,26 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
     >
       {selectedUser && (
         <Descriptions bordered column={2} size='middle' className='mt-4'>
-          <Descriptions.Item
-            label={
-              <span className='flex items-center gap-2'>
-                <MailOutlined /> {t('USER.EMAIL')}
-              </span>
-            }
-          >
-            {selectedUser.email || t('USER.NO_DATA')}
+          <Descriptions.Item label={renderLabel(<MailOutlined />, t('USER.EMAIL'))}>
+            {renderValue(selectedUser.email)}
           </Descriptions.Item>
 
-          <Descriptions.Item
-            label={
-              <span className='flex items-center gap-2'>
-                <PhoneOutlined /> {t('USER.PHONE')}
-              </span>
-            }
-          >
-            {selectedUser.phoneNumber || t('USER.NO_DATA')}
+          <Descriptions.Item label={renderLabel(<PhoneOutlined />, t('USER.PHONE'))}>
+            {renderValue(selectedUser.phoneNumber)}
           </Descriptions.Item>
 
-          <Descriptions.Item
-            label={
-              <span className='flex items-center gap-2'>
-                <CalendarOutlined /> {t('USER.DATE_OF_BIRTH')}
-              </span>
-            }
-          >
-            {moment(selectedUser.dob).format('DD/MM/YYYY') || t('USER.NO_DATA')}
+          <Descriptions.Item label={renderLabel(<CalendarOutlined />, t('USER.DATE_OF_BIRTH'))}>
+            {selectedUser.dob
+              ? moment(selectedUser.dob).format(DATE_TIME.DAY_MONTH_YEAR)
+              : t('USER.NO_DATA')}
           </Descriptions.Item>
 
-          <Descriptions.Item
-            label={
-              <span className='flex items-center gap-2'>
-                <EnvironmentOutlined /> {t('USER.PROVINCE')}
-              </span>
-            }
-          >
-            {selectedUser.province || t('USER.NO_DATA')}
+          <Descriptions.Item label={renderLabel(<EnvironmentOutlined />, t('USER.PROVINCE'))}>
+            {renderValue(selectedUser.province)}
           </Descriptions.Item>
 
-          <Descriptions.Item
-            label={
-              <span className='flex items-center gap-2'>
-                <BankOutlined /> {t('USER.JOB')}
-              </span>
-            }
-          >
-            {selectedUser.job || t('USER.NO_DATA')}
+          <Descriptions.Item label={renderLabel(<BankOutlined />, t('USER.JOB'))}>
+            {renderValue(selectedUser.job)}
           </Descriptions.Item>
 
           <Descriptions.Item label={t('USER.STATUS')}>
@@ -99,18 +81,12 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
             </Tag>
           </Descriptions.Item>
 
-          <Descriptions.Item
-            label={
-              <span className='flex items-center gap-2'>
-                <ClockCircleOutlined /> {t('USER.CREATED_AT')}
-              </span>
-            }
-          >
-            {moment(selectedUser.createdAt).format('DD/MM/YYYY HH:mm:ss') || t('USER.NO_DATA')}
+          <Descriptions.Item label={renderLabel(<ClockCircleOutlined />, t('USER.CREATED_AT'))}>
+            {moment(selectedUser.createdAt).format(DATE_TIME.DAY_MONTH_YEAR) || t('USER.NO_DATA')}
           </Descriptions.Item>
 
           <Descriptions.Item label={t('USER.REFERRAL_CODE')}>
-            {selectedUser.referralCode || t('USER.NO_DATA')}
+            {renderValue(selectedUser.referralCode)}
           </Descriptions.Item>
         </Descriptions>
       )}
