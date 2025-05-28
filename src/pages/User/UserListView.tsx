@@ -167,12 +167,14 @@ const UserTable: React.FC = () => {
       title: t('USER.DATE_OF_BIRTH'),
       dataIndex: 'dob',
       key: 'dob',
-      render: (date: string) => moment(date).format(DATE_TIME.DAY_MONTH_YEAR),
+      render: (date: string) =>
+        date ? moment(date).format(DATE_TIME.DAY_MONTH_YEAR) : t('USER.NO_DATA'),
     },
     {
       title: t('USER.PROVINCE'),
       dataIndex: 'province',
       key: 'province',
+      render: (province: string) => province || t('USER.NO_DATA'),
       filterDropdown: () => (
         <div className='p-2'>
           <Select
@@ -208,6 +210,7 @@ const UserTable: React.FC = () => {
       title: t('USER.JOB'),
       dataIndex: 'job',
       key: 'job',
+      render: (job: string) => job || t('USER.NO_DATA'),
       filterDropdown: () => (
         <div className='p-2'>
           <Select
