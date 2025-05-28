@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { API_URL } from '@app/constants';
-import { MentorCreateDto } from '@app/interface/mentor.interface';
+import { MentorCreateDto, MentorUpdateDto } from '@app/interface/mentor.interface';
 import { GetMentorsParams } from '@app/interface/user.interface';
 
 export const getMentorsApi = (params: GetMentorsParams) =>
@@ -9,7 +9,14 @@ export const getMentorsApi = (params: GetMentorsParams) =>
     params,
   });
 
+export const getMentorByIdApi = (mentorId: string) => axios.get(`${API_URL.MENTOR}/${mentorId}`);
+
 export const createMentorApi = (mentor: MentorCreateDto) => axios.post(API_URL.MENTOR, mentor);
+
+export const updateMentorApi = (mentorDto: MentorUpdateDto) => {
+  const { id, ...data } = mentorDto;
+  return axios.patch(`${API_URL.MENTOR}/${id}`, data);
+};
 
 export const getMentorStatsApi = () => axios.get(API_URL.MENTOR_STATS);
 

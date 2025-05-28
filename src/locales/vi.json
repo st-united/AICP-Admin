@@ -189,7 +189,8 @@
     "IMAGE_MIN_SIZE": "Dung lượng hình ảnh tối thiểu là 10Kb",
     "IMAGE_VALIDATE_SIZE": "Kích thước ảnh phải nhỏ hơn hoặc bằng 400x600",
     "INVALID_EMAIL": "{{field}} không đúng định dạng",
-    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau"
+    "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -259,10 +260,11 @@
   },
   "MENTOR_ACTION": {
     "ADD_NEW": "Thêm mới cố vấn",
-    "EDIT": "Chỉnh sửa",
+    "EDIT": "Cập nhật thông tin cố vấn",
     "DELETE": "Xóa",
     "LIST": "Danh sách cố vấn",
     "ADD_NEW_DESCRIPTION": "Vui lòng nhập thông tin của cố vấn để thêm mới.",
+    "EDIT_DESCRIPTION": "Vui lòng nhập thông tin của cố vấn để tiến hành cập nhật.",
     "PLACEHOLDER": {
       "FULLNAME": "Nhập họ tên tại đây",
       "EMAIL": "Nhập email tại đây",

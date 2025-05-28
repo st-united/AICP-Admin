@@ -12,6 +12,7 @@ interface MentorUpSertModalProps {
   onOk: () => void;
   form: FormInstance;
   isUpdate: boolean;
+  mentorId?: string;
 }
 
 const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
@@ -20,6 +21,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
   onOk,
   form,
   isUpdate,
+  mentorId,
 }) => {
   const { t } = useTranslation();
 
@@ -61,6 +63,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
       className='mentor-modal !rounded-sm px-2 sm:px-4 !w-full'
       footer={null}
       closable={false}
+      destroyOnClose={true}
     >
       <Space
         direction='vertical'
@@ -68,7 +71,11 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
       >
         {renderTitle()}
 
-        {isUpdate ? <MentorUpdateForm form={form} /> : <MentorCreateForm form={form} />}
+        {isUpdate && mentorId ? (
+          <MentorUpdateForm form={form} mentorId={mentorId} />
+        ) : (
+          <MentorCreateForm form={form} />
+        )}
         {renderFooter()}
       </Space>
     </Modal>
