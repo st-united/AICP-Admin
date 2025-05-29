@@ -3,13 +3,14 @@ import { Input, Button, Space, DatePicker, Select } from 'antd';
 import moment, { Moment } from 'moment';
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
+import { useDebounce } from 'use-debounce';
 
 import UserDetailModal from './UserDetailModal';
-import { PaginateProp, Table } from '@app/components/atoms';
-import { DATE_TIME, PARAM, USER_PARAM } from '@app/constants';
+import { Table } from '@app/components/atoms';
+import { DATE_TIME } from '@app/constants';
 import { useGetUsers } from '@app/hooks';
 import { useGetProvince } from '@app/hooks/useLocation';
+import { GetListParams } from '@app/interface/common.interface';
 import { GetUsersParams, UserColumns } from '@app/interface/user.interface';
 import type { InputRef } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
@@ -17,100 +18,94 @@ import type { ColumnsType } from 'antd/lib/table';
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const UserTable: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchText, setSearchText] = useState<string>(searchParams.get(PARAM.SEARCH) || '');
-  const [provinceFilter, setProvinceFilter] = useState<string[]>(
-    searchParams.get(USER_PARAM.PROVINCE) ? [searchParams.get(USER_PARAM.PROVINCE)!] : [],
-  );
-  const [jobFilter, setJobFilter] = useState<string[]>(
-    searchParams.get(USER_PARAM.JOB) ? [searchParams.get(USER_PARAM.JOB)!] : [],
-  );
-  const [statusFilter, setStatusFilter] = useState<boolean[]>(
-    searchParams.get(USER_PARAM.STATUS) ? [searchParams.get(USER_PARAM.STATUS) === 'true'] : [],
-  );
-  const [dateFilter, setDateFilter] = useState<[Moment | null, Moment | null] | null>(
-    searchParams.get(USER_PARAM.START_DATE) && searchParams.get(USER_PARAM.END_DATE)
-      ? [
-          moment(searchParams.get(USER_PARAM.START_DATE)),
-          moment(searchParams.get(USER_PARAM.END_DATE)),
-        ]
-      : null,
-  );
-  const [paginationState, setPaginationState] = useState<PaginateProp>({
-    page: Number(searchParams.get(PARAM.PAGE)) || 1,
-    take: Number(searchParams.get(PARAM.TAKE)) || 20,
-  });
+interface FilterState {
+  searchText: string;
+  provinceFilter: string[];
+  jobFilter: string[];
+  statusFilter: boolean[];
+  dateFilter: [Moment, Moment] | null;
+  pagination: {
+    page: number;
+    take: number;
+  };
+}
 
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [selectedUser, setSelectedUser] = useState<UserColumns | null>(null);
+interface ModalState {
+  isVisible: boolean;
+  selectedUser: UserColumns | null;
+}
+
+const UserTable: React.FC = () => {
+  const { t } = useTranslation();
 
   const searchInput = useRef<InputRef>(null);
 
-  useEffect(() => {
-    const params: Record<string, string> = {};
-    if (searchText) params.search = searchText;
-    if (provinceFilter.length === 1) params.province = provinceFilter[0];
-    if (jobFilter.length === 1) params.job = jobFilter[0];
-    if (statusFilter.length === 1) params.status = String(statusFilter[0]);
-    if (dateFilter && dateFilter[0] && dateFilter[1]) {
-      params.startDate = dateFilter[0].format(DATE_TIME.YEAR_MONTH_DATE);
-      params.endDate = dateFilter[1].format(DATE_TIME.YEAR_MONTH_DATE);
-    }
-    params.page = String(paginationState.page);
-    params.take = String(paginationState.take);
+  const [filters, setFilters] = useState<FilterState>({
+    searchText: '',
+    provinceFilter: [],
+    jobFilter: [],
+    statusFilter: [],
+    dateFilter: null,
+    pagination: { page: 1, take: 20 },
+  });
 
-    setSearchParams(params);
-  }, [
-    searchText,
-    provinceFilter,
-    jobFilter,
-    statusFilter,
-    dateFilter,
-    paginationState,
-    setSearchParams,
-  ]);
+  const [debouncedSearch] = useDebounce(filters.searchText, 500);
+  const [modalState, setModalState] = useState<ModalState>({
+    isVisible: false,
+    selectedUser: null,
+  });
+
+  const [onlyStatus] = filters.statusFilter;
+  const [onlyProvince] = filters.provinceFilter;
+  const [onlyJob] = filters.jobFilter;
+  const [startDate, endDate] = filters.dateFilter || [];
 
   const apiParams: GetUsersParams = {
-    search: searchText,
-    page: paginationState.page,
-    take: paginationState.take,
-    status: statusFilter.length === 1 ? statusFilter[0] : null,
-    province: provinceFilter.length === 1 ? provinceFilter[0] : null,
-    startDate:
-      dateFilter && dateFilter[0] && dateFilter[1]
-        ? new Date(dateFilter[0].format(DATE_TIME.YEAR_MONTH_DATE))
-        : null,
-    endDate:
-      dateFilter && dateFilter[0] && dateFilter[1]
-        ? new Date(dateFilter[1].format(DATE_TIME.YEAR_MONTH_DATE))
-        : null,
-    job: jobFilter.length === 1 ? jobFilter[0] : null,
+    search: debouncedSearch,
+    page: filters.pagination.page,
+    take: filters.pagination.take,
+    status: filters.statusFilter.length === 1 ? onlyStatus : null,
+    province: filters.provinceFilter.length === 1 ? onlyProvince : null,
+    job: filters.jobFilter.length === 1 ? onlyJob : null,
+    startDate: startDate ? new Date(startDate.format(DATE_TIME.YEAR_MONTH_DATE)) : null,
+    endDate: endDate ? new Date(endDate.format(DATE_TIME.YEAR_MONTH_DATE)) : null,
   };
 
   const { data: apiResponse, isLoading, refetch } = useGetUsers(apiParams);
-  const { t } = useTranslation();
   const { data: provinces } = useGetProvince();
   const userData = apiResponse?.data || [];
+
   const paginateOptions = {
-    table: paginationState,
+    table: filters.pagination,
     total: apiResponse?.meta?.itemCount || 0,
     pageCount: apiResponse?.meta?.pageCount || 0,
-    setTable: setPaginationState,
+    setTable: (newPagination: GetListParams) =>
+      setFilters((prev) => ({ ...prev, pagination: newPagination })),
+  };
+
+  const handleRowClick = (record: UserColumns) => {
+    setModalState({ isVisible: true, selectedUser: record });
+  };
+
+  const handleModalClose = () => {
+    setModalState({ isVisible: false, selectedUser: null });
+  };
+
+  const updateFilter = (key: string, value: any) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   useEffect(() => {
     refetch();
-  }, [searchText, provinceFilter, jobFilter, statusFilter, dateFilter, paginationState, refetch]);
-
-  const handleRowClick = (record: UserColumns) => {
-    setSelectedUser(record);
-    setIsModalVisible(true);
-  };
-  const handleModalClose = () => {
-    setIsModalVisible(false);
-    setSelectedUser(null);
-  };
+  }, [
+    debouncedSearch,
+    filters.provinceFilter,
+    filters.jobFilter,
+    filters.statusFilter,
+    filters.dateFilter,
+    filters.pagination,
+    refetch,
+  ]);
 
   const columns: ColumnsType<UserColumns> = [
     {
@@ -122,8 +117,8 @@ const UserTable: React.FC = () => {
           <Input
             ref={searchInput}
             placeholder={t<string>('USER.SEARCH_PLACEHOLDER')}
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            value={filters.searchText}
+            onChange={(e) => updateFilter('searchText', e.target.value)}
             onPressEnter={() => searchInput.current?.blur()}
             className='w-52 mb-2 block'
           />
@@ -136,7 +131,7 @@ const UserTable: React.FC = () => {
             >
               {t('USER.SEARCH')}
             </Button>
-            <Button size='small' onClick={() => setSearchText('')}>
+            <Button size='small' onClick={() => updateFilter('searchText', '')}>
               {t('USER.RESET_FILTER')}
             </Button>
           </Space>
@@ -144,7 +139,7 @@ const UserTable: React.FC = () => {
       ),
       filterIcon: () => (
         <SearchOutlined
-          className={`text-center text-lg mt-1 ${searchText ? 'text-blue-500' : ''}`}
+          className={`text-center text-lg mt-1 ${filters.searchText ? 'text-blue-500' : ''}`}
         />
       ),
       onFilterDropdownOpenChange: (visible) => {
@@ -180,9 +175,9 @@ const UserTable: React.FC = () => {
           <Select
             mode='multiple'
             placeholder={t('USER.PROVINCE_PLACEHOLDER')}
-            value={provinceFilter}
-            onChange={setProvinceFilter}
-            className='w-52 mb-2'
+            value={filters.provinceFilter}
+            onChange={(value) => updateFilter('provinceFilter', value)}
+            className='w-52 mb-2 block'
             optionFilterProp='children'
             showSearch
             filterOption={(input, option) =>
@@ -195,15 +190,15 @@ const UserTable: React.FC = () => {
               </Option>
             ))}
           </Select>
-          <div>
-            <Button size='small' onClick={() => setProvinceFilter([])}>
-              {t('USER.RESET_FILTER')}
-            </Button>
-          </div>
+          <Button size='small' onClick={() => updateFilter('provinceFilter', [])}>
+            {t('USER.RESET_FILTER')}
+          </Button>
         </div>
       ),
       filterIcon: () => (
-        <FilterOutlined className={provinceFilter.length > 0 ? 'text-blue-500' : undefined} />
+        <FilterOutlined
+          className={filters.provinceFilter.length > 0 ? 'text-blue-500' : undefined}
+        />
       ),
     },
     {
@@ -216,23 +211,21 @@ const UserTable: React.FC = () => {
           <Select
             mode='multiple'
             placeholder={t('USER.SELECT_JOB')}
-            value={jobFilter}
-            onChange={setJobFilter}
-            className='w-52 mb-2'
+            value={filters.jobFilter}
+            onChange={(value) => updateFilter('jobFilter', value)}
+            className='w-52 mb-2 block'
             allowClear
           >
             <Option value={t('USER.JOB_WORKING')}>{t('USER.JOB_WORKING')}</Option>
             <Option value={t('USER.JOB_STUDENT')}>{t('USER.JOB_STUDENT')}</Option>
           </Select>
-          <div>
-            <Button size='small' onClick={() => setJobFilter([])}>
-              {t('USER.RESET_FILTER')}
-            </Button>
-          </div>
+          <Button size='small' onClick={() => updateFilter('jobFilter', [])}>
+            {t('USER.RESET_FILTER')}
+          </Button>
         </div>
       ),
       filterIcon: () => (
-        <FilterOutlined className={jobFilter.length > 0 ? 'text-blue-500' : undefined} />
+        <FilterOutlined className={filters.jobFilter.length > 0 ? 'text-blue-500' : undefined} />
       ),
     },
     {
@@ -249,23 +242,21 @@ const UserTable: React.FC = () => {
           <Select
             mode='multiple'
             placeholder={t('USER.SELECT_STATUS')}
-            value={statusFilter}
-            onChange={setStatusFilter}
-            className='w-52 mb-2'
+            value={filters.statusFilter}
+            onChange={(value) => updateFilter('statusFilter', value)}
+            className='w-52 mb-2 block'
             allowClear
           >
             <Option value={true}>{t('USER.STATUS_ACTIVE')}</Option>
             <Option value={false}>{t('USER.STATUS_INACTIVE')}</Option>
           </Select>
-          <div>
-            <Button size='small' onClick={() => setStatusFilter([])}>
-              {t('USER.RESET_FILTER')}
-            </Button>
-          </div>
+          <Button size='small' onClick={() => updateFilter('statusFilter', [])}>
+            {t('USER.RESET_FILTER')}
+          </Button>
         </div>
       ),
       filterIcon: () => (
-        <FilterOutlined className={statusFilter.length > 0 ? 'text-blue-500' : undefined} />
+        <FilterOutlined className={filters.statusFilter.length > 0 ? 'text-blue-500' : undefined} />
       ),
     },
     {
@@ -273,24 +264,25 @@ const UserTable: React.FC = () => {
       dataIndex: 'createdAt',
       key: 'createdAt',
       render: (date: string) => moment(date).format(DATE_TIME.DAY_MONTH_YEAR),
-
       filterDropdown: () => (
         <div className='p-2'>
           <RangePicker
-            value={dateFilter}
-            onChange={setDateFilter}
+            value={filters.dateFilter}
+            onChange={(value) => updateFilter('dateFilter', value)}
             format={DATE_TIME.DAY_MONTH_YEAR}
             placeholder={[t('USER.FROM'), t('USER.TO')]}
-            className='mb-2'
+            className='w-full mb-2'
           />
-          <div>
-            <Button size='small' onClick={() => setDateFilter(null)}>
+          <div className='flex justify-start'>
+            <Button size='small' onClick={() => updateFilter('dateFilter', null)}>
               {t('USER.RESET_FILTER')}
             </Button>
           </div>
         </div>
       ),
-      filterIcon: () => <FilterOutlined className={dateFilter ? 'text-blue-500' : undefined} />,
+      filterIcon: () => (
+        <FilterOutlined className={filters.dateFilter ? 'text-blue-500' : undefined} />
+      ),
     },
   ];
 
@@ -307,8 +299,8 @@ const UserTable: React.FC = () => {
         })}
       />
       <UserDetailModal
-        isVisible={isModalVisible}
-        selectedUser={selectedUser}
+        isVisible={modalState.isVisible}
+        selectedUser={modalState.selectedUser}
         onClose={handleModalClose}
       />
     </>
