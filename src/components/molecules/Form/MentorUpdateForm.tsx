@@ -24,7 +24,7 @@ const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className, me
         fullName: mentor.user.fullName,
         email: mentor.user.email,
         phoneNumber: mentor.user.phoneNumber,
-        // dob: mentor.user.dob,
+        dob: mentor.user.dob,
       };
       form.setFieldsValue(formValues);
     }
