@@ -167,6 +167,7 @@
     "POSITIVE_NUMBER": " {{field}} giá trị phải lớn hơn 0",
     "INTEGER": " {{field}} phải là một số nguyên",
     "MIN_CHARACTER": "{{field}} phải lớn hơn hoặc bằng {{number}} ký tự",
+    "MAX_CHARACTER": "{{field}} phải nhỏ hơn hoặc bằng {{number}} ký tự",
     "NUMBER": "{{field}} phải là số",
     "MATCH": "{{field}} không khớp",
     "SPESIAL_CHARACTERS": "{{field}} không có ký tự đặc biệt",
@@ -178,6 +179,7 @@
     "PLACEHOLDER": "Nhập {{name}}",
     "CHOOSE": "Chọn {{name}}",
     "NO_SPECIAL_CHARACTER": "{{field}} không được chứa ký tự đặc biệt và khoảng trống",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
     "ONLY_ALPHABET": "{{field}} không được chứa số và ký tự đặc biệt",
     "NOT_ALLOW_NUMBER": "{{field}} không được chứa số",
     "SEARCH_CHOOSE": "Chọn {{name}} để tìm kiếm",
@@ -292,5 +294,23 @@
       "INTERVIEW_TIME": "Thời gian phỏng vấn"
     },
     "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm"
+  },
+  "MENTOR_ACTION": {
+    "ADD_NEW": "Thêm mới cố vấn",
+    "EDIT": "Cập nhật thông tin cố vấn",
+    "DELETE": "Xóa",
+    "LIST": "Danh sách cố vấn",
+    "ADD_NEW_DESCRIPTION": "Vui lòng nhập thông tin của cố vấn để thêm mới.",
+    "EDIT_DESCRIPTION": "Vui lòng nhập thông tin của cố vấn để tiến hành cập nhật.",
+    "PLACEHOLDER": {
+      "FULLNAME": "Nhập họ tên tại đây",
+      "EMAIL": "Nhập email tại đây",
+      "PHONE": "Nhập số điện thoại tại đây",
+      "DOB": "Chọn ngày sinh"
+    }
+  },
+  "COMMON": {
+    "CANCEL": "Hủy bỏ",
+    "CREATE": "Tạo mới"
   }
 }
