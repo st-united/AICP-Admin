@@ -1,4 +1,5 @@
 import { Form, Input, DatePicker, type FormInstance } from 'antd';
+import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -24,7 +25,7 @@ const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className, me
         fullName: mentor.user.fullName,
         email: mentor.user.email,
         phoneNumber: mentor.user.phoneNumber,
-        dob: mentor.user.dob,
+        dob: mentor.user.dob ? moment(mentor.user.dob) : null,
       };
       form.setFieldsValue(formValues);
     }
