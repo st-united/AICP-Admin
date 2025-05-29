@@ -272,9 +272,5 @@
       "PHONE": "Nhập số điện thoại tại đây",
       "DOB": "Chọn ngày sinh"
     }
-  },
-  "COMMON": {
-    "CANCEL": "Hủy bỏ",
-    "CREATE": "Tạo mới"
   }
 }

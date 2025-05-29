@@ -32,7 +32,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
         className='bg-white text-[#686868] hover:bg-gray-100 hover:text-gray-700 hover:text-orange-400 hover:border-gray-300 hover:border-orange-300 border-gray-200 shadow-md rounded-lg text-lg px-5 py-3 h-fit font-bold'
         onClick={onCancel}
       >
-        {t('COMMON.CANCEL')}
+        {t('BUTTON.CANCEL')}
       </Button>
       <Button
         key='create'
@@ -40,7 +40,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
         onClick={onOk}
         className='bg-orange-500 hover:bg-orange-600 hover:shadow-lg border-orange-200 hover:border-orange-300 focus:bg-orange-400 focus:border-orange-400 shadow-md rounded-lg text-lg px-5 py-3 h-fit transition-all duration-200 font-bold'
       >
-        {t('COMMON.CREATE')}
+        {isUpdate ? t('BUTTON.UPDATE') : t('BUTTON.CREATE')}
       </Button>
     </div>
   );
