@@ -7,12 +7,10 @@
     font-weight: 500;
   }
 
-  // make the red star nổi bật
   .ant-form-item-required .ant-form-item-required-mark {
     color: #ef4444;
   }
 
-  // chung cho input, datepicker, select
   .ant-input,
   .ant-picker,
   .ant-select-selector {
@@ -24,25 +22,21 @@
     }
   }
 
-  // hover trạng thái
   .ant-input:hover,
   .ant-picker:hover,
   .ant-select-selector:hover {
     border-color: #9ca3af;
   }
 
-  // datepicker icon & dropdown arrow
   .ant-picker-suffix,
   .ant-select-arrow {
     color: #9ca3af;
   }
 
-  // tăng padding Modal body
   .ant-modal-body {
     padding: 1.5rem;
   }
 
-  // custom title
   .ant-modal-title {
     font-size: 1.25rem;
     font-weight: 600;

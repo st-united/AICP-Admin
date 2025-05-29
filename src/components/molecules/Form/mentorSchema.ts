@@ -42,7 +42,7 @@ export const useMentorSchema = () => {
         new Date(),
         t('VALIDATE.AFTER', {
           fieldFirst: t('PROFILE.DOB'),
-          fieldSecond: 'ngày hiện tại',
+          fieldSecond: t('PROFILE.CURRENT_DATE'),
         }) as string,
       ),
   });

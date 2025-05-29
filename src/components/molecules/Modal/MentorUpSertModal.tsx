@@ -2,9 +2,9 @@ import { Modal, Button, Space, type FormInstance } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import './MentorUpSertModal.scss';
 import MentorCreateForm from '../Form/MentorCreateForm';
 import MentorUpdateForm from '../Form/MentorUpdateForm';
+import './MentorUpSertModal.scss';
 
 interface MentorUpSertModalProps {
   isOpen: boolean;
