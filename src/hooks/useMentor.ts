@@ -1,8 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@app/constants';
 import { GetMentorsParams } from '@app/interface/user.interface';
-import { getMenTeeFromMentorApi, getMentorsApi, getMentorStatsApi } from '@app/services';
+import {
+  activateMentorAccountApi,
+  deactivateMentorAccountApi,
+  getMenTeeFromMentorApi,
+  getMentorsApi,
+  getMentorStatsApi,
+} from '@app/services';
 
 export const useGetMentor = (params: GetMentorsParams) => {
   return useQuery(
@@ -17,12 +23,11 @@ export const useGetMentor = (params: GetMentorsParams) => {
     ],
     async () => {
       const { data } = await getMentorsApi(params);
-
       return data;
     },
     {
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+      // keepPreviousData: true,
+      // refetchOnWindowFocus: false,
     },
   );
 };
@@ -52,6 +57,36 @@ export const useGetMenteesMentor = (mentorId: string, enabled = true) => {
       enabled: !!mentorId && enabled,
       keepPreviousData: true,
       refetchOnWindowFocus: false,
+    },
+  );
+};
+
+export const useActivateMentorAccount = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (id: number) => {
+      const response = await activateMentorAccountApi(id);
+      return response;
+    },
+    {
+      onSuccess: async () => {
+        await queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+      },
+    },
+  );
+};
+
+export const useDeactivateMentorAccount = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (id: number) => {
+      const response = await deactivateMentorAccountApi(id);
+      return response;
+    },
+    {
+      onSuccess: async (data) => {
+        await queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+      },
     },
   );
 };
