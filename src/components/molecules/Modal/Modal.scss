@@ -1,0 +1,41 @@
+.ant-modal-wrap {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.ant-modal {
+  padding-bottom: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.ant-modal-body {
+  padding: 0;
+  background: white;
+}
+.ant-modal-content {
+  box-shadow: unset;
+  padding: 40px;
+}
+
+.ant-modal-footer {
+  border-top: unset;
+  text-align: center;
+  padding-bottom: 0px;
+}
+
+.ant-modal-footer .ant-btn {
+  height: 50px;
+  padding: 0px 42px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: none;
+}
+
+.ant-modal-footer .ant-btn.ant-btn-default {
+  color: #686868;
+  box-shadow: 0 0 8px 0px rgb(212, 212, 212);
+}
+
+.ant-modal-footer .ant-btn.ant-btn-primary {
+  background: #fe7743;
+}

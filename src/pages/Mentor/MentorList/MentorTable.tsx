@@ -27,6 +27,7 @@ const MentorTable = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef<InputRef>(null);
+  const [isActivateMentor, setIsActivateMentor] = useState<boolean>(false);
 
   const [table, setTable] = useState<TableState>({
     page: 1,
@@ -161,7 +162,9 @@ const MentorTable = () => {
         const isEnabled = !!record.upcomingCount;
         return (
           <div className='grid grid-cols-[70%_30%] w-full gap-3'>
-            <Status isActive={value} />
+            <Status
+              id={record.id}
+              isActive={value} />
             <div className='flex items-center justify-start'>
               <Tooltip
                 className='calendar-tooltip'
