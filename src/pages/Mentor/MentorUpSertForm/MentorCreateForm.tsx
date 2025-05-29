@@ -1,39 +1,23 @@
 import { Form, Input, DatePicker, type FormInstance } from 'antd';
-import moment from 'moment';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useMentorSchema } from './mentorSchema';
 import { yupSync } from '@app/helpers';
-import { useGetMentorById } from '@app/hooks';
-import type { Rule } from 'antd/es/form';
+import type { Rule } from 'antd/lib/form';
 
-interface MentorUpdateFormProps {
+interface MentorCreateFormProps {
   form: FormInstance;
   className?: string;
-  mentorId: string;
 }
 
-const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className, mentorId }) => {
+const MentorCreateForm: React.FC<MentorCreateFormProps> = ({ form, className }) => {
   const { t } = useTranslation();
   const validator = [yupSync(useMentorSchema())] as unknown as Rule[];
-  const { data: mentor, isLoading } = useGetMentorById(mentorId);
-
-  useEffect(() => {
-    if (mentor && !isLoading) {
-      const formValues = {
-        fullName: mentor.user.fullName,
-        email: mentor.user.email,
-        phoneNumber: mentor.user.phoneNumber,
-        dob: mentor.user.dob ? moment(mentor.user.dob) : null,
-      };
-      form.setFieldsValue(formValues);
-    }
-  }, [mentor, form, mentorId]);
 
   return (
     <Form form={form} layout='vertical' className={`grid grid-cols-2 gap-x-6 gap-y-4 ${className}`}>
-      <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator}>
+      <Form.Item name='fullName' label={t('PROFILE.FULLNAME')} rules={validator} required>
         <Input
           placeholder={t('MENTOR_ACTION.PLACEHOLDER.FULLNAME') as string}
           size='large'
@@ -41,16 +25,15 @@ const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className, me
         />
       </Form.Item>
 
-      <Form.Item name='email' label={t('PROFILE.EMAIL')} rules={validator}>
+      <Form.Item name='email' label={t('PROFILE.EMAIL')} rules={validator} required>
         <Input
           placeholder={t('MENTOR_ACTION.PLACEHOLDER.EMAIL') as string}
           size='large'
           className='p-3'
-          disabled={true}
         />
       </Form.Item>
 
-      <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator}>
+      <Form.Item name='phoneNumber' label={t('PROFILE.PHONE')} rules={validator} required>
         <Input
           placeholder={t('MENTOR_ACTION.PLACEHOLDER.PHONE') as string}
           size='large'
@@ -69,4 +52,4 @@ const MentorUpdateForm: React.FC<MentorUpdateFormProps> = ({ form, className, me
   );
 };
 
-export default MentorUpdateForm;
+export default MentorCreateForm;

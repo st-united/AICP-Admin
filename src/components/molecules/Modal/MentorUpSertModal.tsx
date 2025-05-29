@@ -2,8 +2,8 @@ import { Modal, Button, Space, type FormInstance } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import MentorCreateForm from '../Form/MentorCreateForm';
-import MentorUpdateForm from '../Form/MentorUpdateForm';
+import MentorCreateForm from '../../../pages/Mentor/MentorUpSertForm/MentorCreateForm';
+import MentorUpdateForm from '../../../pages/Mentor/MentorUpSertForm/MentorUpdateForm';
 import './MentorUpSertModal.scss';
 
 interface MentorUpSertModalProps {
@@ -67,7 +67,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
     >
       <Space
         direction='vertical'
-        className='w-full sm:w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] 2xl:w-[40vw] px-6 py-5'
+        className='w-full sm:w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] 2xl:w-[40vw] px-6 py-5 max-h-[85vh] overflow-y-auto'
       >
         {renderTitle()}
 
