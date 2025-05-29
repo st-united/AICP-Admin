@@ -72,7 +72,7 @@ export const API_URL = {
   MENTOR_STATS: '/mentors/stats',
   MENTEES_FROM_MENTOR: '/mentors/mentees',
   MENTOR_ACTIVE: '/mentors/activate',
-  MENTOR_DEACTIVATE: '/mentors'
+  MENTOR_DEACTIVATE: '/mentors',
 };
 
 export const VEHICLES_URL = '/vehicles';

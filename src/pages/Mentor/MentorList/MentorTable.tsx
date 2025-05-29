@@ -162,9 +162,7 @@ const MentorTable = () => {
         const isEnabled = !!record.upcomingCount;
         return (
           <div className='grid grid-cols-[70%_30%] w-full gap-3'>
-            <Status
-              id={record.id}
-              isActive={value} />
+            <Status id={record.id} isActive={value} />
             <div className='flex items-center justify-start'>
               <Tooltip
                 className='calendar-tooltip'
