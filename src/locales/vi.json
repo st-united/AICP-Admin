@@ -291,6 +291,12 @@
       "EMAIL": "Email người dùng",
       "INTERVIEW_TIME": "Thời gian phỏng vấn"
     },
-    "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm"
+    "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm",
+    "CANCEL": "Huỷ bỏ",
+    "CONFIRM": "Xác nhận",
+    "ACTIVE_ACCOUNT_TITLE": "Kích hoạt tài khoản",
+    "DISABLED_ACCOUNT_TITLE": "Vô hiệu hóa tài khoản",
+    "ACTIVE_ACCOUNT_DESCRIPTION": "Kích hoạt tài khoản sẽ khôi phục quyền truy cập cho cố vấn. Vui lòng xác nhận nếu bạn thật sự muốn kích hoạt cố vấn này.",
+    "DISABLED_ACCOUNT_DESCRIPTION": "Vô hiệu hóa tài khoản là hành động có thể ảnh hưởng đến quyền truy cập của cố vấn. Vui lòng xác nhận nếu bạn thật sự muốn vô hiệu hóa cố vấn này."
   }
 }
