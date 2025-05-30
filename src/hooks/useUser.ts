@@ -18,6 +18,7 @@ import {
   forgotPasswordApi,
   changePasswordApi,
   updateForgotPasswordApi,
+  getUserStatsApi,
 } from '@app/services';
 import {
   openNotificationWithIcon,
@@ -41,7 +42,19 @@ export const useCreateUser = () => {
 
 export const useGetUsers = (params: GetUsersParams) =>
   useQuery(
-    [QUERY_KEY.USERS, params.search, params.status, params.page, params.take],
+    [
+      QUERY_KEY.USERS,
+      params.search,
+      params.status,
+      params.page,
+      params.take,
+      params.order,
+      params.orderBy,
+      params.province,
+      params.job,
+      params.startDate,
+      params.endDate,
+    ],
     async () => {
       const { data } = await getUsersAPI(params);
       return data;
@@ -52,6 +65,20 @@ export const useGetUsers = (params: GetUsersParams) =>
       cacheTime: 0,
     },
   );
+
+export const useGetUserStats = () => {
+  return useQuery(
+    [QUERY_KEY.USERS, QUERY_KEY.USER_STATS],
+    async () => {
+      const { data } = await getUserStatsApi();
+      return data;
+    },
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  );
+};
 
 export const useGetUserById = (id: number) =>
   useQuery([QUERY_KEY.USERS, id], async () => {

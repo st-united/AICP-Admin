@@ -2,6 +2,7 @@ import { lazy } from 'react';
 
 import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
 import { Mentor } from '@app/pages';
+import UserManagement from '@app/pages/User/UserManagement';
 
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
@@ -23,6 +24,7 @@ const routes = [
         element: <AdminLayout />,
         children: [
           { path: 'dashboard', element: <div></div> },
+          { path: 'user', element: <UserManagement /> },
           {
             path: 'mentor',
             element: <Mentor />,
