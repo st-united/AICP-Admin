@@ -11,7 +11,7 @@ const Mentor = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
 
-  const { mutate: createMentor } = useCreateMentor();
+  const { mutate: createMentor, isLoading } = useCreateMentor();
 
   const showMentorUpSertModal = () => {
     setIsModalOpen(true);
@@ -24,10 +24,14 @@ const Mentor = () => {
 
   const handleMentorCreate = async () => {
     const values = await form.validateFields();
-    createMentor(values);
-    setIsModalOpen(false);
-    form.resetFields();
+    createMentor(values, {
+      onSuccess: () => {
+        setIsModalOpen(false);
+        form.resetFields();
+      },
+    });
   };
+
   return (
     <div className='flex flex-col mt-2 gap-6 px-5 overflow-y-auto pb-6'>
       <div className='flex justify-between items-center'>
@@ -54,6 +58,7 @@ const Mentor = () => {
         onOk={handleMentorCreate}
         form={form}
         isUpdate={false}
+        isLoading={isLoading}
       />
     </div>
   );
