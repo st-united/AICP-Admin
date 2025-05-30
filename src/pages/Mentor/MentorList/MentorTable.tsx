@@ -46,7 +46,7 @@ const MentorTable = () => {
   };
 
   const { data: mentorData, isLoading } = useGetMentor(getMentorsParams);
-  const { mutate: updateMentor } = useUpdateMentor();
+  const { mutate: updateMentor, isLoading: isUpdating } = useUpdateMentor();
 
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
 
@@ -229,9 +229,15 @@ const MentorTable = () => {
 
   const handleMentorUpdate = async () => {
     const values = await form.validateFields();
-    updateMentor({ id: mentorId, ...values });
-    setIsModalOpen(false);
-    form.resetFields();
+    updateMentor(
+      { id: mentorId, ...values },
+      {
+        onSuccess: () => {
+          setIsModalOpen(false);
+          form.resetFields();
+        },
+      },
+    );
   };
   return (
     <>
@@ -257,6 +263,7 @@ const MentorTable = () => {
         form={form}
         isUpdate={true}
         mentorId={mentorId}
+        isLoading={isUpdating}
       />
     </>
   );

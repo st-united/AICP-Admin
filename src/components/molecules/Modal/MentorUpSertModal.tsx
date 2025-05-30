@@ -13,6 +13,7 @@ interface MentorUpSertModalProps {
   form: FormInstance;
   isUpdate: boolean;
   mentorId?: string;
+  isLoading?: boolean;
 }
 
 const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
@@ -22,6 +23,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
   form,
   isUpdate,
   mentorId,
+  isLoading = false,
 }) => {
   const { t } = useTranslation();
 
@@ -38,6 +40,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
         key='create'
         type='primary'
         onClick={onOk}
+        loading={isLoading}
         className='bg-orange-500 hover:bg-orange-600 hover:shadow-lg border-orange-200 hover:border-orange-300 focus:bg-orange-400 focus:border-orange-400 shadow-md rounded-lg text-lg px-5 py-3 h-fit transition-all duration-200 font-bold'
       >
         {isUpdate ? t('BUTTON.UPDATE') : t('BUTTON.CREATE')}
