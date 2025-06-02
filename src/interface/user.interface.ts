@@ -77,6 +77,7 @@ export interface Users {
   email: string;
   phoneNumber: string;
   status: string;
+  dob: string;
 }
 
 export interface MentorColumns {

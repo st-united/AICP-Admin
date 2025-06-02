@@ -1,14 +1,22 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
 
 import { QUERY_KEY } from '@app/constants';
-import { GetMentorsParams } from '@app/interface/user.interface';
+import { MentorCreateDto, MentorUpdateDto } from '@app/interface/mentor.interface';
+import { GetMentorsParams, MentorColumns } from '@app/interface/user.interface';
 import {
-  activateMentorAccountApi,
-  deactivateMentorAccountApi,
+  createMentorApi,
   getMenTeeFromMentorApi,
+  getMentorByIdApi,
   getMentorsApi,
   getMentorStatsApi,
+  updateMentorApi,
+  activateMentorAccountApi,
+  deactivateMentorAccountApi,
 } from '@app/services';
+import {
+  openNotificationWithIcon,
+  NotificationTypeEnum,
+} from '@app/services/notification/notificationService';
 
 export const useGetMentor = (params: GetMentorsParams) => {
   return useQuery(
@@ -30,6 +38,13 @@ export const useGetMentor = (params: GetMentorsParams) => {
       // refetchOnWindowFocus: false,
     },
   );
+};
+
+export const useGetMentorById = (mentorId: string): UseQueryResult<MentorColumns> => {
+  return useQuery([QUERY_KEY.MENTOR, mentorId], async () => {
+    const { data } = await getMentorByIdApi(mentorId);
+    return data.data;
+  });
 };
 
 export const useGetMentorStats = () => {
@@ -76,6 +91,25 @@ export const useActivateMentorAccount = () => {
   );
 };
 
+export const useCreateMentor = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (mentor: MentorCreateDto) => {
+      const { data } = await createMentorApi(mentor);
+      return data;
+    },
+    {
+      onSuccess({ message }) {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+
 export const useDeactivateMentorAccount = () => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -86,6 +120,26 @@ export const useDeactivateMentorAccount = () => {
     {
       onSuccess: async (data) => {
         await queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+      },
+    },
+  );
+};
+
+export const useUpdateMentor = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (mentor: MentorUpdateDto) => {
+      const { id, ...rest } = mentor;
+      const { data } = await updateMentorApi(mentor);
+      return data;
+    },
+    {
+      onSuccess({ message }) {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );
