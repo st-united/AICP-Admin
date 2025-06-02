@@ -1,4 +1,5 @@
 import PublicLayout from '@app/components/templates/PublicLayout';
+import { Mentor } from '@app/pages';
 
 const routes = [
   {
