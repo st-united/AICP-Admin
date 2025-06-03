@@ -1,7 +1,13 @@
 import { CalendarOutlined, SearchOutlined } from '@ant-design/icons';
-import { Badge, Button, Form, Input, InputRef, Space, Tooltip } from 'antd';
-import { ColumnType, FilterConfirmProps } from 'antd/lib/table/interface';
-import { ColumnsType, TablePaginationConfig } from 'antd/lib/table/Table';
+import { Badge, Button, Form, Input, InputRef, Space, Tooltip, TablePaginationConfig } from 'antd';
+import {
+  ColumnType,
+  FilterConfirmProps,
+  ColumnsType,
+  FilterValue,
+  SorterResult,
+  TableCurrentDataSource,
+} from 'antd/lib/table/interface';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -62,15 +68,17 @@ const MentorTable = () => {
 
   const handleTableChange = (
     pagination: TablePaginationConfig,
-    filters: Record<string, (string | number | boolean)[] | null>,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<MentorColumns> | SorterResult<MentorColumns>[],
+    extra: TableCurrentDataSource<MentorColumns>,
   ) => {
-    const isActiveFilters = filters.isActive as string[] | null;
+    const isActiveFilters = filters?.isActive as (string | number | boolean)[] | null;
     const hasBothFilters = isActiveFilters?.length === 2;
     const isReset = isActiveFilters === null || isActiveFilters === undefined;
 
     setTable((prev) => ({
       ...prev,
-      page: pagination.current || 1,
+      page: pagination?.current || 1,
       take: 20,
       isActive: isReset ? undefined : hasBothFilters ? undefined : isActiveFilters?.[0] === 'true',
     }));
