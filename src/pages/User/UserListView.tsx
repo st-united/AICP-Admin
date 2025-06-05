@@ -1,6 +1,6 @@
 import { SearchOutlined, FilterOutlined } from '@ant-design/icons';
 import { Input, Button, Space, DatePicker, Select, Alert } from 'antd';
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
@@ -23,7 +23,7 @@ interface FilterState {
   provinceFilter: string[];
   jobFilter: string[];
   statusFilter: boolean[];
-  dateFilter: [Moment, Moment] | null;
+  dateFilter: [Dayjs, Dayjs] | null;
   pagination: {
     page: number;
     take: number;
@@ -190,7 +190,7 @@ const UserTable: React.FC = () => {
         dataIndex: 'dob',
         key: 'dob',
         render: (date: string) =>
-          date ? moment(date).format(DATE_TIME.DAY_MONTH_YEAR) : t('USER.NO_DATA'),
+          date ? dayjs(date).format(DATE_TIME.DAY_MONTH_YEAR) : t('USER.NO_DATA'),
       },
       {
         title: t('USER.PROVINCE'),
@@ -301,7 +301,7 @@ const UserTable: React.FC = () => {
         title: t('USER.CREATED_AT'),
         dataIndex: 'createdAt',
         key: 'createdAt',
-        render: (date: string) => moment(date).format(DATE_TIME.DAY_MONTH_YEAR),
+        render: (date: string) => dayjs(date).format(DATE_TIME.DAY_MONTH_YEAR),
         filterDropdown: () => (
           <div className='p-2'>
             <RangePicker
