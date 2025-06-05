@@ -29,7 +29,7 @@ const Sidebar = () => {
           const Icon = item.icon;
 
           return (
-            <Link to={item.path} key={index}>
+            <Link to={item.path} key={index} className='no-underline text-inherit'>
               <div
                 className={`flex flex-row gap-2 items-center justify-start !px-6 !p-4 hover:bg-[#fff2e8] rounded-lg cursor-pointer ${
                   isActive ? 'bg-[#fff2e8]' : ''
