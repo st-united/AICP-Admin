@@ -17,10 +17,10 @@ const ProfileAvatar = () => {
         {
           key: '1',
           label: (
-            <div className='flex items-center gap-3 text-lg font-semibold !p-1 hover:!rounded-lg'>
+            <Link className='flex items-center gap-3 text-lg font-semibold !p-1' to={'/profile'}>
               <UserOutlined />
               <div>{t('PROFILE.PERSONAL_PROFILE')}</div>
-            </div>
+            </Link>
           ),
         },
         {
