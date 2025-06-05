@@ -254,6 +254,8 @@
       "EMAIL": "Email người dùng",
       "INTERVIEW_TIME": "Thời gian phỏng vấn"
     },
-    "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm"
+    "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm",
+    "RESET": "Làm mới",
+    "FILTER": "Lọc"
   }
 }
