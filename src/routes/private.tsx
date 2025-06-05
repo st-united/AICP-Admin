@@ -9,6 +9,7 @@ import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { Mentor } from '@app/pages';
 import Profile from '@app/pages/Profile/Profile';
+import UserManagement from '@app/pages/User/UserManagement';
 
 const routes = [
   {
@@ -40,6 +41,7 @@ const routes = [
         element: <AdminLayout />,
         children: [
           { path: 'dashboard', element: <div></div> },
+          { path: 'user', element: <UserManagement /> },
           {
             path: 'mentor',
             element: <Mentor />,
