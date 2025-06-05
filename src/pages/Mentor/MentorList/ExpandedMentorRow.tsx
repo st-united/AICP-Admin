@@ -1,5 +1,5 @@
 import { Table } from 'antd';
-import { ColumnsType } from 'antd/lib/table/Table';
+import { ColumnsType } from 'antd/lib/table/interface';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 

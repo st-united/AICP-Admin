@@ -1,12 +1,20 @@
 import { GetListParams } from './common.interface';
 
 export interface UserColumns {
-  id: number;
-  name: string;
+  id?: number;
+  fullName: string;
   email: string;
-  phone: string;
-  status: string;
-  operation: string;
+  phoneNumber: string;
+  dob: Date;
+  province: string;
+  job: string;
+  status: boolean;
+  createdAt: Date;
+  updatedAt?: Date;
+  avatarUrl?: string;
+  country?: string;
+  provider?: string;
+  referralCode?: string;
 }
 
 export interface Credentials {
@@ -67,8 +75,11 @@ export interface AssignPermissionParams {
 }
 
 export interface GetUsersParams extends GetListParams {
-  search: string;
-  status: string | null;
+  status: boolean | null;
+  province: string | null;
+  job: string | null;
+  startDate: Date | null;
+  endDate: Date | null;
 }
 
 export interface Users {
@@ -77,6 +88,7 @@ export interface Users {
   email: string;
   phoneNumber: string;
   status: string;
+  dob: string;
 }
 
 export interface MentorColumns {

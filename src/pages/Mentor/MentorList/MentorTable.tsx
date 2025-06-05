@@ -1,15 +1,32 @@
 import { CalendarOutlined, SearchOutlined } from '@ant-design/icons';
-import { Badge, Button, Input, InputRef, Space, Tooltip, Checkbox } from 'antd';
-import { ColumnType, FilterConfirmProps } from 'antd/lib/table/interface';
-import { ColumnsType, TablePaginationConfig } from 'antd/lib/table/Table';
+import {
+  Badge,
+  Button,
+  Form,
+  Input,
+  InputRef,
+  Space,
+  Tooltip,
+  TablePaginationConfig,
+  Checkbox,
+} from 'antd';
+import {
+  ColumnType,
+  FilterConfirmProps,
+  ColumnsType,
+  FilterValue,
+  SorterResult,
+  TableCurrentDataSource,
+} from 'antd/lib/table/interface';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ExpandedRow } from './ExpandedMentorRow';
 import Status from './Status';
 import { Table } from '@app/components/atoms';
+import MentorUpSertModal from '@app/components/molecules/Modal/MentorUpSertModal';
 import { OrderDirection } from '@app/constants/order';
-import { useGetMentor } from '@app/hooks';
+import { useGetMentor, useUpdateMentor } from '@app/hooks';
 import { GetMentorsParams, MentorColumns } from '@app/interface/user.interface';
 import { formatDate } from '@app/utils';
 import './MentorTable.scss';
@@ -24,8 +41,11 @@ interface TableState {
 
 const MentorTable = () => {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mentorId, setMentorId] = useState<string>('');
   const searchInput = useRef<InputRef>(null);
 
   const [table, setTable] = useState<TableState>({
@@ -42,6 +62,7 @@ const MentorTable = () => {
   };
 
   const { data: mentorData, isLoading } = useGetMentor(getMentorsParams);
+  const { mutate: updateMentor, isLoading: isUpdating } = useUpdateMentor();
 
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
 
@@ -57,15 +78,17 @@ const MentorTable = () => {
 
   const handleTableChange = (
     pagination: TablePaginationConfig,
-    filters: Record<string, (string | number | boolean)[] | null>,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<MentorColumns> | SorterResult<MentorColumns>[],
+    extra: TableCurrentDataSource<MentorColumns>,
   ) => {
-    const isActiveFilters = filters.isActive as string[] | null;
+    const isActiveFilters = filters?.isActive as (string | number | boolean)[] | null;
     const hasBothFilters = isActiveFilters?.length === 2;
     const isReset = isActiveFilters === null || isActiveFilters === undefined;
 
     setTable((prev) => ({
       ...prev,
-      page: pagination.current || 1,
+      page: pagination?.current || 1,
       take: 20,
       isActive: isReset ? undefined : hasBothFilters ? undefined : isActiveFilters?.[0] === 'true',
     }));
@@ -196,7 +219,15 @@ const MentorTable = () => {
       dataIndex: 'fullName',
       key: 'fullName',
       width: 200,
-      render: (_, record) => record.user.fullName,
+      render: (_, record) => (
+        <Button
+          type='link'
+          className='text-[#1570EF] text-left hover:text-blue-800'
+          onClick={() => showMentorUpSertModal(record.id.toString())}
+        >
+          {record.user.fullName}
+        </Button>
+      ),
       ...getColumnSearchProps('user.fullName'),
     },
     {
@@ -268,22 +299,56 @@ const MentorTable = () => {
     },
   ];
 
+  const showMentorUpSertModal = (mentorId: string) => {
+    setIsModalOpen(true);
+    setMentorId(mentorId);
+  };
+
+  const handleMentorCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+    setMentorId('');
+  };
+
+  const handleMentorUpdate = async () => {
+    const values = await form.validateFields();
+    updateMentor(
+      { id: mentorId, ...values },
+      {
+        onSuccess: () => {
+          setIsModalOpen(false);
+          form.resetFields();
+        },
+      },
+    );
+  };
   return (
-    <Table
-      columns={columns}
-      dataSource={mentorData?.data}
-      loading={isLoading}
-      onChange={handleTableChange}
-      paginate={{
-        table,
-        total: mentorData?.meta?.itemCount,
-        pageCount: mentorData?.meta?.pageCount,
-        setTable,
-      }}
-      expandableRender={(record) => <ExpandedRow mentorId={record.id} />}
-      expandedRowKeys={expandedRowKeys}
-      setExpandedRowKeys={setExpandedRowKeys}
-    />
+    <>
+      <Table
+        columns={columns}
+        dataSource={mentorData?.data}
+        loading={isLoading}
+        onChange={handleTableChange}
+        paginate={{
+          table,
+          total: mentorData?.meta?.itemCount,
+          pageCount: mentorData?.meta?.pageCount,
+          setTable,
+        }}
+        expandableRender={(record) => <ExpandedRow mentorId={record.id} />}
+        expandedRowKeys={expandedRowKeys}
+        setExpandedRowKeys={setExpandedRowKeys}
+      />
+      <MentorUpSertModal
+        isOpen={isModalOpen}
+        onCancel={handleMentorCancel}
+        onOk={handleMentorUpdate}
+        form={form}
+        isUpdate={true}
+        mentorId={mentorId}
+        isLoading={isUpdating}
+      />
+    </>
   );
 };
 

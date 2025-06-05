@@ -98,6 +98,8 @@
     "ACCOUNT_TITLE": "Thông tin tài khoản",
     "PROFILE_TITLE": "Thông tin cá nhân",
     "NAME": "Họ tên",
+    "SEARCH_PLACEHOLDER": "Tìm kiếm họ tên",
+    "SEARCH": "Tìm kiếm",
     "PHONE": "Số điện thoại",
     "EMAIL": "Email",
     "ADDRESS": "Địa chỉ",
@@ -112,7 +114,28 @@
     "GENDER": "Giới tính",
     "STATUS": "Trạng thái",
     "PASSWORD": "Mật khẩu",
-    "CHOOSE_ROLE": "vai trò"
+    "CHOOSE_ROLE": "vai trò",
+    "TOTAL": "Tổng cộng",
+    "ACTIVE": "Đang hoạt động",
+    "INACTIVE": "Không hoạt động",
+    "LIST": "Danh sách người dùng",
+    "EXPORT": "Xuất danh sách",
+    "PROVINCE": "Tỉnh thành",
+    "PROVINCE_ERROR": "Lỗi khi lấy tỉnh thành",
+    "PROVINCE_PLACEHOLDER": "Chọn tỉnh thành",
+    "RESET_FILTER": "Đặt lại",
+    "JOB": "Nghề nghiệp",
+    "SELECT_JOB": "Chọn nghề nghiệp",
+    "JOB_WORKING": "Đã đi làm",
+    "JOB_STUDENT": "Sinh viên",
+    "STATUS_ACTIVE": "Đã kích hoạt",
+    "STATUS_INACTIVE": "Chưa kích hoạt",
+    "SELECT_STATUS": "Chọn trạng thái",
+    "CREATED_AT": "Ngày đăng ký",
+    "FROM": "Từ ngày",
+    "TO": "Đến ngày",
+    "REFERRAL_CODE": "Mã giới thiệu",
+    "NO_DATA": "N/A"
   },
   "TABLE": {
     "MANIPULATION": "Thao tác",
@@ -167,6 +190,7 @@
     "POSITIVE_NUMBER": " {{field}} giá trị phải lớn hơn 0",
     "INTEGER": " {{field}} phải là một số nguyên",
     "MIN_CHARACTER": "{{field}} phải lớn hơn hoặc bằng {{number}} ký tự",
+    "MAX_CHARACTER": "{{field}} phải nhỏ hơn hoặc bằng {{number}} ký tự",
     "NUMBER": "{{field}} phải là số",
     "MATCH": "{{field}} không khớp",
     "SPESIAL_CHARACTERS": "{{field}} không có ký tự đặc biệt",
@@ -178,6 +202,7 @@
     "PLACEHOLDER": "Nhập {{name}}",
     "CHOOSE": "Chọn {{name}}",
     "NO_SPECIAL_CHARACTER": "{{field}} không được chứa ký tự đặc biệt và khoảng trống",
+    "NO_SPACE_START_END": "Không được có khoảng trống ở đầu và cuối",
     "ONLY_ALPHABET": "{{field}} không được chứa số và ký tự đặc biệt",
     "NOT_ALLOW_NUMBER": "{{field}} không được chứa số",
     "SEARCH_CHOOSE": "Chọn {{name}} để tìm kiếm",
@@ -217,6 +242,7 @@
     "EMAIL_PLACEHOLDER": "Nhập email",
     "DOB": "Ngày sinh",
     "DOB_PLACEHOLDER": "Chọn ngày sinh",
+    "CURRENT_DATE": "ngày hiện tại",
     "PLACEHOLDER_CONFIRM_PASSWORD": "Nhập lại mật khẩu mới",
     "EDIT_PROFILE_BTN": "Chỉnh sửa",
     "CANCEL_EDIT_PROFILE_BTN": "Hủy bỏ",
@@ -294,5 +320,19 @@
     "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm",
     "RESET": "Làm mới",
     "FILTER": "Lọc"
+  },
+  "MENTOR_ACTION": {
+    "ADD_NEW": "Thêm mới cố vấn",
+    "EDIT": "Cập nhật thông tin cố vấn",
+    "DELETE": "Xóa",
+    "LIST": "Danh sách cố vấn",
+    "ADD_NEW_DESCRIPTION": "Vui lòng nhập thông tin của cố vấn để thêm mới.",
+    "EDIT_DESCRIPTION": "Vui lòng nhập thông tin của cố vấn để tiến hành cập nhật.",
+    "PLACEHOLDER": {
+      "FULLNAME": "Nhập họ tên tại đây",
+      "EMAIL": "Nhập email tại đây",
+      "PHONE": "Nhập số điện thoại tại đây",
+      "DOB": "Chọn ngày sinh"
+    }
   }
 }
