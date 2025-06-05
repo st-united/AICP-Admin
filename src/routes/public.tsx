@@ -14,20 +14,6 @@ const routes = [
       },
     ],
   },
-  {
-    element: <AuthLayout />,
-    children: [
-      {
-        element: <ProfileLayout />,
-        children: [
-          {
-            path: 'profile',
-            element: <Profile />,
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 export default routes;
