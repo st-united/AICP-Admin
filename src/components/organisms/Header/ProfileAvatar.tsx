@@ -17,10 +17,10 @@ const ProfileAvatar = () => {
         {
           key: '1',
           label: (
-            <div className='flex items-center gap-3 text-lg font-semibold !p-1 hover:!rounded-lg'>
+            <Link className='flex items-center gap-3 text-lg font-semibold !p-1' to={'/profile'}>
               <UserOutlined />
               <div>{t('PROFILE.PERSONAL_PROFILE')}</div>
-            </div>
+            </Link>
           ),
         },
         {
@@ -56,18 +56,11 @@ const ProfileAvatar = () => {
 
   return (
     <Dropdown overlayClassName='dropdown-menu' menu={{ items }} placement='bottomRight' arrow>
-      <div className='flex items-center cursor-pointer space-x-2 pr-5 py-2'>
-        {isAuth && user?.fullName && <span className='text-lg font-medium'>{user.fullName}</span>}
-        <Avatar
-          src={isAuth && user ? user.avatarUrl : undefined}
-          className='border-[2px] !w-[40px] !h-[40px] md:!w-[40px] md:!h-[40px] cursor-pointer'
-          icon={
-            <div className='flex items-center justify-center w-full h-full'>
-              {!isAuth || !user ? <UserOutlined /> : undefined}
-            </div>
-          }
-        />
-      </div>
+      <Avatar
+        className='border-[2px] !w-[40px] !h-[40px] md:!w-[50px] md:!h-[50px] cursor-pointer'
+        src={isAuth && user ? user.avatarUrl : undefined}
+        icon={!isAuth || !user ? <UserOutlined /> : undefined}
+      />
     </Dropdown>
   );
 };

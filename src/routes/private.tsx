@@ -1,11 +1,14 @@
 import { lazy } from 'react';
 
-import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
-import { Mentor } from '@app/pages';
-
 const PrivateLayout = lazy(() => import('@app/components/templates/PrivateLayout'));
 const NotFound = lazy(() => import('@app/pages/NotFound/NotFound'));
 const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
+
+import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
+import AuthLayout from '@app/components/templates/AuthLayout';
+import ProfileLayout from '@app/components/templates/ProfileLayout';
+import { Mentor } from '@app/pages';
+import Profile from '@app/pages/Profile/Profile';
 
 const routes = [
   {
@@ -29,6 +32,20 @@ const routes = [
           },
           { path: 'user', element: <div></div> },
           { path: 'company', element: <div></div> },
+        ],
+      },
+    ],
+  },
+  {
+    element: <AuthLayout />,
+    children: [
+      {
+        element: <ProfileLayout />,
+        children: [
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
         ],
       },
     ],
