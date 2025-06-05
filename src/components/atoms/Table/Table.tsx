@@ -67,7 +67,7 @@ export const Table: React.FC<TableProps> = ({
         loading={loading}
         rowKey={(record) => record.id}
         onChange={onChange}
-        scroll={{ x: 'max-content', y: 'calc(100vh - 300px)' }}
+        scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
         pagination={false}
         locale={{
