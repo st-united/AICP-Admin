@@ -57,7 +57,7 @@ const ProfileAvatar = () => {
   return (
     <Dropdown overlayClassName='dropdown-menu' menu={{ items }} placement='bottomRight' arrow>
       <div className='flex items-center cursor-pointer space-x-2 pr-5 py-2'>
-        {isAuth && user?.fullname && <span className='text-lg font-medium'>{user.fullName}</span>}
+        {isAuth && user?.fullName && <span className='text-lg font-medium'>{user.fullName}</span>}
         <Avatar
           src={isAuth && user ? user.avatarUrl : undefined}
           className='border-[2px] !w-[40px] !h-[40px] md:!w-[40px] md:!h-[40px] cursor-pointer'
