@@ -15,6 +15,20 @@ const routes = [
     element: <PrivateLayout />,
     children: [
       {
+        element: <AuthLayout />,
+        children: [
+          {
+            element: <ProfileLayout />,
+            children: [
+              {
+                path: 'profile',
+                element: <Profile />,
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: '404',
         element: <NotFound />,
       },
@@ -32,20 +46,6 @@ const routes = [
           },
           { path: 'user', element: <div></div> },
           { path: 'company', element: <div></div> },
-        ],
-      },
-    ],
-  },
-  {
-    element: <AuthLayout />,
-    children: [
-      {
-        element: <ProfileLayout />,
-        children: [
-          {
-            path: 'profile',
-            element: <Profile />,
-          },
         ],
       },
     ],

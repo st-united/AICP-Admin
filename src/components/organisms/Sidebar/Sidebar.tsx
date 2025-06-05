@@ -22,14 +22,14 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className='flex !rounded-2xl bg-white !p-6 min-h-[80vh] shadow-md'>
+    <div className='flex !rounded-2xl bg-white !p-6 h-full shadow-md'>
       <div className='grid grid-cols-1 gap-1 text-[16px] w-full h-fit'>
         {menuItems.map((item, index) => {
           const isActive = currentPath === item.path;
           const Icon = item.icon;
 
           return (
-            <Link to={item.path} key={index} className='no-underline'>
+            <Link to={item.path} key={index} className='no-underline text-inherit'>
               <div
                 className={`flex flex-row gap-2 items-center justify-start !px-6 !p-4 hover:bg-[#fff2e8] rounded-lg cursor-pointer ${
                   isActive ? 'bg-[#fff2e8]' : ''
