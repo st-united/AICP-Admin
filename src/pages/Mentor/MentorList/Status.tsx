@@ -30,8 +30,6 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
         },
         onError: (error) => {
           setIsOpenModal(false);
-
-          console.log(error);
         },
       });
     } else {
@@ -41,8 +39,6 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
         },
         onError: (error) => {
           setIsOpenModal(false);
-
-          console.log(error);
         },
       });
     }
@@ -50,14 +46,14 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => setIsOpenModal(true)}
         className={`${
-          isActive ? 'bg-[#135200]' : 'bg-[#AD2102]'
-        } cursor-pointer py-2 rounded-lg text-center text-base font-medium text-white border-none w-full`}
+          isActive ? 'bg-[#135200] hover:!bg-[#57bb38]' : 'bg-[#AD2102] hover:!bg-[#e7694c]'
+        } cursor-pointer py-6 rounded-lg text-center text-base font-medium !text-white border-none w-full`}
       >
         {isActive ? t('STATUS.ACTIVE') : t('STATUS.INACTIVE')}
-      </button>
+      </Button>
       <ModalComponent
         open={isOpenModal}
         cancelText={t<string>('MENTOR.CANCEL')}

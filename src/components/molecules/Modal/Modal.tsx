@@ -6,7 +6,8 @@ export const ModalComponent: FC<ModalProps> = ({ ...props }) => {
   const { open, onOk, onCancel, children, closeIcon, cancelText, okText, confirmLoading } = props;
   return (
     <Modal
-      className='w-[36rem] px-4'
+      wrapClassName='status-modal'
+      className='w-[36rem] px-4 status-modal_content'
       open={open}
       onOk={onOk}
       onCancel={onCancel}
