@@ -35,6 +35,7 @@ type TableProps = {
   summary?: (data: readonly any[]) => ReactNode;
   className?: string;
   hiddenScrollX?: boolean;
+  onRow?: (record: any) => any;
   expandableRender?: (record: any) => ReactNode;
   expandedRowKeys?: React.Key[];
   setExpandedRowKeys?: (keys: React.Key[]) => void;
@@ -46,6 +47,7 @@ export const Table: React.FC<TableProps> = ({
   dataSource,
   paginate,
   onChange,
+  onRow,
   disablePaginate = false,
   summary,
   className = '',
@@ -59,12 +61,13 @@ export const Table: React.FC<TableProps> = ({
   return (
     <div className={`table-antd shadow-custom rounded-lg ${className}`}>
       <TableAntd
+        onRow={onRow}
         columns={columns}
         dataSource={dataSource}
         loading={loading}
         rowKey={(record) => record.id}
         onChange={onChange}
-        scroll={{ x: 'max-content', y: 'calc(100vh - 300px)' }}
+        scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
         pagination={false}
         locale={{

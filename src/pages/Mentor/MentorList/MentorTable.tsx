@@ -1,7 +1,23 @@
 import { CalendarOutlined, SearchOutlined } from '@ant-design/icons';
-import { Badge, Button, Form, Input, InputRef, Space, Tooltip } from 'antd';
-import { ColumnType, FilterConfirmProps } from 'antd/lib/table/interface';
-import { ColumnsType, TablePaginationConfig } from 'antd/lib/table/Table';
+import {
+  Badge,
+  Button,
+  Form,
+  Input,
+  InputRef,
+  Space,
+  Tooltip,
+  TablePaginationConfig,
+  Checkbox,
+} from 'antd';
+import {
+  ColumnType,
+  FilterConfirmProps,
+  ColumnsType,
+  FilterValue,
+  SorterResult,
+  TableCurrentDataSource,
+} from 'antd/lib/table/interface';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -63,51 +79,120 @@ const MentorTable = () => {
 
   const handleTableChange = (
     pagination: TablePaginationConfig,
-    filters: Record<string, (string | number | boolean)[] | null>,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<MentorColumns> | SorterResult<MentorColumns>[],
+    extra: TableCurrentDataSource<MentorColumns>,
   ) => {
-    const isActiveFilters = filters.isActive as string[] | null;
+    const isActiveFilters = filters?.isActive as (string | number | boolean)[] | null;
     const hasBothFilters = isActiveFilters?.length === 2;
     const isReset = isActiveFilters === null || isActiveFilters === undefined;
 
     setTable((prev) => ({
       ...prev,
-      page: pagination.current || 1,
+      page: pagination?.current || 1,
       take: 20,
       isActive: isReset ? undefined : hasBothFilters ? undefined : isActiveFilters?.[0] === 'true',
     }));
   };
 
-  const getColumnSearchProps = (dataIndex: DataIndex): ColumnType<MentorColumns> => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
-      <div className='p-2'>
-        <Input
-          ref={searchInput}
-          placeholder={t('MENTOR.SEARCH_FULLNAME_PLACEHOLDER') as string}
-          value={`${selectedKeys[0] || ''}`}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
-          className='mb-2 block'
-        />
-        <Space>
-          <Button
-            type='primary'
-            className='rounded-md bg-[#fe7743] border-[#fe7743] w-[90px]'
-            onClick={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size='middle'
-          >
-            Search
-          </Button>
-          <Button
-            className='rounded-md text-[#fe7743] border-[#fe7743] w-[90px]'
-            // onClick={() => clearFilters && handleReset(clearFilters)}
-            size='middle'
-          >
-            Reset
-          </Button>
-        </Space>
+  const getInputFilterDropdown = (
+    setSelectedKeys: (keys: React.Key[]) => void,
+    selectedKeys: React.Key[],
+    confirm: (param?: FilterConfirmProps) => void,
+    clearFilters: (() => void) | undefined,
+    dataIndex: DataIndex,
+  ) => (
+    <div className='p-2'>
+      <Input
+        ref={searchInput}
+        placeholder={t('MENTOR.SEARCH_FULLNAME_PLACEHOLDER') as string}
+        value={`${selectedKeys[0] || ''}`}
+        onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+        onPressEnter={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
+        className='mb-2 block'
+      />
+      <Space>
+        <Button
+          type='primary'
+          className='flex items-center justify-center rounded-md bg-[#fe7743] border-[#fe7743] w-[90px]'
+          onClick={() => handleSearch(selectedKeys as string[], confirm, dataIndex)}
+          icon={<SearchOutlined />}
+          size='middle'
+        >
+          {t('MENTOR.SEARCH')}
+        </Button>
+        <Button
+          className='flex rounded-md text-[#fe7743] border-[#fe7743] w-[90px]'
+          onClick={() => {
+            clearFilters?.();
+            handleSearch([], confirm, dataIndex);
+          }}
+          size='middle'
+        >
+          {t('MENTOR.RESET')}
+        </Button>
+      </Space>
+    </div>
+  );
+
+  const getStatusFilterDropdown = (
+    setSelectedKeys: (keys: React.Key[]) => void,
+    selectedKeys: React.Key[],
+    confirm: (param?: FilterConfirmProps) => void,
+    clearFilters: (() => void) | undefined,
+    dataIndex: DataIndex,
+  ) => (
+    <div className='p-2'>
+      <div className='flex flex-col gap-2 mb-2 custom-filter-checkbox'>
+        <Checkbox
+          checked={selectedKeys.includes('true')}
+          onChange={(e) => {
+            const newKeys = e.target.checked
+              ? [...selectedKeys, 'true']
+              : selectedKeys.filter((key) => key !== 'true');
+            setSelectedKeys(newKeys);
+          }}
+        >
+          {t('MENTOR.ACTIVE')}
+        </Checkbox>
+        <Checkbox
+          checked={selectedKeys.includes('false')}
+          onChange={(e) => {
+            const newKeys = e.target.checked
+              ? [...selectedKeys, 'false']
+              : selectedKeys.filter((key) => key !== 'false');
+            setSelectedKeys(newKeys);
+          }}
+        >
+          {t('MENTOR.INACTIVE')}
+        </Checkbox>
       </div>
-    ),
+      <Space>
+        <Button
+          type='primary'
+          className='flex items-center justify-center rounded-md bg-[#fe7743] border-[#fe7743] w-[90px]'
+          onClick={() => confirm()}
+          size='middle'
+        >
+          {t('MENTOR.FILTER')}
+        </Button>
+        <Button
+          className='flex rounded-md text-[#fe7743] border-[#fe7743] w-[90px]'
+          onClick={() => {
+            clearFilters?.();
+            handleSearch([], confirm, dataIndex);
+          }}
+          size='middle'
+        >
+          {t('MENTOR.RESET')}
+        </Button>
+      </Space>
+    </div>
+  );
+
+  const getColumnSearchProps = (dataIndex: DataIndex): ColumnType<MentorColumns> => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) =>
+      getInputFilterDropdown(setSelectedKeys, selectedKeys, confirm, clearFilters, dataIndex),
     filterIcon: (filtered: boolean) => (
       <SearchOutlined className={`text-[20px] ${filtered ? 'text-[#1890ff]' : ''}`} />
     ),
@@ -200,10 +285,8 @@ const MentorTable = () => {
         );
       },
       width: 280,
-      filters: [
-        { text: t('MENTOR.ACTIVE'), value: 'true' },
-        { text: t('MENTOR.INACTIVE'), value: 'false' },
-      ],
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) =>
+        getStatusFilterDropdown(setSelectedKeys, selectedKeys, confirm, clearFilters, 'isActive'),
       onFilter: (value, record) => String(record.isActive) === value,
     },
     {
