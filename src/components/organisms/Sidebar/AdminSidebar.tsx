@@ -7,7 +7,7 @@ import {
   BankOutlined,
 } from '@ant-design/icons';
 import { Menu, Button, Image, Layout } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +21,8 @@ const { Sider } = Layout;
 const AdminSidebar: React.FC = () => {
   const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState('dashboard');
+
   const navigate = useNavigate();
 
   const menuItems: MenuProps['items'] = [
@@ -51,6 +53,13 @@ const AdminSidebar: React.FC = () => {
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') handleToggleCollapse();
   };
+
+  useEffect(() => {
+    const pathName = location.pathname.replace('/', '');
+    if (pathName) {
+      setSelectedMenu(pathName);
+    }
+  }, [location.pathname]);
 
   return (
     <Sider
@@ -88,9 +97,13 @@ const AdminSidebar: React.FC = () => {
       <Menu
         theme='light'
         mode='inline'
-        defaultSelectedKeys={['dashboard']}
+        defaultSelectedKeys={[selectedMenu]}
+        selectedKeys={[selectedMenu]}
         items={menuItems}
-        onClick={({ key }) => navigate(`/${key}`)}
+        onClick={({ key }) => {
+          setSelectedMenu(key);
+          navigate(`/${key}`);
+        }}
         className='admin-sidebar-menu'
       />
     </Sider>

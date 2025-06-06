@@ -81,6 +81,11 @@
     "SUB_TITLE": "Xin lỗi, bạn không có quyền truy cập vào trang này.",
     "BACK_HOME": "Quay lại"
   },
+  "DEVELOPING": {
+    "TITLE": "500",
+    "SUB_TITLE": "Xin lỗi, trang này đang phát triển.",
+    "BACK_HOME": "Quay lại"
+  },
   "BREADCRUMB": {
     "USERS": "Danh sách học viên",
     "USER_DETAIL": "Chi tiết thông tin học viên",

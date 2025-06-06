@@ -9,11 +9,7 @@ import './PrivateLayout.scss';
 const { Content } = Layout;
 
 const PrivateLayout: FC = () => {
-  const { isLoading } = useGetProfile();
-  if (isLoading) {
-    return <Spin />;
-  }
-
+  useGetProfile();
   return (
     <Layout>
       <Content className='content'>

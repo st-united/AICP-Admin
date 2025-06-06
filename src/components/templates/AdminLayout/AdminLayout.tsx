@@ -7,6 +7,7 @@ import AdminBreadcrumbs, {
 } from '@app/components/molecules/Breadcrumb/AdminBreadcrumb';
 import Header from '@app/components/organisms/Header/Header';
 import AdminSidebar from '@app/components/organisms/Sidebar/AdminSidebar';
+const { Content } = Layout;
 
 const AdminLayout: React.FC = () => {
   const { t } = useTranslation();
@@ -36,14 +37,13 @@ const AdminLayout: React.FC = () => {
   });
 
   return (
-    <Layout id='admin-layout'>
+    <Layout id='admin-layout min-h-screen'>
       <AdminSidebar />
       <Layout className='bg-transparent'>
         <Header />
-        <div className='flex items-center justify-start pl-5'>
-          <AdminBreadcrumbs items={breadcrumbItems} />
-        </div>
-        <Outlet />
+        <Content className='p-4 overflow-auto'>
+          <Outlet />
+        </Content>
       </Layout>
     </Layout>
   );
