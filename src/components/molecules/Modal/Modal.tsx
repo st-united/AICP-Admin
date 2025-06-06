@@ -1,4 +1,4 @@
-import { Modal, Button, ModalProps } from 'antd';
+import { Modal, ModalProps } from 'antd';
 import { FC } from 'react';
 import './Modal.scss';
 
@@ -6,7 +6,7 @@ export const ModalComponent: FC<ModalProps> = ({ ...props }) => {
   const { open, onOk, onCancel, children, closeIcon, cancelText, okText, confirmLoading } = props;
   return (
     <Modal
-      className='!w-[574px]'
+      className='w-[36rem] px-4'
       open={open}
       onOk={onOk}
       onCancel={onCancel}

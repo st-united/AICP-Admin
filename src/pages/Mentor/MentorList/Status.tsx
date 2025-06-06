@@ -70,7 +70,7 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
         <div className='text-center mb-6'>
           <div className='flex justify-center items-center'>
             <div
-              className={`h-[98px] w-[98px] flex justify-center items-center rounded-full bg-red-500 bg-opacity-10`}
+              className={`h-[6rem] w-[6rem] flex justify-center items-center rounded-full bg-red-500 bg-opacity-10`}
             >
               <div
                 className={`flex items-center justify-center w-20 h-20 rounded-full bg-red-500 bg-opacity-20`}
