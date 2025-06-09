@@ -10,6 +10,8 @@ import {
   getMentorsApi,
   getMentorStatsApi,
   updateMentorApi,
+  activateMentorAccountApi,
+  deactivateMentorAccountApi,
 } from '@app/services';
 import {
   openNotificationWithIcon,
@@ -29,12 +31,7 @@ export const useGetMentor = (params: GetMentorsParams) => {
     ],
     async () => {
       const { data } = await getMentorsApi(params);
-
       return data;
-    },
-    {
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
     },
   );
 };
@@ -75,6 +72,21 @@ export const useGetMenteesMentor = (mentorId: string, enabled = true) => {
   );
 };
 
+export const useActivateMentorAccount = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (id: number) => {
+      const response = await activateMentorAccountApi(id);
+      return response;
+    },
+    {
+      onSuccess: async () => {
+        await queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+      },
+    },
+  );
+};
+
 export const useCreateMentor = () => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -89,6 +101,21 @@ export const useCreateMentor = () => {
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
+};
+
+export const useDeactivateMentorAccount = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (id: number) => {
+      const response = await deactivateMentorAccountApi(id);
+      return response;
+    },
+    {
+      onSuccess: async (data) => {
+        await queryClient.refetchQueries([QUERY_KEY.MENTOR]);
       },
     },
   );
