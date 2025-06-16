@@ -48,7 +48,7 @@
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "SAVE": "Lưu",
     "BACK": "Quay lại",
-    "UPDATE": "Cập nhật",
+    "UPDATE": "Lưu",
     "CREATE": "Tạo mới",
     "DELETE": "Xóa",
     "CANCEL": "Hủy bỏ",
@@ -189,6 +189,7 @@
     "IMPORT_VEHICLE": "Import xe"
   },
   "VALIDATE": {
+    "MIN_AGE": "Bạn chưa đủ 18 tuổi",
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
     "MAX": " {{field}} phải bé hơn hoặc bằng {{number}}",
     "MAX_NUMBER": " {{field}} phải bé hơn {{number}}",
@@ -224,7 +225,7 @@
     "DATE_OF_BIRTH_MAX": "Ngày sinh không được lớn hơn ngày hiện tại",
     "DATE_OF_BIRTH_MIN": "Ngày sinh không được nhỏ hơn ngày 01/01/1900",
     "FILE_MAX_SIZE": "Dung lượng file {{type}} tối đa là {{max}}Kb",
-    "OVER_AGE": "Bạn phải đủ 18 tuổi"
+    "OVER_AGE": "Bạn không đủ 18 tuổi"
   },
   "PLACEHOLDER": {
     "FIELD_REQUIRED": "{{field}} *"

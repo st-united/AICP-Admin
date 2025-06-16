@@ -1,4 +1,4 @@
-import { subYears } from 'date-fns';
+import { differenceInYears } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
@@ -40,11 +40,15 @@ export const useMentorSchema = () => {
       .date()
       .nullable()
       .max(
-        subYears(new Date(), 18),
-        t('VALIDATE.OVER_AGE', {
-          field: t('PROFILE.DOB'),
-          age: 18,
+        new Date(),
+        t('VALIDATE.AFTER', {
+          fieldFirst: t('PROFILE.DOB'),
+          fieldSecond: t('PROFILE.CURRENT_DATE'),
         }) as string,
-      ),
+      )
+      .test('is-18', t('VALIDATE.OVER_AGE', { age: 18 }) as string, function (value) {
+        if (!value) return true; // nullable: true, không có giá trị thì bỏ qua
+        return differenceInYears(new Date(), value) >= 18;
+      }),
   });
 };
