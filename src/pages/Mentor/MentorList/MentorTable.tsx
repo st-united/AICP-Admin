@@ -162,29 +162,34 @@ const MentorTable = () => {
         const isEnabled = !!record.upcomingCount;
         return (
           <div className='grid grid-cols-[70%_30%] w-full gap-3'>
-            <Status
-              id={record.id}
-              isActive={value} />
-            <div className='flex items-center justify-start'>
-              <Tooltip
-                className='calendar-tooltip'
-                title={t('MENTOR.INTERVIEW_TOOLTIP')}
-                placement='top'
-                color='black'
-                overlayClassName='custom-tooltip'
-              >
-                <Badge className='custom-badge' count={record.upcomingCount} showZero size='small'>
-                  <CalendarOutlined
-                    className='cursor-pointer hover:!text-sky-700 text-[26px] text-[#08c]'
-                    onClick={() => {
-                      if (isEnabled) {
-                        setExpandedRowKeys(isExpanded ? [] : [record.id]);
-                      }
-                    }}
-                  />
-                </Badge>
-              </Tooltip>
-            </div>
+            <Status id={record.id} isActive={value} />
+            {record.isActive === true && (
+              <div className='flex items-center justify-start'>
+                <Tooltip
+                  className='calendar-tooltip'
+                  title={t('MENTOR.INTERVIEW_TOOLTIP')}
+                  placement='top'
+                  color='black'
+                  overlayClassName='custom-tooltip'
+                >
+                  <Badge
+                    className='custom-badge'
+                    count={record.upcomingCount}
+                    showZero
+                    size='small'
+                  >
+                    <CalendarOutlined
+                      className='cursor-pointer hover:!text-sky-700 text-[26px] text-[#08c]'
+                      onClick={() => {
+                        if (isEnabled) {
+                          setExpandedRowKeys(isExpanded ? [] : [record.id]);
+                        }
+                      }}
+                    />
+                  </Badge>
+                </Tooltip>
+              </div>
+            )}
           </div>
         );
       },
