@@ -51,7 +51,7 @@
     "UPDATE": "Cập nhật",
     "CREATE": "Tạo mới",
     "DELETE": "Xóa",
-    "CANCEL": "Hủy",
+    "CANCEL": "Hủy bỏ",
     "OK": "Đồng ý",
     "RESET": "Làm mới",
     "EXPAND": "Mở rộng",
@@ -223,7 +223,8 @@
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
     "DATE_OF_BIRTH_MAX": "Ngày sinh không được lớn hơn ngày hiện tại",
     "DATE_OF_BIRTH_MIN": "Ngày sinh không được nhỏ hơn ngày 01/01/1900",
-    "FILE_MAX_SIZE": "Dung lượng file {{type}} tối đa là {{max}}Kb"
+    "FILE_MAX_SIZE": "Dung lượng file {{type}} tối đa là {{max}}Kb",
+    "OVER_AGE": "Bạn phải đủ 18 tuổi"
   },
   "PLACEHOLDER": {
     "FIELD_REQUIRED": "{{field}} *"
