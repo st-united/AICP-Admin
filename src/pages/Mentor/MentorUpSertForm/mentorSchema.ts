@@ -1,3 +1,4 @@
+import { differenceInYears } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
@@ -41,9 +42,13 @@ export const useMentorSchema = () => {
       .max(
         new Date(),
         t('VALIDATE.AFTER', {
-          fieldFirst: t('PROFILE.DOB'),
-          fieldSecond: t('PROFILE.CURRENT_DATE'),
+          fieldFirst: t('PROFILE.DOB') as string,
+          fieldSecond: t('PROFILE.CURRENT_DATE') as string,
         }) as string,
-      ),
+      )
+      .test('is-18', t('VALIDATE.MIN_AGE', { age: 18 }) as string, function (value) {
+        if (!value) return true; // nullable: true, không có giá trị thì bỏ qua
+        return differenceInYears(new Date(), value) >= 18;
+      }),
   });
 };

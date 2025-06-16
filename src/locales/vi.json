@@ -161,6 +161,7 @@
     "IMPORT_VEHICLE": "Import xe"
   },
   "VALIDATE": {
+    "MIN_AGE": "Bạn chưa đủ 18 tuổi",
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
     "MAX": " {{field}} phải bé hơn hoặc bằng {{number}}",
     "MAX_NUMBER": " {{field}} phải bé hơn {{number}}",
