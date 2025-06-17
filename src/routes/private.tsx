@@ -8,6 +8,7 @@ import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { Mentor } from '@app/pages';
+import Developing from '@app/pages/Developing';
 import Profile from '@app/pages/Profile/Profile';
 import UserManagement from '@app/pages/User/UserManagement';
 
@@ -40,14 +41,14 @@ const routes = [
       {
         element: <AdminLayout />,
         children: [
-          { path: 'dashboard', element: <div></div> },
+          { index: true, element: <Developing /> },
+          { path: 'dashboard', element: <Developing /> },
           { path: 'user', element: <UserManagement /> },
           {
             path: 'mentor',
             element: <Mentor />,
           },
-          { path: 'user', element: <div></div> },
-          { path: 'company', element: <div></div> },
+          { path: 'company', element: <Developing /> },
         ],
       },
     ],

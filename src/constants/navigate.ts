@@ -5,7 +5,7 @@ export const NAVIGATE_URL = {
   USER_CREATE: '/users/create',
   PROFILE_UPDATE: '/profile/update',
   CHANGE_PASSWORD: '/profile/change-password',
-  SIGN_IN: '/sign-in',
-  SIGN_OUT: '/sign-out',
+  SIGN_IN: '/login',
+  SIGN_OUT: '/logout',
   PROFILE: '/profile',
 };
