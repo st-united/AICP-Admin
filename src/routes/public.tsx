@@ -1,5 +1,6 @@
 import PublicLayout from '@app/components/templates/PublicLayout';
-import { Mentor } from '@app/pages';
+import { SignIn } from '@app/pages';
+import MentorActivation from '@app/pages/MentorActivation/MentorActivation';
 
 const routes = [
   {
@@ -7,7 +8,11 @@ const routes = [
     children: [
       {
         path: 'login',
-        element: <div className='font-bold bg-[#121212] text-white p-2'>Login Page</div>,
+        element: <SignIn />,
+      },
+      {
+        path: 'mentor-activation/:token',
+        element: <MentorActivation />,
       },
     ],
   },

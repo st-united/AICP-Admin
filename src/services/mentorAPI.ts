@@ -24,3 +24,6 @@ export const activateMentorAccountApi = async (id: number) => {
 export const deactivateMentorAccountApi = async (id: number) => {
   await axios.delete(`${API_URL.MENTOR_DEACTIVATE}/${id}`);
 };
+export const mentorSelfActivationApi = async (token: string) => {
+  await axios.patch(API_URL.ACTIVE_MENTOR_BY_LINK, { token });
+};

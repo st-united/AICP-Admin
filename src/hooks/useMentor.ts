@@ -8,6 +8,7 @@ import {
   getMenTeeFromMentorApi,
   getMentorsApi,
   getMentorStatsApi,
+  mentorSelfActivationApi,
 } from '@app/services';
 
 export const useGetMentor = (params: GetMentorsParams) => {
@@ -89,4 +90,11 @@ export const useDeactivateMentorAccount = () => {
       },
     },
   );
+};
+
+export const useActivateMentorByLink = () => {
+  return useMutation(async (token: string) => {
+    const response = await mentorSelfActivationApi(token);
+    return response;
+  });
 };

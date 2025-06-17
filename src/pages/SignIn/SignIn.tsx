@@ -1,36 +1,79 @@
-import { Col, Row } from 'antd';
-import { FC, lazy, useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
+import { Rule } from 'antd/lib/form';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-import { RootState } from '@app/redux/store';
+import { useSignInSchema } from './signInSchema';
+import { yupSync } from '@app/helpers/yupSync';
+import { useLogin } from '@app/hooks';
+import { Credentials } from '@app/interface/user.interface';
+
 import './SignIn.scss';
 
-const SignInForm = lazy(() => import('./SignInForm'));
+const SignIn = () => {
+  const { mutate: loginUser, isLoading } = useLogin();
+  const { t } = useTranslation();
+  const [form] = Form.useForm();
+  const signInSchema = useSignInSchema();
 
-const SignIn: FC = () => {
-  const navigate = useNavigate();
+  const onFinish = (values: Credentials) => {
+    loginUser(values);
+  };
 
-  const { isAuth } = useSelector((state: RootState) => state.auth);
-  useEffect(() => {
-    if (isAuth) navigate('/');
-  }, [isAuth, navigate]);
-
-  const [previousValue, setPreviousValue] = useState({
-    email: '',
-    password: '',
-  });
-
-  const onInputChange = useCallback((name: string, value: string) => {
-    setPreviousValue((prev) => ({ ...prev, [name]: value }));
-  }, []);
+  const validator = [yupSync(signInSchema)] as unknown as Rule[];
 
   return (
-    <Row className='container-box-login'>
-      <Col xs={24} sm={24} md={12} lg={9} className='login-box'>
-        <SignInForm onInputChange={onInputChange} previousValue={previousValue} />
-      </Col>
-    </Row>
+    <div id='container-sign-in' className='flex justify-center items-center w-[20rem] md:w-[40%]'>
+      <div className='w-full h-full'>
+        <div>
+          <h1 className='text-primary text-[1.5rem] text-center md:text-[2rem] lg:text-[2.5rem] font-bold mb-8'>
+            {t('LOGIN.TEXT')}
+          </h1>
+        </div>
+        <Form form={form} layout='vertical' onFinish={onFinish} className='grid grid-cols-2 gap-4'>
+          <Form.Item className='col-span-2' name='email' rules={validator}>
+            <Input
+              className='!px-6 !py-4 !rounded-md !text-lg'
+              placeholder={t('PLACEHOLDER.FIELD_REQUIRED', { field: t('LOGIN.EMAIL') }) ?? ''}
+            />
+          </Form.Item>
+          <Form.Item className='col-span-2 ' name='password' rules={validator}>
+            <Input.Password
+              className='col-span-2 text-lg !px-6 !py-4 !rounded-md'
+              placeholder={t('PLACEHOLDER.FIELD_REQUIRED', { field: t('LOGIN.PASSWORD') }) ?? ''}
+              iconRender={(visible) =>
+                visible ? (
+                  <EyeOutlined color='#69c0ff' size={24} />
+                ) : (
+                  <EyeInvisibleOutlined color='#69c0ff' size={24} />
+                )
+              }
+            />
+          </Form.Item>
+          <div className='grid col-span-2 justify-end items-center'>
+            <Button className='text-lg cursor-pointer transition-color duration-3000 border-none !outline-none !bg-transparent'>
+              <Link
+                to='/forgot-password'
+                className='!text-primary-bold font-bold underline hover:!text-primary-light'
+              >
+                {t('LOGIN.FORGOT_PASSWORD')}
+              </Link>
+            </Button>
+          </div>
+          <Form.Item className='col-span-2 !mt-2'>
+            <Button
+              type='primary'
+              htmlType='submit'
+              className='w-full h-[3.5rem] !bg-primary-bold text-[1rem] font-bold border-none !outline-none !rounded-md cursor-pointer !transition-colors duration-3000 hover:!text-black'
+              loading={isLoading}
+            >
+              {t('LOGIN.LOGIN')}
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </div>
   );
 };
 

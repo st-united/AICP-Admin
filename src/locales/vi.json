@@ -216,11 +216,16 @@
     "LOGOUT": "Đăng xuất"
   },
   "LOGIN": {
-    "TEXT": "Đăng nhập",
-    "PASSWORD": "Mật khẩu",
+    "LOGIN": "Đăng nhập",
+    "TEXT": "Chào mừng bạn trở lại",
+    "EMAIL": "Email *",
+    "PASSWORD": "Mật khẩu *",
+    "FORGOT_PASSWORD": "Quên mật khẩu?",
+    "REGISTER": "Đăng ký",
+    "BACK_TO_HOME": "Quay về trang chủ",
+    "NOT_HAVE_ACCOUNT": "Bạn chưa có tài khoản?",
     "PASSWORD_INPUT": "Nhập mật khẩu",
-    "EMAIL_INPUT": "Nhập email",
-    "EMAIL": "Email"
+    "EMAIL_INPUT": "Nhập email"
   },
   "ADMIN_SIDEBAR": {
     "DASHBOARD": "Trang chủ",
@@ -260,6 +265,17 @@
     "ACTIVE_ACCOUNT_TITLE": "Kích hoạt tài khoản",
     "DISABLED_ACCOUNT_TITLE": "Vô hiệu hóa tài khoản",
     "ACTIVE_ACCOUNT_DESCRIPTION": "Kích hoạt tài khoản sẽ khôi phục quyền truy cập cho cố vấn. Vui lòng xác nhận nếu bạn thật sự muốn kích hoạt cố vấn này.",
-    "DISABLED_ACCOUNT_DESCRIPTION": "Vô hiệu hóa tài khoản là hành động có thể ảnh hưởng đến quyền truy cập của cố vấn. Vui lòng xác nhận nếu bạn thật sự muốn vô hiệu hóa cố vấn này."
+    "DISABLED_ACCOUNT_DESCRIPTION": "Vô hiệu hóa tài khoản là hành động có thể ảnh hưởng đến quyền truy cập của cố vấn. Vui lòng xác nhận nếu bạn thật sự muốn vô hiệu hóa cố vấn này.",
+    "ACTIVATION": {
+      "WELCOME": "Chào mừng đến với",
+      "DEVPLUS": "DevPlus",
+      "DESCRIPTION": "Nhấn vào nút bên dưới để kích hoạt tài khoản cố vấn và bắt đầu hành trình cùng chúng tôi.",
+      "ACTIVATE_BUTTON": "Kích hoạt tài khoản",
+      "LOADING": "Đang kích hoạt tài khoản của bạn...",
+      "SUCCESS_TITLE": "Kích hoạt tài khoản thành công!",
+      "SUCCESS_SUBTITLE": "Bạn sẽ được chuyển hướng đến trang đăng nhập trong giây lát...",
+      "ERROR_TITLE": "Kích hoạt thất bại",
+      "ERROR_SUBTITLE": "Vui lòng thử lại hoặc liên hệ hỗ trợ. Đang chuyển hướng đến trang đăng nhập..."
+    }
   }
 }
