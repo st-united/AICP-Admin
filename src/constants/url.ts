@@ -74,6 +74,7 @@ export const API_URL = {
   MENTEES_FROM_MENTOR: '/mentors/mentees',
   MENTOR_ACTIVE: '/mentors/activate',
   MENTOR_DEACTIVATE: '/mentors',
+  ACTIVE_MENTOR_BY_LINK: '/mentors/activate-link-account',
 };
 
 export const VEHICLES_URL = '/vehicles';
