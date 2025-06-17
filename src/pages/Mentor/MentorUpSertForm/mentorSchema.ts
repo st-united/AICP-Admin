@@ -46,9 +46,9 @@ export const useMentorSchema = () => {
           fieldSecond: t('PROFILE.CURRENT_DATE'),
         }) as string,
       )
-      .test('is-18', t('VALIDATE.OVER_AGE', { age: 18 }) as string, function (value) {
-        if (!value) return true; // nullable: true, không có giá trị thì bỏ qua
-        return differenceInYears(new Date(), value) >= 18;
+      .test('is-18', t('VALIDATE.OVER_AGE', { age: 15 }) as string, function (value) {
+        if (!value) return true;
+        return differenceInYears(new Date(), value) >= 15;
       }),
   });
 };
