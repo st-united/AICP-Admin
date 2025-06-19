@@ -10,7 +10,7 @@ import {
   BankOutlined,
 } from '@ant-design/icons';
 import { Avatar, Descriptions, Modal, Tag } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -60,7 +60,7 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
 
           <Descriptions.Item label={renderLabel(<CalendarOutlined />, t('USER.DATE_OF_BIRTH'))}>
             {selectedUser.dob
-              ? moment(selectedUser.dob).format(DATE_TIME.DAY_MONTH_YEAR)
+              ? dayjs(selectedUser.dob).format(DATE_TIME.DAY_MONTH_YEAR)
               : t('USER.NO_DATA')}
           </Descriptions.Item>
 
@@ -82,7 +82,7 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
           </Descriptions.Item>
 
           <Descriptions.Item label={renderLabel(<ClockCircleOutlined />, t('USER.CREATED_AT'))}>
-            {moment(selectedUser.createdAt).format(DATE_TIME.DAY_MONTH_YEAR) || t('USER.NO_DATA')}
+            {dayjs(selectedUser.createdAt).format(DATE_TIME.DAY_MONTH_YEAR) || t('USER.NO_DATA')}
           </Descriptions.Item>
 
           <Descriptions.Item label={t('USER.REFERRAL_CODE')}>
