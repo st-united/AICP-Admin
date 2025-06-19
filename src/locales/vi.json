@@ -333,7 +333,18 @@
     "DISABLED_ACCOUNT_DESCRIPTION": "Vô hiệu hóa tài khoản là hành động có thể ảnh hưởng đến quyền truy cập của cố vấn. Vui lòng xác nhận nếu bạn thật sự muốn vô hiệu hóa cố vấn này.",
     "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm",
     "RESET": "Làm mới",
-    "FILTER": "Lọc"
+    "FILTER": "Lọc",
+    "ACTIVATION": {
+      "WELCOME": "Chào mừng đến với",
+      "DEVPLUS": "DevPlus",
+      "DESCRIPTION": "Nhấn vào nút bên dưới để kích hoạt tài khoản cố vấn và bắt đầu hành trình cùng chúng tôi.",
+      "ACTIVATE_BUTTON": "Kích hoạt tài khoản",
+      "LOADING": "Đang kích hoạt tài khoản của bạn...",
+      "SUCCESS_TITLE": "Kích hoạt tài khoản thành công!",
+      "SUCCESS_SUBTITLE": "Bạn sẽ được chuyển hướng đến trang đăng nhập trong giây lát...",
+      "ERROR_TITLE": "Kích hoạt thất bại",
+      "ERROR_SUBTITLE": "Vui lòng thử lại hoặc liên hệ hỗ trợ. Đang chuyển hướng đến trang đăng nhập..."
+    }
   },
   "MENTOR_ACTION": {
     "ADD_NEW": "Thêm mới cố vấn",

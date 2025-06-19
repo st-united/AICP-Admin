@@ -46,14 +46,14 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
 
   return (
     <div>
-      <Button
+      <button
         onClick={() => setIsOpenModal(true)}
         className={`${
-          isActive ? 'bg-[#135200] hover:!bg-[#57bb38]' : 'bg-[#AD2102] hover:!bg-[#e7694c]'
-        } cursor-pointer py-6 rounded-lg text-center text-base font-medium !text-white border-none w-full`}
+          isActive ? 'bg-[#135200]' : 'bg-[#AD2102]'
+        } cursor-pointer px-4 py-2 rounded-lg text-center text-base font-medium text-white w-full`}
       >
         {isActive ? t('STATUS.ACTIVE') : t('STATUS.INACTIVE')}
-      </Button>
+      </button>
       <ModalComponent
         open={isOpenModal}
         cancelText={t<string>('MENTOR.CANCEL')}
@@ -66,7 +66,7 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
         <div className='text-center mb-6'>
           <div className='flex justify-center items-center'>
             <div
-              className={`h-[6rem] w-[6rem] flex justify-center items-center rounded-full bg-red-500 bg-opacity-10`}
+              className={`h-[98px] w-[98px] flex justify-center items-center rounded-full bg-red-500 bg-opacity-10`}
             >
               <div
                 className={`flex items-center justify-center w-20 h-20 rounded-full bg-red-500 bg-opacity-20`}
