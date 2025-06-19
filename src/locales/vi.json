@@ -204,7 +204,7 @@
     "INVALID": "{{field}} không hợp lệ",
     "FIELD_MIN_VALUE": "{{name}} phải có ít nhất {{number}} giá trị",
     "RULE_PASSWORD": "{{field}} phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt",
-    "AFTER": "{{fieldFirst}} phải lớn hơn {{fieldSecond}}",
+    "AFTER": "{{fieldFirst}} phải bé hơn {{fieldSecond}}",
     "PLACEHOLDER": "Nhập {{name}}",
     "CHOOSE": "Chọn {{name}}",
     "NO_SPECIAL_CHARACTER": "{{field}} không được chứa ký tự đặc biệt và khoảng trống",
