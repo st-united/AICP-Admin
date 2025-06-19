@@ -36,6 +36,7 @@ export const QUERY_KEY = {
   CABINS: 'CABINS',
   PROVINCE: 'PROVINCE',
   MENTOR: 'MENTOR',
+  DOMAIN: 'DOMAIN',
 };
 
 export const REACT_QUERY = {

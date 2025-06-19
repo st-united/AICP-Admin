@@ -76,8 +76,8 @@ export interface AssignPermissionParams {
 
 export interface GetUsersParams extends GetListParams {
   status: boolean | null;
-  province: string | null;
-  job: string | null;
+  province: string[] | null;
+  job: string[] | null;
   startDate: Date | null;
   endDate: Date | null;
 }
