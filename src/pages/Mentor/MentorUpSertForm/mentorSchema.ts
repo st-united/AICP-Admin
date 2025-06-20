@@ -1,4 +1,4 @@
-import { differenceInYears } from 'date-fns';
+import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
@@ -48,7 +48,7 @@ export const useMentorSchema = () => {
       )
       .test('is-18', t('VALIDATE.OVER_AGE', { age: 15 }) as string, function (value) {
         if (!value) return true;
-        return differenceInYears(new Date(), value) >= 15;
+        return dayjs().diff(value, 'year') >= 15;
       }),
   });
 };

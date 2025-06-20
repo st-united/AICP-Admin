@@ -96,8 +96,8 @@ export interface MentorColumns {
   isActive: boolean;
   createdAt: string;
   user: Users;
-  completedCount: string;
-  upcomingCount: string;
+  completedCount: number;
+  upcomingCount: number;
 }
 
 export interface MenteeColumns {
