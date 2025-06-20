@@ -47,7 +47,7 @@ const Status: FC<StatusProps> = ({ id, isActive, disabled }) => {
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => setIsOpenModal(true)}
         className={`${
           isActive ? '!bg-[#135200]' : '!bg-[#AD2102]'
@@ -55,7 +55,7 @@ const Status: FC<StatusProps> = ({ id, isActive, disabled }) => {
         disabled={disabled}
       >
         {isActive ? t('STATUS.ACTIVE') : t('STATUS.INACTIVE')}
-      </button>
+      </Button>
       <ModalComponent
         open={isOpenModal}
         cancelText={t<string>('MENTOR.CANCEL')}
