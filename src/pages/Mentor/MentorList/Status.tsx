@@ -9,9 +9,10 @@ import { useActivateMentorAccount, useDeactivateMentorAccount } from '@app/hooks
 interface StatusProps {
   isActive: boolean;
   id: number;
+  disabled?: boolean;
 }
 
-const Status: FC<StatusProps> = ({ id, isActive }) => {
+const Status: FC<StatusProps> = ({ id, isActive, disabled }) => {
   const { t } = useTranslation();
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const { mutate: handleDeactivateMentorAccount, isLoading: isLoadingDeactive } =
@@ -49,8 +50,9 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
       <button
         onClick={() => setIsOpenModal(true)}
         className={`${
-          isActive ? 'bg-[#135200]' : 'bg-[#AD2102]'
-        } cursor-pointer px-4 py-2 rounded-lg text-center text-base font-medium text-white w-full`}
+          isActive ? '!bg-[#135200]' : '!bg-[#AD2102]'
+        } cursor-pointer px-2 py-2 rounded-2xl text-center text-base font-medium !text-white h-full w-full border-none`}
+        disabled={disabled}
       >
         {isActive ? t('STATUS.ACTIVE') : t('STATUS.INACTIVE')}
       </button>
