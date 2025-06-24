@@ -1,4 +1,5 @@
 import { GetListParams } from './common.interface';
+import { Domain } from './domain.interface';
 
 export interface UserColumns {
   id?: number;
@@ -7,7 +8,7 @@ export interface UserColumns {
   phoneNumber: string;
   dob: Date;
   province: string;
-  job: string;
+  job: Domain[];
   status: boolean;
   createdAt: Date;
   updatedAt?: Date;

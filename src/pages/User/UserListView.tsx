@@ -11,6 +11,7 @@ import { DATE_TIME } from '@app/constants';
 import { useGetDomainNames, useGetUsers } from '@app/hooks';
 import { useGetProvince } from '@app/hooks/useLocation';
 import { GetListParams } from '@app/interface/common.interface';
+import { Domain } from '@app/interface/domain.interface';
 import { GetUsersParams, UserColumns } from '@app/interface/user.interface';
 import type { InputRef } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
@@ -195,7 +196,7 @@ const UserTable: React.FC = () => {
         title: t('USER.PROVINCE'),
         dataIndex: 'province',
         key: 'province',
-        width: 150,
+        width: 180,
         render: (province: string) => province || '',
         filterDropdown: () => (
           <div className='p-2'>
@@ -241,8 +242,8 @@ const UserTable: React.FC = () => {
         title: t('USER.JOB'),
         dataIndex: 'job',
         key: 'job',
-        width: 160,
-        render: (job: string) => job || '',
+        width: 320,
+        render: (job: Domain[]) => job.map((item) => item.name).join(', ') || '',
         filterDropdown: () => (
           <div className='p-2'>
             <Select
