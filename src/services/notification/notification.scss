@@ -3,6 +3,11 @@
   width: fit-content;
   padding: 10px;
 }
+
+.ant-notification-notice-wrapper {
+  box-shadow: none !important;
+}
+
 .notification-success {
   background-color: #00c07e;
 }
