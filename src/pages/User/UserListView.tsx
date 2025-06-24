@@ -8,9 +8,10 @@ import { useDebounce } from 'use-debounce';
 import UserDetailModal from './UserDetailModal';
 import { Table } from '@app/components/atoms';
 import { DATE_TIME } from '@app/constants';
-import { useGetUsers } from '@app/hooks';
+import { useGetDomainNames, useGetUsers } from '@app/hooks';
 import { useGetProvince } from '@app/hooks/useLocation';
 import { GetListParams } from '@app/interface/common.interface';
+import { Domain } from '@app/interface/domain.interface';
 import { GetUsersParams, UserColumns } from '@app/interface/user.interface';
 import type { InputRef } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
@@ -37,7 +38,7 @@ interface ModalState {
 
 const UserTable: React.FC = () => {
   const { t } = useTranslation();
-
+  const { data: domainNames } = useGetDomainNames();
   const searchInput = useRef<InputRef>(null);
 
   const [filters, setFilters] = useState<FilterState>({
@@ -56,8 +57,6 @@ const UserTable: React.FC = () => {
   });
 
   const [onlyStatus] = filters.statusFilter;
-  const [onlyProvince] = filters.provinceFilter;
-  const [onlyJob] = filters.jobFilter;
   const [startDate, endDate] = filters.dateFilter || [];
 
   const apiParams: GetUsersParams = {
@@ -65,8 +64,8 @@ const UserTable: React.FC = () => {
     page: filters.pagination.page,
     take: filters.pagination.take,
     status: filters.statusFilter.length === 1 ? onlyStatus : null,
-    province: filters.provinceFilter.length === 1 ? onlyProvince : null,
-    job: filters.jobFilter.length === 1 ? onlyJob : null,
+    province: filters.provinceFilter.length > 0 ? filters.provinceFilter : null,
+    job: filters.jobFilter.length > 0 ? filters.jobFilter : null,
     startDate: startDate ? new Date(startDate.format(DATE_TIME.YEAR_MONTH_DATE)) : null,
     endDate: endDate ? new Date(endDate.format(DATE_TIME.YEAR_MONTH_DATE)) : null,
   };
@@ -183,6 +182,7 @@ const UserTable: React.FC = () => {
       {
         title: t('USER.PHONE'),
         dataIndex: 'phoneNumber',
+        width: 150,
         key: 'phoneNumber',
       },
       {
@@ -196,7 +196,8 @@ const UserTable: React.FC = () => {
         title: t('USER.PROVINCE'),
         dataIndex: 'province',
         key: 'province',
-        render: (province: string) => province || t('USER.NO_DATA'),
+        width: 180,
+        render: (province: string) => province || '',
         filterDropdown: () => (
           <div className='p-2'>
             <Select
@@ -241,7 +242,8 @@ const UserTable: React.FC = () => {
         title: t('USER.JOB'),
         dataIndex: 'job',
         key: 'job',
-        render: (job: string) => job || t('USER.NO_DATA'),
+        width: 320,
+        render: (job: Domain[]) => job.map((item) => item.name).join(', ') || '',
         filterDropdown: () => (
           <div className='p-2'>
             <Select
@@ -252,8 +254,11 @@ const UserTable: React.FC = () => {
               className='w-52 mb-2 block'
               allowClear
             >
-              <Option value={t('USER.JOB_WORKING')}>{t('USER.JOB_WORKING')}</Option>
-              <Option value={t('USER.JOB_STUDENT')}>{t('USER.JOB_STUDENT')}</Option>
+              {domainNames?.map((domain) => (
+                <Option key={domain.id} value={domain.id}>
+                  {domain.name}
+                </Option>
+              ))}
             </Select>
             <Button size='small' onClick={() => updateFilter('jobFilter', [])}>
               {t('USER.RESET_FILTER')}
