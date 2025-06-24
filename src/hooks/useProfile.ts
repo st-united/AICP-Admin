@@ -1,7 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { useLogout } from './useAuth';
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
 import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
@@ -12,38 +14,48 @@ import {
   updateProfileApi,
   uploadAvatarApi,
 } from '@app/services';
+import {
+  NotificationTypeEnum,
+  openNotificationWithIcon,
+} from '@app/services/notification/notificationService';
 
 export const useGetProfile = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const logout = useLogout();
 
-  return useQuery(
-    [QUERY_KEY.PROFILE],
-    async () => {
+  return useQuery({
+    queryKey: [QUERY_KEY.PROFILE],
+    queryFn: async () => {
       const { data } = await getProfileApi();
       return data.data;
     },
-    {
-      onSuccess(data) {
-        dispatch(setAuth(data));
-      },
+
+    onSuccess: (data: UserProfile) => {
+      const role = data.roles?.[0]?.name || '';
+      if (role === 'user') {
+        logout.mutate();
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, t<string>('VALIDATE.INVALID_USER'));
+      }
+      dispatch(setAuth(data));
     },
-  );
+  });
 };
 
 export const useChangePassword = () => {
   const navigate = useNavigate();
-
   return useMutation(
     async (password: ChangePassword) => {
       const response = await changePassword(password);
       return response.data;
     },
     {
-      onSuccess({ message }) {
-        navigate(NAVIGATE_URL.PROFILE);
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        navigate(NAVIGATE_URL.SIGN_IN);
       },
       onError({ response }) {
-        console.log(response);
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
       },
     },
   );

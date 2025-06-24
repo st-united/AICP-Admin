@@ -33,6 +33,12 @@ export interface UserProfile {
   identityId: string;
   avatarUrl: string;
   permissions: string[];
+  roles?: Role[];
+}
+
+export interface Role {
+  id: number;
+  name: string;
 }
 
 export interface UserDetail {

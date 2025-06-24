@@ -225,7 +225,14 @@
     "DATE_OF_BIRTH_MAX": "Ngày sinh không được lớn hơn ngày hiện tại",
     "DATE_OF_BIRTH_MIN": "Ngày sinh không được nhỏ hơn ngày 01/01/1900",
     "FILE_MAX_SIZE": "Dung lượng file {{type}} tối đa là {{max}}Kb",
-    "OVER_AGE": "Bạn không đủ 15 tuổi"
+    "OVER_AGE": "Bạn không đủ 15 tuổi",
+    "EMAIL_INVALID": "Email không đúng định dạng!",
+    "PASSWORD_REQUIRED": "Vui lòng nhập mật khẩu!",
+    "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
+    "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
+    "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
+    "INVALID_USER": "Tài khoản của bạn không được phép đăng nhập tại trang này!"
   },
   "PLACEHOLDER": {
     "FIELD_REQUIRED": "{{field}} *",
@@ -255,7 +262,12 @@
     "EDIT_PROFILE_BTN": "Chỉnh sửa",
     "CANCEL_EDIT_PROFILE_BTN": "Hủy bỏ",
     "SAVE_PROFILE_BTN": "Lưu thay đổi",
-    "LOGOUT": "Đăng xuất"
+    "LOGOUT": "Đăng xuất",
+    "PLACEHOLDER_OLD_PASSWORD": "Nhập mật khẩu cũ",
+    "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
+    "PASSWORD_REQUIREMENT": "Mật khẩu trong khoảng 8-50 ký tự",
+    "PASSWORD_COMPLEXITY": "Mật khẩu bắt buộc phải bao gồm ít nhất 01 chữ viết thường, 01 chữ viết hoa và 01 chữ số",
+    "SAVE": "Lưu"
   },
   "LOGIN": {
     "LOGIN": "Đăng nhập",
