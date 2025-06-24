@@ -48,7 +48,7 @@ export const useMentorSchema = () => {
       )
       .test('is-18', t('VALIDATE.OVER_AGE', { age: 15 }) as string, function (value) {
         if (!value) return true;
-        return dayjs(new Date()).diff(dayjs(value), 'year') >= 15;
+        return dayjs().diff(value, 'year') >= 15;
       }),
   });
 };
