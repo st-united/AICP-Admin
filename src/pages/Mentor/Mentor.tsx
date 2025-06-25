@@ -43,7 +43,8 @@ const Mentor = () => {
             {t('MENTOR.EXPORT')}
           </Button>
           <Button
-            className='flex items-center justify-center rounded-lg shadow-custom border-none text-lg px-6 py-5 text-white font-bold bg-[#FE7743] hover:text-orange-500 active:bg-orange-500 focus:text-orange-500 focus:shadow-lg focus:border-orange-500 focus:border-2'
+            className='flex items-center justify-center rounded-lg shadow-custom border-none text-white text-lg font-bold 
+             px-6 py-5 bg-[#FE7743] hover:bg-orange-500 active:bg-orange-600 focus:outline-none'
             onClick={showMentorUpSertModal}
           >
             {t('MENTOR.ADD')}

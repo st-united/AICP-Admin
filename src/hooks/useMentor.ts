@@ -12,6 +12,7 @@ import {
   updateMentorApi,
   activateMentorAccountApi,
   deactivateMentorAccountApi,
+  mentorSelfActivationApi,
 } from '@app/services';
 import {
   openNotificationWithIcon,
@@ -139,4 +140,10 @@ export const useUpdateMentor = () => {
       },
     },
   );
+};
+export const useActivateMentorByLink = () => {
+  return useMutation(async (token: string) => {
+    const response = await mentorSelfActivationApi(token);
+    return response;
+  });
 };

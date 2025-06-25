@@ -48,10 +48,10 @@
     "CHANGE_PASSWORD": "Đổi mật khẩu",
     "SAVE": "Lưu",
     "BACK": "Quay lại",
-    "UPDATE": "Cập nhật",
+    "UPDATE": "Lưu",
     "CREATE": "Tạo mới",
     "DELETE": "Xóa",
-    "CANCEL": "Hủy",
+    "CANCEL": "Hủy bỏ",
     "OK": "Đồng ý",
     "RESET": "Làm mới",
     "EXPAND": "Mở rộng",
@@ -121,8 +121,8 @@
     "PASSWORD": "Mật khẩu",
     "CHOOSE_ROLE": "vai trò",
     "TOTAL": "Tổng cộng",
-    "ACTIVE": "Đang hoạt động",
-    "INACTIVE": "Không hoạt động",
+    "ACTIVE": "Đã kích hoạt",
+    "INACTIVE": "Chưa kích hoạt",
     "LIST": "Danh sách người dùng",
     "EXPORT": "Xuất danh sách",
     "PROVINCE": "Tỉnh thành",
@@ -189,6 +189,7 @@
     "IMPORT_VEHICLE": "Import xe"
   },
   "VALIDATE": {
+    "MIN_AGE": "Bạn chưa đủ 18 tuổi",
     "MIN": " {{field}} phải lớn hơn hoặc bằng {{number}}",
     "MAX": " {{field}} phải bé hơn hoặc bằng {{number}}",
     "MAX_NUMBER": " {{field}} phải bé hơn {{number}}",
@@ -203,7 +204,7 @@
     "INVALID": "{{field}} không hợp lệ",
     "FIELD_MIN_VALUE": "{{name}} phải có ít nhất {{number}} giá trị",
     "RULE_PASSWORD": "{{field}} phải có ít nhất 8 ký tự, có số, chữ thường, chữ viết hoa và ký tự đặc biệt",
-    "AFTER": "{{fieldFirst}} phải lớn hơn {{fieldSecond}}",
+    "AFTER": "{{fieldFirst}} phải bé hơn {{fieldSecond}}",
     "PLACEHOLDER": "Nhập {{name}}",
     "CHOOSE": "Chọn {{name}}",
     "NO_SPECIAL_CHARACTER": "{{field}} không được chứa ký tự đặc biệt và khoảng trống",
@@ -223,10 +224,12 @@
     "DUPLICATE_POSITION": "Vị trí bắt đầu và vị trí kết thúc không được trùng nhau",
     "DATE_OF_BIRTH_MAX": "Ngày sinh không được lớn hơn ngày hiện tại",
     "DATE_OF_BIRTH_MIN": "Ngày sinh không được nhỏ hơn ngày 01/01/1900",
-    "FILE_MAX_SIZE": "Dung lượng file {{type}} tối đa là {{max}}Kb"
+    "FILE_MAX_SIZE": "Dung lượng file {{type}} tối đa là {{max}}Kb",
+    "OVER_AGE": "Bạn không đủ 15 tuổi"
   },
   "PLACEHOLDER": {
-    "FIELD_REQUIRED": "{{field}} *"
+    "FIELD_REQUIRED": "{{field}} *",
+    "OVER_AGE": "Bạn chưa đủ 15 tuổi"
   },
   "PROFILE": {
     "AVATAR": "Ảnh đại diện",
@@ -330,7 +333,18 @@
     "DISABLED_ACCOUNT_DESCRIPTION": "Vô hiệu hóa tài khoản là hành động có thể ảnh hưởng đến quyền truy cập của cố vấn. Vui lòng xác nhận nếu bạn thật sự muốn vô hiệu hóa cố vấn này.",
     "SEARCH_FULLNAME_PLACEHOLDER": "Nhập họ tên để tìm kiếm",
     "RESET": "Làm mới",
-    "FILTER": "Lọc"
+    "FILTER": "Lọc",
+    "ACTIVATION": {
+      "WELCOME": "Chào mừng đến với",
+      "DEVPLUS": "DevPlus",
+      "DESCRIPTION": "Nhấn vào nút bên dưới để kích hoạt tài khoản cố vấn và bắt đầu hành trình cùng chúng tôi.",
+      "ACTIVATE_BUTTON": "Kích hoạt tài khoản",
+      "LOADING": "Đang kích hoạt tài khoản của bạn...",
+      "SUCCESS_TITLE": "Kích hoạt tài khoản thành công!",
+      "SUCCESS_SUBTITLE": "Bạn sẽ được chuyển hướng đến trang đăng nhập trong giây lát...",
+      "ERROR_TITLE": "Kích hoạt thất bại",
+      "ERROR_SUBTITLE": "Vui lòng thử lại hoặc liên hệ hỗ trợ. Đang chuyển hướng đến trang đăng nhập..."
+    }
   },
   "MENTOR_ACTION": {
     "ADD_NEW": "Thêm mới cố vấn",
