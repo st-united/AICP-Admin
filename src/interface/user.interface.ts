@@ -1,4 +1,5 @@
 import { GetListParams } from './common.interface';
+import { Domain } from './domain.interface';
 
 export interface UserColumns {
   id?: number;
@@ -7,7 +8,7 @@ export interface UserColumns {
   phoneNumber: string;
   dob: Date;
   province: string;
-  job: string;
+  job: Domain[];
   status: boolean;
   createdAt: Date;
   updatedAt?: Date;
@@ -25,8 +26,8 @@ export interface Credentials {
 export interface UserProfile {
   fullName: string;
   email: string;
-  phone: string;
-  dateOfBirth: string;
+  phoneNumber: string;
+  dob: string;
   address: string;
   gender: string;
   identityId: string;
@@ -82,8 +83,8 @@ export interface AssignPermissionParams {
 
 export interface GetUsersParams extends GetListParams {
   status: boolean | null;
-  province: string | null;
-  job: string | null;
+  province: string[] | null;
+  job: string[] | null;
   startDate: Date | null;
   endDate: Date | null;
 }
@@ -102,8 +103,8 @@ export interface MentorColumns {
   isActive: boolean;
   createdAt: string;
   user: Users;
-  completedCount: string;
-  upcomingCount: string;
+  completedCount: number;
+  upcomingCount: number;
 }
 
 export interface MenteeColumns {
