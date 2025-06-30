@@ -26,8 +26,8 @@ export interface Credentials {
 export interface UserProfile {
   fullName: string;
   email: string;
-  phone: string;
-  dateOfBirth: string;
+  phoneNumber: string;
+  dob: string;
   address: string;
   gender: string;
   identityId: string;
