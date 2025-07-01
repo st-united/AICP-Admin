@@ -36,7 +36,7 @@ const Profile = () => {
     uploadAvatar(values);
     setIsEdit(false);
   };
-  if (isLoading) return null;
+  if (isLoading || !data) return null;
   return (
     <div className='relative rounded-2xl bg-white shadow-md min-h-full'>
       <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl '>
