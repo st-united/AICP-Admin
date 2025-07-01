@@ -1,6 +1,8 @@
 .mentor-modal {
   .ant-modal-content {
     border-radius: 10px;
+    width: 90vw !important;
+    max-width: 800px;
   }
   .ant-form-item-label > label {
     color: #374151;
