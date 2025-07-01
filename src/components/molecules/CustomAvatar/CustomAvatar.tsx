@@ -1,6 +1,7 @@
-import { CameraFilled, UserOutlined } from '@ant-design/icons';
-import { Avatar, Upload } from 'antd';
+import { CameraFilled, LoadingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Upload, UploadFile } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ACCEPTED_IMAGE_TYPES, FILE_TYPE, MAX_IMAGE_FILE_SIZE_KB } from '@app/constants/file';
@@ -13,11 +14,13 @@ import {
 interface Props {
   avatar?: string;
   isEdit?: boolean;
+  isUploading?: boolean;
   onAvatarChange: (formdata: FormData) => void;
 }
 
-const CustomAvartar = ({ avatar, isEdit, onAvatarChange }: Props) => {
+const CustomAvartar = ({ avatar, isEdit, onAvatarChange, isUploading }: Props) => {
   const { t } = useTranslation();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const handleChangeImage = (info: UploadChangeParam) => {
     const file = info.fileList[0]?.originFileObj;
     if (!file) return;
@@ -38,20 +41,27 @@ const CustomAvartar = ({ avatar, isEdit, onAvatarChange }: Props) => {
           ...errorMessageParams,
         }),
       );
+      setFileList([]);
       return;
     }
     const formdata = new FormData();
     formdata.append('avatar', file);
     onAvatarChange(formdata);
+    setFileList([]);
   };
   return (
     <div className='relative'>
-      <Avatar
-        className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
-        src={avatar}
-        icon={<UserOutlined className='md:!text-[180px] !text-[150px]' />}
-      />
-
+      {avatar && !isUploading ? (
+        <Avatar
+          className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
+          src={avatar}
+          icon={<UserOutlined className='md:!text-[150px] !text-[120px]' />}
+        />
+      ) : (
+        <div className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px] !text-black flex items-center justify-center'>
+          <LoadingOutlined className='md:!text-[150px] !text-[100px]' />
+        </div>
+      )}
       {isEdit && (
         <Upload
           key={avatar}
@@ -59,6 +69,7 @@ const CustomAvartar = ({ avatar, isEdit, onAvatarChange }: Props) => {
           beforeUpload={() => false}
           onChange={handleChangeImage}
           accept='image/*'
+          fileList={fileList}
         >
           <div className='absolute bottom-0 right-2 cursor-pointer'>
             <div className='flex items-center justify-center bg-[#FF8C5F] rounded-full !p-2'>

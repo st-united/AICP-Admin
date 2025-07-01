@@ -19,7 +19,7 @@ const Profile = () => {
   const { t } = useTranslation();
   const validator = [yupSync(useProfileSchema())] as unknown as Rule[];
   const { mutate: updateProfile } = useUpdateProfile();
-  const { mutate: uploadAvatar } = useUploadAvatar();
+  const { mutate: uploadAvatar, isPending: isUploading } = useUploadAvatar();
 
   const handleCancel = () => {
     setIsEdit(false);
@@ -44,6 +44,7 @@ const Profile = () => {
           <CustomAvartar
             avatar={data?.avatarUrl}
             isEdit={isEdit}
+            isUploading={isUploading}
             onAvatarChange={handleSubmitUploadAvatar}
           />
         </div>
