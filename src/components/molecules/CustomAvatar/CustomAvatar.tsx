@@ -51,7 +51,7 @@ const CustomAvartar = ({ avatar, isEdit, onAvatarChange, isUploading }: Props) =
   };
   return (
     <div className='relative'>
-      {avatar && !isUploading ? (
+      {!isUploading ? (
         <Avatar
           className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
           src={avatar}
