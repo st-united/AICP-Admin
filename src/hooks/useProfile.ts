@@ -23,7 +23,7 @@ export const useGetProfile = () => {
       return data.data;
     },
     {
-      onSuccess(data) {
+      onSuccess: (data: UserProfile) => {
         dispatch(setAuth(data));
       },
     },
