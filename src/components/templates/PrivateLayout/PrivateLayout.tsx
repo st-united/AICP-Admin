@@ -11,17 +11,19 @@ const { Content } = Layout;
 const PrivateLayout: FC = () => {
   useGetProfile();
   return (
-    <Layout>
-      <Content className='content'>
-        <Suspense fallback={<Spin />}>
-          <ProtectedRoute>
-            <Col className='outlet-layout'>
-              <Outlet />
-            </Col>
-          </ProtectedRoute>
-        </Suspense>
-      </Content>
-    </Layout>
+    <div className='private-layout'>
+      <Layout>
+        <Content>
+          <Suspense fallback={<Spin />}>
+            <ProtectedRoute>
+              <div className='h-full'>
+                <Outlet />
+              </div>
+            </ProtectedRoute>
+          </Suspense>
+        </Content>
+      </Layout>
+    </div>
   );
 };
 
