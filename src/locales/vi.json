@@ -231,6 +231,7 @@
     "PASSWORD_MIN": "Mật khẩu phải có ít nhất 8 ký tự",
     "PASSWORD_MAX": "Mật khẩu không được vượt quá 50 ký tự",
     "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường và một số",
+    "NEW_PASSWORD_DIFFERENT": "Mật khẩu mới phải khác mật khẩu cũ",
     "CONFIRM_PASSWORD_REQUIRED": "Vui lòng nhập lại mật khẩu!",
     "INVALID_USER": "Tài khoản của bạn không được phép đăng nhập tại trang này!"
   },
