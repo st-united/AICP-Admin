@@ -7,7 +7,6 @@
 
     li:first-child {
       &::after {
-        content: '|';
         margin: 0 14px;
       }
 
