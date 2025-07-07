@@ -6,6 +6,7 @@ import AdminBreadcrumbs, {
   BreadcrumbItem,
 } from '@app/components/molecules/Breadcrumb/AdminBreadcrumb';
 import Header from '@app/components/organisms/Header/Header';
+import ProfileAvatar from '@app/components/organisms/Header/ProfileAvatar';
 import AdminSidebar from '@app/components/organisms/Sidebar/AdminSidebar';
 
 const AdminLayout: React.FC = () => {
@@ -39,7 +40,9 @@ const AdminLayout: React.FC = () => {
     <Layout id='admin-layout'>
       <AdminSidebar />
       <Layout className='bg-transparent'>
-        <Header />
+        <Layout.Header className='flex items-center justify-end w-full !h-[5rem] px-6 bg-white shadow'>
+          <ProfileAvatar />
+        </Layout.Header>
         <div className='flex items-center justify-start pl-5'>
           <AdminBreadcrumbs items={breadcrumbItems} />
         </div>
