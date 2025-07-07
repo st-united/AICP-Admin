@@ -21,10 +21,10 @@ const routes = [
         path: 'reset-password',
         element: <UpdatePassword />,
       },
-      {
-        path: 'mentor-activation/:token',
-        element: <MentorActivation />,
-      },
+      // {
+      //   path: 'mentor-activation/:token',
+      //   element: <MentorActivation />,
+      // },
     ],
   },
 ];

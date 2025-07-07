@@ -1,12 +1,13 @@
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Spin } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
 import { yupSync } from '@app/helpers/yupSync';
-import { useLogin } from '@app/hooks';
+import { useActivateMentorByLink, useLogin } from '@app/hooks';
 import { Credentials } from '@app/interface/user.interface';
 
 import './SignIn.scss';
@@ -16,7 +17,20 @@ const SignIn = () => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const signInSchema = useSignInSchema();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('activateToken');
+  const { mutate: activateMentor, isPending } = useActivateMentorByLink();
 
+  useEffect(() => {
+    if (token) activateMentor(token);
+  }, [token]);
+  if (isPending)
+    return (
+      <div className='w-full h-full flex justify-center items-center'>
+        <Spin />
+      </div>
+    );
   const onFinish = (values: Credentials) => {
     loginUser(values);
   };
