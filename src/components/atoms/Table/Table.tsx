@@ -20,28 +20,28 @@ interface PaginateOptions {
   pageCount: number;
 }
 
-type TableProps = {
-  columns: ColumnsType<any>;
-  dataSource: any[];
+type TableProps<T extends Record<string, any>> = {
+  columns: ColumnsType<T>;
+  dataSource: T[];
   loading?: boolean;
   onChange?: (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
-    sorter: SorterResult<any> | SorterResult<any>[],
-    extra: TableCurrentDataSource<any>,
+    sorter: SorterResult<T> | SorterResult<T>[],
+    extra: TableCurrentDataSource<T>,
   ) => void;
   paginate?: PaginateOptions;
   disablePaginate?: boolean;
-  summary?: (data: readonly any[]) => ReactNode;
+  summary?: (data: readonly T[]) => ReactNode;
   className?: string;
   hiddenScrollX?: boolean;
-  onRow?: (record: any) => any;
-  expandableRender?: (record: any) => ReactNode;
+  onRow?: (record: T) => any;
+  expandableRender?: (record: T) => ReactNode;
   expandedRowKeys?: React.Key[];
   setExpandedRowKeys?: (keys: React.Key[]) => void;
 };
 
-export const Table: React.FC<TableProps> = ({
+export const Table = <T extends Record<string, any>>({
   loading,
   columns,
   dataSource,
@@ -55,14 +55,14 @@ export const Table: React.FC<TableProps> = ({
   expandableRender,
   expandedRowKeys,
   setExpandedRowKeys,
-}) => {
+}: TableProps<T>) => {
   const { t } = useTranslation();
 
   const handleTableChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
-    sorter: SorterResult<any> | SorterResult<any>[],
-    extra: TableCurrentDataSource<any>,
+    sorter: SorterResult<T> | SorterResult<T>[],
+    extra: TableCurrentDataSource<T>,
   ) => {
     onChange?.(pagination, filters, sorter, extra);
 
@@ -76,12 +76,12 @@ export const Table: React.FC<TableProps> = ({
 
   return (
     <div className={`table-antd shadow-custom rounded-lg ${className}`}>
-      <TableAntd
+      <TableAntd<T>
         onRow={onRow}
         columns={columns}
         dataSource={dataSource}
         loading={loading}
-        rowKey={(record) => record.id}
+        rowKey={(record) => (record as any).id}
         onChange={handleTableChange}
         scroll={{ x: 'max-content', y: 'calc(100vh - 300px)' }}
         showSorterTooltip={false}
@@ -95,12 +95,12 @@ export const Table: React.FC<TableProps> = ({
           expandableRender
             ? {
                 expandedRowRender: (record) => expandableRender(record),
-                rowExpandable: (record) => !record?.user?.upcomingCount,
+                rowExpandable: (record) => !(record as any)?.user?.upcomingCount,
                 expandedRowKeys: expandedRowKeys,
                 onExpand: (expanded, record) => {
                   if (!setExpandedRowKeys) return;
                   if (expanded) {
-                    setExpandedRowKeys([record.id]);
+                    setExpandedRowKeys([(record as any).id]);
                   } else {
                     setExpandedRowKeys([]);
                   }
