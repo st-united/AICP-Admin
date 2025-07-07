@@ -83,7 +83,7 @@ export const Table = <T extends Record<string, any>>({
         loading={loading}
         rowKey={(record) => (record as any).id}
         onChange={handleTableChange}
-        scroll={{ x: 'max-content', y: 'calc(100vh - 300px)' }}
+        scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
         pagination={false}
         locale={{
