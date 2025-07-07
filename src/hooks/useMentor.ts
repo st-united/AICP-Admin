@@ -34,6 +34,7 @@ export const useGetMentor = (params: GetMentorsParams) => {
       const { data } = await getMentorsApi(params);
       return data;
     },
+    { keepPreviousData: true },
   );
 };
 

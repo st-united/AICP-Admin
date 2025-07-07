@@ -15,33 +15,33 @@ export interface PaginateProp {
 
 interface PaginateOptions {
   table: PaginateProp;
-  setTable: (value: any) => void;
+  setTable: (value: PaginateProp) => void;
   total: number;
   pageCount: number;
 }
 
-type TableProps = {
-  columns: ColumnsType<any>;
-  dataSource: [];
+type TableProps<T extends Record<string, any>> = {
+  columns: ColumnsType<T>;
+  dataSource: T[];
   loading?: boolean;
   onChange?: (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
-    sorter: SorterResult<any> | SorterResult<any>[],
-    extra: TableCurrentDataSource<any>,
+    sorter: SorterResult<T> | SorterResult<T>[],
+    extra: TableCurrentDataSource<T>,
   ) => void;
   paginate?: PaginateOptions;
   disablePaginate?: boolean;
-  summary?: (data: readonly any[]) => ReactNode;
+  summary?: (data: readonly T[]) => ReactNode;
   className?: string;
   hiddenScrollX?: boolean;
-  onRow?: (record: any) => any;
-  expandableRender?: (record: any) => ReactNode;
+  onRow?: (record: T) => any;
+  expandableRender?: (record: T) => ReactNode;
   expandedRowKeys?: React.Key[];
   setExpandedRowKeys?: (keys: React.Key[]) => void;
 };
 
-export const Table: React.FC<TableProps> = ({
+export const Table = <T extends Record<string, any>>({
   loading,
   columns,
   dataSource,
@@ -55,38 +55,52 @@ export const Table: React.FC<TableProps> = ({
   expandableRender,
   expandedRowKeys,
   setExpandedRowKeys,
-}) => {
+}: TableProps<T>) => {
   const { t } = useTranslation();
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<T> | SorterResult<T>[],
+    extra: TableCurrentDataSource<T>,
+  ) => {
+    onChange?.(pagination, filters, sorter, extra);
+
+    if (paginate) {
+      paginate.setTable({
+        ...paginate.table,
+        page: 1,
+      });
+    }
+  };
 
   return (
     <div className={`table-antd shadow-custom rounded-lg ${className}`}>
-      <TableAntd
+      <TableAntd<T>
         onRow={onRow}
         columns={columns}
         dataSource={dataSource}
         loading={loading}
-        rowKey={(record) => record.id}
-        onChange={onChange}
+        rowKey={(record) => (record as any).id}
+        onChange={handleTableChange}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
         pagination={false}
         locale={{
           emptyText: <EmptyData />,
         }}
-        className={`${disablePaginate === true ? 'br12' : ''} ${
-          hiddenScrollX ? 'hidden-scroll-x' : ''
-        }`}
+        className={`${disablePaginate ? 'br12' : ''} ${hiddenScrollX ? 'hidden-scroll-x' : ''}`}
         summary={summary}
         expandable={
           expandableRender
             ? {
                 expandedRowRender: (record) => expandableRender(record),
-                rowExpandable: (record) => !record?.user?.upcomingCount,
+                rowExpandable: (record) => !(record as any)?.user?.upcomingCount,
                 expandedRowKeys: expandedRowKeys,
                 onExpand: (expanded, record) => {
                   if (!setExpandedRowKeys) return;
                   if (expanded) {
-                    setExpandedRowKeys([record.id]);
+                    setExpandedRowKeys([(record as any).id]);
                   } else {
                     setExpandedRowKeys([]);
                   }
@@ -97,54 +111,35 @@ export const Table: React.FC<TableProps> = ({
         }
       />
 
-      {disablePaginate === false && (
-        <>
-          {paginate && (
-            <div className='flex gap-2 justify-end items-center py-4 pr-6 shadow-custom rounded-b-lg bg-white'>
-              <Pagination
-                showSizeChanger={false}
-                total={paginate.total}
-                current={paginate.table.page}
-                pageSize={paginate.table.take}
-                onChange={(page: number) => {
-                  paginate.setTable({
-                    ...paginate.table,
-                    page: page,
-                  });
-                }}
-              />
-              <Select
-                defaultValue={paginate && paginate.table.take}
-                onChange={(value: number) => {
-                  paginate &&
-                    paginate.setTable({
-                      ...paginate.table,
-                      take: value,
-                      page: 1,
-                    });
-                }}
-                options={[
-                  {
-                    value: 10,
-                    label: t('TABLE.PER_PAGE', { number: 10 }),
-                  },
-                  {
-                    value: 20,
-                    label: t('TABLE.PER_PAGE', { number: 20 }),
-                  },
-                  {
-                    value: 50,
-                    label: t('TABLE.PER_PAGE', { number: 50 }),
-                  },
-                  {
-                    value: 100,
-                    label: t('TABLE.PER_PAGE', { number: 100 }),
-                  },
-                ]}
-              />
-            </div>
-          )}
-        </>
+      {!disablePaginate && paginate && (
+        <div className='flex gap-2 justify-end items-center py-4 pr-6 shadow-custom rounded-b-lg bg-white'>
+          <Pagination
+            showSizeChanger={false}
+            total={paginate.total}
+            current={paginate.table.page}
+            pageSize={paginate.table.take}
+            onChange={(page: number) => {
+              paginate.setTable({
+                ...paginate.table,
+                page: page,
+              });
+            }}
+          />
+          <Select
+            value={paginate.table.take}
+            onChange={(value: number) => {
+              paginate.setTable({
+                ...paginate.table,
+                take: value,
+                page: 1,
+              });
+            }}
+            options={[10, 20, 50, 100].map((value) => ({
+              value,
+              label: t('TABLE.PER_PAGE', { number: value }),
+            }))}
+          />
+        </div>
       )}
     </div>
   );
