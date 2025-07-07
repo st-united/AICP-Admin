@@ -71,7 +71,7 @@ export const DropProfile: FC = () => {
     >
       <div>
         <Avatar size={40} className='drop-avatar' src={user?.avatar ? user?.avatar : null} />
-        <span className='drop-name'>{user?.name}</span>
+        <span className='drop-name'>{user?.fullName}</span>
         {activeItem === true ? (
           <CaretUpOutlined className='drop-name' />
         ) : (

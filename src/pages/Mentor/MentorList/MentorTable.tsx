@@ -215,7 +215,7 @@ const MentorTable = () => {
         pageCount: mentorData?.meta?.pageCount,
         setTable,
       }}
-      expandableRender={(record) => <ExpandedRow mentorId={record.id} />}
+      expandableRender={(record) => <ExpandedRow mentorId={String(record.id)} />}
       expandedRowKeys={expandedRowKeys}
       setExpandedRowKeys={setExpandedRowKeys}
     />
