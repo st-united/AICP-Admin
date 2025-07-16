@@ -46,6 +46,10 @@ const PasswordChangeForm = () => {
     );
   }, [values]);
 
+  const isAllFieldsFilled = useMemo(() => {
+    return values?.oldPassword && values?.newPassword && values?.confirmPassword;
+  }, [values]);
+
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
   return (
@@ -153,7 +157,7 @@ const PasswordChangeForm = () => {
           <div className='text-sm sm:text-base text-gray-600 mb-6 flex flex-col gap-y-2'>
             <div
               className={`flex items-center gap-2 ${
-                isLengthValid ? 'text-green-500' : 'text-gray-400'
+                isLengthValid ? 'text-green-500' : 'text-[#8B8B8B]'
               }`}
             >
               <CheckOutlined className='text-xl' />
@@ -161,7 +165,7 @@ const PasswordChangeForm = () => {
             </div>
             <div
               className={`flex items-center gap-2 ${
-                isComplexValid ? 'text-green-500' : 'text-gray-400'
+                isComplexValid ? 'text-green-500' : 'text-[#8B8B8B]'
               }`}
             >
               <CheckOutlined className='text-xl' />
@@ -173,7 +177,9 @@ const PasswordChangeForm = () => {
           <Form.Item className='flex justify-center'>
             <Button
               htmlType='submit'
-              className='w-full px-8 sm:px-12 md:px-14 !bg-blue-600 !hover:bg-blue-700 h-12 text-base sm:text-lg rounded-full !text-white font-bold border-none'
+              className={`w-full px-8 sm:px-12 md:px-14 !hover:bg-blue-700 h-12 text-base sm:text-lg rounded-full !text-white font-bold border-none ${
+                isAllFieldsFilled ? '!bg-blue-600' : '!bg-blue-400'
+              }`}
               loading={isLoading}
             >
               {t('PROFILE.SAVE')}
