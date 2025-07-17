@@ -54,15 +54,15 @@ const PasswordChangeForm = () => {
 
   return (
     <div className='flex justify-center w-full h-full' id='change-password-form'>
-      <div className='w-full max-w-full bg-white rounded-2xl p-6 shadow flex flex-col items-center overflow-y-auto'>
+      <div className='w-full max-w-full bg-white rounded-2xl shadow flex flex-col items-center overflow-y-auto'>
         {/* Lock image */}
-        <div className='flex justify-center'>
-          <div className='bg-[#FEF1EC] rounded-full p-4 sm:p-6'>
-            <div className='bg-[#FFE3D8] rounded-full p-3 sm:p-4'>
+        <div className='flex justify-center my-5 sm:mt-4 sm:mb-0'>
+          <div className='bg-[#FEF1EC] rounded-full p-3 sm:p-4'>
+            <div className='bg-[#FFE3D8] rounded-full p-2 sm:p-3'>
               <img
                 src={Lock}
                 alt='Lock Icon'
-                className='w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24'
+                className='w-14 h-1w-14 sm:w-16 sm:h-16 md:w-20 md:h-20'
               />
             </div>
           </div>
@@ -73,13 +73,11 @@ const PasswordChangeForm = () => {
           layout='vertical'
           onFinish={onFinish}
           validateTrigger={['onChange', 'onBlur']}
-          className='w-full md:w-full xl:w-1/2 px-4 sm:px-6 md:px-8 box-border'
+          className='w-full lg:w-2/3 xl:w-1/2 px-5 sm:px-6 md:px-8 box-border space-y-7 sm:space-y-0'
         >
           {/* Old Password */}
           <Form.Item
-            label={
-              <span className='text-sm sm:text-base lg:text-lg'>{t('PROFILE.OLD_PASSWORD')}</span>
-            }
+            label={<span className='text-base lg:text-lg'>{t('PROFILE.OLD_PASSWORD')}</span>}
             name='oldPassword'
             rules={validator}
             required
@@ -93,9 +91,7 @@ const PasswordChangeForm = () => {
 
           {/* Mật khẩu mới */}
           <Form.Item
-            label={
-              <span className='text-sm sm:text-base lg:text-lg'>{t('PROFILE.NEW_PASSWORD')}</span>
-            }
+            label={<span className='text-base lg:text-lg'>{t('PROFILE.NEW_PASSWORD')}</span>}
             name='newPassword'
             rules={[
               ...validator,
@@ -120,11 +116,7 @@ const PasswordChangeForm = () => {
 
           {/* Confirm Password */}
           <Form.Item
-            label={
-              <span className='text-sm sm:text-base lg:text-lg'>
-                {t('PROFILE.CONFIRM_PASSWORD')}
-              </span>
-            }
+            label={<span className='text-base lg:text-lg'>{t('PROFILE.CONFIRM_PASSWORD')}</span>}
             name='confirmPassword'
             dependencies={['newPassword']}
             required
@@ -154,7 +146,7 @@ const PasswordChangeForm = () => {
           </Form.Item>
 
           {/* Password Requirements */}
-          <div className='text-sm sm:text-base text-gray-600 mb-6 flex flex-col gap-y-2'>
+          <div className='text-base text-gray-600 flex flex-col gap-y-2 !mt-4 !mb-2'>
             <div
               className={`flex items-center gap-2 ${
                 isLengthValid ? 'text-green-500' : 'text-[#8B8B8B]'
