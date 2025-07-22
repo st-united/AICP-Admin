@@ -12,6 +12,7 @@ import { Mentor } from '@app/pages';
 import Developing from '@app/pages/Developing';
 import { PasswordChangeForm, Profile } from '@app/pages/Profile';
 import UserManagement from '@app/pages/User/UserManagement';
+import UserDetail from '@app/pages/UserDetail/UserDetail';
 
 const routes = [
   {
@@ -53,7 +54,8 @@ const routes = [
             path: 'mentor',
             element: <Mentor />,
           },
-          { path: 'company', element: <Developing /> },
+          // { path: 'company', element: <Developing /> },
+          { path: 'company', element: <UserDetail /> },
         ],
       },
     ],
