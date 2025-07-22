@@ -9,9 +9,10 @@ import { useActivateMentorAccount, useDeactivateMentorAccount } from '@app/hooks
 interface StatusProps {
   isActive: boolean;
   id: number;
+  disabled?: boolean;
 }
 
-const Status: FC<StatusProps> = ({ id, isActive }) => {
+const Status: FC<StatusProps> = ({ id, isActive, disabled }) => {
   const { t } = useTranslation();
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const { mutate: handleDeactivateMentorAccount, isLoading: isLoadingDeactive } =
@@ -49,8 +50,9 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
       <Button
         onClick={() => setIsOpenModal(true)}
         className={`${
-          isActive ? 'bg-[#135200] hover:!bg-[#57bb38]' : 'bg-[#AD2102] hover:!bg-[#e7694c]'
-        } cursor-pointer py-6 rounded-lg text-center text-base font-medium !text-white border-none w-full`}
+          isActive ? '!bg-[#135200]' : '!bg-[#AD2102]'
+        } cursor-pointer px-2 py-2 rounded-2xl text-center text-base font-medium !text-white h-full w-full border-none`}
+        disabled={disabled}
       >
         {isActive ? t('STATUS.ACTIVE') : t('STATUS.INACTIVE')}
       </Button>
@@ -66,7 +68,7 @@ const Status: FC<StatusProps> = ({ id, isActive }) => {
         <div className='text-center mb-6'>
           <div className='flex justify-center items-center'>
             <div
-              className={`h-[6rem] w-[6rem] flex justify-center items-center rounded-full bg-red-500 bg-opacity-10`}
+              className={`h-[98px] w-[98px] flex justify-center items-center rounded-full bg-red-500 bg-opacity-10`}
             >
               <div
                 className={`flex items-center justify-center w-20 h-20 rounded-full bg-red-500 bg-opacity-20`}

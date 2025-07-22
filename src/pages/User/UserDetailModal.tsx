@@ -46,10 +46,10 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
       open={isVisible}
       onCancel={onClose}
       footer={null}
-      width='65%'
+      width={3000}
     >
       {selectedUser && (
-        <Descriptions bordered column={2} size='middle' className='mt-4'>
+        <Descriptions bordered column={{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }} className='mt-4'>
           <Descriptions.Item label={renderLabel(<MailOutlined />, t('USER.EMAIL'))}>
             {renderValue(selectedUser.email)}
           </Descriptions.Item>
@@ -69,7 +69,7 @@ const UserDetailModal: React.FC<UserDetailModalProps> = ({ isVisible, selectedUs
           </Descriptions.Item>
 
           <Descriptions.Item label={renderLabel(<BankOutlined />, t('USER.JOB'))}>
-            {renderValue(selectedUser.job)}
+            {renderValue(selectedUser.job.map((item) => item.name).join(', ') || '')}
           </Descriptions.Item>
 
           <Descriptions.Item label={t('USER.STATUS')}>

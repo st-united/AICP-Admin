@@ -41,7 +41,7 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
         type='primary'
         onClick={onOk}
         loading={isLoading}
-        className='bg-orange-500 hover:bg-orange-600 hover:shadow-lg border-orange-200 hover:border-orange-300 focus:bg-orange-400 focus:border-orange-400 shadow-md rounded-lg text-lg px-5 py-3 h-fit transition-all duration-200 font-bold'
+        className='bg-[#FE7743] hover:bg-orange-600 hover:shadow-lg border-orange-200 hover:border-orange-300 focus:bg-orange-400 focus:border-orange-400 shadow-md rounded-lg text-lg px-5 py-3 h-fit transition-all duration-200 font-bold'
       >
         {isUpdate ? t('BUTTON.UPDATE') : t('BUTTON.CREATE')}
       </Button>
@@ -63,15 +63,13 @@ const MentorUpSertModal: React.FC<MentorUpSertModalProps> = ({
     <Modal
       open={isOpen}
       onCancel={onCancel}
-      className='mentor-modal !rounded-sm px-2 sm:px-4 !w-full'
+      className='mentor-modal !rounded-sm px-2 sm:px-4 w-full max-w-[800px] mx-auto'
       footer={null}
       closable={false}
+      width='auto'
       destroyOnClose={true}
     >
-      <Space
-        direction='vertical'
-        className='w-full sm:w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] 2xl:w-[40vw] px-6 py-5 max-h-[85vh] overflow-y-auto'
-      >
+      <Space direction='vertical' className='w-full box-border max-h-[85vh] overflow-y-auto'>
         {renderTitle()}
 
         {isUpdate && mentorId ? (
