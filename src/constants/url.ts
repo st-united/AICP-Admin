@@ -1,4 +1,5 @@
 export const API_URL = {
+  EXAM_SETS: '/exam-sets',
   PERMISSION_PARENT: '/permissions/parents',
   PERMISSION_TREE: '/permissions/all',
   PERMISSIONS: '/permissions',

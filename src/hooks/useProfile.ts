@@ -7,6 +7,7 @@ import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
 import {
   changePassword,
+  getAllExamSetApi,
   getProfileApi,
   removeAvatarApi,
   updateProfileApi,
@@ -28,6 +29,15 @@ export const useGetProfile = () => {
       },
     },
   );
+};
+
+export const useGetAllExamSet = () => {
+  const dispatch = useDispatch();
+
+  return useMutation(async () => {
+    const { data } = await getAllExamSetApi();
+    return data;
+  });
 };
 
 export const useChangePassword = () => {

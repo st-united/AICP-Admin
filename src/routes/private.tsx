@@ -7,7 +7,7 @@ const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
 import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
-import { Mentor } from '@app/pages';
+import { Mentor, TestPage } from '@app/pages';
 import Developing from '@app/pages/Developing';
 import Profile from '@app/pages/Profile/Profile';
 import UserManagement from '@app/pages/User/UserManagement';
@@ -49,6 +49,7 @@ const routes = [
             element: <Mentor />,
           },
           { path: 'company', element: <Developing /> },
+          { path: 'test', element: <TestPage /> },
         ],
       },
     ],

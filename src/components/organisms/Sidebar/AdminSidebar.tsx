@@ -42,6 +42,11 @@ const AdminSidebar: React.FC = () => {
       label: t('ADMIN_SIDEBAR.USER'),
     },
     {
+      key: 'test',
+      icon: <BankOutlined />,
+      label: t('ADMIN_SIDEBAR.TEST'),
+    },
+    {
       key: 'company',
       icon: <BankOutlined />,
       label: t('ADMIN_SIDEBAR.COMPANY'),
