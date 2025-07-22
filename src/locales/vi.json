@@ -310,7 +310,8 @@
     "DASHBOARD": "Trang chủ",
     "MENTOR": "Cố vấn",
     "USER": "Người dùng",
-    "COMPANY": "Doanh nghiệp"
+    "COMPANY": "Doanh nghiệp",
+    "TEST": "Bài kiểm tra"
   },
   "ADMIN_BREADCRUMB": {
     "HOME": "Trang chủ"
@@ -371,6 +372,33 @@
       "EMAIL": "Nhập email tại đây",
       "PHONE": "Nhập số điện thoại tại đây",
       "DOB": "Chọn ngày sinh"
+    }
+  },
+  "TEST_LIST": {
+    "BREADCRUMB": {
+      "HOME": "Trang chủ",
+      "TEST": "Bài kiểm tra"
+    },
+    "TITLE": "Danh sách bài kiểm tra",
+    "BUTTON": {
+      "ADD": "Thêm mới",
+      "CREATE": "Tạo bài kiểm tra",
+      "CLEAR_FILTER": "Xóa bộ lọc",
+      "VIEW_DETAILS": "Xem chi tiết"
+    },
+    "INPUT": {
+      "PLACEHOLDER": "Tìm tên bài kiểm tra"
+    },
+    "EMPTY": {
+      "NO_TEST": {
+        "TITLE": "Hiện chưa có bài kiểm tra nào",
+        "DESCRIPTION": "Hãy tạo bài kiểm tra đầu tiên để bắt đầu"
+      },
+      "NO_RESULT": {
+        "TITLE": "Không tìm thấy bài kiểm tra phù hợp",
+        "SEARCH_ACTIVE": "Hãy thử thay đổi từ khóa tìm kiếm hoặc bộ lọc",
+        "NO_FILTER_MATCH": "Không có bài kiểm tra nào phù hợp với tiêu chí tìm kiếm"
+      }
     }
   }
 }
