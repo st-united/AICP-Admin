@@ -359,5 +359,20 @@
       "PHONE": "Nhập số điện thoại tại đây",
       "DOB": "Chọn ngày sinh"
     }
+  },
+  "INTERVIEW_REGISTRATION": {
+    "TITLE": "Đăng ký phỏng vấn",
+    "LIST_TITLE": "Danh sách đăng ký phỏng vấn",
+    "SELECTED": "Đã chọn",
+    "SELECT": "Chọn",
+    "TOTAL": "Tổng cộng",
+    "LEVEL": "Level",
+    "DATE": "Ngày",
+    "NAME": "Họ và tên",
+    "EMAIL": "Email",
+    "PHONE": "Số điện thoại",
+    "TEST": "Bài kiểm tra",
+    "RESULT": "Kết quả kiểm tra",
+    "INTERVIEW_DATE": "Ngày giờ phỏng vấn"
   }
 }

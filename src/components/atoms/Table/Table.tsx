@@ -22,7 +22,7 @@ interface PaginateOptions {
 
 type TableProps = {
   columns: ColumnsType<any>;
-  dataSource: [];
+  dataSource: any[];
   loading?: boolean;
   onChange?: (
     pagination: TablePaginationConfig,
@@ -39,6 +39,7 @@ type TableProps = {
   expandableRender?: (record: any) => ReactNode;
   expandedRowKeys?: React.Key[];
   setExpandedRowKeys?: (keys: React.Key[]) => void;
+  rowSelection?: any;
 };
 
 export const Table: React.FC<TableProps> = ({
@@ -55,6 +56,7 @@ export const Table: React.FC<TableProps> = ({
   expandableRender,
   expandedRowKeys,
   setExpandedRowKeys,
+  rowSelection,
 }) => {
   const { t } = useTranslation();
 
@@ -95,6 +97,7 @@ export const Table: React.FC<TableProps> = ({
               }
             : undefined
         }
+        rowSelection={rowSelection}
       />
 
       {disablePaginate === false && (
