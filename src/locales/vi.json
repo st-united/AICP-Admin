@@ -396,6 +396,8 @@
     "CERTIFICATE": "Chứng chỉ chuyên môn",
     "EXPERIENCE": "Kinh nghiệm",
     "LEVEL": "Mức năng lực",
-    "CORRECT_ANSWER": "Câu đúng"
+    "CORRECT_ANSWER": "Câu đúng",
+    "COPY_SUCCESS_TITLE": "Sao chép thành công",
+    "COPY_FAIL_DESC": "Không thể sao chép liên kết, vui lòng thử lại sau."
   }
 }
