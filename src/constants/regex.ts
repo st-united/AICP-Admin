@@ -12,6 +12,8 @@ export const INTEGER_REGEX = /^[0-9]*$/;
 
 export const DECIMAL_REGEX = /^[0-9,.]*$/;
 
+export const NUMBER_LENGTH_REGEX = /^.{8,50}$/;
+
 export const ALLOW_ALPHABET_REGEX_PATTERN =
   /[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý ]$/;
 
@@ -33,6 +35,8 @@ export const NO_ALPHABET_REGEX_PATTERN =
 export const NO_ALLOW_SPACE =
   /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý]+( [A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý]+)*$/;
 
+export const PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\S*$/;
 export const NO_NUMBER = /^([^0-9]*)+( ([^0-9]*)+)*$/;
 
 export const NO_SPECIAL_CHARACTER_IN_NAME = /^[a-zA-ZÀ-ỹ\s]*$/;

@@ -259,7 +259,7 @@ const MentorTable = () => {
         const isEnabled = !!record.upcomingCount;
         return (
           <div className='grid grid-cols-[70%_30%] w-full gap-3'>
-            <Status id={record.id} isActive={value} disabled={isEnabled} />
+            <Status id={record.id} isActive={value} disabled={record.upcomingCount > 0 && value} />
             {record.upcomingCount > 0 && (
               <div className='flex items-center justify-start'>
                 <Tooltip
@@ -342,7 +342,7 @@ const MentorTable = () => {
           pageCount: mentorData?.meta?.pageCount,
           setTable,
         }}
-        expandableRender={(record) => <ExpandedRow mentorId={record.id} />}
+        expandableRender={(record) => <ExpandedRow mentorId={String(record.id)} />}
         expandedRowKeys={expandedRowKeys}
         setExpandedRowKeys={setExpandedRowKeys}
       />

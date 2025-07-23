@@ -7,9 +7,11 @@ const Forbidden = lazy(() => import('@app/pages/Forbidden/Forbidden'));
 import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
-import { Mentor, InterviewRegistrationPage } from '@app/pages';
+import { NAVIGATE_URL } from '@app/constants';
+import { Mentor } from '@app/pages';
 import Developing from '@app/pages/Developing';
-import Profile from '@app/pages/Profile/Profile';
+import InterviewRegistration from '@app/pages/InterviewRegistration/InterviewRegistration';
+import { PasswordChangeForm, Profile } from '@app/pages/Profile';
 import UserManagement from '@app/pages/User/UserManagement';
 
 const routes = [
@@ -25,6 +27,10 @@ const routes = [
               {
                 path: 'profile',
                 element: <Profile />,
+              },
+              {
+                path: NAVIGATE_URL.CHANGE_PASSWORD,
+                element: <PasswordChangeForm />,
               },
             ],
           },
@@ -49,7 +55,7 @@ const routes = [
             element: <Mentor />,
           },
           { path: 'company', element: <Developing /> },
-          { path: 'interview-registration', element: <InterviewRegistrationPage /> },
+          { path: NAVIGATE_URL.INTERVIEW_REGISTRATION, element: <InterviewRegistration /> },
         ],
       },
     ],

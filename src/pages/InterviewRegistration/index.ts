@@ -1,1 +1,1 @@
-export { default } from './InterviewRegistrationPage';
+export { default } from './InterviewRegistration';

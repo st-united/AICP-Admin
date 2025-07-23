@@ -9,7 +9,7 @@ const ProfileLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className='flex justify-center items-center w-full min-h-[80vh] bg-[#fffbf9]'>
+    <div className='flex justify-center items-center w-full bg-[#fffbf9] h-full'>
       <div
         className={`
           fixed inset-0 bg-black bg-opacity-50 z-40
@@ -38,8 +38,8 @@ const ProfileLayout = () => {
         <Sidebar />
       </div>
 
-      <div className='flex mx-auto flex-row gap-4 p-4 w-full justify-center items-center'>
-        <div className='container'>
+      <div className='flex mx-auto flex-row gap-4 p-4 w-full justify-center h-full'>
+        <div className='container h-full'>
           {!isSidebarOpen && (
             <div className='md:hidden z-50'>
               <Button
@@ -51,12 +51,12 @@ const ProfileLayout = () => {
               </Button>
             </div>
           )}
-          <div className='flex justify-center gap-2 flex-row'>
-            <div className='hidden md:block top-0 left-0 min-h-[80vh] z-40 w-1/5'>
+          <div className='flex justify-center gap-2 flex-row h-full'>
+            <div className='hidden md:block top-0 left-0 z-40 w-1/5 py-2 h-full'>
               <Sidebar />
             </div>
 
-            <div className='md:col-span-3 lg:col-span-3 xl:col-span-4 2xl:col-span-4 w-3/4'>
+            <div className='h-full p-2 custom-scrollbar scroll-content'>
               <Outlet />
             </div>
           </div>

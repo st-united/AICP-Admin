@@ -79,7 +79,7 @@
     "vitest": "^0.24.3"
   },
   "lint-staged": {
-    "*.{jsx,js,ts,tsx,scss,html}": [
+    "*.{jsx,js,ts,tsx,scss}": [
       "npm run lint",
       "npm run format",
       "git add ."

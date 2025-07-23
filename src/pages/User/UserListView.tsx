@@ -189,8 +189,7 @@ const UserTable: React.FC = () => {
         title: t('USER.DATE_OF_BIRTH'),
         dataIndex: 'dob',
         key: 'dob',
-        render: (date: string) =>
-          date ? dayjs(date).format(DATE_TIME.DAY_MONTH_YEAR) : t('USER.NO_DATA'),
+        render: (date: string) => (date ? dayjs(date).format(DATE_TIME.DAY_MONTH_YEAR) : ''),
       },
       {
         title: t('USER.PROVINCE'),

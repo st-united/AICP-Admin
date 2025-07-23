@@ -1,12 +1,14 @@
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Spin } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useSignInSchema } from './signInSchema';
+import { NAVIGATE_URL } from '@app/constants';
 import { yupSync } from '@app/helpers/yupSync';
-import { useLogin } from '@app/hooks';
+import { useActivateMentorByLink, useLogin } from '@app/hooks';
 import { Credentials } from '@app/interface/user.interface';
 
 import './SignIn.scss';
@@ -16,7 +18,20 @@ const SignIn = () => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const signInSchema = useSignInSchema();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('activateToken');
+  const { mutate: activateMentor, isPending } = useActivateMentorByLink();
 
+  useEffect(() => {
+    if (token) activateMentor(token);
+  }, [token]);
+  if (isPending)
+    return (
+      <div className='w-full h-full flex justify-center items-center'>
+        <Spin />
+      </div>
+    );
   const onFinish = (values: Credentials) => {
     loginUser(values);
   };
@@ -52,20 +67,18 @@ const SignIn = () => {
             />
           </Form.Item>
           <div className='grid col-span-2 justify-end items-center'>
-            <Button className='text-lg cursor-pointer transition-color duration-3000 border-none !outline-none !bg-transparent'>
-              <Link
-                to='/forgot-password'
-                className='!text-primary-bold font-bold underline hover:!text-primary-light'
-              >
-                {t('LOGIN.FORGOT_PASSWORD')}
-              </Link>
-            </Button>
+            <Link
+              to={NAVIGATE_URL.FORGOT_PASSWORD}
+              className='!text-primary-bold font-bold !underline text-base bg-transparent'
+            >
+              {t('LOGIN.FORGOT_PASSWORD')}
+            </Link>
           </div>
           <Form.Item className='col-span-2 !mt-2'>
             <Button
               type='primary'
               htmlType='submit'
-              className='w-full h-[3.5rem] !bg-primary-bold text-[1rem] font-bold border-none !outline-none !rounded-md cursor-pointer !transition-colors duration-3000 hover:!text-black'
+              className='w-full h-[3.75rem] !bg-primary-bold text-[1rem] text-white font-bold !border-none !outline-none !rounded-md hover:!bg-primary-light hover:text-black transition duration-300'
               loading={isLoading}
             >
               {t('LOGIN.LOGIN')}

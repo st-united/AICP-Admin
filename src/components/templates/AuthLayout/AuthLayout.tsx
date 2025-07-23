@@ -15,9 +15,11 @@ const AuthLayout = () => {
     }
   }, [isAuth]);
   return (
-    <div>
+    <div className='flex flex-col h-full'>
       <Header />
-      <Outlet />
+      <div className='flex-1 overflow-y-auto'>
+        <Outlet />
+      </div>
     </div>
   );
 };

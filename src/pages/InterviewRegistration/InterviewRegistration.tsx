@@ -225,7 +225,7 @@ const getColumns = (t: (key: string) => string) => [
   { title: t('INTERVIEW_REGISTRATION.INTERVIEW_DATE'), dataIndex: 'date', key: 'date' },
 ];
 
-const InterviewRegistrationPage = () => {
+const InterviewRegistration = () => {
   const { t } = useTranslation();
   const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]);
   const [table, setTable] = useState({ page: 1, take: 10 });
@@ -256,15 +256,8 @@ const InterviewRegistrationPage = () => {
   });
 
   return (
-    <div className='w-full mx-auto py-8 px-2 sm:px-4 flex flex-col gap-4 sm:gap-6'>
-      <div className='text-gray-400 text-xs sm:text-sm mb-2 flex items-center gap-2'>
-        <span className='inline-block'>
-          <HomeOutlined />
-        </span>
-        {t('ADMIN_BREADCRUMB.HOME')} /{' '}
-        <span className='font-semibold'>{t('INTERVIEW_REGISTRATION.TITLE')}</span>
-      </div>
-      <h2 className='text-[22px] sm:text-[30px] font-bold mb-2 sm:mb-4'>
+    <div className='w-full mx-auto pb-8 px-2 sm:px-4 flex flex-col gap-4 sm:gap-6 overflow-y-auto'>
+      <h2 className='text-[22px] sm:text-[30px] font-bold mx-6'>
         {t('INTERVIEW_REGISTRATION.LIST_TITLE')}
       </h2>
       <div className='interview-registration-card bg-white p-3 sm:p-6 rounded-[16px] sm:rounded-[20px] flex flex-col gap-4 sm:gap-[35px]'>
@@ -323,4 +316,4 @@ const InterviewRegistrationPage = () => {
   );
 };
 
-export default InterviewRegistrationPage;
+export default InterviewRegistration;

@@ -1,6 +1,6 @@
 import Forbidden from './Forbidden/Forbidden';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
-import InterviewRegistrationPage from './InterviewRegistration';
+import InterviewRegistration from './InterviewRegistration';
 import Mentor from './Mentor/Mentor';
 import NotFound from './NotFound/NotFound';
 import SignIn from './SignIn/SignIn';
@@ -13,5 +13,5 @@ export {
   ForgotPassword,
   UpdatePassword,
   Mentor,
-  InterviewRegistrationPage,
+  InterviewRegistration,
 };

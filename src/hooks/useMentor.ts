@@ -34,6 +34,7 @@ export const useGetMentor = (params: GetMentorsParams) => {
       const { data } = await getMentorsApi(params);
       return data;
     },
+    { keepPreviousData: true },
   );
 };
 
@@ -142,8 +143,18 @@ export const useUpdateMentor = () => {
   );
 };
 export const useActivateMentorByLink = () => {
-  return useMutation(async (token: string) => {
-    const response = await mentorSelfActivationApi(token);
-    return response;
-  });
+  return useMutation(
+    async (token: string) => {
+      const { data } = await mentorSelfActivationApi(token);
+      return data;
+    },
+    {
+      onSuccess: ({ message }) => {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+      },
+      onError: ({ response }) => {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
 };

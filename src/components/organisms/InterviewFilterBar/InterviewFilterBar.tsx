@@ -32,7 +32,7 @@ const InterviewFilterBar: React.FC<InterviewFilterBarProps> = ({
   t,
 }) => {
   return (
-    <div className='flex flex-col md:flex-row md:flex-wrap items-stretch md:items-center justify-between gap-6 mt-4'>
+    <div className='flex flex-col md:flex-row md:flex-wrap items-stretch md:items-center justify-between gap-6'>
       <div className='flex flex-col md:flex-row items-stretch md:items-center gap-5 flex-1'>
         <p className='text-black text-base md:text-lg whitespace-nowrap'>
           {t('INTERVIEW_REGISTRATION.TOTAL')} : {filteredCount}
