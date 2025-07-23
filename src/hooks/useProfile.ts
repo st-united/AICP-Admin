@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { NAVIGATE_URL, QUERY_KEY } from '@app/constants';
+import { Test } from '@app/interface/examSet.interface';
 import { ChangePassword, UserProfile } from '@app/interface/user.interface';
 import { setAuth } from '@app/redux/features/auth/authSlice';
 import {
@@ -35,9 +36,7 @@ export const useGetProfile = () => {
 };
 
 export const useGetAllExamSet = () => {
-  const dispatch = useDispatch();
-
-  return useMutation(async () => {
+  return useMutation<Test[], Error, void>(async () => {
     const { data } = await getAllExamSetApi();
     return data;
   });

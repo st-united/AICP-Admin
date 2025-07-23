@@ -2,40 +2,19 @@ import { Card, Tag, Button } from 'antd';
 import { t } from 'i18next';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
-import { TestStatus, TestCardProps, Test } from '@app/interface/examSet.interface';
-
-const statusLabels: Record<TestStatus, string> = {
-  [TestStatus.DRAFT]: 'Bản nháp',
-  [TestStatus.PUBLISHED]: 'Đã xuất bản',
-  [TestStatus.ACTIVE]: 'Đang sử dụng',
-  [TestStatus.INACTIVE]: 'Ngưng sử dụng',
-  [TestStatus.ARCHIVED]: 'Đã lưu trữ',
-};
-
-const statusColors: Record<TestStatus, string> = {
-  [TestStatus.DRAFT]: 'default',
-  [TestStatus.PUBLISHED]: 'success',
-  [TestStatus.ACTIVE]: 'processing',
-  [TestStatus.INACTIVE]: 'warning',
-  [TestStatus.ARCHIVED]: 'error',
-};
-
-const statusBorderColors: Record<TestStatus, string> = {
-  [TestStatus.DRAFT]: 'border-gray-400',
-  [TestStatus.PUBLISHED]: 'border-green-500',
-  [TestStatus.ACTIVE]: 'border-blue-500',
-  [TestStatus.INACTIVE]: 'border-yellow-500',
-  [TestStatus.ARCHIVED]: 'border-red-500',
-};
+import {
+  TestCardProps,
+  Test,
+  statusLabels,
+  statusColors,
+  statusStyleClasses,
+} from '@app/interface/examSet.interface';
 
 export function TestCard({ test, onViewDetails }: TestCardProps) {
   return (
-    <Card
-      className='h-full flex flex-col justify-between border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-[#F6F7F9]'
-      bodyStyle={{ padding: 0 }}
-    >
-      <div className='p-6'>
-        <div className='relative h-40 overflow-hidden rounded-xl'>
+    <Card className='h-full flex flex-col justify-between border-t border-[#DCDEE4]  shadow-lg hover:shadow-xl hover:-translate-y-1 bg-[#F6F7F9]'>
+      <div className='p-2'>
+        <div className='relative h-48 overflow-hidden rounded-xl'>
           {test.urlImage && (
             <img src={test.urlImage} alt='Test' className='w-full h-full object-cover' />
           )}
@@ -47,7 +26,7 @@ export function TestCard({ test, onViewDetails }: TestCardProps) {
           </h3>
           <Tag
             color={statusColors[test.status]}
-            className={`font-medium px-3 py-1 border ${statusBorderColors[test.status]}`}
+            className={`font-medium m-0 px-3 py-1 ${statusStyleClasses}`}
           >
             {statusLabels[test.status]}
           </Tag>

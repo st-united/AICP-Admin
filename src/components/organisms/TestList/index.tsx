@@ -1,61 +1,34 @@
-import { HomeOutlined } from '@ant-design/icons';
-import { Button, Input, Select, Row, Col, Empty, Breadcrumb } from 'antd';
+import { Button, Input, Select, Row, Col, Empty, Breadcrumb, Spin } from 'antd';
 import { Search, Plus, FileX } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { TestCard, TestType as Test } from './../TestCard/index';
+import { ALL_STATUS_VALUE } from '@app/constants/examset';
+import { formatDate } from '@app/helpers/date';
 import { useGetAllExamSet } from '@app/hooks';
-import { TestStatus } from '@app/interface/examSet.interface';
+import { statusOptions } from '@app/interface/examSet.interface';
 const { Option } = Select;
-
-const statusOptions = [
-  { value: 'all', label: 'Tất cả trạng thái' },
-  { value: TestStatus.DRAFT, label: 'Bản nháp' },
-  { value: TestStatus.PUBLISHED, label: 'Đã xuất bản' },
-  { value: TestStatus.ACTIVE, label: 'Đang sử dụng' },
-  { value: TestStatus.INACTIVE, label: 'Ngưng sử dụng' },
-  { value: TestStatus.ARCHIVED, label: 'Đã lưu trữ' },
-];
 
 export function TestList() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { mutate: fetchTests } = useGetAllExamSet();
-
+  const { mutate: fetchTests, isPending } = useGetAllExamSet();
   const [tests, setTests] = useState<Test[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-
-  const mapStatus = (test: any): Test['status'] => {
-    if (!test.isActive) return TestStatus.INACTIVE;
-    if (test.assessmentType === 'SELF_ASSESSMENT') return TestStatus.DRAFT;
-    return TestStatus.ACTIVE;
-  };
+  const [statusFilter, setStatusFilter] = useState(ALL_STATUS_VALUE);
 
   useEffect(() => {
     fetchTests(undefined, {
-      onSuccess: (data: any[]) => {
-        const mappedTests: Test[] = data.map((item) => ({
-          id: item.id,
-          name: item.name,
-          description: item.description,
-          urlImage: item.urlImage,
-          startDate: new Date(item.startDate).toLocaleDateString('vi-VN'),
-          endDate: new Date(item.endDate).toLocaleDateString('vi-VN'),
-          assessmentType: item.assessmentType,
-          isActive: item.isActive,
-          createdAt: item.createdAt,
-          status: mapStatus(item),
-        }));
-
+      onSuccess: (data: Test[]) => {
+        const mapToTest = (item: Test): Test => ({
+          ...item,
+          startDate: formatDate(item.startDate),
+          endDate: formatDate(item.endDate),
+        });
+        const mappedTests: Test[] = data.map(mapToTest);
         setTests(mappedTests);
-        setLoading(false);
-      },
-      onError: (err) => {
-        setLoading(false);
       },
     });
   }, [fetchTests]);
@@ -69,7 +42,7 @@ export function TestList() {
       );
     }
 
-    if (statusFilter !== 'all') {
+    if (statusFilter !== ALL_STATUS_VALUE) {
       filtered = filtered.filter((test) => test.status === statusFilter);
     }
 
@@ -78,9 +51,9 @@ export function TestList() {
     );
   }, [searchTerm, statusFilter, tests]);
 
-  const hasNoTests = !loading && tests.length === 0;
-  const hasNoResults = !loading && filteredTests.length === 0;
-  const isSearchActive = searchTerm.trim() !== '' || statusFilter !== 'all';
+  const hasNoTests = !isPending && tests.length === 0;
+  const hasNoResults = !isPending && filteredTests.length === 0;
+  const isSearchActive = searchTerm.trim() !== '' || statusFilter !== ALL_STATUS_VALUE;
 
   const handleCreateTest = () => {
     navigate('/tests/create');
@@ -90,6 +63,13 @@ export function TestList() {
     navigate(`/tests/${testId}`);
   };
 
+  if (isPending) {
+    return (
+      <div className='w-full h-[300px] flex justify-center items-center'>
+        <Spin size='large' />
+      </div>
+    );
+  }
   return (
     <div className='bg-gray-50 w-full'>
       <div className='w-full mx-auto px-6 pb-6'>
