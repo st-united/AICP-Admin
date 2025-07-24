@@ -53,8 +53,14 @@ const routes = [
             path: 'mentor',
             element: <Mentor />,
           },
-          { path: 'company', element: <Developing /> },
-          { path: 'test', element: <TestPage /> },
+          {
+            path: 'company',
+            element: <Developing />,
+          },
+          {
+            path: NAVIGATE_URL.TEST,
+            element: <TestPage />,
+          },
         ],
       },
     ],

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { TestCard, TestType as Test } from './../TestCard/index';
 import { ALL_STATUS_VALUE } from '@app/constants/examset';
 import { formatDate } from '@app/helpers/date';
-import { useGetAllExamSet } from '@app/hooks';
+import { useGetAllExamSet } from '@app/hooks/useExamset';
 import { statusOptions } from '@app/interface/examSet.interface';
 const { Option } = Select;
 

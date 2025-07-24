@@ -399,6 +399,14 @@
         "SEARCH_ACTIVE": "Hãy thử thay đổi từ khóa tìm kiếm hoặc bộ lọc",
         "NO_FILTER_MATCH": "Không có bài kiểm tra nào phù hợp với tiêu chí tìm kiếm"
       }
+    },
+    "STATUS": {
+      "ALL": "Tất cả trạng thái",
+      "DRAFT": "Bản nháp",
+      "PUBLISHED": "Đã xuất bản",
+      "ACTIVE": "Đang sử dụng",
+      "INACTIVE": "Ngưng sử dụng",
+      "ARCHIVED": "Đã lưu trữ"
     }
   }
 }

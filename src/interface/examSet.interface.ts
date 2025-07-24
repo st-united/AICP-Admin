@@ -1,3 +1,5 @@
+import { t } from 'i18next';
+
 import { ALL_STATUS_VALUE } from '@app/constants/examset';
 
 export interface Test {
@@ -27,20 +29,20 @@ export enum TestStatus {
 }
 
 export const statusOptions = [
-  { value: ALL_STATUS_VALUE, label: 'Tất cả trạng thái' },
-  { value: TestStatus.DRAFT, label: 'Bản nháp' },
-  { value: TestStatus.PUBLISHED, label: 'Đã xuất bản' },
-  { value: TestStatus.ACTIVE, label: 'Đang sử dụng' },
-  { value: TestStatus.INACTIVE, label: 'Ngưng sử dụng' },
-  { value: TestStatus.ARCHIVED, label: 'Đã lưu trữ' },
+  { value: ALL_STATUS_VALUE, label: t('TEST_LIST.STATUS.ALL') },
+  { value: TestStatus.DRAFT, label: t('TEST_LIST.STATUS.DRAFT') },
+  { value: TestStatus.PUBLISHED, label: t('TEST_LIST.STATUS.PUBLISHED') },
+  { value: TestStatus.ACTIVE, label: t('TEST_LIST.STATUS.ACTIVE') },
+  { value: TestStatus.INACTIVE, label: t('TEST_LIST.STATUS.INACTIVE') },
+  { value: TestStatus.ARCHIVED, label: t('TEST_LIST.STATUS.ARCHIVED') },
 ];
 
 export const statusLabels: Record<TestStatus, string> = {
-  [TestStatus.DRAFT]: 'Bản nháp',
-  [TestStatus.PUBLISHED]: 'Đã xuất bản',
-  [TestStatus.ACTIVE]: 'Đang sử dụng',
-  [TestStatus.INACTIVE]: 'Ngưng sử dụng',
-  [TestStatus.ARCHIVED]: 'Đã lưu trữ',
+  [TestStatus.DRAFT]: t('TEST_LIST.STATUS.DRAFT'),
+  [TestStatus.PUBLISHED]: t('TEST_LIST.STATUS.PUBLISHED'),
+  [TestStatus.ACTIVE]: t('TEST_LIST.STATUS.ACTIVE'),
+  [TestStatus.INACTIVE]: t('TEST_LIST.STATUS.INACTIVE'),
+  [TestStatus.ARCHIVED]: t('TEST_LIST.STATUS.ARCHIVED'),
 };
 
 export const statusColors: Record<TestStatus, string> = {

@@ -8,8 +8,6 @@ export const changePassword = (password: ChangePassword) =>
 
 export const getProfileApi = () => axios.get(API_URL.GET_PROFILE);
 
-export const getAllExamSetApi = () => axios.get(API_URL.EXAM_SETS);
-
 export const updateProfileApi = async (user: UserProfile) =>
   await axios.patch(`${API_URL.UPDATE_PROFILE}`, user);
 
