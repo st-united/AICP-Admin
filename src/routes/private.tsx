@@ -8,7 +8,7 @@ import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
-import { Mentor } from '@app/pages';
+import { Mentor, TestPage } from '@app/pages';
 import Developing from '@app/pages/Developing';
 import { PasswordChangeForm, Profile } from '@app/pages/Profile';
 import UserManagement from '@app/pages/User/UserManagement';
@@ -53,7 +53,14 @@ const routes = [
             path: 'mentor',
             element: <Mentor />,
           },
-          { path: 'company', element: <Developing /> },
+          {
+            path: 'company',
+            element: <Developing />,
+          },
+          {
+            path: NAVIGATE_URL.TEST,
+            element: <TestPage />,
+          },
         ],
       },
     ],

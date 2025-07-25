@@ -7,7 +7,8 @@
 
     li:first-child {
       &::after {
-        margin: 0 14px;
+        content: '';
+        margin: 0 0px;
       }
 
       .ant-breadcrumb-separator {

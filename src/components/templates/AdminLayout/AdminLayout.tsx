@@ -22,6 +22,7 @@ const AdminLayout: React.FC = () => {
     { key: 'mentor', label: t('ADMIN_SIDEBAR.MENTOR') },
     { key: 'user', label: t('ADMIN_SIDEBAR.USER') },
     { key: 'company', label: t('ADMIN_SIDEBAR.COMPANY') },
+    { key: 'test', label: t('ADMIN_SIDEBAR.TEST') },
   ];
 
   const breadcrumbItems: BreadcrumbItem[] = [];
