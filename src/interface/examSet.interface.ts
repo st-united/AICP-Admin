@@ -54,9 +54,9 @@ export const statusColors: Record<TestStatus, string> = {
 };
 
 export const statusStyleClasses: Record<TestStatus, string> = {
-  [TestStatus.DRAFT]: 'border-[#616161] bg-[#E5E5E5]',
-  [TestStatus.PUBLISHED]: 'border-[#5630E3] bg-[#ECE7FF]',
-  [TestStatus.ACTIVE]: 'border-[#307AE3] bg-[#E2EEFF]',
-  [TestStatus.INACTIVE]: 'border-[#CA8617] bg-[#FDE6E6]',
-  [TestStatus.ARCHIVED]: 'border-[#B40000] bg-[#F8ECD9]',
+  [TestStatus.DRAFT]: 'text-[#616161] border-[#C0C0C0] bg-[#E5E5E5]',
+  [TestStatus.PUBLISHED]: 'text-[#5630E3] border-[#B6A7ED] bg-[#ECE7FF]',
+  [TestStatus.ACTIVE]: 'text-[#307AE3] border-[#B7CBE7] bg-[#E2EEFF]',
+  [TestStatus.INACTIVE]: 'text -[#B40000] border-[#E1BEBE] bg-[#FDE6E6]',
+  [TestStatus.ARCHIVED]: 'text-[#CA8617] border-[#DECBAD] bg-[#F8ECD9]',
 };

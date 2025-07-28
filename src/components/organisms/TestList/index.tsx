@@ -9,6 +9,7 @@ import { ALL_STATUS_VALUE } from '@app/constants/examset';
 import { formatDate } from '@app/helpers/date';
 import { useGetAllExamSet } from '@app/hooks/useExamset';
 import { statusOptions } from '@app/interface/examSet.interface';
+import './Testlist.scss';
 const { Option } = Select;
 
 export function TestList() {
@@ -93,7 +94,7 @@ export function TestList() {
               placeholder={t('TEST_LIST.INPUT.PLACEHOLDER') as string}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              suffix={<Search className='w-4 h-4 text-gray-400' />}
+              suffix={<Search className='w-4 h-4 text-[#6B7280]' />}
               className='bg-white border-gray-200 focus:border-purple-500 focus:shadow-purple-100 h-10'
             />
           </div>
@@ -116,7 +117,7 @@ export function TestList() {
             image={<FileX className='w-16 h-16 text-gray-400 mx-auto' />}
             description={
               <div className='text-center'>
-                <h3 className='text-lg font-medium text-gray-900 mb-2'>
+                <h3 className='text-xs font-medium text-gray-900 mb-2'>
                   {t('TEST_LIST.EMPTY.NO_TEST.TITLE')}
                 </h3>
                 <p className='text-gray-600 mb-6'>{t('TEST_LIST.EMPTY.NO_TEST.DESCRIPTION')}</p>
@@ -134,13 +135,13 @@ export function TestList() {
           </Empty>
         ) : hasNoResults ? (
           <Empty
-            image={<Search className='w-16 h-16 text-gray-400 mx-auto' />}
+            image={<Search className='w-8 h-8 sm:w-16 sm:h-16 text-gray-400 mx-auto' />}
             description={
-              <div className='text-center'>
-                <h3 className='text-lg font-medium text-gray-900 mb-2'>
+              <div className='text-center px-4 sm:px-0'>
+                <h3 className='text-sm sm:text-lg font-semibold text-gray-900 mb-2'>
                   {t('TEST_LIST.EMPTY.NO_RESULT.TITLE')}
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className='text-sm sm:text-base text-gray-600 mb-6'>
                   {isSearchActive
                     ? t('TEST_LIST.EMPTY.NO_RESULT.SEARCH_ACTIVE')
                     : t('TEST_LIST.EMPTY.NO_RESULT.NO_FILTER_MATCH')}
