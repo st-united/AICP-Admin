@@ -18,7 +18,22 @@
       }
     }
   }
+
   .ant-menu-inline {
     border: none;
+  }
+
+  &:not(.collapsed) {
+    .ant-menu-item-icon {
+      font-size: 18px;
+      transition: font-size 0.3s ease;
+    }
+  }
+
+  &.collapsed {
+    .ant-menu-item-icon {
+      font-size: 20px !important;
+      transition: font-size 0.3s ease;
+    }
   }
 }

@@ -1,6 +1,6 @@
 export const NAVIGATE_URL = {
   FORBIDDEN: '/403',
-  USERS: '/users',
+  USER: '/user',
   USER_UPDATE: '/users/update',
   USER_CREATE: '/users/create',
   PROFILE_UPDATE: '/profile/update',
@@ -8,6 +8,13 @@ export const NAVIGATE_URL = {
   SIGN_IN: '/login',
   SIGN_OUT: '/logout',
   PROFILE: '/profile',
+  EXAM_SET: '/exam-set',
+  DASHBOARD: '/dashboard',
+  MENTOR: '/mentor',
+  COMPANY: '/company',
+  INTERVIEWER_LIST: '/interviewer-list',
+  MY_CALENDER: '/my-calender',
+  QUESTION_BANK: '/question-bank',
   FORGOT_PASSWORD: '/forgot-password',
   TEST: 'test',
 };
