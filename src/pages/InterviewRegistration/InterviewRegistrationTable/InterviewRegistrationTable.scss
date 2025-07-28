@@ -1,0 +1,42 @@
+.interview__table {
+  .ant-table-thead,
+  .ant-table-tbody {
+    > tr {
+      > th,
+      > td {
+        position: relative;
+
+        &:not(:first-child)::before {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 1px;
+          height: 60%;
+          background: #eaeff3;
+          z-index: 1;
+        }
+
+        &.ant-table-selection-column {
+          text-align: center;
+          padding-left: 28px !important;
+          padding-right: 28px !important;
+        }
+      }
+    }
+  }
+
+  .ant-table-thead
+    > tr
+    > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not(
+      [colspan]
+    )::before {
+    content: '' !important;
+  }
+
+  .ant-table-tbody > tr > td {
+    box-sizing: content-box;
+  }
+}

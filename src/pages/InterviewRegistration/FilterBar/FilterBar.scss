@@ -1,0 +1,22 @@
+.ant-input-group {
+  .ant-input,
+  .ant-input-group-addon:last-child .ant-input-search-button {
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .ant-input-group-addon:last-child .ant-input-search-button {
+    width: 42px;
+  }
+
+  .ant-input-group-addon svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+.interview-filter-select {
+  .ant-select-selection-item {
+    font-size: 18px !important;
+  }
+}
