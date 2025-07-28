@@ -1,11 +1,9 @@
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UserOutlined,
-  UsergroupAddOutlined,
   HomeOutlined,
-  BankOutlined,
-  FolderOpenOutlined,
+  CalendarOutlined,
+  ReadOutlined,
 } from '@ant-design/icons';
 import { Menu, Button, Image, Layout } from 'antd';
 import { useEffect, useState } from 'react';
@@ -20,7 +18,7 @@ import './AdminSidebar.scss';
 
 const { Sider } = Layout;
 
-const AdminSidebar: React.FC = () => {
+const MentorSidebar: React.FC = () => {
   const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(MENU_ITEMS_KEY.DASHBOARD);
@@ -34,24 +32,25 @@ const AdminSidebar: React.FC = () => {
       label: t('ADMIN_SIDEBAR.DASHBOARD'),
     },
     {
-      key: MENU_ITEMS_KEY.MENTOR,
-      icon: <UsergroupAddOutlined />,
-      label: t('ADMIN_SIDEBAR.MENTOR'),
+      key: MENU_ITEMS_KEY.CALENDER_MANAGEMENT,
+      icon: <CalendarOutlined />,
+      label: t('MENTOR_SIDEBAR.CALENDER_MANAGEMENT'),
+      className: 'font-semibold',
+      children: [
+        {
+          key: MENU_ITEMS_KEY.INTERVIEWER_LIST,
+          label: t('MENTOR_SIDEBAR.INTERVIEWER_LIST'),
+        },
+        {
+          key: MENU_ITEMS_KEY.MY_CALENDER,
+          label: t('MENTOR_SIDEBAR.MY_CALENDER'),
+        },
+      ],
     },
     {
-      key: MENU_ITEMS_KEY.USER,
-      icon: <UserOutlined />,
-      label: t('ADMIN_SIDEBAR.USER'),
-    },
-    {
-      key: MENU_ITEMS_KEY.EXAM_SET,
-      icon: <FolderOpenOutlined />,
-      label: t('ADMIN_SIDEBAR.EXAM_SET'),
-    },
-    {
-      key: MENU_ITEMS_KEY.COMPANY,
-      icon: <BankOutlined />,
-      label: t('ADMIN_SIDEBAR.COMPANY'),
+      key: MENU_ITEMS_KEY.QUESTION_BANK,
+      icon: <ReadOutlined />,
+      label: t('MENTOR_SIDEBAR.QUESTION_BANK'),
     },
   ];
 
@@ -118,4 +117,4 @@ const AdminSidebar: React.FC = () => {
   );
 };
 
-export default AdminSidebar;
+export default MentorSidebar;
