@@ -1,4 +1,4 @@
-.interview__table {
+.interview-table {
   .ant-table-thead,
   .ant-table-tbody {
     > tr {
@@ -14,8 +14,8 @@
           top: 50%;
           transform: translateY(-50%);
           width: 1px;
-          height: 60%;
-          background: #eaeff3;
+          height: 40%;
+          background-color: #0000000f;
           z-index: 1;
         }
 
@@ -28,12 +28,17 @@
     }
   }
 
+  .ant-table-thead > tr > th {
+    background-color: #eceaea !important;
+  }
+
   .ant-table-thead
     > tr
     > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not(
       [colspan]
     )::before {
     content: '' !important;
+    background-color: #0000000f;
   }
 
   .ant-table-tbody > tr > td {

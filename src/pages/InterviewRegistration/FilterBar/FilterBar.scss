@@ -2,7 +2,7 @@
   .ant-input,
   .ant-input-group-addon:last-child .ant-input-search-button {
     height: 45px;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .ant-input-group-addon:last-child .ant-input-search-button {
@@ -15,8 +15,10 @@
   }
 }
 
-.interview-filter-select {
-  .ant-select-selection-item {
-    font-size: 18px !important;
-  }
+.ant-select-selection-wrap {
+  margin: auto;
+}
+
+.ant-picker-input > input {
+  font-size: 16px !important;
 }

@@ -387,6 +387,8 @@
     "INTERVIEW_DATE": "Ngày giờ phỏng vấn",
     "SEARCH_PLACEHOLDER": "Tìm kiếm",
     "LEVEL": "Level",
-    "DATE": "Ngày"
+    "FROM": "Từ ngày",
+    "TO": "Đến ngày",
+    "RESET_FILTER": "Đặt lại"
   }
 }

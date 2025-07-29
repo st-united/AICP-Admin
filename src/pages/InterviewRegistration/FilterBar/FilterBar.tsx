@@ -1,21 +1,22 @@
-import { Input, Select } from 'antd';
+import { Input, Select, DatePicker, Button } from 'antd';
+import { Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
+import { DATE_TIME } from '@app/constants';
 import './FilterBar.scss';
 
-const { Option } = Select;
 const { Search } = Input;
+const { RangePicker } = DatePicker;
 
 interface FilterBarProps {
   total: number;
   searchValue: string;
   onSearchChange: (value: string) => void;
-  levelFilter: string;
-  onLevelFilterChange: (value: string) => void;
+  levelFilter: string[];
+  onLevelFilterChange: (value: string[]) => void;
   levelOptions: string[];
-  dateFilter: string;
-  onDateFilterChange: (value: string) => void;
-  dateOptions: string[];
+  dateFilter: [Dayjs, Dayjs] | null;
+  onDateFilterChange: (value: [Dayjs, Dayjs] | null) => void;
 }
 
 const FilterBar = ({
@@ -27,19 +28,26 @@ const FilterBar = ({
   levelOptions,
   dateFilter,
   onDateFilterChange,
-  dateOptions,
 }: FilterBarProps) => {
   const { t } = useTranslation();
 
+  const handleDateChange = (val: any) => {
+    if (!val || val[0] === null || val[1] === null) {
+      onDateFilterChange(null);
+    } else {
+      onDateFilterChange([val[0], val[1]]);
+    }
+  };
+
   return (
-    <div className='flex flex-col md:flex-row md:flex-wrap items-stretch md:items-center justify-between gap-6'>
-      <div className='flex flex-col md:flex-row items-stretch md:items-center gap-5 flex-1'>
-        <p className='text-black text-base md:text-lg whitespace-nowrap'>
+    <div className='flex flex-col md:flex-row md:flex-wrap justify-between gap-6'>
+      <div className='flex flex-col md:flex-row gap-5 flex-1'>
+        <p className='text-black text-base md:text-lg whitespace-nowrap pt-2'>
           {t('INTERVIEW_REGISTRATION.TOTAL')} : {total}
         </p>
 
         <Search
-          className='flex-1 min-w-[200px] md:min-w-[250px] w-full lg:max-w-[370px] h-full text-base md:text-lg rounded-lg'
+          className='min-w-[200px] md:w-[200px] lg:w-[300px] w-full lg:max-w-[370px] h-full text-base md:text-lg rounded-lg'
           placeholder={t('INTERVIEW_REGISTRATION.SEARCH_PLACEHOLDER') || 'Tìm kiếm'}
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
@@ -47,38 +55,52 @@ const FilterBar = ({
         />
       </div>
 
-      <div className='flex flex-col md:flex-row items-stretch md:items-center gap-5 w-full md:w-auto'>
-        <Select
-          className='min-w-[120px] h-[44px] rounded-lg interview-filter-select'
-          value={levelFilter}
-          onChange={onLevelFilterChange}
-          placeholder={t('INTERVIEW_REGISTRATION.LEVEL')}
-        >
-          <Option value='all' className='!text-[18px]'>
-            {t('INTERVIEW_REGISTRATION.LEVEL')}
-          </Option>
-          {levelOptions.map((level) => (
-            <Option className='!text-[18px]' key={level} value={level}>
-              {level}
-            </Option>
-          ))}
-        </Select>
+      <div className='flex flex-col md:flex-row gap-5 w-full md:w-auto'>
+        <div className='flex flex-col gap-1'>
+          <Select
+            className='min-w-[200px] w-full h-[45px] text-base'
+            mode='multiple'
+            value={levelFilter}
+            onChange={onLevelFilterChange}
+            placeholder={t('INTERVIEW_REGISTRATION.LEVEL')}
+            allowClear
+          >
+            {levelOptions.map((level) => (
+              <Select.Option key={level} value={level}>
+                {level}
+              </Select.Option>
+            ))}
+          </Select>
+          {levelFilter.length > 0 && (
+            <Button
+              size='small'
+              className='text-base w-20 self-end'
+              onClick={() => onLevelFilterChange([])}
+            >
+              {t('USER.RESET_FILTER')}
+            </Button>
+          )}
+        </div>
 
-        <Select
-          className=' min-w-[120px] h-[44px] rounded-lg interview-filter-select'
-          value={dateFilter}
-          onChange={onDateFilterChange}
-          placeholder={t('INTERVIEW_REGISTRATION.DATE')}
-        >
-          <Option className='!text-[18px]' value='all'>
-            {t('INTERVIEW_REGISTRATION.DATE')}
-          </Option>
-          {dateOptions.map((date) => (
-            <Option className='!text-[18px]' key={date} value={date}>
-              {new Date(date).toLocaleDateString()}
-            </Option>
-          ))}
-        </Select>
+        <div className='flex flex-col gap-1'>
+          <RangePicker
+            className='lg:w-[200px] md:w-[200px] w-full h-[45px] rounded-lg'
+            value={dateFilter}
+            onChange={handleDateChange}
+            format={DATE_TIME.DAY_MONTH_YEAR}
+            placeholder={[t('INTERVIEW_REGISTRATION.FROM'), t('INTERVIEW_REGISTRATION.TO')]}
+            allowClear
+          />
+          {dateFilter && (
+            <Button
+              size='small'
+              className='text-base w-20 self-end'
+              onClick={() => onDateFilterChange(null)}
+            >
+              {t('INTERVIEW_REGISTRATION.RESET_FILTER')}
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
