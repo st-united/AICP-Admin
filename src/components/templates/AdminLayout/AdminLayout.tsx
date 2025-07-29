@@ -1,28 +1,35 @@
 import { Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import AdminBreadcrumbs, {
   BreadcrumbItem,
 } from '@app/components/molecules/Breadcrumb/AdminBreadcrumb';
-import Header from '@app/components/organisms/Header/Header';
 import ProfileAvatar from '@app/components/organisms/Header/ProfileAvatar';
 import AdminSidebar from '@app/components/organisms/Sidebar/AdminSidebar';
+import MentorSidebar from '@app/components/organisms/Sidebar/MentorSidebar';
+import { MENU_ITEMS_KEY } from '@app/constants/menuKey';
+import { RootState } from '@app/redux/store';
 
 const AdminLayout: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const role = useSelector((state: RootState) => state.auth.user?.roles?.[0]?.name || '');
   const segments = location.pathname
     .split('/')
     .filter(Boolean)
-    .filter((seg) => seg !== 'dashboard');
+    .filter((seg) => seg !== MENU_ITEMS_KEY.DASHBOARD);
 
   const menuItems = [
-    { key: 'dashboard', label: t('ADMIN_SIDEBAR.DASHBOARD') },
-    { key: 'mentor', label: t('ADMIN_SIDEBAR.MENTOR') },
-    { key: 'user', label: t('ADMIN_SIDEBAR.USER') },
-    { key: 'company', label: t('ADMIN_SIDEBAR.COMPANY') },
-    { key: 'test', label: t('ADMIN_SIDEBAR.TEST') },
+    { key: MENU_ITEMS_KEY.DASHBOARD, label: t('ADMIN_SIDEBAR.DASHBOARD') },
+    { key: MENU_ITEMS_KEY.MENTOR, label: t('ADMIN_SIDEBAR.MENTOR') },
+    { key: MENU_ITEMS_KEY.USER, label: t('ADMIN_SIDEBAR.USER') },
+    { key: MENU_ITEMS_KEY.EXAM_SET, label: t('ADMIN_SIDEBAR.EXAM_SET') },
+    { key: MENU_ITEMS_KEY.COMPANY, label: t('ADMIN_SIDEBAR.COMPANY') },
+    { key: MENU_ITEMS_KEY.INTERVIEWER_LIST, label: t('MENTOR_SIDEBAR.INTERVIEWER_LIST') },
+    { key: MENU_ITEMS_KEY.MY_CALENDER, label: t('MENTOR_SIDEBAR.MY_CALENDER') },
+    { key: MENU_ITEMS_KEY.QUESTION_BANK, label: t('MENTOR_SIDEBAR.QUESTION_BANK') },
   ];
 
   const breadcrumbItems: BreadcrumbItem[] = [];
@@ -39,7 +46,7 @@ const AdminLayout: React.FC = () => {
 
   return (
     <Layout id='admin-layout'>
-      <AdminSidebar />
+      {role === 'admin' ? <AdminSidebar /> : <MentorSidebar />}
       <Layout className='bg-transparent'>
         <Layout.Header className='flex items-center justify-end w-full !h-[5rem] px-6 bg-white shadow'>
           <ProfileAvatar />
