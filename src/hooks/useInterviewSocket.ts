@@ -2,25 +2,26 @@ import { useEffect, useState } from 'react';
 
 import { socket } from '@app/constants/socket';
 import {
-  InterviewRegistrationColumns,
-  InterviewRegistrationData,
-  InterviewRegistrationFilter,
-} from '@app/interface/interviewRegistration.interface';
+  InterviewColumns,
+  InterviewData,
+  InterviewFilter,
+} from '@app/interface/interview.interface';
 
-export const useInterviewRegistrationSocket = ({
+export const useInterviewSocket = ({
   search,
   levelFilter,
   dateFilter,
   page,
   limit,
-}: InterviewRegistrationFilter) => {
-  const [data, setData] = useState<InterviewRegistrationData | null>(null);
-  const [tableData, setTableData] = useState<InterviewRegistrationColumns[]>([]);
+}: InterviewFilter) => {
+  const [data, setData] = useState<InterviewData | null>(null);
+  const [tableData, setTableData] = useState<InterviewColumns[]>([]);
 
   useEffect(() => {
-    const handleUserBookings = (response: { data?: InterviewRegistrationData }) => {
+    const handleUserBookings = (response: { data?: InterviewData }) => {
       const payload = response?.data;
       if (!payload) return;
+      console.log(payload);
 
       setData({
         data: payload.data || [],
@@ -51,6 +52,7 @@ export const useInterviewRegistrationSocket = ({
 
     if (socket.connected) {
       socket.emit('getUserBookings', payload);
+      console.log(payload);
     }
   }, [search, levelFilter, dateFilter, page, limit]);
 

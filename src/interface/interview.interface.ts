@@ -1,5 +1,5 @@
 import { Dayjs } from 'dayjs';
-export interface InterviewRegistrationColumns {
+export interface InterviewColumns {
   id: number;
   name: string;
   email: string;
@@ -7,15 +7,16 @@ export interface InterviewRegistrationColumns {
   nameExamSet: string;
   level: string;
   date: string;
+  timeSlost: string;
 }
 
-export interface InterviewRegistrationData {
-  data: InterviewRegistrationColumns[];
+export interface InterviewData {
+  data: InterviewColumns[];
   total: number;
   totalPages: number;
 }
 
-export interface InterviewRegistrationFilter {
+export interface InterviewFilter {
   search: string;
   levelFilter: string[];
   dateFilter: [Dayjs, Dayjs] | null;

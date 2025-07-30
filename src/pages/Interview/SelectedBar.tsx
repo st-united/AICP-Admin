@@ -12,7 +12,7 @@ const SelectedBar = ({ selectedCount, onAction }: SelectedBarProps) => {
   return (
     <div className='interview-selected-bar bg-[#ffe9e187] border border-orange-100 rounded-lg px-4 py-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3'>
       <span className='text-black text-base md:text-lg font-semibold'>
-        {t('INTERVIEW_REGISTRATION.SELECTED')} : {selectedCount}
+        {t('INTERVIEW.SELECTED')} : {selectedCount}
       </span>
       <Button
         type='primary'
@@ -22,7 +22,7 @@ const SelectedBar = ({ selectedCount, onAction }: SelectedBarProps) => {
         disabled={selectedCount === 0}
         onClick={onAction}
       >
-        {t('INTERVIEW_REGISTRATION.SELECT')}
+        {t('INTERVIEW.SELECT')}
       </Button>
     </div>
   );

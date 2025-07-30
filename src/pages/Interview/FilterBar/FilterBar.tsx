@@ -43,12 +43,12 @@ const FilterBar = ({
     <div className='flex flex-col md:flex-row md:flex-wrap justify-between gap-6'>
       <div className='flex flex-col md:flex-row gap-5 flex-1'>
         <p className='text-black text-base md:text-lg whitespace-nowrap pt-2'>
-          {t('INTERVIEW_REGISTRATION.TOTAL')} : {total}
+          {t('INTERVIEW.TOTAL')} : {total}
         </p>
 
         <Search
           className='min-w-[200px] md:w-[200px] lg:w-[300px] w-full lg:max-w-[370px] h-full text-base md:text-lg rounded-lg'
-          placeholder={t('INTERVIEW_REGISTRATION.SEARCH_PLACEHOLDER') || 'Tìm kiếm'}
+          placeholder={t('INTERVIEW.SEARCH_PLACEHOLDER') || 'Tìm kiếm'}
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
           onSearch={onSearchChange}
@@ -62,7 +62,7 @@ const FilterBar = ({
             mode='multiple'
             value={levelFilter}
             onChange={onLevelFilterChange}
-            placeholder={t('INTERVIEW_REGISTRATION.LEVEL')}
+            placeholder={t('INTERVIEW.LEVEL')}
             allowClear
           >
             {levelOptions.map((level) => (
@@ -88,7 +88,7 @@ const FilterBar = ({
             value={dateFilter}
             onChange={handleDateChange}
             format={DATE_TIME.DAY_MONTH_YEAR}
-            placeholder={[t('INTERVIEW_REGISTRATION.FROM'), t('INTERVIEW_REGISTRATION.TO')]}
+            placeholder={[t('INTERVIEW.FROM'), t('INTERVIEW.TO')]}
             allowClear
           />
           {dateFilter && (
@@ -97,7 +97,7 @@ const FilterBar = ({
               className='text-base w-20 self-end'
               onClick={() => onDateFilterChange(null)}
             >
-              {t('INTERVIEW_REGISTRATION.RESET_FILTER')}
+              {t('INTERVIEW.RESET_FILTER')}
             </Button>
           )}
         </div>

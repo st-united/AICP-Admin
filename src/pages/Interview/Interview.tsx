@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 
 import FilterBar from './FilterBar/FilterBar';
-import InterviewRegistrationTable from './InterviewRegistrationTable/InterviewRegistrationTable';
+import InterviewTable from './InterviewList/InterviewTable';
 import SelectedBar from './SelectedBar';
-import { useInterviewRegistrationSocket } from '@app/hooks/index';
-import { InterviewRegistrationColumns } from '@app/interface/interviewRegistration.interface';
+import { useInterviewSocket } from '@app/hooks/index';
+import { InterviewColumns } from '@app/interface/interview.interface';
 
-const InterviewRegistration = () => {
+const Interview = () => {
   const { t } = useTranslation();
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -24,7 +24,7 @@ const InterviewRegistration = () => {
   const handleFilterChange = () => {
     setPagination((prev) => ({ ...prev, page: 1 }));
   };
-  const { data } = useInterviewRegistrationSocket({
+  const { data } = useInterviewSocket({
     search: debouncedSearch,
     levelFilter,
     dateFilter,
@@ -34,7 +34,7 @@ const InterviewRegistration = () => {
 
   const levelOptions = useMemo(() => {
     const levels = new Set<string>();
-    data?.data?.forEach((item: InterviewRegistrationColumns) => {
+    data?.data?.forEach((item: InterviewColumns) => {
       if (item.level) levels.add(item.level);
     });
     return Array.from(levels).sort();
@@ -43,7 +43,7 @@ const InterviewRegistration = () => {
   return (
     <div className='flex flex-col mt-2 gap-6 px-5 overflow-y-auto pb-6'>
       <div className='flex items-center'>
-        <h2 className='!text-2xl !mb-0'>{t('INTERVIEW_REGISTRATION.LIST')}</h2>
+        <h2 className='!text-2xl !mb-0'>{t('INTERVIEW.LIST')}</h2>
       </div>
 
       <div className='interview-registration-card bg-white p-3 sm:p-6 rounded-[16px] sm:rounded-[20px] flex flex-col gap-4 sm:gap-[35px]'>
@@ -74,7 +74,7 @@ const InterviewRegistration = () => {
           }}
         />
 
-        <InterviewRegistrationTable
+        <InterviewTable
           selectedRowKeys={selectedRowKeys}
           setSelectedRowKeys={setSelectedRowKeys}
           data={data?.data || []}
@@ -88,4 +88,4 @@ const InterviewRegistration = () => {
   );
 };
 
-export default InterviewRegistration;
+export default Interview;

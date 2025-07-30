@@ -4,20 +4,20 @@ import { useTranslation } from 'react-i18next';
 
 import { Table } from '@app/components/atoms';
 import { DATE_TIME } from '@app/constants';
-import { InterviewRegistrationColumns } from '@app/interface/interviewRegistration.interface';
-import './InterviewRegistrationTable.scss';
+import { InterviewColumns } from '@app/interface/interview.interface';
+import './InterviewTable.scss';
 
-interface InterviewRegistrationTableProps {
+interface InterviewTableProps {
   selectedRowKeys: React.Key[];
   setSelectedRowKeys: (keys: React.Key[]) => void;
-  data: InterviewRegistrationColumns[];
+  data: InterviewColumns[];
   total: number;
   pageCount: number;
   table: { page: number; take: number };
   setTable: (value: { page: number; take: number }) => void;
 }
 
-const InterviewRegistrationTable = ({
+const InterviewTable = ({
   selectedRowKeys,
   setSelectedRowKeys,
   data,
@@ -25,46 +25,61 @@ const InterviewRegistrationTable = ({
   pageCount,
   table,
   setTable,
-}: InterviewRegistrationTableProps) => {
+}: InterviewTableProps) => {
   const { t } = useTranslation();
 
-  const columns: ColumnsType<InterviewRegistrationColumns> = [
+  const columns: ColumnsType<InterviewColumns> = [
     {
-      title: t('INTERVIEW_REGISTRATION.FULLNAME'),
+      title: t('INTERVIEW.FULLNAME'),
       dataIndex: 'name',
       key: 'name',
       width: 188,
     },
     {
-      title: t('INTERVIEW_REGISTRATION.EMAIL'),
+      title: t('INTERVIEW.EMAIL'),
       dataIndex: 'email',
       key: 'email',
       width: 238,
     },
     {
-      title: t('INTERVIEW_REGISTRATION.PHONENUMBER'),
+      title: t('INTERVIEW.PHONENUMBER'),
       dataIndex: 'phone',
       key: 'phone',
       width: 176,
     },
     {
-      title: t('INTERVIEW_REGISTRATION.TEST'),
+      title: t('INTERVIEW.TEST'),
       dataIndex: 'nameExamSet',
       key: 'nameExamSet',
       width: 169,
     },
     {
-      title: t('INTERVIEW_REGISTRATION.RESULT'),
+      title: t('INTERVIEW.RESULT'),
       dataIndex: 'level',
       key: 'level',
       width: 172,
     },
     {
-      title: t('INTERVIEW_REGISTRATION.INTERVIEW_DATE'),
+      title: t('INTERVIEW.INTERVIEW_DATE'),
       dataIndex: 'date',
       key: 'date',
       width: 215,
-      render: (date: string) => dayjs(date).format(DATE_TIME.DAY_MONTH_YEAR_TIME),
+      render: (_: string, record: InterviewColumns) => {
+        const timeMap: Record<string, string> = {
+          AM_08_09: '08:00 AM',
+          AM_09_10: '09:00 AM',
+          AM_10_11: '10:00 AM',
+          AM_11_12: '11:00 AM',
+          PM_02_03: '02:00 PM',
+          PM_03_04: '03:00 PM',
+          PM_04_05: '04:00 PM',
+          PM_05_06: '05:00 PM',
+        };
+
+        const date = dayjs(record.date).format(DATE_TIME.DAY_MONTH_YEAR);
+        const time = timeMap[record.timeSlost];
+        return `${date} ${time}`;
+      },
     },
   ];
 
@@ -91,4 +106,4 @@ const InterviewRegistrationTable = ({
   );
 };
 
-export default InterviewRegistrationTable;
+export default InterviewTable;

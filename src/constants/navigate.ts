@@ -9,4 +9,5 @@ export const NAVIGATE_URL = {
   SIGN_OUT: '/logout',
   PROFILE: '/profile',
   FORGOT_PASSWORD: '/forgot-password',
+  INTERVIEW: '/interview',
 };
