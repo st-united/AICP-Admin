@@ -12,6 +12,8 @@ import { yupSync } from '@app/helpers';
 import { useGetProfile, useUpdateProfile, useUploadAvatar } from '@app/hooks';
 dayjs.locale('vi');
 
+import './profile.scss';
+
 const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [form] = Form.useForm();
@@ -38,7 +40,7 @@ const Profile = () => {
   };
   if (isLoading || !data) return null;
   return (
-    <div className='relative rounded-2xl bg-white shadow-md min-h-full'>
+    <div className='relative rounded-2xl bg-white shadow-md min-h-full' id='profile-style'>
       <div className='bg-[#FF8C5F] h-[145px] rounded-t-2xl '>
         <div className='absolute top-12 mx-auto left-1/2 -translate-x-1/2 lg:left-12 lg:translate-x-0'>
           <CustomAvartar
@@ -112,8 +114,8 @@ const Profile = () => {
             </Form.Item>
 
             <Divider className='md:col-span-2 border-t border-[#E5E5E5]' />
-            <Form.Item className='md:col-span-2 border-t border-[#E5E5E5] !py-8'>
-              <div className='flex justify-end gap-2 !flex-row'>
+            <Form.Item className='md:col-span-2 border-t border-[#E5E5E5]'>
+              <div className='flex justify-center gap-2 !flex-row'>
                 {!isEdit ? (
                   <>
                     <Button
@@ -124,17 +126,17 @@ const Profile = () => {
                     </Button>
                   </>
                 ) : (
-                  <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px]'>
+                  <div className='flex flex-row justify-between items-center gap-4 max-w-[900px] w-full'>
                     <Button
                       onClick={handleCancel}
-                      className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
+                      className='w-1/2 flex justify-center items-center rounded-2xl !px-8 !py-4 border-[#FF8C5F] text-[#FF8C5F] text-md hover:bg-[#FF8C5F] hover:text-white'
                     >
                       {t('PROFILE.CANCEL_EDIT_PROFILE_BTN')}
                     </Button>
                     <Button
                       type='primary'
                       htmlType='submit'
-                      className='!flex !justify-center !items-center !rounded-2xl !px-8 !py-4 !text-md !bg-[#FF8C5F]  !border-[#FF8C5F] !text-white'
+                      className='w-1/2 flex justify-center items-center rounded-2xl !px-8 !py-4 text-md bg-[#FF8C5F] border-[#FF8C5F] text-white'
                     >
                       {t('PROFILE.SAVE_PROFILE_BTN')}
                     </Button>
