@@ -1,4 +1,6 @@
 import { Dayjs } from 'dayjs';
+
+import { TimeSlotKey } from '@app/constants';
 export interface InterviewColumns {
   id: number;
   name: string;
@@ -7,7 +9,7 @@ export interface InterviewColumns {
   nameExamSet: string;
   level: string;
   date: string;
-  timeSlost: string;
+  timeSlost: TimeSlotKey;
 }
 
 export interface InterviewData {

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 interface SelectedBarProps {
   selectedCount: number;
-  onAction: () => void;
+  onAction?: () => void;
 }
 
 const SelectedBar = ({ selectedCount, onAction }: SelectedBarProps) => {

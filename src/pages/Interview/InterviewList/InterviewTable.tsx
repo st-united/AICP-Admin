@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
 import { Table } from '@app/components/atoms';
-import { DATE_TIME } from '@app/constants';
+import { DATE_TIME, TIME_SLOTS } from '@app/constants';
 import { InterviewColumns } from '@app/interface/interview.interface';
 import './InterviewTable.scss';
 
@@ -65,19 +65,8 @@ const InterviewTable = ({
       key: 'date',
       width: 215,
       render: (_: string, record: InterviewColumns) => {
-        const timeMap: Record<string, string> = {
-          AM_08_09: '08:00 AM',
-          AM_09_10: '09:00 AM',
-          AM_10_11: '10:00 AM',
-          AM_11_12: '11:00 AM',
-          PM_02_03: '02:00 PM',
-          PM_03_04: '03:00 PM',
-          PM_04_05: '04:00 PM',
-          PM_05_06: '05:00 PM',
-        };
-
         const date = dayjs(record.date).format(DATE_TIME.DAY_MONTH_YEAR);
-        const time = timeMap[record.timeSlost];
+        const time = TIME_SLOTS[record.timeSlost];
         return `${date} ${time}`;
       },
     },

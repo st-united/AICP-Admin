@@ -47,12 +47,7 @@ const Interview = () => {
       </div>
 
       <div className='interview-registration-card bg-white p-3 sm:p-6 rounded-[16px] sm:rounded-[20px] flex flex-col gap-4 sm:gap-[35px]'>
-        <SelectedBar
-          selectedCount={selectedRowKeys.length}
-          onAction={() => {
-            // console.log('Selected rows:', selectedRowKeys);
-          }}
-        />
+        <SelectedBar selectedCount={selectedRowKeys.length} />
 
         <FilterBar
           total={data?.total || 0}

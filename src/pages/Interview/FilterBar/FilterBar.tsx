@@ -31,7 +31,7 @@ const FilterBar = ({
 }: FilterBarProps) => {
   const { t } = useTranslation();
 
-  const handleDateChange = (val: any) => {
+  const handleDateChange = (val: [Dayjs | null, Dayjs | null] | null) => {
     if (!val || val[0] === null || val[1] === null) {
       onDateFilterChange(null);
     } else {
@@ -40,7 +40,10 @@ const FilterBar = ({
   };
 
   return (
-    <div className='flex flex-col md:flex-row md:flex-wrap justify-between gap-6'>
+    <div
+      id='interview-filter'
+      className='flex flex-col md:flex-row md:flex-wrap justify-between gap-6'
+    >
       <div className='flex flex-col md:flex-row gap-5 flex-1'>
         <p className='text-black text-base md:text-lg whitespace-nowrap pt-2'>
           {t('INTERVIEW.TOTAL')} : {total}
@@ -48,7 +51,7 @@ const FilterBar = ({
 
         <Search
           className='min-w-[200px] md:w-[200px] lg:w-[300px] w-full lg:max-w-[370px] h-full text-base md:text-lg rounded-lg'
-          placeholder={t('INTERVIEW.SEARCH_PLACEHOLDER') || 'Tìm kiếm'}
+          placeholder={t('INTERVIEW.SEARCH_PLACEHOLDER') || ''}
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
           onSearch={onSearchChange}
