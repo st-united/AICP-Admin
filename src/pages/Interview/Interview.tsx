@@ -46,7 +46,7 @@ const Interview = () => {
         <h2 className='!text-2xl !mb-0'>{t('INTERVIEW.LIST')}</h2>
       </div>
 
-      <div className='interview-registration-card bg-white p-3 sm:p-6 rounded-[16px] sm:rounded-[20px] flex flex-col gap-4 sm:gap-[35px]'>
+      <div className='bg-white p-3 sm:p-6 rounded-[16px] sm:rounded-[20px] flex flex-col gap-4 sm:gap-[35px]'>
         <SelectedBar selectedCount={selectedRowKeys.length} />
 
         <FilterBar
