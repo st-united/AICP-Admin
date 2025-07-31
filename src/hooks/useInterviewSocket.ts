@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { socket } from '@app/constants/socket';
+import { socket } from '@app/constants';
 import {
   InterviewColumns,
   InterviewData,
@@ -21,7 +21,6 @@ export const useInterviewSocket = ({
     const handleUserBookings = (response: { data?: InterviewData }) => {
       const payload = response?.data;
       if (!payload) return;
-      console.log(payload);
 
       setData({
         data: payload.data || [],
@@ -52,7 +51,6 @@ export const useInterviewSocket = ({
 
     if (socket.connected) {
       socket.emit('getUserBookings', payload);
-      console.log(payload);
     }
   }, [search, levelFilter, dateFilter, page, limit]);
 

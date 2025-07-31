@@ -1,4 +1,4 @@
-.ant-input-group {
+#interview-filter {
   .ant-input,
   .ant-input-group-addon:last-child .ant-input-search-button {
     height: 45px;
@@ -13,12 +13,18 @@
     width: 1.125rem;
     height: 1.125rem;
   }
-}
 
-.ant-select-selection-wrap {
-  margin: auto;
-}
+  .ant-select {
+    &-selection-wrap {
+      margin: auto;
+    }
 
-.ant-picker-input > input {
-  font-size: 16px !important;
+    &-selection-item {
+      font-size: 16px;
+    }
+  }
+
+  .ant-picker-input > input {
+    font-size: 16px !important;
+  }
 }
