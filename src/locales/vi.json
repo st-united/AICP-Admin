@@ -380,6 +380,24 @@
       "DOB": "Chọn ngày sinh"
     }
   },
+  "INTERVIEW": {
+    "BREADCRUMB": "Đăng ký phỏng vấn",
+    "LIST": "Danh sách đăng ký phỏng vấn",
+    "SELECT": "Chọn",
+    "SELECTED": "Đã chọn",
+    "TOTAL": "Tổng cộng",
+    "FULLNAME": "Họ và tên",
+    "EMAIL": "Email",
+    "PHONENUMBER": "Số điện thoại",
+    "TEST": "Bài kiểm tra",
+    "RESULT": "Kết quả kiểm tra",
+    "INTERVIEW_DATE": "Ngày giờ phỏng vấn",
+    "SEARCH_PLACEHOLDER": "Tìm kiếm",
+    "LEVEL": "Level",
+    "FROM": "Từ ngày",
+    "TO": "Đến ngày",
+    "RESET_FILTER": "Đặt lại"
+  },
   "TEST_LIST": {
     "BREADCRUMB": {
       "HOME": "Trang chủ",
