@@ -1,19 +1,19 @@
 .admin-sidebar {
   .ant-menu {
-    .ant-menu-item {
-      color: #888;
-      font-weight: bold;
-      &::after {
-        display: none;
-      }
-      &:hover {
-        background: transparent;
-        color: #fa8c16;
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+      .ant-menu-title-content {
+        color: #888;
+        font-weight: bold;
+        transition: color 0.3s ease;
       }
 
-      &.ant-menu-item-selected,
-      &.ant-menu-item-active {
-        background: transparent;
+      &:hover .ant-menu-title-content {
+        color: #000;
+      }
+
+      &.ant-menu-item-selected .ant-menu-title-content,
+      &.ant-menu-submenu-selected .ant-menu-title-content {
         color: #fa8c16;
       }
     }
@@ -21,6 +21,7 @@
 
   .ant-menu-inline {
     border: none;
+    background: white !important;
   }
 
   &:not(.collapsed) {
