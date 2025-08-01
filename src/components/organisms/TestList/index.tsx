@@ -1,5 +1,5 @@
+import { SearchOutlined, PlusOutlined, FileExclamationOutlined } from '@ant-design/icons';
 import { Button, Input, Select, Row, Col, Empty, Breadcrumb, Spin } from 'antd';
-import { Search, Plus, FileX } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -94,7 +94,7 @@ export function TestList() {
               placeholder={t('TEST_LIST.INPUT.PLACEHOLDER') as string}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              suffix={<Search className='w-4 h-4 text-[#6B7280]' />}
+              suffix={<SearchOutlined className='w-4 h-4 text-[#6B7280]' />}
               className='bg-white border-gray-200 focus:border-purple-500 focus:shadow-purple-100 h-10'
             />
           </div>
@@ -114,7 +114,7 @@ export function TestList() {
       <div className='w-full mx-auto px-6 pb-6'>
         {hasNoTests ? (
           <Empty
-            image={<FileX className='w-16 h-16 text-gray-400 mx-auto' />}
+            image={<FileExclamationOutlined className='w-16 h-16 text-gray-400 mx-auto' />}
             description={
               <div className='text-center'>
                 <h3 className='text-xs font-medium text-gray-900 mb-2'>
@@ -128,14 +128,16 @@ export function TestList() {
               type='primary'
               onClick={handleCreateTest}
               className='bg-purple-600 hover:bg-purple-700 border-purple-600'
-              icon={<Plus className='w-4 h-4' />}
+              icon={<PlusOutlined className='w-4 h-4' />}
             >
               {t('TEST_LIST.BUTTON.CREATE')}
             </Button>
           </Empty>
         ) : hasNoResults ? (
           <Empty
-            image={<Search className='w-8 h-8 sm:w-16 sm:h-16 text-gray-400 mx-auto ' />}
+            image={
+              <SearchOutlined className='w-16 h-16 sm:w-16 text-2xl sm:text-3xl sm:h-16 text-gray-400 mx-auto ' />
+            }
             description={
               <div className='text-center px-4 sm:px-0'>
                 <h3 className='text-sm sm:text-lg font-semibold text-gray-900 mb-2'>
