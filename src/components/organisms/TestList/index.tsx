@@ -72,7 +72,7 @@ export function TestList() {
     );
   }
   return (
-    <div className='bg-gray-50 w-full'>
+    <div className='bg-gray-50 w-full mentor-booking__empty'>
       <div className='w-full mx-auto px-6 pb-6'>
         <div className='flex items-center justify-between mb-6 w-full'>
           <div className='w-full'>
@@ -135,7 +135,7 @@ export function TestList() {
           </Empty>
         ) : hasNoResults ? (
           <Empty
-            image={<Search className='w-8 h-8 sm:w-16 sm:h-16 text-gray-400 mx-auto' />}
+            image={<Search className='w-8 h-8 sm:w-16 sm:h-16 text-gray-400 mx-auto ' />}
             description={
               <div className='text-center px-4 sm:px-0'>
                 <h3 className='text-sm sm:text-lg font-semibold text-gray-900 mb-2'>
