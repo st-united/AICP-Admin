@@ -16,7 +16,7 @@ const SelectedBar = ({ selectedCount, onAction }: SelectedBarProps) => {
       </span>
       <Button
         type='primary'
-        className={`w-full sm:w-auto sm:min-w-[66px] h-[44px] text-base md:text-lg border-none ${
+        className={`w-full sm:w-auto sm:min-w-[4.125rem] h-[2.75rem] text-base md:text-lg border-none ${
           selectedCount === 0 ? 'cursor-not-allowed' : 'bg-[#fe7743]'
         }`}
         disabled={selectedCount === 0}

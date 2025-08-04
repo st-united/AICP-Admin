@@ -1,12 +1,12 @@
 #interview-filter {
   .ant-input,
   .ant-input-group-addon:last-child .ant-input-search-button {
-    height: 45px;
-    font-size: 16px;
+    height: 2.8125rem;
+    font-size: 1rem;
   }
 
   .ant-input-group-addon:last-child .ant-input-search-button {
-    width: 42px;
+    width: 2.625rem;
   }
 
   .ant-input-group-addon svg {
@@ -20,11 +20,11 @@
     }
 
     &-selection-item {
-      font-size: 16px;
+      font-size: 1rem;
     }
   }
 
   .ant-picker-input > input {
-    font-size: 16px !important;
+    font-size: 1rem !important;
   }
 }
