@@ -2,7 +2,8 @@ import Forbidden from './Forbidden/Forbidden';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 import Mentor from './Mentor/Mentor';
 import NotFound from './NotFound/NotFound';
+import Schedule from './Schedule/Schedule';
 import SignIn from './SignIn/SignIn';
 import UpdatePassword from './UpdatePassword/UpdatePassword';
 
-export { SignIn, NotFound, Forbidden, ForgotPassword, UpdatePassword, Mentor };
+export { SignIn, NotFound, Forbidden, ForgotPassword, UpdatePassword, Mentor, Schedule };
