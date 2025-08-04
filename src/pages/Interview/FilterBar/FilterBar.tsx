@@ -50,7 +50,7 @@ const FilterBar = ({
         </p>
 
         <Search
-          className='min-w-[200px] md:w-[200px] lg:w-[300px] w-full lg:max-w-[370px] h-full text-base md:text-lg rounded-lg'
+          className='min-w-[12.5rem] md:w-[12.5rem] lg:w-[18.75rem] w-full lg:max-w-[23.125rem] h-full text-base md:text-lg rounded-lg'
           placeholder={t('INTERVIEW.SEARCH_PLACEHOLDER') || ''}
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
@@ -61,7 +61,7 @@ const FilterBar = ({
       <div className='flex flex-col md:flex-row gap-5 w-full md:w-auto'>
         <div className='flex flex-col gap-1'>
           <Select
-            className='min-w-[200px] w-full h-[45px] text-base'
+            className='min-w-[12.5rem] w-full h-[2.8125rem] text-base'
             mode='multiple'
             value={levelFilter}
             onChange={onLevelFilterChange}
@@ -87,7 +87,7 @@ const FilterBar = ({
 
         <div className='flex flex-col gap-1'>
           <RangePicker
-            className='lg:w-[200px] md:w-[200px] w-full h-[45px] rounded-lg'
+            className='lg:w-[12.5rem] md:w-[12.5rem] w-full h-[2.8125rem] rounded-lg'
             value={dateFilter}
             onChange={handleDateChange}
             format={DATE_TIME.DAY_MONTH_YEAR}
