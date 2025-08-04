@@ -65,7 +65,7 @@ const Schedule = () => {
         <h2 className='!text-2xl !mb-0'>{t('SCHEDULE.LIST')}</h2>
       </div>
 
-      <Summary></Summary>
+      {/* <Summary></Summary> */}
 
       <div className='bg-white p-3 sm:p-6 rounded-[1rem] sm:rounded-[1.25rem] flex flex-col gap-4 sm:gap-[2.1875rem]'>
         <FilterBar

@@ -58,7 +58,7 @@ const ScheduleTable = ({ data, total, pageCount, table, setTable }: ScheduleTabl
       width: 215,
       render: (_: string, record: ScheduleColumns) => {
         const date = dayjs(record.date).format(DATE_TIME.DAY_MONTH_YEAR);
-        const time = TIME_SLOTS[record.timeSlot];
+        const time = TIME_SLOTS[record.timeSlot as keyof typeof TIME_SLOTS];
         return `${date} ${time}`;
       },
     },
