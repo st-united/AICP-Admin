@@ -1,61 +1,35 @@
-import { HomeOutlined } from '@ant-design/icons';
-import { Button, Input, Select, Row, Col, Empty, Breadcrumb } from 'antd';
-import { Search, Plus, FileX } from 'lucide-react';
+import { SearchOutlined, PlusOutlined, FileExclamationOutlined } from '@ant-design/icons';
+import { Button, Input, Select, Row, Col, Empty, Breadcrumb, Spin } from 'antd';
 import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { TestCard, TestType as Test } from './../TestCard/index';
-import { useGetAllExamSet } from '@app/hooks';
-import { TestStatus } from '@app/interface/examSet.interface';
+import { ALL_STATUS_VALUE } from '@app/constants/examset';
+import { formatDate } from '@app/helpers/date';
+import { useGetAllExamSet } from '@app/hooks/useExamset';
+import { statusOptions } from '@app/interface/examSet.interface';
+import './TestList.scss';
 const { Option } = Select;
-
-const statusOptions = [
-  { value: 'all', label: 'Tất cả trạng thái' },
-  { value: TestStatus.DRAFT, label: 'Bản nháp' },
-  { value: TestStatus.PUBLISHED, label: 'Đã xuất bản' },
-  { value: TestStatus.ACTIVE, label: 'Đang sử dụng' },
-  { value: TestStatus.INACTIVE, label: 'Ngưng sử dụng' },
-  { value: TestStatus.ARCHIVED, label: 'Đã lưu trữ' },
-];
 
 export function TestList() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { mutate: fetchTests } = useGetAllExamSet();
-
+  const { mutate: fetchTests, isPending } = useGetAllExamSet();
   const [tests, setTests] = useState<Test[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-
-  const mapStatus = (test: any): Test['status'] => {
-    if (!test.isActive) return TestStatus.INACTIVE;
-    if (test.assessmentType === 'SELF_ASSESSMENT') return TestStatus.DRAFT;
-    return TestStatus.ACTIVE;
-  };
+  const [statusFilter, setStatusFilter] = useState(ALL_STATUS_VALUE);
 
   useEffect(() => {
     fetchTests(undefined, {
-      onSuccess: (data: any[]) => {
-        const mappedTests: Test[] = data.map((item) => ({
-          id: item.id,
-          name: item.name,
-          description: item.description,
-          urlImage: item.urlImage,
-          startDate: new Date(item.startDate).toLocaleDateString('vi-VN'),
-          endDate: new Date(item.endDate).toLocaleDateString('vi-VN'),
-          assessmentType: item.assessmentType,
-          isActive: item.isActive,
-          createdAt: item.createdAt,
-          status: mapStatus(item),
-        }));
-
+      onSuccess: (data: Test[]) => {
+        const mapToTest = (item: Test): Test => ({
+          ...item,
+          startDate: formatDate(item.startDate),
+          endDate: formatDate(item.endDate),
+        });
+        const mappedTests: Test[] = data.map(mapToTest);
         setTests(mappedTests);
-        setLoading(false);
-      },
-      onError: (err) => {
-        setLoading(false);
       },
     });
   }, [fetchTests]);
@@ -69,7 +43,7 @@ export function TestList() {
       );
     }
 
-    if (statusFilter !== 'all') {
+    if (statusFilter !== ALL_STATUS_VALUE) {
       filtered = filtered.filter((test) => test.status === statusFilter);
     }
 
@@ -78,9 +52,9 @@ export function TestList() {
     );
   }, [searchTerm, statusFilter, tests]);
 
-  const hasNoTests = !loading && tests.length === 0;
-  const hasNoResults = !loading && filteredTests.length === 0;
-  const isSearchActive = searchTerm.trim() !== '' || statusFilter !== 'all';
+  const hasNoTests = !isPending && tests.length === 0;
+  const hasNoResults = !isPending && filteredTests.length === 0;
+  const isSearchActive = searchTerm.trim() !== '' || statusFilter !== ALL_STATUS_VALUE;
 
   const handleCreateTest = () => {
     navigate('/tests/create');
@@ -90,21 +64,18 @@ export function TestList() {
     navigate(`/tests/${testId}`);
   };
 
+  if (isPending) {
+    return (
+      <div className='w-full h-[300px] flex justify-center items-center'>
+        <Spin size='large' />
+      </div>
+    );
+  }
   return (
-    <div className='min-h-screen bg-gray-50 w-full'>
+    <div className='bg-gray-50 w-full mentor-booking__empty'>
       <div className='w-full mx-auto px-6 pb-6'>
         <div className='flex items-center justify-between mb-6 w-full'>
           <div className='w-full'>
-            <Breadcrumb className='mb-2'>
-              <Breadcrumb.Item className='!text-[#686868]'>
-                <HomeOutlined className='mr-1' />
-                {t('TEST_LIST.BREADCRUMB.HOME')}
-              </Breadcrumb.Item>
-              <Breadcrumb.Item className='!text-[#000000]'>
-                {' '}
-                {t('TEST_LIST.BREADCRUMB.TEST')}
-              </Breadcrumb.Item>
-            </Breadcrumb>
             <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full'>
               <h1 className='text-2xl font-bold text-gray-900'>{t('TEST_LIST.TITLE')}</h1>
               <Button
@@ -123,7 +94,7 @@ export function TestList() {
               placeholder={t('TEST_LIST.INPUT.PLACEHOLDER') as string}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              suffix={<Search className='w-4 h-4 text-gray-400' />}
+              suffix={<SearchOutlined className='w-4 h-4 text-[#6B7280]' />}
               className='bg-white border-gray-200 focus:border-purple-500 focus:shadow-purple-100 h-10'
             />
           </div>
@@ -143,10 +114,10 @@ export function TestList() {
       <div className='w-full mx-auto px-6 pb-6'>
         {hasNoTests ? (
           <Empty
-            image={<FileX className='w-16 h-16 text-gray-400 mx-auto' />}
+            image={<FileExclamationOutlined className='w-16 h-16 text-gray-400 mx-auto' />}
             description={
               <div className='text-center'>
-                <h3 className='text-lg font-medium text-gray-900 mb-2'>
+                <h3 className='text-xs font-medium text-gray-900 mb-2'>
                   {t('TEST_LIST.EMPTY.NO_TEST.TITLE')}
                 </h3>
                 <p className='text-gray-600 mb-6'>{t('TEST_LIST.EMPTY.NO_TEST.DESCRIPTION')}</p>
@@ -157,20 +128,22 @@ export function TestList() {
               type='primary'
               onClick={handleCreateTest}
               className='bg-purple-600 hover:bg-purple-700 border-purple-600'
-              icon={<Plus className='w-4 h-4' />}
+              icon={<PlusOutlined className='w-4 h-4' />}
             >
               {t('TEST_LIST.BUTTON.CREATE')}
             </Button>
           </Empty>
         ) : hasNoResults ? (
           <Empty
-            image={<Search className='w-16 h-16 text-gray-400 mx-auto' />}
+            image={
+              <SearchOutlined className='w-16 h-16 sm:w-16 text-2xl sm:text-3xl sm:h-16 text-gray-400 mx-auto ' />
+            }
             description={
-              <div className='text-center'>
-                <h3 className='text-lg font-medium text-gray-900 mb-2'>
+              <div className='text-center px-4 sm:px-0'>
+                <h3 className='text-sm sm:text-lg font-semibold text-gray-900 mb-2'>
                   {t('TEST_LIST.EMPTY.NO_RESULT.TITLE')}
                 </h3>
-                <p className='text-gray-600 mb-6'>
+                <p className='text-sm sm:text-base text-gray-600 mb-6'>
                   {isSearchActive
                     ? t('TEST_LIST.EMPTY.NO_RESULT.SEARCH_ACTIVE')
                     : t('TEST_LIST.EMPTY.NO_RESULT.NO_FILTER_MATCH')}
