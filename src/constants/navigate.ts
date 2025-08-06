@@ -17,4 +17,6 @@ export const NAVIGATE_URL = {
   QUESTION_BANK: '/question-bank',
   FORGOT_PASSWORD: '/forgot-password',
   TEST: 'test',
+  INTERVIEW: '/interview',
+  SELECT_INTERVIEW: 'mentor/assign',
 };

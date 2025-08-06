@@ -25,3 +25,7 @@ export interface InterviewFilter {
   page: number;
   limit: number;
 }
+
+export interface MentorCreateScheduleDto {
+  interviewRequestIds: string[];
+}
