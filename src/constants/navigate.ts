@@ -10,4 +10,5 @@ export const NAVIGATE_URL = {
   PROFILE: '/profile',
   FORGOT_PASSWORD: '/forgot-password',
   INTERVIEW: '/interview',
+  SELECT_INTERVIEW: 'mentor/assign',
 };
