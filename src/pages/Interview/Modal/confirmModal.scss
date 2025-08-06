@@ -1,0 +1,13 @@
+.fixed-close-button {
+  .anticon {
+    transition: transform 0.2s, color 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}

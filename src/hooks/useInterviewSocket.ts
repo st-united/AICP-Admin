@@ -1,11 +1,18 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-import { socket } from '@app/constants';
+import { QUERY_KEY, socket } from '@app/constants';
 import {
   InterviewColumns,
   InterviewData,
   InterviewFilter,
+  MentorCreateScheduleDto,
 } from '@app/interface/interview.interface';
+import { createMentorScheduleApi } from '@app/services';
+import {
+  openNotificationWithIcon,
+  NotificationTypeEnum,
+} from '@app/services/notification/notificationService';
 
 export const useInterviewSocket = ({
   search,
@@ -55,4 +62,23 @@ export const useInterviewSocket = ({
   }, [search, levelFilter, dateFilter, page, limit]);
 
   return { data, tableData };
+};
+
+export const useCreateMentorSchedule = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (mentor: MentorCreateScheduleDto) => {
+      const { data } = await createMentorScheduleApi(mentor);
+      return data;
+    },
+    {
+      onSuccess({ message }) {
+        openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
+        queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+      },
+      onError({ response }) {
+        openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);
+      },
+    },
+  );
 };
