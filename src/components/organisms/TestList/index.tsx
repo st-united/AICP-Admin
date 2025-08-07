@@ -66,7 +66,7 @@ export function TestList() {
 
   if (isPending) {
     return (
-      <div className='w-full h-[300px] flex justify-center items-center'>
+      <div className='w-full h-[18.75rem] flex justify-center items-center'>
         <Spin size='large' />
       </div>
     );
@@ -89,7 +89,7 @@ export function TestList() {
           </div>
         </div>
         <div className='flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-4'>
-          <div className='w-full [@media(min-width:600px)]:w-[30%] [@media(min-width:1200px)]:w-[15%_!important]'>
+          <div className='w-full sm:w-[30%] md1200:w-[15%_!important]'>
             <Input
               placeholder={t('TEST_LIST.INPUT.PLACEHOLDER') as string}
               value={searchTerm}
@@ -99,7 +99,7 @@ export function TestList() {
             />
           </div>
 
-          <div className='w-full [@media(min-width:600px)]:w-[30%] [@media(min-width:1200px)]:w-[15%_!important]'>
+          <div className='w-full sm:w-[30%] md1200:w-[15%_!important]'>
             <Select value={statusFilter} onChange={setStatusFilter} className='w-full h-10'>
               {statusOptions.map((option) => (
                 <Option key={option.value} value={option.value}>

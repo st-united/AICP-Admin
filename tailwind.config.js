@@ -15,6 +15,7 @@ export default {
       md: '960px', // > iPad gen 9 vertical (810x1080)
       mdS: '1045px',
       mdM: '1120px',
+      md1200: '1200px',
       mdL: '1230px',
       lg: '1281px',
       lgS: '1350px',

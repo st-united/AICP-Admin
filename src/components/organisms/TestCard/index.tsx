@@ -34,7 +34,7 @@ export function TestCard({ test, onViewDetails }: TestCardProps) {
           </Tag>
         </div>
 
-        <p className='text-[#33394A] text-sm sm:text-base mb-4 line-clamp-2 leading-relaxed min-h-[48px]'>
+        <p className='text-[#33394A] text-sm sm:text-base mb-4 line-clamp-2 leading-relaxed min-h-[3rem]'>
           {test.description}
         </p>
 
@@ -52,7 +52,7 @@ export function TestCard({ test, onViewDetails }: TestCardProps) {
         <Button
           type='default'
           onClick={() => onViewDetails(test.id)}
-          className='w-full border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors h-[40px]'
+          className='w-full border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors h-[2.5rem]'
         >
           {t('TEST_LIST.BUTTON.VIEW_DETAILS')}
         </Button>
