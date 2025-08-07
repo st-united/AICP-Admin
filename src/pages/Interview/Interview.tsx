@@ -20,6 +20,7 @@ const Interview = () => {
   const [pagination, setPagination] = useState({ page: 1, take: 10 });
   const [debouncedSearch] = useDebounce(searchInput, 500);
   const { mutate: createMentorSchedule } = useCreateMentorSchedule();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFilterChange = () => {
     setPagination((prev) => ({ ...prev, page: 1 }));
@@ -46,12 +47,16 @@ const Interview = () => {
     const validSelectedKeys = selectedRowKeys.filter((key) =>
       data?.data?.some((item) => item.id === key),
     );
+    setIsLoading(true);
     createMentorSchedule(
       { interviewRequestIds: validSelectedKeys.map(String) },
       {
         onSuccess: () => {
           setSelectedRowKeys([]);
           setIsModalOpen(false);
+        },
+        onSettled: () => {
+          setIsLoading(false);
         },
       },
     );
@@ -102,6 +107,7 @@ const Interview = () => {
           handleSetSchedule={handleConfirm}
           quantityKey='MODAL.DESCRIPTION_CONFIRM_INTERVIEW_USER'
           interviewList={selectedRowKeys}
+          loading={isLoading}
         />
       </div>
     </div>
