@@ -1,9 +1,7 @@
 export const STATUS = {
-  PENDING: 'PENDING',
-  ACCEPTED: 'Chưa diễn ra',
-  REJECTED: 'REJECTED',
-  CANCELLED: 'Không tham gia',
+  UPCOMING: 'Chưa diễn ra',
   COMPLETED: 'Đã diễn ra',
+  NOT_JOINED: 'Không tham gia',
 };
 
 export type StatusKey = keyof typeof STATUS;

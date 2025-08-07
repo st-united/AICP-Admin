@@ -20,7 +20,7 @@ interface FilterBarProps {
   filters: Filters;
   onFiltersChange: (filters: Partial<Filters>) => void;
   levelOptions: string[];
-  statusOptions: string[];
+  statusOptions: any[];
 }
 
 const FilterBar = ({
@@ -56,7 +56,6 @@ const FilterBar = ({
       </div>
 
       <div className='flex flex-col md:flex-row gap-5 w-full md:w-auto'>
-        {/* Level Filter */}
         <div className='flex flex-col gap-1'>
           <Select
             className='min-w-[12.5rem] w-full h-[2.8125rem] text-base'
@@ -83,7 +82,6 @@ const FilterBar = ({
           )}
         </div>
 
-        {/* Status Filter */}
         <div className='flex flex-col gap-1'>
           <Select
             className='min-w-[12.5rem] w-full h-[2.8125rem] text-base'
@@ -94,11 +92,12 @@ const FilterBar = ({
             allowClear
           >
             {statusOptions.map((status) => (
-              <Select.Option key={status} value={status}>
-                {status}
+              <Select.Option key={status.value} value={status.value}>
+                {status.label}
               </Select.Option>
             ))}
           </Select>
+
           {filters.status.length > 0 && (
             <Button
               size='small'

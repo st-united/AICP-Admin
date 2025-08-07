@@ -46,36 +46,26 @@
   }
 
   .status-tag {
-    padding: 4px 10px;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: 25px;
     font-weight: 500;
     display: inline-block;
     min-width: 100px;
     text-align: center;
 
-    &.PENDING {
-      background-color: #fffbe6;
-      color: #faad14;
-    }
-
-    &.ACCEPTED {
+    &.UPCOMING {
       background-color: #e6f4ff;
       color: #1890ff;
-    }
-
-    &.CANCELLED {
-      background-color: #c005050f;
-      color: #c00505;
-    }
-
-    &.REJECTED {
-      background-color: #f9f0ff;
-      color: #722ed1;
     }
 
     &.COMPLETED {
       background-color: #f6ffed;
       color: #52c41a;
+    }
+
+    &.NOT_JOINED {
+      background-color: #c005050f;
+      color: #c00505;
     }
   }
 }

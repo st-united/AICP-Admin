@@ -6,6 +6,7 @@ import { useDebounce } from 'use-debounce';
 import FilterBar from './FilterBar/FilterBar';
 import ScheduleTable from './ScheduleList/ScheduleTable';
 import Summary from './Summary';
+import { STATUS, StatusKey } from '@app/constants';
 import { useGetSchedule } from '@app/hooks';
 import { ScheduleColumns, GetScheduleParams } from '@app/interface/schedule.interface';
 
@@ -36,8 +37,8 @@ const Schedule = () => {
 
   const { data } = useGetSchedule({
     keyword: debouncedFilters.keyword,
-    levelFilter: debouncedFilters.level,
-    statusFilter: debouncedFilters.status,
+    level: debouncedFilters.level,
+    status: debouncedFilters.status,
     dateFilter: debouncedFilters.dateRange,
     page: pagination.page,
     limit: pagination.take,
@@ -56,7 +57,13 @@ const Schedule = () => {
     data?.data?.forEach((item: ScheduleColumns) => {
       if (item.status) statuses.add(item.status);
     });
-    return Array.from(statuses).sort();
+
+    return Array.from(statuses)
+      .filter((key): key is StatusKey => key in STATUS)
+      .map((key) => ({
+        label: STATUS[key],
+        value: key,
+      }));
   }, [data?.data]);
 
   return (
@@ -65,7 +72,12 @@ const Schedule = () => {
         <h2 className='!text-2xl !mb-0'>{t('SCHEDULE.LIST')}</h2>
       </div>
 
-      {/* <Summary></Summary> */}
+      <Summary
+        total={data?.stats?.total || 0}
+        happened={data?.stats?.completed || 0}
+        notHappened={data?.stats?.upcoming || 0}
+        notParticipated={data?.stats?.notJoined || 0}
+      />
 
       <div className='bg-white p-3 sm:p-6 rounded-[1rem] sm:rounded-[1.25rem] flex flex-col gap-4 sm:gap-[2.1875rem]'>
         <FilterBar
