@@ -9,7 +9,7 @@ import { ALL_STATUS_VALUE } from '@app/constants/examset';
 import { formatDate } from '@app/helpers/date';
 import { useGetAllExamSet } from '@app/hooks/useExamset';
 import { statusOptions } from '@app/interface/examSet.interface';
-import './Testlist.scss';
+
 const { Option } = Select;
 
 export function TestList() {
@@ -114,7 +114,9 @@ export function TestList() {
       <div className='w-full mx-auto px-6 pb-6'>
         {hasNoTests ? (
           <Empty
-            image={<FileExclamationOutlined className='w-16 h-16 text-gray-400 mx-auto' />}
+            image={
+              <FileExclamationOutlined className='mx-auto text-gray-400 h-[2.813rem] sm:h-[3.125rem] w-auto' />
+            }
             description={
               <div className='text-center'>
                 <h3 className='text-xs font-medium text-gray-900 mb-2'>
