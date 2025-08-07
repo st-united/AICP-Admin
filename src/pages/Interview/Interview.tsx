@@ -23,6 +23,7 @@ const Interview = () => {
 
   const handleFilterChange = () => {
     setPagination((prev) => ({ ...prev, page: 1 }));
+    setSelectedRowKeys([]);
   };
 
   const { data } = useInterviewSocket({
@@ -42,8 +43,11 @@ const Interview = () => {
   }, [data?.data]);
 
   const handleConfirm = () => {
+    const validSelectedKeys = selectedRowKeys.filter((key) =>
+      data?.data?.some((item) => item.id === key),
+    );
     createMentorSchedule(
-      { interviewRequestIds: selectedRowKeys.map(String) },
+      { interviewRequestIds: validSelectedKeys.map(String) },
       {
         onSuccess: () => {
           setSelectedRowKeys([]);
