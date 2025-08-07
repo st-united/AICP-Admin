@@ -13,6 +13,7 @@ interface ConfirmModalProps {
   open: boolean;
   onClose: () => void;
   handleSetSchedule: () => void;
+  loading?: boolean;
 }
 
 export const ConfirmModal = ({
@@ -21,6 +22,7 @@ export const ConfirmModal = ({
   handleSetSchedule,
   quantityKey,
   interviewList,
+  loading,
 }: ConfirmModalProps) => {
   const { t } = useTranslation();
 
@@ -59,6 +61,8 @@ export const ConfirmModal = ({
 
               <Button
                 onClick={handleSetSchedule}
+                loading={loading}
+                disabled={loading}
                 className='w-full h-full text-base font-semibold border !border-primary px-3 py-2 rounded-full !bg-orange-500 hover:!bg-white hover:!text-primary !text-white transition-colors duration-200 md:w-48 md:px-6 md:py-3 md:text-xl'
               >
                 {t('MODAL.CONFIRM')}
