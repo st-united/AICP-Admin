@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-import { QUERY_KEY, socket } from '@app/constants';
+import { socket } from '@app/constants';
 import {
   InterviewColumns,
   InterviewData,
@@ -27,6 +27,7 @@ export const useInterviewSocket = ({
   useEffect(() => {
     const handleUserBookings = (response: { data?: InterviewData }) => {
       const payload = response?.data;
+
       if (!payload) return;
 
       setData({
@@ -35,16 +36,19 @@ export const useInterviewSocket = ({
         totalPages: payload.totalPages || 1,
       });
 
-      if (!tableData.length && Array.isArray(payload.data)) {
+      if (Array.isArray(payload.data)) {
         setTableData(payload.data);
       }
     };
 
     socket.on('userBookings', handleUserBookings);
+    socket.on('userBookingsUpdate', handleUserBookings);
+
     return () => {
       socket.off('userBookings', handleUserBookings);
+      socket.off('userBookingsUpdate', handleUserBookings);
     };
-  }, [tableData.length]);
+  }, [search, levelFilter, dateFilter, page, limit]);
 
   useEffect(() => {
     const payload = {
@@ -65,7 +69,6 @@ export const useInterviewSocket = ({
 };
 
 export const useCreateMentorSchedule = () => {
-  const queryClient = useQueryClient();
   return useMutation(
     async (mentor: MentorCreateScheduleDto) => {
       const { data } = await createMentorScheduleApi(mentor);
@@ -74,7 +77,7 @@ export const useCreateMentorSchedule = () => {
     {
       onSuccess({ message }) {
         openNotificationWithIcon(NotificationTypeEnum.SUCCESS, message);
-        queryClient.refetchQueries([QUERY_KEY.MENTOR]);
+        socket.emit('scheduleUpdated');
       },
       onError({ response }) {
         openNotificationWithIcon(NotificationTypeEnum.ERROR, response.data.message);

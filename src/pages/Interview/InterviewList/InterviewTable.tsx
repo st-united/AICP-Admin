@@ -77,8 +77,11 @@ const InterviewTable = ({
       className='interview-table'
       rowSelection={{
         selectedRowKeys,
-        onChange: (newKeys) => setSelectedRowKeys(newKeys),
+        onChange: (newKeys) => {
+          setSelectedRowKeys(newKeys);
+        },
       }}
+      rowKey='id'
       columns={columns}
       dataSource={data}
       loading={false}
