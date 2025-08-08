@@ -11,14 +11,12 @@ const { Content } = Layout;
 const PrivateLayout: FC = () => {
   useGetProfile();
   return (
-    <div className='private-layout'>
-      <Layout>
-        <Content>
-          <Suspense fallback={<Spin />}>
+    <div className='private-layout h-screen w-full overflow-hidden'>
+      <Layout className='h-full'>
+        <Content className='h-full'>
+          <Suspense fallback={<Spin className='flex justify-center items-center h-full' />}>
             <ProtectedRoute>
-              <div className='h-full'>
-                <Outlet />
-              </div>
+              <Outlet />
             </ProtectedRoute>
           </Suspense>
         </Content>
