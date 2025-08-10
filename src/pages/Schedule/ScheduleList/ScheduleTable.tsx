@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
 import { Table } from '@app/components/atoms';
-import { DATE_TIME, TIME_SLOTS, STATUS, StatusKey } from '@app/constants';
+import { DATE_TIME, TIME_SLOTS, STATUS, StatusKey, LEVEL, LevelKey } from '@app/constants';
 import { ScheduleColumns } from '@app/interface/schedule.interface';
 import './ScheduleTable.scss';
 
@@ -17,9 +17,6 @@ interface ScheduleTableProps {
 
 const ScheduleTable = ({ data, total, pageCount, table, setTable }: ScheduleTableProps) => {
   const { t } = useTranslation();
-
-  console.log(data);
-
   const columns: ColumnsType<ScheduleColumns> = [
     {
       title: t('SCHEDULE.FULLNAME'),
@@ -49,7 +46,10 @@ const ScheduleTable = ({ data, total, pageCount, table, setTable }: ScheduleTabl
       title: t('SCHEDULE.RESULT'),
       dataIndex: 'level',
       key: 'level',
-      width: 172,
+      width: 180,
+      render: (level: LevelKey) => {
+        return `${LEVEL[level]}`;
+      },
     },
     {
       title: t('SCHEDULE.SCHEDULE_DATE'),
@@ -57,7 +57,7 @@ const ScheduleTable = ({ data, total, pageCount, table, setTable }: ScheduleTabl
       key: 'date',
       width: 215,
       render: (_: string, record: ScheduleColumns) => {
-        const date = dayjs(record.date).format(DATE_TIME.DAY_MONTH_YEAR);
+        const date = dayjs(record.interviewDate).format(DATE_TIME.DAY_MONTH_YEAR);
         const time = TIME_SLOTS[record.timeSlot as keyof typeof TIME_SLOTS];
         return `${date} ${time}`;
       },

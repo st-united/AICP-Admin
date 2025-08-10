@@ -11,14 +11,13 @@ export const useGetSchedule = (params: GetScheduleParams) => {
       params.keyword,
       params.level,
       params.status,
-      params.startDate,
-      params.endDate,
+      params.dateStart,
+      params.dateEnd,
       params.limit,
       params.page,
     ],
     async () => {
       const { data } = await getScheduleAPI(params);
-      console.log(data.data);
       return data.data;
     },
     { keepPreviousData: true },
@@ -33,7 +32,6 @@ export const useGetAllSchedule = () => {
         page: 1,
         limit: 10000,
       });
-      console.log(data);
       return data.data;
     },
     { keepPreviousData: true },

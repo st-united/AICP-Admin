@@ -2,7 +2,7 @@ import { Input, Select, DatePicker, Button } from 'antd';
 import { Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
-import { DATE_TIME } from '@app/constants';
+import { DATE_TIME, LevelKey, StatusKey } from '@app/constants';
 import './FilterBar.scss';
 
 const { Search } = Input;
@@ -15,21 +15,20 @@ interface Filters {
   dateRange: [Dayjs, Dayjs] | null;
 }
 
+interface Option<T extends string> {
+  label: string;
+  value: T;
+}
+
 interface FilterBarProps {
   total: number;
   filters: Filters;
   onFiltersChange: (filters: Partial<Filters>) => void;
-  levelOptions: string[];
-  statusOptions: any[];
+  levelOptions: Option<LevelKey>[];
+  statusOptions: Option<StatusKey>[];
 }
 
-const FilterBar = ({
-  total,
-  filters,
-  onFiltersChange,
-  levelOptions,
-  statusOptions,
-}: FilterBarProps) => {
+const FilterBar = ({ filters, onFiltersChange, levelOptions, statusOptions }: FilterBarProps) => {
   const { t } = useTranslation();
 
   const handleDateChange = (val: [Dayjs | null, Dayjs | null] | null) => {
@@ -42,7 +41,7 @@ const FilterBar = ({
 
   return (
     <div
-      id='SCHEDULE-filter'
+      id='schedule-filter'
       className='flex flex-col md:flex-row md:flex-wrap justify-between gap-6'
     >
       <div className='flex flex-col md:flex-row gap-5 flex-1'>
@@ -66,8 +65,8 @@ const FilterBar = ({
             allowClear
           >
             {levelOptions.map((level) => (
-              <Select.Option key={level} value={level}>
-                {level}
+              <Select.Option key={level.value} value={level.value}>
+                {level.label}
               </Select.Option>
             ))}
           </Select>
@@ -109,7 +108,6 @@ const FilterBar = ({
           )}
         </div>
 
-        {/* Date Filter */}
         <div className='flex flex-col gap-1'>
           <RangePicker
             className='lg:w-[12.5rem] md:w-[12.5rem] w-full h-[2.8125rem] rounded-lg'

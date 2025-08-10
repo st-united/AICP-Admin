@@ -6,7 +6,7 @@ export interface ScheduleColumns {
   phone: string;
   nameExamSet: string;
   level: string;
-  date: string;
+  interviewDate: string;
   timeSlot: string;
   status: string;
 }
@@ -21,8 +21,8 @@ export interface GetScheduleParams {
   keyword?: string;
   level?: string[];
   status?: string[];
-  startDate?: Date | null;
-  endDate?: Date | null;
+  dateStart?: string | null;
+  dateEnd?: string | null;
   page: number;
   limit: number;
 }

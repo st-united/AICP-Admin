@@ -6,8 +6,8 @@ import { useDebounce } from 'use-debounce';
 import FilterBar from './FilterBar/FilterBar';
 import ScheduleTable from './ScheduleList/ScheduleTable';
 import Summary from './Summary';
-import { STATUS, StatusKey } from '@app/constants';
-import { useGetSchedule } from '@app/hooks';
+import { STATUS, StatusKey, LEVEL, LevelKey } from '@app/constants';
+import { useGetSchedule, useGetAllSchedule } from '@app/hooks';
 import { ScheduleColumns, GetScheduleParams } from '@app/interface/schedule.interface';
 
 interface FilterState {
@@ -39,32 +39,38 @@ const Schedule = () => {
     keyword: debouncedFilters.keyword,
     level: debouncedFilters.level,
     status: debouncedFilters.status,
-    dateFilter: debouncedFilters.dateRange,
+    dateStart: debouncedFilters.dateRange ? debouncedFilters.dateRange[0].toISOString() : null,
+    dateEnd: debouncedFilters.dateRange ? debouncedFilters.dateRange[1].toISOString() : null,
     page: pagination.page,
     limit: pagination.take,
   } as GetScheduleParams);
 
-  const levelOptions = useMemo(() => {
-    const levels = new Set<string>();
-    data?.data?.forEach((item: ScheduleColumns) => {
-      if (item.level) levels.add(item.level);
-    });
-    return Array.from(levels).sort();
-  }, [data?.data]);
+  const { data: allData } = useGetAllSchedule();
 
-  const statusOptions = useMemo(() => {
+  const { levelOptions, statusOptions } = useMemo(() => {
+    const levels = new Set<string>();
     const statuses = new Set<string>();
-    data?.data?.forEach((item: ScheduleColumns) => {
+
+    allData?.data?.forEach((item: ScheduleColumns) => {
+      if (item.level) levels.add(item.level);
       if (item.status) statuses.add(item.status);
     });
 
-    return Array.from(statuses)
-      .filter((key): key is StatusKey => key in STATUS)
-      .map((key) => ({
-        label: STATUS[key],
-        value: key,
-      }));
-  }, [data?.data]);
+    return {
+      levelOptions: (Object.keys(LEVEL) as LevelKey[])
+        .filter((key) => levels.has(key))
+        .map((key) => ({
+          label: LEVEL[key],
+          value: key,
+        })),
+      statusOptions: (Object.keys(STATUS) as StatusKey[])
+        .filter((key) => statuses.has(key))
+        .map((key) => ({
+          label: STATUS[key],
+          value: key,
+        })),
+    };
+  }, [allData]);
 
   return (
     <div className='flex flex-col mt-2 gap-6 px-5 overflow-y-auto pb-6'>
@@ -73,10 +79,10 @@ const Schedule = () => {
       </div>
 
       <Summary
-        total={data?.stats?.total || 0}
-        happened={data?.stats?.completed || 0}
-        notHappened={data?.stats?.upcoming || 0}
-        notParticipated={data?.stats?.notJoined || 0}
+        total={allData?.stats?.total}
+        happened={allData?.stats?.completed}
+        notHappened={allData?.stats?.upcoming}
+        notParticipated={allData?.stats?.notJoined}
       />
 
       <div className='bg-white p-3 sm:p-6 rounded-[1rem] sm:rounded-[1.25rem] flex flex-col gap-4 sm:gap-[2.1875rem]'>
