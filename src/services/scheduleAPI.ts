@@ -6,28 +6,4 @@ import { GetScheduleParams } from '@app/interface/schedule.interface';
 export const getScheduleAPI = async (params: GetScheduleParams) =>
   await axios.get(API_URL.MY_SCHEDULE, {
     params,
-    paramsSerializer: (p) => {
-      return Object.keys(p)
-        .filter((key) => p[key] !== undefined && p[key] !== null)
-        .map((key) => {
-          const value = p[key];
-
-          if (Array.isArray(value)) {
-            return value
-              .map((v) => {
-                if (key === 'dateStart' || key === 'dateEnd') {
-                  return `${encodeURIComponent(key)}=${v}`;
-                }
-                return `${encodeURIComponent(key)}=${encodeURIComponent(v)}`;
-              })
-              .join('&');
-          }
-
-          if (key === 'dateStart' || key === 'dateEnd') {
-            return `${encodeURIComponent(key)}=${value}`;
-          }
-          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-        })
-        .join('&');
-    },
   });
