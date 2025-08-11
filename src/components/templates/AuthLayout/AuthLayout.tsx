@@ -13,11 +13,12 @@ const AuthLayout = () => {
     if (!isAuth) {
       navigate('/login');
     }
-  }, [isAuth]);
+  }, [isAuth, navigate]);
+
   return (
-    <div className='flex flex-col h-full'>
+    <div className='flex flex-col h-screen w-full'>
       <Header />
-      <div className='flex-1 overflow-y-auto'>
+      <div className='flex-1 overflow-hidden'>
         <Outlet />
       </div>
     </div>

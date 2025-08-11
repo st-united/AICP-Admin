@@ -6,7 +6,7 @@ import { logoDevPlus } from '@app/assets/images';
 
 const Header = () => {
   return (
-    <Layout.Header className='flex items-center justify-between w-full !h-[5rem] px-6 bg-white shadow'>
+    <Layout.Header className='flex items-center justify-between w-full !h-16 px-6 bg-white shadow'>
       <Link className='flex items-center gap-4 cursor-pointer' to='/'>
         <img src={logoDevPlus} alt='logo' className='w-[8rem]' />
       </Link>
