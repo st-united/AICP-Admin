@@ -6,21 +6,25 @@ import {
   DownloadOutlined,
 } from '@ant-design/icons';
 import { notification } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { string } from 'yup';
+
+import FilePreviewModal from './FilePreviewModal';
+import { getOriginalFileName } from '@app/utils/stringFormatters';
 
 interface PortfolioProps {
   portfolioData?: {
     linkedin?: string;
     github?: string;
     certificates?: string[];
-    experience?: string[];
+    experiences?: string[];
   } | null;
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
   const { t } = useTranslation();
-
+  const [previewFile, setPreviewFile] = useState<string | undefined>(undefined);
   const safeValue = (value?: string) => value?.trim() || t('TABLE.EMPTY');
 
   const handleCopy = async (text: string, label: string) => {
@@ -41,6 +45,20 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
     }
   };
 
+  const handlePreview = (fileUrl: string) => {
+    setPreviewFile(fileUrl);
+  };
+
+  const handleDownload = (url: string) => {
+    if (!url) return;
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = getOriginalFileName(url);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (!portfolioData) {
     return (
       <div className='w-full shadow-md rounded-[12px] text-center py-12'>
@@ -50,7 +68,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
   }
 
   return (
-    <div className='w-full shadow-md rounded-[12px]'>
+    <div className='w-full shadow-md rounded-[0.75rem]'>
       <h3 className='mb-4 text-lg px-12 pt-6'>
         <ProfileOutlined className='me-2' />
         {t('USER_DETAIL.EXPERIENCE_PROFILE')}
@@ -60,7 +78,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
       <div className='flex flex-col md:flex-row md:justify-between gap-x-0 lg:gap-x-14'>
         <div className='w-full md:w-6/12 pb-6 px-12'>
           <span className='text-lg'>{t('USER_DETAIL.LINKEDIN')}</span>
-          <div className='flex justify-between items-center text-lg'>
+          <div className='flex justify-between items-center text-[1rem] font-bold'>
             <p>{safeValue(portfolioData.linkedin)}</p>
             <CopyOutlined
               className='me-2 cursor-pointer'
@@ -70,7 +88,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
         </div>
         <div className='w-full md:w-6/12 pb-6 px-12'>
           <span className='text-lg'>{t('USER_DETAIL.GITHUB')}</span>
-          <div className='flex justify-between items-center text-lg'>
+          <div className='flex justify-between items-center text-[1rem] font-bold'>
             <p>{safeValue(portfolioData.github)}</p>
             <CopyOutlined
               className='me-2 cursor-pointer'
@@ -94,16 +112,22 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
                 >
                   <div className='flex gap-x-2 text-lg'>
                     <FileOutlined />
-                    <p>{cert}</p>
+                    <p>{getOriginalFileName(cert)}</p>
                   </div>
                   <div className='flex gap-x-2 text-lg'>
-                    <EyeOutlined className='text-red-600 cursor-pointer' />
-                    <DownloadOutlined className='text-blue-600 cursor-pointer' />
+                    <EyeOutlined
+                      className='text-red-600 cursor-pointer'
+                      onClick={() => handlePreview(cert)}
+                    />
+                    <DownloadOutlined
+                      className='text-blue-600 cursor-pointer'
+                      onClick={() => handleDownload(cert)}
+                    />
                   </div>
                 </div>
               ))
             ) : (
-              <p className='text-[18px]'>{t('TABLE.EMPTY')}</p>
+              <p className='text-[1rem] font-bold'>{t('TABLE.EMPTY')}</p>
             )}
           </div>
         </div>
@@ -112,28 +136,40 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
         <div className='w-full lg:w-6/12 pb-6 px-12'>
           <h3 className='text-lg pb-2 font-normal'>{t('USER_DETAIL.EXPERIENCE')}</h3>
           <div className='flex flex-col gap-y-4'>
-            {portfolioData.experience && portfolioData.experience.length > 0 ? (
-              portfolioData.experience.map((exp, index) => (
+            {portfolioData.experiences && portfolioData.experiences.length > 0 ? (
+              portfolioData.experiences.map((exp, index) => (
                 <div
                   key={index}
                   className='flex justify-between text-lg border border-solid border-red-200 p-6 rounded-[12px]'
                 >
                   <div className='flex gap-x-2 text-lg'>
                     <FileOutlined />
-                    <p>{exp}</p>
+                    <p>{getOriginalFileName(exp)}</p>
                   </div>
                   <div className='flex gap-x-2 text-lg'>
-                    <EyeOutlined className='text-red-600 cursor-pointer' />
-                    <DownloadOutlined className='text-blue-600 cursor-pointer' />
+                    <EyeOutlined
+                      className='text-red-600 cursor-pointer'
+                      onClick={() => handlePreview(exp)}
+                    />
+                    <DownloadOutlined
+                      className='text-blue-600 cursor-pointer'
+                      onClick={() => handleDownload(exp)}
+                    />
                   </div>
                 </div>
               ))
             ) : (
-              <p className='text-[18px]'>{t('TABLE.EMPTY')}</p>
+              <p className='text-[1rem] font-semibold'>{t('TABLE.EMPTY')}</p>
             )}
           </div>
         </div>
       </div>
+
+      <FilePreviewModal
+        open={!!previewFile}
+        fileUrl={previewFile}
+        onClose={() => setPreviewFile(undefined)}
+      />
     </div>
   );
 };
