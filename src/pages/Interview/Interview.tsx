@@ -6,7 +6,8 @@ import { useDebounce } from 'use-debounce';
 import FilterBar from './FilterBar/FilterBar';
 import InterviewTable from './InterviewList/InterviewTable';
 import SelectedBar from './SelectedBar';
-import { useInterviewSocket } from '@app/hooks/index';
+import { LEVEL, LevelKey } from '@app/constants';
+import { useGetInterviewRequests, useGetInterviewRequestsForFilter } from '@app/hooks/index';
 import { InterviewColumns } from '@app/interface/interview.interface';
 
 const Interview = () => {
@@ -24,21 +25,36 @@ const Interview = () => {
   const handleFilterChange = () => {
     setPagination((prev) => ({ ...prev, page: 1 }));
   };
-  const { data } = useInterviewSocket({
-    search: debouncedSearch,
-    levelFilter,
-    dateFilter,
+
+  const { data, isLoading } = useGetInterviewRequests({
+    name: debouncedSearch || undefined,
+    level: levelFilter.length ? levelFilter : undefined,
+    dateStart: dateFilter?.[0]?.toISOString(),
+    dateEnd: dateFilter?.[1]?.toISOString(),
     page: pagination.page,
     limit: pagination.take,
   });
 
-  const levelOptions = useMemo(() => {
+  const { data: allData } = useGetInterviewRequestsForFilter();
+
+  const { levelOptions } = useMemo(() => {
     const levels = new Set<string>();
-    data?.data?.forEach((item: InterviewColumns) => {
+
+    const items = allData?.data?.data || [];
+
+    items.forEach((item: InterviewColumns) => {
       if (item.level) levels.add(item.level);
     });
-    return Array.from(levels).sort();
-  }, [data?.data]);
+
+    return {
+      levelOptions: (Object.keys(LEVEL) as LevelKey[])
+        .filter((key) => levels.has(key))
+        .map((key) => ({
+          label: LEVEL[key],
+          value: key,
+        })),
+    };
+  }, [allData]);
 
   return (
     <div className='flex flex-col mt-2 gap-6 px-5 overflow-y-auto pb-6'>
@@ -50,7 +66,7 @@ const Interview = () => {
         <SelectedBar selectedCount={selectedRowKeys.length} />
 
         <FilterBar
-          total={data?.total || 0}
+          total={data?.data?.total || 0}
           searchValue={searchInput}
           onSearchChange={(value) => {
             setSearchInput(value);
@@ -72,9 +88,9 @@ const Interview = () => {
         <InterviewTable
           selectedRowKeys={selectedRowKeys}
           setSelectedRowKeys={setSelectedRowKeys}
-          data={data?.data || []}
-          total={data?.total || 0}
-          pageCount={data?.totalPages || 1}
+          data={data?.data?.data || []}
+          total={data?.data?.total || 0}
+          pageCount={data?.data?.totalPages || 1}
           table={pagination}
           setTable={setPagination}
         />

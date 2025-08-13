@@ -12,16 +12,11 @@ export interface InterviewColumns {
   timeSlost: TimeSlotKey;
 }
 
-export interface InterviewData {
-  data: InterviewColumns[];
-  total: number;
-  totalPages: number;
-}
-
-export interface InterviewFilter {
-  search: string;
-  levelFilter: string[];
-  dateFilter: [Dayjs, Dayjs] | null;
+export interface InterviewRequestsParams {
+  name?: string;
+  level?: string[];
+  dateStart?: string | null;
+  dateEnd?: string | null;
   page: number;
   limit: number;
 }

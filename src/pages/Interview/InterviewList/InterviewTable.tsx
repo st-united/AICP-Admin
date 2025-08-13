@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
 import { Table } from '@app/components/atoms';
-import { DATE_TIME, TIME_SLOTS } from '@app/constants';
+import { DATE_TIME, TIME_SLOTS, LEVEL, LevelKey } from '@app/constants';
 import { InterviewColumns } from '@app/interface/interview.interface';
 import './InterviewTable.scss';
 
@@ -57,7 +57,10 @@ const InterviewTable = ({
       title: t('INTERVIEW.RESULT'),
       dataIndex: 'level',
       key: 'level',
-      width: 172,
+      width: 180,
+      render: (level: LevelKey) => {
+        return `${LEVEL[level]}`;
+      },
     },
     {
       title: t('INTERVIEW.INTERVIEW_DATE'),
