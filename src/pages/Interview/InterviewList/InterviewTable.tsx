@@ -1,9 +1,10 @@
 import { ColumnsType } from 'antd/lib/table/interface';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { Table } from '@app/components/atoms';
-import { DATE_TIME, TIME_SLOTS } from '@app/constants';
+import { DATE_TIME, NAVIGATE_URL, TIME_SLOTS } from '@app/constants';
 import { InterviewColumns } from '@app/interface/interview.interface';
 import './InterviewTable.scss';
 
@@ -27,6 +28,7 @@ const InterviewTable = ({
   setTable,
 }: InterviewTableProps) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const columns: ColumnsType<InterviewColumns> = [
     {
@@ -91,8 +93,12 @@ const InterviewTable = ({
         pageCount,
         setTable,
       }}
-      onRow={() => ({
+      onRow={(record) => ({
         className: 'cursor-pointer',
+        onClick: () => {
+          // Điều hướng đến route với id
+          navigate(`${NAVIGATE_URL.INTERVIEWER_LIST}/${record.examId}`);
+        },
       })}
     />
   );

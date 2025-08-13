@@ -19,4 +19,5 @@ export const NAVIGATE_URL = {
   TEST: 'test',
   INTERVIEW: '/interview',
   SELECT_INTERVIEW: 'mentor/assign',
+  USER_DETAIL: ':id',
 };

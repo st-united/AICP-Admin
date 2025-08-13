@@ -36,6 +36,7 @@ const Interview = () => {
   });
 
   const levelOptions = useMemo(() => {
+    console.log(data);
     const levels = new Set<string>();
     data?.data?.forEach((item: InterviewColumns) => {
       if (item.level) levels.add(item.level);

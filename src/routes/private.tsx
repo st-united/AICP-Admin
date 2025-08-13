@@ -53,7 +53,13 @@ const routes = [
           { path: NAVIGATE_URL.MENTOR, element: <Mentor /> },
           { path: NAVIGATE_URL.COMPANY, element: <Developing /> },
           { path: NAVIGATE_URL.EXAM_SET, element: <TestPage /> },
-          { path: NAVIGATE_URL.INTERVIEWER_LIST, element: <Interview /> },
+          {
+            path: NAVIGATE_URL.INTERVIEWER_LIST,
+            children: [
+              { index: true, element: <Interview /> },
+              { path: NAVIGATE_URL.USER_DETAIL, element: <UserDetail /> },
+            ],
+          },
           { path: NAVIGATE_URL.MY_CALENDER, element: <Developing /> },
           { path: NAVIGATE_URL.QUESTION_BANK, element: <Developing /> },
         ],
