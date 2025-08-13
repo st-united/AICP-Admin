@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { string } from 'yup';
 
 import FilePreviewModal from './FilePreviewModal';
+import Card from '@app/components/atoms/Card/Card';
 import { getOriginalFileName } from '@app/utils/stringFormatters';
 
 interface PortfolioProps {
@@ -68,15 +69,15 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
   }
 
   return (
-    <div className='w-full shadow-md rounded-[0.75rem]'>
-      <h3 className='mb-4 text-lg px-12 pt-6'>
+    <Card className='w-full rounded-[0.75rem]'>
+      <h3 className='mb-2 text-lg px-6 pt-6'>
         <ProfileOutlined className='me-2' />
         {t('USER_DETAIL.EXPERIENCE_PROFILE')}
       </h3>
 
       {/* LinkedIn & GitHub */}
       <div className='flex flex-col md:flex-row md:justify-between gap-x-0 lg:gap-x-14'>
-        <div className='w-full md:w-6/12 pb-6 px-12'>
+        <div className='w-full md:w-6/12 pb-2 px-6'>
           <span className='text-lg'>{t('USER_DETAIL.LINKEDIN')}</span>
           <div className='flex justify-between items-center text-[1rem] font-bold'>
             <p>{safeValue(portfolioData.linkedin)}</p>
@@ -86,7 +87,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
             />
           </div>
         </div>
-        <div className='w-full md:w-6/12 pb-6 px-12'>
+        <div className='w-full md:w-6/12  px-6'>
           <span className='text-lg'>{t('USER_DETAIL.GITHUB')}</span>
           <div className='flex justify-between items-center text-[1rem] font-bold'>
             <p>{safeValue(portfolioData.github)}</p>
@@ -101,7 +102,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
       {/* Certificates & Experience */}
       <div className='flex flex-col lg:flex-row justify-between lg:gap-x-14'>
         {/* Certificates */}
-        <div className='w-full lg:w-6/12 pb-6 px-12'>
+        <div className='w-full lg:w-6/12 pb-6 px-6'>
           <h3 className='text-lg pb-2 font-normal'>{t('USER_DETAIL.CERTIFICATE')}</h3>
           <div className='flex flex-col gap-y-4'>
             {portfolioData.certificates && portfolioData.certificates.length > 0 ? (
@@ -133,7 +134,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
         </div>
 
         {/* Experience */}
-        <div className='w-full lg:w-6/12 pb-6 px-12'>
+        <div className='w-full lg:w-6/12 pb-6 px-6'>
           <h3 className='text-lg pb-2 font-normal'>{t('USER_DETAIL.EXPERIENCE')}</h3>
           <div className='flex flex-col gap-y-4'>
             {portfolioData.experiences && portfolioData.experiences.length > 0 ? (
@@ -170,7 +171,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
         fileUrl={previewFile}
         onClose={() => setPreviewFile(undefined)}
       />
-    </div>
+    </Card>
   );
 };
 

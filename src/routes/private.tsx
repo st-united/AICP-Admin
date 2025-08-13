@@ -55,7 +55,7 @@ const routes = [
             element: <Mentor />,
           },
           { path: 'company', element: <Developing /> },
-          { path: 'user-detail', element: <UserDetail /> },
+          { path: 'user-detail/:id', element: <UserDetail /> },
         ],
       },
     ],

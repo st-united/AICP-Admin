@@ -313,7 +313,8 @@
     "COMPANY": "Doanh nghiệp"
   },
   "ADMIN_BREADCRUMB": {
-    "HOME": "Trang chủ"
+    "HOME": "Trang chủ",
+    "USER_DETAIL": "Danh sách đăng ký"
   },
   "MENTOR": {
     "LIST": "Danh sách cố vấn",
