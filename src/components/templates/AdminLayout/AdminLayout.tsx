@@ -30,6 +30,7 @@ const AdminLayout: React.FC = () => {
     { key: MENU_ITEMS_KEY.INTERVIEWER_LIST, label: t('MENTOR_SIDEBAR.INTERVIEWER_LIST') },
     { key: MENU_ITEMS_KEY.MY_CALENDER, label: t('MENTOR_SIDEBAR.MY_CALENDER') },
     { key: MENU_ITEMS_KEY.QUESTION_BANK, label: t('MENTOR_SIDEBAR.QUESTION_BANK') },
+    { key: 'user-detail', label: t('ADMIN_BREADCRUMB.USER_DETAIL') },
   ];
 
   const breadcrumbItems: BreadcrumbItem[] = [];
