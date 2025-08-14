@@ -1,5 +1,5 @@
 import { Dayjs } from 'dayjs';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 
@@ -27,10 +27,9 @@ const Interview = () => {
   const { mutate: createMentorSchedule } = useCreateMentorSchedule();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleFilterChange = () => {
+  const handleFilterChange = useCallback(() => {
     setPagination((prev) => ({ ...prev, page: 1 }));
-    setSelectedRowKeys([]);
-  };
+  }, []);
 
   const { data } = useGetInterviewRequests({
     name: debouncedSearch || undefined,
