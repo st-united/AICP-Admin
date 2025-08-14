@@ -8,7 +8,6 @@ import {
 import { notification } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { string } from 'yup';
 
 import FilePreviewModal from './FilePreviewModal';
 import Card from '@app/components/atoms/Card/Card';
