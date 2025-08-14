@@ -2,7 +2,6 @@ import { Spin, Typography } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { string } from 'yup';
 
 import UserInfo from './components/UserInfo';
 import Portfolio from './components/UserPorfolio';
