@@ -79,6 +79,7 @@ export const API_URL = {
   ACTIVE_MENTOR_BY_LINK: '/mentors/activate-link-account',
   INTERVIEW: '/bookings',
   INTERVIEW_SCHEDULE: '/mentors/assign',
+  MY_SCHEDULE: '/mentors',
 };
 
 export const VEHICLES_URL = '/vehicles';
