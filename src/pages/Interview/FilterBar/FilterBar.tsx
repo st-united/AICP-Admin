@@ -1,5 +1,6 @@
 import { Input, Select, DatePicker, Button } from 'antd';
 import { Dayjs } from 'dayjs';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DATE_TIME, LevelKey } from '@app/constants';
@@ -35,13 +36,16 @@ const FilterBar = ({
 }: FilterBarProps) => {
   const { t } = useTranslation();
 
-  const handleDateChange = (val: [Dayjs | null, Dayjs | null] | null) => {
-    if (!val || !val[0] || !val[1]) {
-      onDateFilterChange(null);
-    } else {
-      onDateFilterChange([val[0], val[1]]);
-    }
-  };
+  const handleDateChange = useCallback(
+    (val: [Dayjs | null, Dayjs | null] | null) => {
+      if (!val || !val[0] || !val[1]) {
+        onDateFilterChange(null);
+      } else {
+        onDateFilterChange([val[0], val[1]]);
+      }
+    },
+    [onDateFilterChange],
+  );
 
   return (
     <div
