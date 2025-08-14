@@ -34,7 +34,7 @@ const Interview = () => {
 
   const { data } = useGetInterviewRequests({
     name: debouncedSearch || undefined,
-    level: levelFilter.length ? levelFilter : undefined,
+    levels: levelFilter.length ? levelFilter : undefined,
     dateStart: dateFilter?.[0]?.toISOString(),
     dateEnd: dateFilter?.[1]?.toISOString(),
     page: pagination.page,
