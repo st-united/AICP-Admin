@@ -1,5 +1,5 @@
 import { Dayjs } from 'dayjs';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 
@@ -30,17 +30,17 @@ const Schedule = () => {
   const [pagination, setPagination] = useState({ page: 1, take: 10 });
   const [debouncedFilters] = useDebounce(filters, 500);
 
-  const handleFiltersChange = (newFilters: Partial<FilterState>) => {
+  const handleFiltersChange = useCallback((newFilters: Partial<FilterState>) => {
     setFilters((prev) => ({ ...prev, ...newFilters }));
     setPagination((prev) => ({ ...prev, page: 1 }));
-  };
+  }, []);
 
   const { data } = useGetSchedule({
-    keyword: debouncedFilters.keyword,
-    level: debouncedFilters.level,
-    status: debouncedFilters.status,
-    dateStart: debouncedFilters.dateRange ? debouncedFilters.dateRange[0].toISOString() : null,
-    dateEnd: debouncedFilters.dateRange ? debouncedFilters.dateRange[1].toISOString() : null,
+    keyword: debouncedFilters.keyword || undefined,
+    levels: debouncedFilters.level.length ? debouncedFilters.level : undefined,
+    status: debouncedFilters.status.length ? debouncedFilters.status : undefined,
+    dateStart: debouncedFilters.dateRange?.[0]?.toISOString(),
+    dateEnd: debouncedFilters.dateRange?.[1]?.toISOString(),
     page: pagination.page,
     limit: pagination.take,
   } as GetScheduleParams);

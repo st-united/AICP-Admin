@@ -1,5 +1,6 @@
 import { Input, Select, DatePicker, Button } from 'antd';
 import { Dayjs } from 'dayjs';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DATE_TIME, LevelKey, StatusKey } from '@app/constants';
@@ -31,13 +32,16 @@ interface FilterBarProps {
 const FilterBar = ({ filters, onFiltersChange, levelOptions, statusOptions }: FilterBarProps) => {
   const { t } = useTranslation();
 
-  const handleDateChange = (val: [Dayjs | null, Dayjs | null] | null) => {
-    if (!val || val[0] === null || val[1] === null) {
-      onFiltersChange({ dateRange: null });
-    } else {
-      onFiltersChange({ dateRange: [val[0], val[1]] });
-    }
-  };
+  const handleDateChange = useCallback(
+    (val: [Dayjs | null, Dayjs | null] | null) => {
+      if (!val || val[0] === null || val[1] === null) {
+        onFiltersChange({ dateRange: null });
+      } else {
+        onFiltersChange({ dateRange: [val[0], val[1]] });
+      }
+    },
+    [onFiltersChange],
+  );
 
   return (
     <div
@@ -96,7 +100,6 @@ const FilterBar = ({ filters, onFiltersChange, levelOptions, statusOptions }: Fi
               </Select.Option>
             ))}
           </Select>
-
           {filters.status.length > 0 && (
             <Button
               size='small'

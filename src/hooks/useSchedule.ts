@@ -9,7 +9,7 @@ export const useGetSchedule = (params: GetScheduleParams) => {
     [
       QUERY_KEY.SCHEDULE,
       params.keyword,
-      params.level,
+      params.levels,
       params.status,
       params.dateStart,
       params.dateEnd,

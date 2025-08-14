@@ -1,4 +1,3 @@
-import { Dayjs } from 'dayjs';
 export interface ScheduleColumns {
   id: string;
   fullName: string;
@@ -19,7 +18,7 @@ export interface ScheduleData {
 
 export interface GetScheduleParams {
   keyword?: string;
-  level?: string[];
+  levels?: string[];
   status?: string[];
   dateStart?: string | null;
   dateEnd?: string | null;
