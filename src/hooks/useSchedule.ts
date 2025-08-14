@@ -5,35 +5,26 @@ import { GetScheduleParams } from '@app/interface/schedule.interface';
 import { getScheduleAPI } from '@app/services';
 
 export const useGetSchedule = (params: GetScheduleParams) => {
-  return useQuery(
-    [
-      QUERY_KEY.SCHEDULE,
-      params.keyword,
-      params.levels,
-      params.status,
-      params.dateStart,
-      params.dateEnd,
-      params.limit,
-      params.page,
-    ],
-    async () => {
+  return useQuery({
+    queryKey: [QUERY_KEY.SCHEDULE, params],
+    queryFn: async () => {
       const { data } = await getScheduleAPI(params);
       return data.data;
     },
-    { keepPreviousData: true },
-  );
+    keepPreviousData: true,
+  });
 };
 
 export const useGetAllSchedule = () => {
-  return useQuery(
-    [QUERY_KEY.SCHEDULE],
-    async () => {
+  return useQuery({
+    queryKey: [QUERY_KEY.SCHEDULE, { page: 1, limit: 10000 }],
+    queryFn: async () => {
       const { data } = await getScheduleAPI({
         page: 1,
         limit: 10000,
       });
       return data.data;
     },
-    { keepPreviousData: true },
-  );
+    keepPreviousData: true,
+  });
 };
