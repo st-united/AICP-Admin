@@ -100,7 +100,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
       </div>
 
       {/* Certificates & Experience */}
-      <div className='flex flex-col lg:flex-row justify-between lg:gap-x-14'>
+      <div className='flex flex-col justify-between'>
         {/* Certificates */}
         <div className='w-full lg:w-6/12 pb-6 px-6'>
           <h3 className='text-lg pb-2 font-normal'>{t('USER_DETAIL.CERTIFICATE')}</h3>
@@ -160,7 +160,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
                 </div>
               ))
             ) : (
-              <p className='text-[1rem] font-semibold'>{t('TABLE.EMPTY')}</p>
+              <p className='text-[1rem] font-bold'>{t('TABLE.EMPTY')}</p>
             )}
           </div>
         </div>

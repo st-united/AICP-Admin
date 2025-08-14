@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -12,6 +13,10 @@ import MentorSidebar from '@app/components/organisms/Sidebar/MentorSidebar';
 import { MENU_ITEMS_KEY } from '@app/constants/menuKey';
 import { RootState } from '@app/redux/store';
 
+// Hàm kiểm tra UUID
+const isUUID = (str: string) =>
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+
 const AdminLayout: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
@@ -20,6 +25,15 @@ const AdminLayout: React.FC = () => {
     .split('/')
     .filter(Boolean)
     .filter((seg) => seg !== MENU_ITEMS_KEY.DASHBOARD);
+
+  // Ánh xạ route với label tùy chỉnh cho UUID
+  const customLabels = useMemo(
+    () => ({
+      [MENU_ITEMS_KEY.INTERVIEWER_LIST]: t('MENTOR_SIDEBAR.USER_DETAIL_INTERVIEW'),
+      // Thêm các route khác ở đây, ví dụ: [MENU_ITEMS_KEY.COMPANY]: t('ADMIN_SIDEBAR.COMPANY_DETAIL')
+    }),
+    [t],
+  );
 
   const menuItems = [
     { key: MENU_ITEMS_KEY.DASHBOARD, label: t('ADMIN_SIDEBAR.DASHBOARD') },
@@ -30,16 +44,21 @@ const AdminLayout: React.FC = () => {
     { key: MENU_ITEMS_KEY.INTERVIEWER_LIST, label: t('MENTOR_SIDEBAR.INTERVIEWER_LIST') },
     { key: MENU_ITEMS_KEY.MY_CALENDER, label: t('MENTOR_SIDEBAR.MY_CALENDER') },
     { key: MENU_ITEMS_KEY.QUESTION_BANK, label: t('MENTOR_SIDEBAR.QUESTION_BANK') },
-    { key: 'user-detail', label: t('ADMIN_BREADCRUMB.USER_DETAIL') },
   ];
 
   const breadcrumbItems: BreadcrumbItem[] = [];
   let currentPath = '';
-  segments.forEach((seg) => {
+  segments.forEach((seg, index) => {
     currentPath += `/${seg}`;
     const found = menuItems.find((item) => item.key === seg);
     if (found) {
       breadcrumbItems.push({ ...found, path: currentPath });
+    } else if (index > 0 && isUUID(seg) && customLabels[segments[index - 1]]) {
+      breadcrumbItems.push({
+        key: seg,
+        label: customLabels[segments[index - 1]],
+        path: currentPath,
+      });
     } else {
       breadcrumbItems.push({ key: seg, label: decodeURIComponent(seg), path: currentPath });
     }

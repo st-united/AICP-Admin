@@ -321,11 +321,11 @@
     "CALENDER_MANAGEMENT": "Quản lý lịch phỏng vấn",
     "INTERVIEWER_LIST": "Danh sách đăng kí",
     "MY_CALENDER": "Lịch phỏng vấn của tôi",
-    "QUESTION_BANK": "Ngân hàng câu hỏi"
+    "QUESTION_BANK": "Ngân hàng câu hỏi",
+    "USER_DETAIL_INTERVIEW": "Chi tiết người dùng"
   },
   "ADMIN_BREADCRUMB": {
-    "HOME": "Trang chủ",
-    "USER_DETAIL": "Danh sách đăng ký"
+    "HOME": "Trang chủ"
   },
   "MENTOR": {
     "LIST": "Danh sách cố vấn",
