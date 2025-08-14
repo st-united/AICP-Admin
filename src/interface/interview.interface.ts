@@ -1,5 +1,3 @@
-import { Dayjs } from 'dayjs';
-
 import { TimeSlotKey } from '@app/constants';
 export interface InterviewColumns {
   id: number;
