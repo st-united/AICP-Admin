@@ -1,5 +1,5 @@
 import { Dayjs } from 'dayjs';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 
@@ -7,7 +7,12 @@ import FilterBar from './FilterBar/FilterBar';
 import InterviewTable from './InterviewList/InterviewTable';
 import { ConfirmModal } from './Modal/ConfirmModal';
 import SelectedBar from './SelectedBar';
-import { useCreateMentorSchedule, useInterviewSocket } from '@app/hooks';
+import { LEVEL, LevelKey } from '@app/constants';
+import {
+  useCreateMentorSchedule,
+  useGetInterviewRequests,
+  useGetInterviewRequestsForFilter,
+} from '@app/hooks';
 import { InterviewColumns } from '@app/interface/interview.interface';
 
 const Interview = () => {
@@ -22,30 +27,43 @@ const Interview = () => {
   const { mutate: createMentorSchedule } = useCreateMentorSchedule();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleFilterChange = () => {
+  const handleFilterChange = useCallback(() => {
     setPagination((prev) => ({ ...prev, page: 1 }));
-    setSelectedRowKeys([]);
-  };
+  }, []);
 
-  const { data } = useInterviewSocket({
-    search: debouncedSearch,
-    levelFilter,
-    dateFilter,
+  const { data } = useGetInterviewRequests({
+    name: debouncedSearch || undefined,
+    levels: levelFilter.length ? levelFilter : undefined,
+    dateStart: dateFilter?.[0]?.toISOString(),
+    dateEnd: dateFilter?.[1]?.toISOString(),
     page: pagination.page,
     limit: pagination.take,
   });
 
-  const levelOptions = useMemo(() => {
+  const { data: allData } = useGetInterviewRequestsForFilter();
+
+  const { levelOptions } = useMemo(() => {
     const levels = new Set<string>();
-    data?.data?.forEach((item: InterviewColumns) => {
+
+    const items = allData?.data?.data || [];
+
+    items.forEach((item: InterviewColumns) => {
       if (item.level) levels.add(item.level);
     });
-    return Array.from(levels).sort();
-  }, [data?.data]);
+
+    return {
+      levelOptions: (Object.keys(LEVEL) as LevelKey[])
+        .filter((key) => levels.has(key))
+        .map((key) => ({
+          label: LEVEL[key],
+          value: key,
+        })),
+    };
+  }, [allData]);
 
   const handleConfirm = () => {
     const validSelectedKeys = selectedRowKeys.filter((key) =>
-      data?.data?.some((item) => item.id === key),
+      data?.data?.data?.some((item: InterviewColumns) => item.id === key),
     );
     setIsLoading(true);
     createMentorSchedule(
@@ -72,7 +90,7 @@ const Interview = () => {
         <SelectedBar selectedCount={selectedRowKeys.length} onAction={() => setIsModalOpen(true)} />
 
         <FilterBar
-          total={data?.total || 0}
+          total={data?.data?.total || 0}
           searchValue={searchInput}
           onSearchChange={(value) => {
             setSearchInput(value);
@@ -94,9 +112,9 @@ const Interview = () => {
         <InterviewTable
           selectedRowKeys={selectedRowKeys}
           setSelectedRowKeys={setSelectedRowKeys}
-          data={data?.data || []}
-          total={data?.total || 0}
-          pageCount={data?.totalPages || 1}
+          data={data?.data?.data || []}
+          total={data?.data?.total || 0}
+          pageCount={data?.data?.totalPages || 1}
           table={pagination}
           setTable={setPagination}
         />
