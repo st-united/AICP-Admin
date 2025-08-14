@@ -9,7 +9,7 @@ export const useGetInterviewRequests = (params: InterviewRequestsParams) => {
     [
       QUERY_KEY.INTERVIEW,
       params.name,
-      params.level,
+      params.levels,
       params.dateStart,
       params.dateEnd,
       params.limit,

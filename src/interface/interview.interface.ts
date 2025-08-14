@@ -14,7 +14,7 @@ export interface InterviewColumns {
 
 export interface InterviewRequestsParams {
   name?: string;
-  level?: string[];
+  levels?: string[];
   dateStart?: string | null;
   dateEnd?: string | null;
   page: number;
