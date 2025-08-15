@@ -99,7 +99,6 @@ const InterviewTable = ({
       onRow={(record) => ({
         className: 'cursor-pointer',
         onClick: () => {
-          // Điều hướng đến route với id
           navigate(`${NAVIGATE_URL.INTERVIEWER_LIST}/${record.examId}`);
         },
       })}

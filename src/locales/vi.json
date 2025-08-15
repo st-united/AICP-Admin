@@ -483,5 +483,9 @@
     "CORRECT_ANSWER": "Câu đúng",
     "COPY_SUCCESS_TITLE": "Sao chép thành công",
     "COPY_FAIL_DESC": "Không thể sao chép liên kết, vui lòng thử lại sau."
+  },
+  "FILE_PREVIEW": {
+    "NO_DATA": "Không có file để hiển thị",
+    "FORMAT_ERROR": "Không hỗ trợ xem trước định dạng này"
   }
 }
