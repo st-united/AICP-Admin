@@ -1,20 +1,25 @@
 import { Input, Select, DatePicker, Button } from 'antd';
 import { Dayjs } from 'dayjs';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { DATE_TIME } from '@app/constants';
+import { DATE_TIME, LevelKey } from '@app/constants';
 import './FilterBar.scss';
 
 const { Search } = Input;
 const { RangePicker } = DatePicker;
 
+interface Option<T extends string> {
+  label: string;
+  value: T;
+}
 interface FilterBarProps {
   total: number;
   searchValue: string;
   onSearchChange: (value: string) => void;
   levelFilter: string[];
   onLevelFilterChange: (value: string[]) => void;
-  levelOptions: string[];
+  levelOptions: Option<LevelKey>[];
   dateFilter: [Dayjs, Dayjs] | null;
   onDateFilterChange: (value: [Dayjs, Dayjs] | null) => void;
 }
@@ -31,13 +36,16 @@ const FilterBar = ({
 }: FilterBarProps) => {
   const { t } = useTranslation();
 
-  const handleDateChange = (val: [Dayjs | null, Dayjs | null] | null) => {
-    if (!val || val[0] === null || val[1] === null) {
-      onDateFilterChange(null);
-    } else {
-      onDateFilterChange([val[0], val[1]]);
-    }
-  };
+  const handleDateChange = useCallback(
+    (val: [Dayjs | null, Dayjs | null] | null) => {
+      if (!val || !val[0] || !val[1]) {
+        onDateFilterChange(null);
+      } else {
+        onDateFilterChange([val[0], val[1]]);
+      }
+    },
+    [onDateFilterChange],
+  );
 
   return (
     <div
@@ -69,8 +77,8 @@ const FilterBar = ({
             allowClear
           >
             {levelOptions.map((level) => (
-              <Select.Option key={level} value={level}>
-                {level}
+              <Select.Option key={level.value} value={level.value}>
+                {level.label}
               </Select.Option>
             ))}
           </Select>
@@ -80,7 +88,7 @@ const FilterBar = ({
               className='text-base w-20 self-end'
               onClick={() => onLevelFilterChange([])}
             >
-              {t('USER.RESET_FILTER')}
+              {t('INTERVIEW.RESET_FILTER')}
             </Button>
           )}
         </div>

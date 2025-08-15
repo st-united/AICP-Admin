@@ -10,7 +10,6 @@ interface CustomCardProps extends Omit<AntdCardProps, 'title'> {
   loading?: boolean;
 }
 
-// Reusable Card component with Ant Design
 const Card: React.FC<CustomCardProps> = ({
   actions,
   className,
@@ -18,7 +17,6 @@ const Card: React.FC<CustomCardProps> = ({
   loading = false,
   ...antdProps
 }) => {
-  // Combine Tailwind and Ant Design classes
   const cardClasses = clsx(
     'shadow-md hover:shadow-lg transition-shadow duration-300 !p-0',
     className,

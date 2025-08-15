@@ -14,7 +14,7 @@ export const getUsersAPI = async (params: GetUsersParams) =>
 export const getUserStatsApi = () => axios.get(API_URL.GET_USER_STATS);
 
 export const getUserByIdAPI = async (id: number) => await axios.get(`${API_URL.USERS}/${id}`);
-``;
+
 export const updateUser = async (user: UserDetail) =>
   await axios.patch(`${API_URL.USERS}/${user.id}`, user);
 

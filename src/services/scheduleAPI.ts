@@ -1,16 +1,10 @@
 import axios from 'axios';
 
 import { API_URL } from '@app/constants';
-import {
-  MentorCreateScheduleDto,
-  InterviewRequestsParams,
-} from '@app/interface/interview.interface';
+import { GetScheduleParams } from '@app/interface/schedule.interface';
 
-export const createMentorScheduleApi = (mentor: MentorCreateScheduleDto) =>
-  axios.post(API_URL.INTERVIEW_SCHEDULE, mentor);
-
-export const getInterviewRequestsApi = (params: InterviewRequestsParams) =>
-  axios.get(API_URL.INTERVIEW, {
+export const getScheduleAPI = async (params: GetScheduleParams) =>
+  await axios.get(API_URL.MY_SCHEDULE, {
     params,
     paramsSerializer: (p) => {
       return Object.keys(p)

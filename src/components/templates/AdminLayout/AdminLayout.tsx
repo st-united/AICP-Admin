@@ -12,10 +12,7 @@ import AdminSidebar from '@app/components/organisms/Sidebar/AdminSidebar';
 import MentorSidebar from '@app/components/organisms/Sidebar/MentorSidebar';
 import { MENU_ITEMS_KEY } from '@app/constants/menuKey';
 import { RootState } from '@app/redux/store';
-
-// Hàm kiểm tra UUID
-const isUUID = (str: string) =>
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+import { isUUID } from '@app/utils/stringFormatters';
 
 const AdminLayout: React.FC = () => {
   const { t } = useTranslation();
@@ -26,11 +23,9 @@ const AdminLayout: React.FC = () => {
     .filter(Boolean)
     .filter((seg) => seg !== MENU_ITEMS_KEY.DASHBOARD);
 
-  // Ánh xạ route với label tùy chỉnh cho UUID
   const customLabels = useMemo(
     () => ({
       [MENU_ITEMS_KEY.INTERVIEWER_LIST]: t('MENTOR_SIDEBAR.USER_DETAIL_INTERVIEW'),
-      // Thêm các route khác ở đây, ví dụ: [MENU_ITEMS_KEY.COMPANY]: t('ADMIN_SIDEBAR.COMPANY_DETAIL')
     }),
     [t],
   );

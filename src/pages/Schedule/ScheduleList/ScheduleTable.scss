@@ -1,0 +1,71 @@
+.schedule-table {
+  .ant-table-thead,
+  .ant-table-tbody {
+    > tr {
+      > th,
+      > td {
+        position: relative;
+
+        &:not(:first-child)::before {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 1px;
+          height: 40%;
+          background-color: #0000000f;
+          z-index: 1;
+        }
+
+        &.ant-table-selection-column {
+          text-align: center;
+          padding-left: 28px !important;
+          padding-right: 28px !important;
+        }
+      }
+    }
+  }
+
+  .ant-table-thead > tr > th {
+    background-color: #eceaea !important;
+  }
+
+  .ant-table-thead
+    > tr
+    > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not(
+      [colspan]
+    )::before {
+    content: '' !important;
+    background-color: #0000000f;
+  }
+
+  .ant-table-tbody > tr > td {
+    box-sizing: content-box;
+  }
+
+  .status-tag {
+    padding: 8px 12px;
+    border-radius: 25px;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+
+    &.UPCOMING {
+      background-color: #e6f4ff;
+      color: #1890ff;
+    }
+
+    &.COMPLETED {
+      background-color: #f6ffed;
+      color: #52c41a;
+    }
+
+    &.NOT_JOINED {
+      background-color: #c005050f;
+      color: #c00505;
+    }
+  }
+}

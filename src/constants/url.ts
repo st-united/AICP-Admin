@@ -80,6 +80,7 @@ export const API_URL = {
   INTERVIEW: '/bookings',
   INTERVIEW_SCHEDULE: '/mentors/assign',
   INTERVIEW_INFO: '/bookings/interview-info',
+  MY_SCHEDULE: '/mentors',
 };
 
 export const VEHICLES_URL = '/vehicles';
