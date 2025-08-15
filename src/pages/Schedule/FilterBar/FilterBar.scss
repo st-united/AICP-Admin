@@ -1,0 +1,30 @@
+#schedule-filter {
+  .ant-input,
+  .ant-input-group-addon:last-child .ant-input-search-button {
+    height: 2.8125rem;
+    font-size: 1rem;
+  }
+
+  .ant-input-group-addon:last-child .ant-input-search-button {
+    width: 2.625rem;
+  }
+
+  .ant-input-group-addon svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .ant-select {
+    &-selection-wrap {
+      margin: auto;
+    }
+
+    &-selection-item {
+      font-size: 1rem;
+    }
+  }
+
+  .ant-picker-input > input {
+    font-size: 1rem !important;
+  }
+}

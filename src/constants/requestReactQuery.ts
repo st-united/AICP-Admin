@@ -38,6 +38,7 @@ export const QUERY_KEY = {
   MENTOR: 'MENTOR',
   DOMAIN: 'DOMAIN',
   INTERVIEW: 'INTERVIEW',
+  SCHEDULE: 'SCHEDULE',
 };
 
 export const REACT_QUERY = {

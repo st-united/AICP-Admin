@@ -402,6 +402,25 @@
     "TO": "Đến ngày",
     "RESET_FILTER": "Đặt lại"
   },
+  "SCHEDULE": {
+    "LIST": "Lịch phỏng vấn của tôi",
+    "TOTAL": "Tổng cộng",
+    "HAPPENED": "Đã diễn ra",
+    "NOT_HAPPENED": "Chưa diễn ra",
+    "NOT_PARTICIPATED": "Không tham gia",
+    "FULLNAME": "Họ và tên",
+    "EMAIL": "Email",
+    "PHONENUMBER": "Số điện thoại",
+    "TEST": "Bài kiểm tra",
+    "RESULT": "Kết quả kiểm tra",
+    "SCHEDULE_DATE": "Ngày giờ phỏng vấn",
+    "STATUS": "Trạng thái",
+    "SEARCH_PLACEHOLDER": "Tìm kiếm",
+    "LEVEL": "Level",
+    "FROM": "Từ ngày",
+    "TO": "Đến ngày",
+    "RESET_FILTER": "Đặt lại"
+  },
   "TEST_LIST": {
     "BREADCRUMB": {
       "HOME": "Trang chủ",
