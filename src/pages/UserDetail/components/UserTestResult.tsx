@@ -7,18 +7,28 @@ import Card from '@app/components/atoms/Card/Card';
 import { getLevelNumber } from '@app/constants/level.unum';
 import { formatDate } from '@app/utils';
 
+interface Score {
+  [key: string]: number;
+}
+
+interface ExamData {
+  scores: Score | null;
+  correctCount: string;
+  examDate: string;
+  overallScore: string;
+  sfiLevel: string;
+  timeSpentMinutes: number;
+  totalQuestions: number;
+}
+
 interface UserTestResultProps {
-  examData?: {
-    sfiaLevel?: string;
-    correctCount?: string;
-    timeSpentMinutes?: string;
-    examDate?: string;
-    scores?: { name: string; score: number }[];
-  } | null;
+  examData?: ExamData | null;
 }
 
 const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
   const { t } = useTranslation();
+
+  console.log(examData);
 
   if (!examData) {
     return (
@@ -39,9 +49,7 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
         <div className='flex gap-x-8 justify-between mb-4'>
           <div className='w-full bg-[#FFE9E1] rounded-[0.75rem] p-2 flex flex-col items-center text-center'>
             <h4 className='text-[0.875rem]'>{t('USER_DETAIL.LEVEL')}</h4>
-            <p className='text-[1.5rem] font-semibold'>
-              {getLevelNumber(examData.sfiaLevel || '')}
-            </p>
+            <p className='text-[1.5rem] font-semibold'>{getLevelNumber(examData.sfiLevel || '')}</p>
           </div>
           <div className='w-full bg-[#E6F1FF] rounded-[0.75rem] p-2 flex flex-col items-center text-center'>
             <h4 className='text-[0.875rem]'>{t('USER_DETAIL.CORRECT_ANSWER')}</h4>
@@ -50,7 +58,7 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
         </div>
 
         <div className='flex gap-x-10'>
-          <div className='w-full '>
+          <div className='w-full'>
             <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.TIME_TAKEN')}</h4>
             <p className='text-[1rem] font-semibold'>{examData.timeSpentMinutes}</p>
           </div>
@@ -64,14 +72,14 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
         <div className='w-full'>
           <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.SKILLS_SCORE')}</h4>
           <div className='flex flex-col gap-y-2'>
-            {examData.scores && examData.scores.length > 0 ? (
-              examData.scores.map((item, index) => (
-                <div key={index} className='flex justify-between items-center'>
-                  <p className='text-[16px] capitalize'>{item.name}</p>
+            {examData.scores && Object.keys(examData.scores).length > 0 ? (
+              Object.entries(examData.scores).map(([name, score], index) => (
+                <div key={name} className='flex justify-between items-center'>
+                  <p className='text-[16px] capitalize'>{name}</p>
                   <Progress
                     steps={7}
-                    percent={(Number(item.score) / 7) * 100}
-                    format={() => `${item.score} / 7`}
+                    percent={(Number(score) / 7) * 100}
+                    format={() => `${score} / 7`}
                     strokeColor='#1677ff'
                   />
                 </div>
