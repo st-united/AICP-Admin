@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -11,6 +12,7 @@ import AdminSidebar from '@app/components/organisms/Sidebar/AdminSidebar';
 import MentorSidebar from '@app/components/organisms/Sidebar/MentorSidebar';
 import { MENU_ITEMS_KEY } from '@app/constants/menuKey';
 import { RootState } from '@app/redux/store';
+import { isUUID } from '@app/utils/stringFormatters';
 
 const AdminLayout: React.FC = () => {
   const { t } = useTranslation();
@@ -20,6 +22,13 @@ const AdminLayout: React.FC = () => {
     .split('/')
     .filter(Boolean)
     .filter((seg) => seg !== MENU_ITEMS_KEY.DASHBOARD);
+
+  const customLabels = useMemo(
+    () => ({
+      [MENU_ITEMS_KEY.INTERVIEWER_LIST]: t('MENTOR_SIDEBAR.USER_DETAIL_INTERVIEW'),
+    }),
+    [t],
+  );
 
   const menuItems = [
     { key: MENU_ITEMS_KEY.DASHBOARD, label: t('ADMIN_SIDEBAR.DASHBOARD') },
@@ -34,11 +43,17 @@ const AdminLayout: React.FC = () => {
 
   const breadcrumbItems: BreadcrumbItem[] = [];
   let currentPath = '';
-  segments.forEach((seg) => {
+  segments.forEach((seg, index) => {
     currentPath += `/${seg}`;
     const found = menuItems.find((item) => item.key === seg);
     if (found) {
       breadcrumbItems.push({ ...found, path: currentPath });
+    } else if (index > 0 && isUUID(seg) && customLabels[segments[index - 1]]) {
+      breadcrumbItems.push({
+        key: seg,
+        label: customLabels[segments[index - 1]],
+        path: currentPath,
+      });
     } else {
       breadcrumbItems.push({ key: seg, label: decodeURIComponent(seg), path: currentPath });
     }

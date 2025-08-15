@@ -8,6 +8,7 @@ export interface InterviewColumns {
   level: string;
   date: string;
   timeSlost: TimeSlotKey;
+  examId: string;
 }
 
 export interface InterviewRequestsParams {

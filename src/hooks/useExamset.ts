@@ -5,7 +5,6 @@ import { getAllExamSetApi } from '@app/services/examSetAPI';
 export const useGetAllExamSet = () => {
   return useMutation<Test[], Error, void>(async () => {
     const { data } = await getAllExamSetApi();
-    console.log(data);
 
     return data;
   });

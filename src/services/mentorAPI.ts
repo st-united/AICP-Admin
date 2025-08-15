@@ -37,3 +37,6 @@ export const deactivateMentorAccountApi = async (id: number) => {
 export const mentorSelfActivationApi = async (token: string) => {
   return axios.patch(API_URL.ACTIVE_MENTOR_BY_LINK, { token });
 };
+
+export const getUserDetailBeforeInterview = async (id: string) =>
+  await axios.get(`${API_URL.INTERVIEW_INFO}/${id}`);

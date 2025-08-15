@@ -19,6 +19,7 @@ import {
   changePasswordApi,
   updateForgotPasswordApi,
   getUserStatsApi,
+  getUserDetailBeforeInterview,
 } from '@app/services';
 import {
   openNotificationWithIcon,
@@ -85,6 +86,18 @@ export const useGetUserById = (id: number) =>
     const { data } = await getUserByIdAPI(id);
     return data.data;
   });
+
+export const useGetUserDetail = (id: string) =>
+  useQuery(
+    [QUERY_KEY.USER, id],
+    async () => {
+      const { data } = await getUserDetailBeforeInterview(id);
+      return data.data;
+    },
+    {
+      enabled: !!id,
+    },
+  );
 
 export const useUpdateUser = () => {
   const navigate = useNavigate();
