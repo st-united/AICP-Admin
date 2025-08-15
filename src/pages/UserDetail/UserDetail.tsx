@@ -23,7 +23,7 @@ const UserDetail: React.FC = () => {
 
   if (isError) {
     return (
-      <div className='mx-4 h-full rounded-[1.25rem] bg-whitep y-8 mb-6 sm:px-8 lg:px-12 flex justify-center items-center'>
+      <div className='mx-4 h-full rounded-[1.25rem] bg-white y-8 mb-6 sm:px-8 lg:px-12 flex justify-center items-center'>
         <Typography.Title level={3} className='text-center text-red-500'>
           {t('USER_DETAIL.ERROR')}
         </Typography.Title>

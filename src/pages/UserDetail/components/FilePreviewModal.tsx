@@ -1,6 +1,8 @@
 import { Modal } from 'antd';
 import React from 'react';
 
+import { getFileType } from '@app/utils';
+
 interface FilePreviewModalProps {
   open: boolean;
   fileUrl?: string;
@@ -8,14 +10,6 @@ interface FilePreviewModalProps {
 }
 
 const FilePreviewModal: React.FC<FilePreviewModalProps> = ({ open, fileUrl, onClose }) => {
-  const getFileType = (url: string) => {
-    const ext = url.split('.').pop()?.toLowerCase();
-    if (!ext) return 'unknown';
-    if (['png', 'jpg', 'jpeg', 'gif', 'webp'].includes(ext)) return 'image';
-    if (['pdf'].includes(ext)) return 'pdf';
-    return 'other';
-  };
-
   const fileType = fileUrl ? getFileType(fileUrl) : 'unknown';
 
   return (

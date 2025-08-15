@@ -92,7 +92,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
             <p>{safeValue(portfolioData.github)}</p>
             <CopyOutlined
               className='me-2 cursor-pointer'
-              onClick={() => handleCopy(portfolioData.linkedin || '', 'LinkedIn')}
+              onClick={() => handleCopy(portfolioData.github || '', 'Github')}
             />
           </div>
         </div>

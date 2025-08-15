@@ -64,14 +64,14 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
         <div className='w-full'>
           <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.SKILLS_SCORE')}</h4>
           <div className='flex flex-col gap-y-2'>
-            {examData.scores && Object.keys(examData.scores).length > 0 ? (
-              Object.entries(examData.scores).map(([name, score], index) => (
+            {examData.scores && examData.scores.length > 0 ? (
+              examData.scores.map((item, index) => (
                 <div key={index} className='flex justify-between items-center'>
-                  <p className='text-[16px] capitalize'>{name}</p>
+                  <p className='text-[16px] capitalize'>{item.name}</p>
                   <Progress
                     steps={7}
-                    percent={(Number(score) / 7) * 100}
-                    format={() => `${score} / 7`}
+                    percent={(Number(item.score) / 7) * 100}
+                    format={() => `${item.score} / 7`}
                     strokeColor='#1677ff'
                   />
                 </div>
