@@ -26,7 +26,9 @@ export function TestCard({ test, onViewDetails }: TestCardProps) {
           </h3>
           <Tag
             color={statusColors[test.status]}
-            className={`font-medium m-0 px-3 py-1 ${statusStyleClasses}`}
+            className={`inline-block rounded border text-sm font-medium m-0 px-3 py-1 ${
+              statusStyleClasses[test.status]
+            }`}
           >
             {statusLabels[test.status]}
           </Tag>
@@ -36,7 +38,7 @@ export function TestCard({ test, onViewDetails }: TestCardProps) {
           {test.description}
         </p>
 
-        <div className='flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4'>
+        <div className='flex flex-row items-start sm:items-center gap-1 sm:gap-4 text-xs sm:text-sm text-gray-500 mb-4'>
           <div className='flex items-center gap-1'>
             <CalendarIcon className='w-3 h-3' />
             <span className='text-[#33394A]'>{test.startDate}</span>
