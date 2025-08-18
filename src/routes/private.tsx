@@ -60,7 +60,7 @@ const routes = [
               { path: NAVIGATE_URL.USER_DETAIL, element: <UserDetail /> },
             ],
           },
-          { path: NAVIGATE_URL.MY_CALENDER, element: <Developing /> },
+          { path: NAVIGATE_URL.MY_CALENDER, element: <Schedule /> },
           { path: NAVIGATE_URL.QUESTION_BANK, element: <Developing /> },
         ],
       },
