@@ -19,7 +19,7 @@ export interface ScheduleData {
 export interface GetScheduleParams {
   keyword?: string;
   levels?: string[];
-  status?: string[];
+  statuses?: string[];
   dateStart?: string | null;
   dateEnd?: string | null;
   page: number;
