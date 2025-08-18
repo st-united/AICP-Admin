@@ -38,7 +38,7 @@ const Schedule = () => {
   const { data } = useGetSchedule({
     keyword: debouncedFilters.keyword || undefined,
     levels: debouncedFilters.level.length ? debouncedFilters.level : undefined,
-    status: debouncedFilters.status.length ? debouncedFilters.status : undefined,
+    statuses: debouncedFilters.status.length ? debouncedFilters.status : undefined,
     dateStart: debouncedFilters.dateRange?.[0]?.toISOString(),
     dateEnd: debouncedFilters.dateRange?.[1]?.toISOString(),
     page: pagination.page,
