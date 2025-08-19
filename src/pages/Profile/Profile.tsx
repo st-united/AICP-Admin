@@ -115,7 +115,7 @@ const Profile = () => {
 
             <Divider className='md:col-span-2 border-t border-[#E5E5E5]' />
             <Form.Item className='md:col-span-2 border-t border-[#E5E5E5]'>
-              <div className='flex justify-center gap-2 !flex-row'>
+              <div className='flex justify-end gap-2 !flex-row'>
                 {!isEdit ? (
                   <>
                     <Button
@@ -126,17 +126,17 @@ const Profile = () => {
                     </Button>
                   </>
                 ) : (
-                  <div className='flex flex-row justify-between items-center gap-4 max-w-[900px] w-full'>
+                  <div className='grid grid-cols-2 gap-2 max-w-[900px]'>
                     <Button
                       onClick={handleCancel}
-                      className='w-1/2 flex justify-center items-center rounded-2xl !px-8 !py-4 border-[#FF8C5F] text-[#FF8C5F] text-md hover:bg-[#FF8C5F] hover:text-white'
+                      className='w-full flex justify-center items-center rounded-2xl !px-8 !py-4 border-[#FF8C5F] text-[#FF8C5F] text-md hover:bg-[#FF8C5F] hover:text-white'
                     >
                       {t('PROFILE.CANCEL_EDIT_PROFILE_BTN')}
                     </Button>
                     <Button
                       type='primary'
                       htmlType='submit'
-                      className='w-1/2 flex justify-center items-center rounded-2xl !px-8 !py-4 text-md bg-[#FF8C5F] border-[#FF8C5F] text-white'
+                      className='w-full flex justify-center items-center rounded-2xl !px-8 !py-4 text-md bg-[#FF8C5F] border-[#FF8C5F] text-white'
                     >
                       {t('PROFILE.SAVE_PROFILE_BTN')}
                     </Button>

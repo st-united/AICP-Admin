@@ -35,8 +35,7 @@ export const useProfileSchema = () => {
 
     dob: yup
       .date()
-      .typeError(t('VALIDATE.INVALID', { field: t('PROFILE.DOB') }) as string)
-      .required(t('VALIDATE.REQUIRED', { field: t('PROFILE.DOB') }) as string)
+      .nullable()
       .min(
         new Date('1900-01-01'),
         t('VALIDATE.DATE_OF_BIRTH_MIN', { field: t('PROFILE.DOB') }) as string,
