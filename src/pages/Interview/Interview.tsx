@@ -1,5 +1,5 @@
-import { Dayjs } from 'dayjs';
-import { useState, useMemo, useCallback } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 
@@ -7,12 +7,8 @@ import FilterBar from './FilterBar/FilterBar';
 import InterviewTable from './InterviewList/InterviewTable';
 import { ConfirmModal } from './Modal/ConfirmModal';
 import SelectedBar from './SelectedBar';
-import { LEVEL, LevelKey } from '@app/constants';
-import {
-  useCreateMentorSchedule,
-  useGetInterviewRequests,
-  useGetInterviewRequestsForFilter,
-} from '@app/hooks';
+import { LEVEL, LevelKey, DATE_TIME } from '@app/constants';
+import { useCreateMentorSchedule, useGetInterviewRequests } from '@app/hooks';
 import { InterviewColumns } from '@app/interface/interview.interface';
 
 const Interview = () => {
@@ -31,35 +27,35 @@ const Interview = () => {
     setPagination((prev) => ({ ...prev, page: 1 }));
   }, []);
 
+  useEffect(() => {
+    setSelectedRowKeys([]);
+  }, [pagination.page]);
+
   const { data } = useGetInterviewRequests({
     name: debouncedSearch || undefined,
     levels: levelFilter.length ? levelFilter : undefined,
-    dateStart: dateFilter?.[0]?.toISOString(),
-    dateEnd: dateFilter?.[1]?.toISOString(),
+    dateStart: dateFilter
+      ? dayjs(dateFilter[0]).startOf('day').format(DATE_TIME.YEAR_MONTH_DATE_TIME)
+      : undefined,
+    dateEnd: dateFilter
+      ? dayjs(dateFilter[1]).endOf('day').format(DATE_TIME.YEAR_MONTH_DATE_TIME)
+      : undefined,
     page: pagination.page,
     limit: pagination.take,
   });
 
-  const { data: allData } = useGetInterviewRequestsForFilter();
-
   const { levelOptions } = useMemo(() => {
-    const levels = new Set<string>();
-
-    const items = allData?.data?.data || [];
-
-    items.forEach((item: InterviewColumns) => {
-      if (item.level) levels.add(item.level);
-    });
+    const levels: string[] = data?.data?.levels || [];
 
     return {
       levelOptions: (Object.keys(LEVEL) as LevelKey[])
-        .filter((key) => levels.has(key))
+        .filter((key) => levels.includes(key))
         .map((key) => ({
           label: LEVEL[key],
           value: key,
         })),
     };
-  }, [allData]);
+  }, [data]);
 
   const handleConfirm = () => {
     const validSelectedKeys = selectedRowKeys.filter((key) =>

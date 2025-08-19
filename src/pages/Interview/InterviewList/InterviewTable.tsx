@@ -71,7 +71,7 @@ const InterviewTable = ({
       width: 215,
       render: (_: string, record: InterviewColumns) => {
         const date = dayjs(record.date).format(DATE_TIME.DAY_MONTH_YEAR);
-        const time = TIME_SLOTS[record.timeSlost];
+        const time = TIME_SLOTS[record.timeSlots];
         return `${date} ${time}`;
       },
     },
