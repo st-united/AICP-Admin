@@ -16,7 +16,7 @@ interface ExamData {
   correctCount: string;
   examDate: string;
   overallScore: string;
-  sfiLevel: string;
+  sfiaLevel: string;
   timeSpentMinutes: number;
   totalQuestions: number;
 }
@@ -49,7 +49,9 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
         <div className='flex gap-x-8 justify-between mb-4'>
           <div className='w-full bg-[#FFE9E1] rounded-[0.75rem] p-2 flex flex-col items-center text-center'>
             <h4 className='text-[0.875rem]'>{t('USER_DETAIL.LEVEL')}</h4>
-            <p className='text-[1.5rem] font-semibold'>{getLevelNumber(examData.sfiLevel || '')}</p>
+            <p className='text-[1.5rem] font-semibold'>
+              {getLevelNumber(examData.sfiaLevel || '')}
+            </p>
           </div>
           <div className='w-full bg-[#E6F1FF] rounded-[0.75rem] p-2 flex flex-col items-center text-center'>
             <h4 className='text-[0.875rem]'>{t('USER_DETAIL.CORRECT_ANSWER')}</h4>
