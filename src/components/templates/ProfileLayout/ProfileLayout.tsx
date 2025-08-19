@@ -10,10 +10,9 @@ const ProfileLayout = () => {
 
   return (
     <div className='flex h-full w-full bg-[#fffbf9]'>
-      <button
-        type='button'
+      <Button
         aria-label='Close sidebar overlay'
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
+        className={`fixed inset-0 h-full bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
           isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         } md:hidden`}
         onClick={() => setIsSidebarOpen(false)}
