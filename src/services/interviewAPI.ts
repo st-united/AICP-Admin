@@ -15,16 +15,9 @@ export const getInterviewRequestsApi = (params: InterviewRequestsParams) =>
           if (Array.isArray(value)) {
             return value
               .map((v) => {
-                if (key === 'dateStart' || key === 'dateEnd') {
-                  return `${encodeURIComponent(key)}=${v}`;
-                }
                 return `${encodeURIComponent(key)}=${encodeURIComponent(String(v))}`;
               })
               .join('&');
-          }
-
-          if (key === 'dateStart' || key === 'dateEnd') {
-            return `${encodeURIComponent(key)}=${value}`;
           }
 
           return `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`;

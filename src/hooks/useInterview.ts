@@ -14,17 +14,3 @@ export const useGetInterviewRequests = (params: InterviewRequestsParams) => {
     keepPreviousData: true,
   });
 };
-
-export const useGetInterviewRequestsForFilter = () => {
-  return useQuery({
-    queryKey: [QUERY_KEY.INTERVIEW, { page: 1, limit: 10000 }],
-    queryFn: async () => {
-      const { data } = await getInterviewRequestsApi({
-        page: 1,
-        limit: 10000,
-      });
-      return data.data;
-    },
-    keepPreviousData: true,
-  });
-};

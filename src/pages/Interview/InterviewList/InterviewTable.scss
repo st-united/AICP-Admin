@@ -44,4 +44,9 @@
   .ant-table-tbody > tr > td {
     box-sizing: content-box;
   }
+
+  .ant-table-container {
+    border-radius: 8px;
+    overflow: hidden;
+  }
 }
