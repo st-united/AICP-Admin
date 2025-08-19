@@ -372,5 +372,17 @@
       "PHONE": "Nhập số điện thoại tại đây",
       "DOB": "Chọn ngày sinh"
     }
+  },
+  "MENTOR_RECORD": {
+    "TITLE": "Ghi kết quả phỏng vấn",
+    "RECOMMENDATION_TITLE": "Gợi ý",
+    "RECOMMENDATION_1": "Chung chung: xem tutorial, đọc docs, thử vài ví dụ cơ bản.....",
+    "RECOMMENDATION_2": "Cụ thể hóa:  học LangChain qua khóa Coursera, tự viết chatbot demo, tích hợp API, và áp dụng xử lý Q&A cho project nội bộ",
+    "CRITERIA_TITLE": "Tiêu chí chấm điểm",
+    "CRITERIA_1": "Level 2-3: trả lời chung chung ",
+    "CRITERIA_2": "Level 4+: Nêu được trải nghiệm cụ thể, trình bày cách thực hành áp dụng",
+    "NOTE": "Ghi chú",
+    "POINT_ASSESSMENT": "Đánh giá điểm số",
+    "NOTED_PLACEHOLDER": "Nhập nội dung của bạn"
   }
 }

@@ -1,0 +1,9 @@
+.card-record {
+  .ant-card-body {
+    padding: 12px;
+
+    @media (min-width: 640px) {
+      padding: 16px 20px;
+    }
+  }
+}
