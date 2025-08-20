@@ -22,20 +22,6 @@ export const useGetInterviewRequests = (params: InterviewRequestsParams) => {
   });
 };
 
-export const useGetInterviewRequestsForFilter = () => {
-  return useQuery({
-    queryKey: [QUERY_KEY.INTERVIEW, { page: 1, limit: 10000 }],
-    queryFn: async () => {
-      const { data } = await getInterviewRequestsApi({
-        page: 1,
-        limit: 10000,
-      });
-      return data.data;
-    },
-    keepPreviousData: true,
-  });
-};
-
 export const useCreateMentorSchedule = () => {
   return useMutation(
     async (mentor: MentorCreateScheduleDto) => {

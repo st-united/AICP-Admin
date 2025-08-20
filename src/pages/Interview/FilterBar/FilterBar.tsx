@@ -75,6 +75,7 @@ const FilterBar = ({
             onChange={onLevelFilterChange}
             placeholder={t('INTERVIEW.LEVEL')}
             allowClear
+            maxTagCount='responsive'
           >
             {levelOptions.map((level) => (
               <Select.Option key={level.value} value={level.value}>
@@ -101,6 +102,10 @@ const FilterBar = ({
             format={DATE_TIME.DAY_MONTH_YEAR}
             placeholder={[t('INTERVIEW.FROM'), t('INTERVIEW.TO')]}
             allowClear
+            panelRender={(panelNode) => <div className='mobile-date-picker'>{panelNode}</div>}
+            dropdownClassName='mobile-optimized-datepicker'
+            getPopupContainer={(trigger) => trigger.parentElement || document.body}
+            placement='bottomLeft'
           />
           {dateFilter && (
             <Button

@@ -28,3 +28,64 @@
     font-size: 1rem !important;
   }
 }
+
+.mobile-optimized-datepicker {
+  @media (max-width: 768px) {
+    .ant-picker-panels {
+      flex-direction: column;
+    }
+
+    .ant-picker-panel:last-child {
+      display: none;
+    }
+
+    .ant-picker-panel:first-child {
+      .ant-picker-header {
+        .ant-picker-header-super-prev-btn,
+        .ant-picker-header-prev-btn,
+        .ant-picker-header-next-btn,
+        .ant-picker-header-super-next-btn {
+          display: inline-flex !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+
+        .ant-picker-header-super-next-btn {
+          color: rgba(0, 0, 0, 0.85) !important;
+          cursor: pointer !important;
+        }
+
+        .ant-picker-header-next-btn {
+          color: rgba(0, 0, 0, 0.85) !important;
+          cursor: pointer !important;
+        }
+      }
+    }
+
+    max-width: 90vw;
+    max-height: 70vh;
+    overflow: hidden;
+
+    .ant-picker-header {
+      font-size: 0.9rem;
+    }
+
+    .ant-picker-cell {
+      font-size: 0.85rem;
+    }
+
+    .ant-picker-footer {
+      padding: 8px 12px;
+    }
+  }
+}
+
+.mobile-date-picker {
+  @media (max-width: 768px) {
+    .ant-picker-panels {
+      .ant-picker-panel + .ant-picker-panel {
+        display: none;
+      }
+    }
+  }
+}
