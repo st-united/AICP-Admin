@@ -78,7 +78,7 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
             {examData.scores && Object.keys(examData.scores).length > 0 ? (
               Object.entries(examData.scores).map(([name, score], index) => (
                 <div key={name} className='flex justify-between items-center'>
-                  <p className='text-[16px] capitalize font-semibold'>{name}</p>
+                  <p className='text-[1rem] capitalize font-semibold'>{name}</p>
                   <Progress
                     steps={7}
                     percent={(Number(score) / 7) * 100}
