@@ -1,5 +1,3 @@
-import { Dayjs } from 'dayjs';
-
 import { TimeSlotKey } from '@app/constants';
 export interface InterviewColumns {
   id: number;
@@ -9,12 +7,13 @@ export interface InterviewColumns {
   nameExamSet: string;
   level: string;
   date: string;
-  timeSlost: TimeSlotKey;
+  timeSlots: TimeSlotKey;
+  examId: string;
 }
 
 export interface InterviewRequestsParams {
   name?: string;
-  level?: string[];
+  levels?: string[];
   dateStart?: string | null;
   dateEnd?: string | null;
   page: number;

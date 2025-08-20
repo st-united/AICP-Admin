@@ -6,6 +6,5 @@ export * from './datetime';
 export * from './notification';
 export * from './navigate';
 export * from './param';
-export * from './socket';
 export * from './timeSlots';
 export * from './level';
