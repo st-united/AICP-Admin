@@ -34,12 +34,16 @@ const UserDetail: React.FC = () => {
   return (
     <div className='overflow-y-auto'>
       <div className='mx-4 rounded-[1.25rem] bg-white py-8 mb-6 sm:px-8 lg:px-12'>
-        <Typography.Title className='!text-2xl '>{t('USER_DETAIL.INFO')}</Typography.Title>
-        <div className='flex flex-col gap-y-4 lg:flex-row justify-between items-center md:gap-x-10 lg:gap-x-14 mb-6'>
+        <Typography.Title className='!text-2xl px-4 md:px-2'>
+          {t('USER_DETAIL.INFO')}
+        </Typography.Title>
+        <div className='flex flex-col gap-y-4 lg:flex-row justify-between px-4 md:px-2 items-center md:gap-x-10 lg:gap-x-14 mb-6'>
           <UserInfo userData={user.personalInfo} />
           <UserTestResult examData={user.examResult} />
         </div>
-        <Portfolio portfolioData={user.portfolio} />
+        <div className='px-4 md:px-2'>
+          <Portfolio portfolioData={user.portfolio} />
+        </div>
       </div>
     </div>
   );

@@ -40,13 +40,12 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
 
   return (
     <Card className='w-full md:h-[23.75rem] lg:w-6/12 rounded-[0.75rem]'>
-      <div className='py-6 px-6'>
+      <div className='p-2 md:py-6 md:px-6'>
         <h3 className='mb-4 text-lg'>
           <BookOutlined className='me-2' />
           <span>{t('USER_DETAIL.RESULT')}</span>
         </h3>
-
-        <div className='flex gap-x-8 justify-between mb-4'>
+        <div className='flex flex-col gap-y-4 md:flex-row md:gap-x-8 justify-between mb-4'>
           <div className='w-full bg-[#FFE9E1] rounded-[0.75rem] p-2 flex flex-col items-center text-center'>
             <h4 className='text-[0.875rem]'>{t('USER_DETAIL.LEVEL')}</h4>
             <p className='text-[1.5rem] font-semibold'>
@@ -58,18 +57,18 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
             <p className='text-[1.5rem] font-semibold'>{examData.correctCount}</p>
           </div>
         </div>
-
-        <div className='flex gap-x-10'>
-          <div className='w-full'>
+        <div className='flex flex-col md:flex-row gap-x-10'>
+          <div className='w-full mb-2 md:mb-0'>
             <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.TIME_TAKEN')}</h4>
-            <p className='text-[1rem] font-semibold'>{examData.timeSpentMinutes}</p>
+            <p className='text-[1rem] font-semibold'>
+              {t('USER_DETAIL.TIME_SPENT', { minutes: examData.timeSpentMinutes })}
+            </p>
           </div>
-          <div className='w-full'>
+          <div className='w-full mb-2 md:mb-0'>
             <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.TEST_DATE')}</h4>
             <p className='text-[1rem] font-semibold'>{formatDate(examData.examDate || '')}</p>
           </div>
         </div>
-
         {/* SKILLS */}
         <div className='w-full'>
           <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.SKILLS_SCORE')}</h4>
