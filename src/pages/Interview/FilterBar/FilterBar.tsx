@@ -102,10 +102,6 @@ const FilterBar = ({
             format={DATE_TIME.DAY_MONTH_YEAR}
             placeholder={[t('INTERVIEW.FROM'), t('INTERVIEW.TO')]}
             allowClear
-            panelRender={(panelNode) => <div className='mobile-date-picker'>{panelNode}</div>}
-            dropdownClassName='mobile-optimized-datepicker'
-            getPopupContainer={(trigger) => trigger.parentElement || document.body}
-            placement='bottomLeft'
           />
           {dateFilter && (
             <Button
