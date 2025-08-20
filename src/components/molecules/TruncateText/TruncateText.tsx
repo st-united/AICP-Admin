@@ -11,7 +11,7 @@ export const TruncateText = ({ value }: TruncateTextProps) => {
 
   return (
     <Tooltip title={safeValue}>
-      <p className='text-[1rem] font-semibold truncate max-w-[150px] sm:max-w-[250px]'>
+      <p className='text-[1rem] font-semibold truncate max-w-[9.375rem] sm:max-w-[15.625rem]'>
         {safeValue}
       </p>
     </Tooltip>
