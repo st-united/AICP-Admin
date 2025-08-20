@@ -22,7 +22,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
   if (!userData) {
     return (
       <div className='w-full md:h-[18.75rem] lg:w-6/12 py-6 px-12 shadow-md rounded-[0.75rem] text-center flex items-center justify-center'>
-        <p className='text-gray-400 text-lg'>{t('TABLE.EMPTY')}</p>
+        <p className='text-lg font-semibold'>{t('TABLE.EMPTY')}</p>
       </div>
     );
   }
@@ -79,7 +79,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
                     )}
                   </>
                 ) : (
-                  <span className='text-gray-400'>{t('TABLE.EMPTY')}</span>
+                  <span className='text-lg font-semibold'>{t('TABLE.EMPTY')}</span>
                 )}
               </div>
             </div>
