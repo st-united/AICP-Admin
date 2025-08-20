@@ -1,4 +1,10 @@
-import { Pagination, Select, Table as TableAntd, TablePaginationConfig } from 'antd';
+import {
+  Pagination,
+  Select,
+  Table as TableAntd,
+  TableProps as AntdTableProps,
+  TablePaginationConfig,
+} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { FilterValue, SorterResult, TableCurrentDataSource } from 'antd/lib/table/interface';
 import React, { ReactNode } from 'react';
@@ -21,6 +27,7 @@ interface PaginateOptions {
 }
 
 type TableProps<T extends Record<string, any>> = {
+  rowSelection?: AntdTableProps<T>['rowSelection'];
   columns: ColumnsType<T>;
   dataSource: T[];
   loading?: boolean;
@@ -39,6 +46,7 @@ type TableProps<T extends Record<string, any>> = {
   expandableRender?: (record: T) => ReactNode;
   expandedRowKeys?: React.Key[];
   setExpandedRowKeys?: (keys: React.Key[]) => void;
+  rowKey?: string | ((record: T) => string);
 };
 
 export const Table = <T extends Record<string, any>>({
@@ -55,6 +63,8 @@ export const Table = <T extends Record<string, any>>({
   expandableRender,
   expandedRowKeys,
   setExpandedRowKeys,
+  rowSelection,
+  rowKey,
 }: TableProps<T>) => {
   const { t } = useTranslation();
 
@@ -81,7 +91,8 @@ export const Table = <T extends Record<string, any>>({
         columns={columns}
         dataSource={dataSource}
         loading={loading}
-        rowKey={(record) => (record as any).id}
+        rowKey={rowKey ?? ((record) => (record as any).id)}
+        rowSelection={rowSelection}
         onChange={handleTableChange}
         scroll={{ x: 'max-content' }}
         showSorterTooltip={false}
