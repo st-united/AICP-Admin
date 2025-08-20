@@ -49,7 +49,7 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
           <div className='w-full bg-[#FFE9E1] rounded-[0.75rem] p-2 flex flex-col items-center text-center'>
             <h4 className='text-[0.875rem]'>{t('USER_DETAIL.LEVEL')}</h4>
             <p className='text-[1.5rem] font-semibold'>
-              {getLevelNumber(examData.sfiaLevel || '')}
+              {getLevelNumber(examData.sfiaLevel || t('TABLE.EMPTY'))}
             </p>
           </div>
           <div className='w-full bg-[#E6F1FF] rounded-[0.75rem] p-2 flex flex-col items-center text-center'>
@@ -61,12 +61,15 @@ const UserTestResult: React.FC<UserTestResultProps> = ({ examData }) => {
           <div className='w-full mb-2 md:mb-0'>
             <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.TIME_TAKEN')}</h4>
             <p className='text-[1rem] font-semibold'>
-              {t('USER_DETAIL.TIME_SPENT', { minutes: examData.timeSpentMinutes })}
+              {t('USER_DETAIL.TIME_SPENT', { minutes: examData.timeSpentMinutes }) ||
+                t('TABLE.EMPTY')}
             </p>
           </div>
           <div className='w-full mb-2 md:mb-0'>
             <h4 className='text-[1.125rem] font-normal'>{t('USER_DETAIL.TEST_DATE')}</h4>
-            <p className='text-[1rem] font-semibold'>{formatDate(examData.examDate || '')}</p>
+            <p className='text-[1rem] font-semibold'>
+              {formatDate(examData.examDate || t('TABLE.EMPTY'))}
+            </p>
           </div>
         </div>
         {/* SKILLS */}
