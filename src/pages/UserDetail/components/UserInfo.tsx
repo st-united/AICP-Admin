@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Card from '@app/components/atoms/Card/Card';
-
+import TruncateText from '@app/components/molecules/TruncateText/TruncateText';
 interface UserInfoProps {
   userData?: {
     fullName?: string;
@@ -26,9 +26,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
       </div>
     );
   }
-
-  const safeValue = (value?: string) => value?.trim() || t('TABLE.EMPTY');
-
   return (
     <Card className='w-full md:h-[23.75rem] lg:w-6/12 rounded-[0.75rem]'>
       <div className='p-2 md:py-6 md:px-6'>
@@ -36,19 +33,15 @@ const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
           <UserOutlined className='me-2' />
           <span>{t('USER_DETAIL.USER_INFO')}</span>
         </h3>
-        <div className='flex flex-col md:flex-row justify-between items-center lg:gap-x-14'>
-          <div className='w-full flex flex-col gap-y-4 lg:gap-4'>
+        <div className='flex flex-col md:flex-row justify-between items-center lg:gap-x-10'>
+          <div className='w-full flex flex-col gap-y-4 lg:gap-8'>
             <div className='flex flex-col gap-y-2'>
               <span className='text-lg'>{t('USER_DETAIL.FULLNAME')}</span>
-              <p className='text-lg font-semibold'>{userData.fullName}</p>
+              <TruncateText value={userData.fullName} />
             </div>
             <div className='flex flex-col gap-y-2'>
               <span className='text-lg'>{t('USER_DETAIL.EMAIL')}</span>
-              <Tooltip title={safeValue(userData.email)}>
-                <p className='text-lg font-semibold truncate max-w-[250px]'>
-                  {safeValue(userData.email)}
-                </p>
-              </Tooltip>
+              <TruncateText value={userData.email} />
             </div>
             <div className='flex flex-col gap-y-2'>
               <span className='text-lg'>{t('USER_DETAIL.JOB')}</span>
@@ -79,23 +72,23 @@ const UserInfo: React.FC<UserInfoProps> = ({ userData }) => {
                     )}
                   </>
                 ) : (
-                  <span className='text-lg font-semibold'>{t('TABLE.EMPTY')}</span>
+                  <span className='text-[1rem] font-semibold'>{t('TABLE.EMPTY')}</span>
                 )}
               </div>
             </div>
           </div>
-          <div className='w-full flex flex-col gap-y-4 lg:gap-4'>
+          <div className='w-full flex flex-col gap-y-4 lg:gap-8'>
             <div className='flex flex-col gap-y-2'>
               <span className='text-lg'>{t('USER_DETAIL.AGE')}</span>
-              <p className='text-lg font-semibold'>{safeValue(userData.age)}</p>
+              <TruncateText value={userData.age} />
             </div>
             <div className='flex flex-col gap-y-2'>
               <span className='text-lg'>{t('USER_DETAIL.PHONE')}</span>
-              <p className='text-lg font-semibold'>{safeValue(userData.phoneNumber)}</p>
+              <TruncateText value={userData.phoneNumber} />
             </div>
             <div className='flex flex-col gap-y-2'>
               <span className='text-lg'>{t('USER_DETAIL.PROVINCE')}</span>
-              <p className='text-lg font-semibold'>{safeValue(userData.province)}</p>
+              <TruncateText value={userData.province} />
             </div>
           </div>
         </div>

@@ -401,7 +401,8 @@
     "LEVEL": "Mức năng lực",
     "CORRECT_ANSWER": "Câu đúng",
     "COPY_SUCCESS_TITLE": "Sao chép thành công",
-    "COPY_FAIL_DESC": "Không thể sao chép liên kết, vui lòng thử lại sau."
+    "COPY_FAIL_DESC": "Không thể sao chép liên kết, vui lòng thử lại sau.",
+    "ERROR": "Không thể lấy thông tin người dùng"
   },
   "FILE_PREVIEW": {
     "NO_DATA": "Không có file để hiển thị",
