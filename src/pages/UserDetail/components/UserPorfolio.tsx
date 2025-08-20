@@ -62,7 +62,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolioData }) => {
   if (!portfolioData) {
     return (
       <div className='w-full shadow-md rounded-[12px] text-center py-12'>
-        <p className='text-gray-400 text-lg'>{t('TABLE.EMPTY')}</p>
+        <p className='text-lg font-semibold'>{t('TABLE.EMPTY')}</p>
       </div>
     );
   }
