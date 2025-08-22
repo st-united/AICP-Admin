@@ -4,6 +4,7 @@ import { UploadChangeParam } from 'antd/lib/upload';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { DefaultAvatar } from '@app/assets/images';
 import { ACCEPTED_IMAGE_TYPES, FILE_TYPE, MAX_IMAGE_FILE_SIZE_KB } from '@app/constants/file';
 import { validateFile, ValidateFileParams } from '@app/helpers/fileValidation';
 import {
@@ -54,8 +55,7 @@ const CustomAvartar = ({ avatar, isEdit, onAvatarChange, isUploading }: Props) =
       {!isUploading ? (
         <Avatar
           className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px]'
-          src={avatar}
-          icon={<UserOutlined className='md:!text-[150px] !text-[120px]' />}
+          src={avatar || DefaultAvatar}
         />
       ) : (
         <div className='relative md:!w-[180px] !w-[150px] md:!h-[180px] !h-[150px] !max-w-[900px] !text-black flex items-center justify-center'>
