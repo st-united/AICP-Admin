@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const Modal: FC<ModalProps> = ({ children, ...props }) => {
-  const className = props.className ? props.className : '';
+  const className = props.className || '';
   const { t } = useTranslation();
 
   return (
