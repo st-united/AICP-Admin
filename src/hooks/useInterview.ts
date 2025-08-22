@@ -16,7 +16,7 @@ export const useGetInterviewRequests = (params: InterviewRequestsParams) => {
     queryKey: [QUERY_KEY.INTERVIEW, params],
     queryFn: async () => {
       const { data } = await getInterviewRequestsApi(params);
-      return data.data;
+      return data.data.data;
     },
     keepPreviousData: true,
   });

@@ -45,7 +45,7 @@ const Interview = () => {
   });
 
   const { levelOptions } = useMemo(() => {
-    const levels: string[] = data?.data?.levels || [];
+    const levels: string[] = data?.levels || [];
 
     return {
       levelOptions: (Object.keys(LEVEL) as LevelKey[])
@@ -58,9 +58,12 @@ const Interview = () => {
   }, [data]);
 
   const handleConfirm = () => {
+    const interviewRequests = data?.data || [];
+
     const validSelectedKeys = selectedRowKeys.filter((key) =>
-      data?.data?.data?.some((item: InterviewColumns) => item.id === key),
+      interviewRequests.some((item: InterviewColumns) => item.id === key),
     );
+
     setIsLoading(true);
     createMentorSchedule(
       { interviewRequestIds: validSelectedKeys.map(String) },
@@ -86,7 +89,7 @@ const Interview = () => {
         <SelectedBar selectedCount={selectedRowKeys.length} onAction={() => setIsModalOpen(true)} />
 
         <FilterBar
-          total={data?.data?.total || 0}
+          total={data?.total || 0}
           searchValue={searchInput}
           onSearchChange={(value) => {
             setSearchInput(value);
@@ -108,9 +111,9 @@ const Interview = () => {
         <InterviewTable
           selectedRowKeys={selectedRowKeys}
           setSelectedRowKeys={setSelectedRowKeys}
-          data={data?.data?.data || []}
-          total={data?.data?.total || 0}
-          pageCount={data?.data?.totalPages || 1}
+          data={data?.data || []}
+          total={data?.total || 0}
+          pageCount={data?.totalPages || 1}
           table={pagination}
           setTable={setPagination}
         />
