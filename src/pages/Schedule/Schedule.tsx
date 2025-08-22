@@ -1,4 +1,4 @@
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
@@ -6,9 +6,9 @@ import { useDebounce } from 'use-debounce';
 import FilterBar from './FilterBar/FilterBar';
 import ScheduleTable from './ScheduleList/ScheduleTable';
 import Summary from './Summary';
-import { STATUS, StatusKey, LEVEL, LevelKey } from '@app/constants';
-import { useGetSchedule, useGetAllSchedule } from '@app/hooks';
-import { ScheduleColumns, GetScheduleParams } from '@app/interface/schedule.interface';
+import { STATUS, StatusKey, LEVEL, LevelKey, DATE_TIME } from '@app/constants';
+import { useGetSchedule } from '@app/hooks';
+import { GetScheduleParams } from '@app/interface/schedule.interface';
 
 interface FilterState {
   keyword: string;
@@ -39,38 +39,35 @@ const Schedule = () => {
     keyword: debouncedFilters.keyword || undefined,
     levels: debouncedFilters.level.length ? debouncedFilters.level : undefined,
     statuses: debouncedFilters.status.length ? debouncedFilters.status : undefined,
-    dateStart: debouncedFilters.dateRange?.[0]?.toISOString(),
-    dateEnd: debouncedFilters.dateRange?.[1]?.toISOString(),
+    dateStart: debouncedFilters.dateRange
+      ? dayjs(debouncedFilters.dateRange[0]).startOf('day').format(DATE_TIME.YEAR_MONTH_DATE_TIME)
+      : undefined,
+    dateEnd: debouncedFilters.dateRange
+      ? dayjs(debouncedFilters.dateRange[1]).endOf('day').format(DATE_TIME.YEAR_MONTH_DATE_TIME)
+      : undefined,
     page: pagination.page,
     limit: pagination.take,
   } as GetScheduleParams);
 
-  const { data: allData } = useGetAllSchedule();
-
   const { levelOptions, statusOptions } = useMemo(() => {
-    const levels = new Set<string>();
-    const statuses = new Set<string>();
-
-    allData?.data?.forEach((item: ScheduleColumns) => {
-      if (item.level) levels.add(item.level);
-      if (item.status) statuses.add(item.status);
-    });
+    const levels: string[] = data?.levels || data?.data?.levels || [];
+    const statuses: string[] = data?.statuses || data?.data?.statuses || [];
 
     return {
       levelOptions: (Object.keys(LEVEL) as LevelKey[])
-        .filter((key) => levels.has(key))
+        .filter((key) => levels.includes(key))
         .map((key) => ({
           label: LEVEL[key],
           value: key,
         })),
       statusOptions: (Object.keys(STATUS) as StatusKey[])
-        .filter((key) => statuses.has(key))
+        .filter((key) => statuses.includes(key))
         .map((key) => ({
           label: STATUS[key],
           value: key,
         })),
     };
-  }, [allData]);
+  }, [data]);
 
   return (
     <div className='flex flex-col mt-2 gap-6 px-5 overflow-y-auto pb-6'>
@@ -79,10 +76,10 @@ const Schedule = () => {
       </div>
 
       <Summary
-        total={allData?.stats?.total}
-        happened={allData?.stats?.completed}
-        notHappened={allData?.stats?.upcoming}
-        notParticipated={allData?.stats?.notJoined}
+        total={data?.stats?.total}
+        happened={data?.stats?.completed}
+        notHappened={data?.stats?.upcoming}
+        notParticipated={data?.stats?.notJoined}
       />
 
       <div className='bg-white p-3 sm:p-6 rounded-[1rem] sm:rounded-[1.25rem] flex flex-col gap-4 sm:gap-[2.1875rem]'>

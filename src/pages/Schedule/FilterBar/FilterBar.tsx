@@ -67,6 +67,7 @@ const FilterBar = ({ filters, onFiltersChange, levelOptions, statusOptions }: Fi
             onChange={(val) => onFiltersChange({ level: val })}
             placeholder={t('SCHEDULE.LEVEL')}
             allowClear
+            maxTagCount='responsive'
           >
             {levelOptions.map((level) => (
               <Select.Option key={level.value} value={level.value}>
@@ -93,6 +94,7 @@ const FilterBar = ({ filters, onFiltersChange, levelOptions, statusOptions }: Fi
             onChange={(val) => onFiltersChange({ status: val })}
             placeholder={t('SCHEDULE.STATUS')}
             allowClear
+            maxTagCount='responsive'
           >
             {statusOptions.map((status) => (
               <Select.Option key={status.value} value={status.value}>
