@@ -62,7 +62,7 @@ const PasswordChangeForm = () => {
               <img
                 src={Lock}
                 alt='Lock Icon'
-                className='w-14 h-1w-14 sm:w-16 sm:h-16 md:w-20 md:h-20'
+                className='w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20'
               />
             </div>
           </div>
@@ -148,7 +148,7 @@ const PasswordChangeForm = () => {
           {/* Password Requirements */}
           <div className='text-base text-gray-600 flex flex-col gap-y-2 !mt-4 !mb-2'>
             <div
-              className={`flex items-center gap-2 ${
+              className={`flex items-start gap-2 ${
                 isLengthValid ? 'text-green-500' : 'text-[#8B8B8B]'
               }`}
             >
@@ -156,7 +156,7 @@ const PasswordChangeForm = () => {
               <div>{t<string>('PROFILE.PASSWORD_REQUIREMENT')}</div>
             </div>
             <div
-              className={`flex items-center gap-2 ${
+              className={`flex items-start gap-2 ${
                 isComplexValid ? 'text-green-500' : 'text-[#8B8B8B]'
               }`}
             >
