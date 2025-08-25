@@ -29,26 +29,31 @@ const PasswordChangeForm = () => {
   const values = Form.useWatch([], form); // Watch all form values
 
   const isLengthValid = useMemo(() => {
-    return (
-      NUMBER_LENGTH_REGEX.test(values?.newPassword || '') &&
-      NUMBER_LENGTH_REGEX.test(values?.confirmPassword || '')
-    );
+    return values?.newPassword ? NUMBER_LENGTH_REGEX.test(values.newPassword) : false;
   }, [values]);
 
   const isComplexValid = useMemo(() => {
-    return (
-      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
-        values?.newPassword || '',
-      ) &&
-      PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(
-        values?.confirmPassword || '',
-      )
-    );
+    return values?.newPassword
+      ? PASSWORD_REGEX_PATTERN_WITHOUT_NUMBER_LIMIT_AND_SPECIAL_CHARACTER.test(values.newPassword)
+      : false;
   }, [values]);
 
-  const isAllFieldsFilled = useMemo(() => {
-    return values?.oldPassword && values?.newPassword && values?.confirmPassword;
-  }, [values]);
+  const isFormValid = useMemo(() => {
+    if (!values) return false;
+    const { oldPassword, newPassword, confirmPassword } = values;
+    const hasErrors = form.getFieldsError().some(({ errors }) => errors.length > 0);
+    const allFieldsFilled = oldPassword && newPassword && confirmPassword;
+    const isNewPasswordDifferent = newPassword && oldPassword && newPassword !== oldPassword;
+    const isPasswordMatch = newPassword === confirmPassword;
+    const isNewPasswordValid = isLengthValid && isComplexValid;
+    return (
+      allFieldsFilled &&
+      !hasErrors &&
+      isNewPasswordDifferent &&
+      isPasswordMatch &&
+      isNewPasswordValid
+    );
+  }, [form, values, isLengthValid, isComplexValid]);
 
   const validator = [yupSync(changePasswordSchema)] as unknown as Rule[];
 
@@ -169,9 +174,14 @@ const PasswordChangeForm = () => {
           <Form.Item className='flex justify-center'>
             <Button
               htmlType='submit'
-              className={`w-full px-8 sm:px-12 md:px-14 !hover:bg-blue-700 h-12 text-base sm:text-lg rounded-full !text-white font-bold border-none ${
-                isAllFieldsFilled ? '!bg-blue-600' : '!bg-blue-400'
-              }`}
+              disabled={!isFormValid || isLoading}
+              className={`w-full px-8 sm:px-12 md:px-14 h-12 text-base sm:text-lg rounded-full text-white font-bold transition-all duration-300
+    ${
+      isFormValid && !isLoading
+        ? 'bg-[#2563eb] hover:!bg-[#1d4ed8] !border-[#2563eb] hover:!text-white shadow-md'
+        : 'bg-gray-300 !border-gray-300 cursor-not-allowed opacity-70'
+    }
+  `}
               loading={isLoading}
             >
               {t('PROFILE.SAVE')}

@@ -9,13 +9,18 @@ export const useChangePasswordSchema = () => {
   return yup.object().shape({
     oldPassword: yup
       .string()
-      .required(t('VALIDATE.REQUIRED', { field: t('PROFILE.OLD_PASSWORD') }) as string),
+      .required(t('VALIDATE.REQUIRED', { field: t('PASSWORD.OLD_PASSWORD') }) as string),
 
     newPassword: yup
       .string()
-      .required(t('VALIDATE.REQUIRED', { field: t('PROFILE.NEW_PASSWORD') }) as string)
-      .min(8, t('VALIDATE.PASSWORD_MIN', { field: t('PROFILE.NEW_PASSWORD'), min: 8 }) as string)
-      .max(50, t('VALIDATE.PASSWORD_MAX', { field: t('PROFILE.NEW_PASSWORD'), max: 50 }) as string)
+      .required(t('VALIDATE.REQUIRED', { field: t('PASSWORD.NEW_PASSWORD') }) as string)
+      .test(
+        'no-spaces',
+        t('VALIDATE.NOT_ALLOW_SPACE', { field: t('PASSWORD.NEW_PASSWORD') }) as string,
+        (value) => !value || /^\S+$/.test(value),
+      )
+      .min(8, t('VALIDATE.PASSWORD_MIN', { field: t('PASSWORD.NEW_PASSWORD'), min: 8 }) as string)
+      .max(50, t('VALIDATE.PASSWORD_MAX', { field: t('PASSWORD.NEW_PASSWORD'), max: 50 }) as string)
       .test(
         'complexity',
         t('VALIDATE.PASSWORD_COMPLEXITY') as string,
