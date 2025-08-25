@@ -16,6 +16,8 @@ export const NAVIGATE_URL = {
   MY_CALENDER: '/my-calender',
   QUESTION_BANK: '/question-bank',
   FORGOT_PASSWORD: '/forgot-password',
+  TEST: 'test',
   INTERVIEW: '/interview',
   SELECT_INTERVIEW: 'mentor/assign',
+  USER_DETAIL: ':id',
 };
