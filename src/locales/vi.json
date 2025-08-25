@@ -324,7 +324,8 @@
     "QUESTION_BANK": "Ngân hàng câu hỏi"
   },
   "ADMIN_BREADCRUMB": {
-    "HOME": "Trang chủ"
+    "HOME": "Trang chủ",
+    "USER_DETAIL": "Danh sách đăng ký"
   },
   "MENTOR": {
     "LIST": "Danh sách cố vấn",
@@ -401,5 +402,39 @@
     "FROM": "Từ ngày",
     "TO": "Đến ngày",
     "RESET_FILTER": "Đặt lại"
+  },
+
+  "USER_DETAIL": {
+    "INFO": "Thông tin người dùng",
+    "USER_INFO": "Thông tin cá nhân",
+    "FULLNAME": "Họ tên",
+    "AGE": "Tuổi",
+    "EMAIL": "Email",
+    "PHONE": "Số điện thoại",
+    "PROVINCE": "Tỉnh thành",
+    "JOB": "Nghề nghiệp",
+    "MORE_JOBS": "Các nghề nghiệp khác",
+    "RESULT": "Kết quả bài test",
+    "TIME_SPENT": "{{minutes}} phút",
+    "TIME_TAKEN": "Thời gian làm bài",
+    "TEST_DATE": "Ngày làm bài",
+    "SKILLS_SCORE": "Điểm theo kỹ năng",
+    "MINDSET_SCORE": "Mindset",
+    "SKILL_LEVEL": "Skillset",
+    "TOOLSET_SCORE": "Toolset",
+    "EXPERIENCE_PROFILE": "Hồ sơ kinh nghiệm",
+    "LINKEDIN": "LinkedIn",
+    "GITHUB": "GitHub",
+    "CERTIFICATE": "Chứng chỉ chuyên môn",
+    "EXPERIENCE": "Kinh nghiệm",
+    "LEVEL": "Mức năng lực",
+    "CORRECT_ANSWER": "Câu đúng",
+    "COPY_SUCCESS_TITLE": "Sao chép thành công",
+    "COPY_FAIL_DESC": "Không thể sao chép liên kết, vui lòng thử lại sau.",
+    "ERROR": "Không thể lấy thông tin người dùng"
+  },
+  "FILE_PREVIEW": {
+    "NO_DATA": "Không có file để hiển thị",
+    "FORMAT_ERROR": "Không hỗ trợ xem trước định dạng này"
   }
 }
