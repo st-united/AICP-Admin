@@ -12,7 +12,6 @@ import { Mentor } from '@app/pages';
 import Developing from '@app/pages/Developing';
 import { PasswordChangeForm, Profile } from '@app/pages/Profile';
 import UserManagement from '@app/pages/User/UserManagement';
-import UserDetail from '@app/pages/UserDetail/UserDetail';
 
 const routes = [
   {
@@ -25,7 +24,7 @@ const routes = [
             element: <ProfileLayout />,
             children: [
               {
-                path: 'profile',
+                path: NAVIGATE_URL.PROFILE,
                 element: <Profile />,
               },
               {
@@ -48,14 +47,14 @@ const routes = [
         element: <AdminLayout />,
         children: [
           { index: true, element: <Developing /> },
-          { path: 'dashboard', element: <Developing /> },
-          { path: 'user', element: <UserManagement /> },
-          {
-            path: 'mentor',
-            element: <Mentor />,
-          },
-          { path: 'company', element: <Developing /> },
-          { path: 'user-detail/:id', element: <UserDetail /> },
+          { path: NAVIGATE_URL.DASHBOARD, element: <Developing /> },
+          { path: NAVIGATE_URL.USER, element: <UserManagement /> },
+          { path: NAVIGATE_URL.MENTOR, element: <Mentor /> },
+          { path: NAVIGATE_URL.COMPANY, element: <Developing /> },
+          { path: NAVIGATE_URL.EXAM_SET, element: <Developing /> },
+          { path: NAVIGATE_URL.INTERVIEWER_LIST, element: <Developing /> },
+          { path: NAVIGATE_URL.MY_CALENDER, element: <Developing /> },
+          { path: NAVIGATE_URL.QUESTION_BANK, element: <Developing /> },
         ],
       },
     ],

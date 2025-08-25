@@ -124,7 +124,7 @@ const Profile = () => {
                     </Button>
                   </>
                 ) : (
-                  <div className='grid grid-cols-1 md:grid-cols-2 gap-2 max-w-[900px]'>
+                  <div className='grid grid-cols-2 gap-2 max-w-[900px]'>
                     <Button
                       onClick={handleCancel}
                       className='!flex !justify-center !items-center !rounded-2xl !px-5 !py-4 !border-[#FF8C5F] !text-[#FF8C5F] !text-md hover:!bg-[#FF8C5F] hover:!text-white'
