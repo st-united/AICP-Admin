@@ -14,17 +14,3 @@ export const useGetSchedule = (params: GetScheduleParams) => {
     keepPreviousData: true,
   });
 };
-
-export const useGetAllSchedule = () => {
-  return useQuery({
-    queryKey: [QUERY_KEY.SCHEDULE, { page: 1, limit: 10000 }],
-    queryFn: async () => {
-      const { data } = await getScheduleAPI({
-        page: 1,
-        limit: 10000,
-      });
-      return data.data;
-    },
-    keepPreviousData: true,
-  });
-};
