@@ -8,7 +8,7 @@ import AdminLayout from '@app/components/templates/AdminLayout/AdminLayout';
 import AuthLayout from '@app/components/templates/AuthLayout';
 import ProfileLayout from '@app/components/templates/ProfileLayout';
 import { NAVIGATE_URL } from '@app/constants';
-import { Mentor, Interview } from '@app/pages';
+import { Mentor, Interview, UserDetail } from '@app/pages';
 import Developing from '@app/pages/Developing';
 import { PasswordChangeForm, Profile } from '@app/pages/Profile';
 import UserManagement from '@app/pages/User/UserManagement';
@@ -52,7 +52,13 @@ const routes = [
           { path: NAVIGATE_URL.MENTOR, element: <Mentor /> },
           { path: NAVIGATE_URL.COMPANY, element: <Developing /> },
           { path: NAVIGATE_URL.EXAM_SET, element: <Developing /> },
-          { path: NAVIGATE_URL.INTERVIEWER_LIST, element: <Interview /> },
+          {
+            path: NAVIGATE_URL.INTERVIEWER_LIST,
+            children: [
+              { index: true, element: <Interview /> },
+              { path: NAVIGATE_URL.USER_DETAIL, element: <UserDetail /> },
+            ],
+          },
           { path: NAVIGATE_URL.MY_CALENDER, element: <Developing /> },
           { path: NAVIGATE_URL.QUESTION_BANK, element: <Developing /> },
         ],
