@@ -19,3 +19,7 @@ export interface InterviewRequestsParams {
   page: number;
   limit: number;
 }
+
+export interface MentorCreateScheduleDto {
+  interviewRequestIds: string[];
+}

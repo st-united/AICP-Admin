@@ -186,7 +186,11 @@
     "IMPORT_MODAL_SUB_CONTENT": "Chỉ hỗ trợ đăng tải một file. Định dạng file được chấp nhận là {{fileExtensions}}",
     "IMPORT_ERROR_REPORT": "Lỗi nhập BC1 khóa {{course}}",
     "IMPORT_WARNING_REPORT": "Lỗi tạo mới khóa sau khóa {{course}}",
-    "IMPORT_VEHICLE": "Import xe"
+    "IMPORT_VEHICLE": "Import xe",
+    "TITLE_CONFIRM_INTERVIEW_USER": "Xác nhận phỏng vấn người dùng",
+    "DESCRIPTION_CONFIRM_INTERVIEW_USER": "Bạn chắc chắn sẽ tham gia phỏng vấn {{quantity}} người dùng này?",
+    "CANCEL": "Huỷ bỏ",
+    "CONFIRM": "Xác nhận"
   },
   "VALIDATE": {
     "MIN_AGE": "Bạn chưa đủ 18 tuổi",

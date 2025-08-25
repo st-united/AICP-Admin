@@ -46,6 +46,7 @@ type TableProps<T extends Record<string, any>> = {
   expandableRender?: (record: T) => ReactNode;
   expandedRowKeys?: React.Key[];
   setExpandedRowKeys?: (keys: React.Key[]) => void;
+  rowKey?: string | ((record: T) => string);
 };
 
 export const Table = <T extends Record<string, any>>({
@@ -63,6 +64,7 @@ export const Table = <T extends Record<string, any>>({
   expandedRowKeys,
   setExpandedRowKeys,
   rowSelection,
+  rowKey,
 }: TableProps<T>) => {
   const { t } = useTranslation();
 
@@ -89,7 +91,7 @@ export const Table = <T extends Record<string, any>>({
         columns={columns}
         dataSource={dataSource}
         loading={loading}
-        rowKey={(record) => (record as any).id}
+        rowKey={rowKey ?? ((record) => (record as any).id)}
         rowSelection={rowSelection}
         onChange={handleTableChange}
         scroll={{ x: 'max-content' }}
