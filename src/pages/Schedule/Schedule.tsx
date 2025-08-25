@@ -28,7 +28,7 @@ const Schedule = () => {
   });
 
   const [pagination, setPagination] = useState({ page: 1, take: 10 });
-  const [debouncedFilters] = useDebounce(filters, 500);
+  const [debouncedFilters] = useDebounce(filters, 200);
 
   const handleFiltersChange = useCallback((newFilters: Partial<FilterState>) => {
     setFilters((prev) => ({ ...prev, ...newFilters }));

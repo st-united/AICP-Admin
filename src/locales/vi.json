@@ -262,7 +262,7 @@
     "PLACEHOLDER_CONFIRM_PASSWORD": "Xác nhận mật khẩu mới",
     "EDIT_PROFILE_BTN": "Chỉnh sửa",
     "CANCEL_EDIT_PROFILE_BTN": "Hủy bỏ",
-    "SAVE_PROFILE_BTN": "Lưu thay đổi",
+    "SAVE_PROFILE_BTN": "Lưu",
     "LOGOUT": "Đăng xuất",
     "PLACEHOLDER_OLD_PASSWORD": "Nhập mật khẩu cũ",
     "PLACEHOLDER_NEW_PASSWORD": "Nhập mật khẩu mới",
@@ -310,7 +310,14 @@
     "DASHBOARD": "Trang chủ",
     "MENTOR": "Cố vấn",
     "USER": "Người dùng",
+    "EXAM_SET": "Bài kiểm tra",
     "COMPANY": "Doanh nghiệp"
+  },
+  "MENTOR_SIDEBAR": {
+    "CALENDER_MANAGEMENT": "Quản lý lịch phỏng vấn",
+    "INTERVIEWER_LIST": "Danh sách đăng kí",
+    "MY_CALENDER": "Lịch phỏng vấn của tôi",
+    "QUESTION_BANK": "Ngân hàng câu hỏi"
   },
   "ADMIN_BREADCRUMB": {
     "HOME": "Trang chủ"
